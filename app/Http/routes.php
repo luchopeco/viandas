@@ -22,6 +22,8 @@ Route::controllers([
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],
     function(){
-
+        Route::get('/','HomeController@index');
         Route::resource('home','HomeController');
-    	});
+        Route::post('modificarclave','HomeController@modificarclave');
+    	}
+);

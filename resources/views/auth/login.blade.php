@@ -67,6 +67,7 @@
 
             <div class="col-xs-offset-1 col-xs-10">
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                   <div class="form-group has-feedback">
                     <input placeholder="Nombre Usuario" required  class="form-control" name="name" value="{{ old('name') }}">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>

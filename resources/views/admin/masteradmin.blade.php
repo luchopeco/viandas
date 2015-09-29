@@ -86,14 +86,7 @@
           <ul class="sidebar-menu">
             <li class="header">Menu Navegacion</li>
 
-            {{--<li <?php if('admin.imagenes.index'== Route::current()->getName()||'admin.imagenes.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/imagenes"><i class="fa fa-picture-o"></i>Imagenes</a></li>--}}
-            {{--<li <?php if('admin.arbitros.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/arbitros"><i class="fa fa-gavel"></i></i> Arbitros</a></li>--}}
-             {{--<li <?php if('admin.inscripcion.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/inscripcion"><i class="fa fa-pencil-square-o"></i>Inscripciones</a></li>--}}
-             {{--<li <?php if('torneo\Http\Controllers\Admin\JugadoresController'==substr(\Illuminate\Support\Facades\Route::getCurrentRoute()->getActionName(), 0, -11)){echo 'class="active"';} ?>><a href="/admin/listanegra"> <i class="fa fa-male"></i> Lista Negra</a></li>--}}
-             {{--<li <?php if('torneo\Http\Controllers\Admin\EquiposController'== substr(\Illuminate\Support\Facades\Route::getCurrentRoute()->getActionName(),0,-16)){echo 'class="active"';} ?> ><a href="/admin/equiposxtorneos"><i class="fa fa-futbol-o"></i> Equipos X Torneo</a></li>--}}
-            {{--<li <?php if('admin.equipos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/equipos"><i class="fa fa-futbol-o"></i> Equipos</a></li>--}}
-            {{--<li <?php if('admin.torneos.index'== Route::current()->getName()){echo 'class="active"';} ?>> <a href="/admin/torneos"><i class="fa fa-trophy"></i>Torneos</a></li>--}}
-            {{--<li <?php if('admin.noticias.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/noticias"><i class="fa fa-newspaper-o"></i>Noticias</a></li>--}}
+
 
 
             <li><a href="#">
