@@ -99,6 +99,11 @@
                                          {!!Form::Text('estado',null,['class'=>' form-control','required'])!!}
                                          <span class="help-block with-errors"></span>
                                      </div>
+                                     <div class="form-group">
+                                          {!!Form::label('tipoAlimento','Tipo Alimento')!!}
+                                          {!!Form::select('tipo_alimento_id', $listTiposAlimentos,null,array('class' => 'form-control'))!!}
+                                          <span class="help-block with-errors"></span>
+                                     </div>
                                  </div>
                               </div>
                          </div>
@@ -142,6 +147,11 @@
                                          {!!Form::Text('estado',null,['class'=>' form-control','id'=>'estadoU','required'])!!}
                                          <span class="help-block with-errors"></span>
                                      </div>
+                                       <div class="form-group">
+                                           {!!Form::label('tipoAlimento','Tipo Alimento')!!}
+                                           {!!Form::select('tipo_alimento_id', $listTiposAlimentos,null,array('class' => 'form-control','id'=>'tipo_alimento_idU'))!!}
+                                           <span class="help-block with-errors"></span>
+                                      </div>
                                 </div>
                              </div>
                         </div>
@@ -194,29 +204,31 @@
     $(function () {
         $('body').on('click', '.editar', function (event) {
             event.preventDefault();
-            var id_tipoalimento=$(this).attr('data-idtipoalimento');
+            var id_alimento=$(this).attr('data-idalimento');
             $.ajax({
-                 url:"tiposalimentos/buscar",
+                 url:"alimentos/buscar",
                  type: "POST",
                  dataType: "json",
-                data:{'id': id_tipoalimento}
+                data:{'id': id_alimento}
                 })
             .done(function(response){
                     //alert(response.datos.titulo);
                     $('#nombreU').val(response.datos.nombre);
                     $('#descripcionU').val(response.datos.descripcion);
                     $('#idU').val(response.datos.id);
-                    $("#modalTipoAlimentoModificar").modal("show");
+                    $('#estadoU').val(response.datos.estado);
+                    $('#tipo_alimento_idU').val(response.datos.tipo_alimento_id);
+                    $("#modalAlimentoModificar").modal("show");
                 })
                 .fail(function(){
-                    alert(id_tipoalimento);
+                    alert(id_alimento);
                 });
         });
         $('body').on('click', '.eliminar', function (event) {
             event.preventDefault();
-            var id_tipoalimento=$(this).attr('data-idtipoalimento');
-            $("#idD").val(id_tipoalimento);
-            $("#modalTipoAlimentoEliminar").modal("show");
+            var id_alimento=$(this).attr('data-idalimento');
+            $("#idD").val(id_alimento);
+            $("#modalAlimentoEliminar").modal("show");
         });
 
     });

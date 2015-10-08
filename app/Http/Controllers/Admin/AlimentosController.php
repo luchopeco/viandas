@@ -3,9 +3,11 @@
 namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use viandas\Alimento;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
+use viandas\TipoAlimento;
 
 class AlimentosController extends Controller
 {
@@ -16,8 +18,16 @@ class AlimentosController extends Controller
      */
     public function index()
     {
-        $listAlimentos = Alimento::all();
-        return view ('admin.alimentos',compact('listAlimentos'));
+        try {
+            $listAlimentos = Alimento::all();
+            $listTiposAlimentos = TipoAlimento::all()->lists('nombre', 'id');
+            return view('admin.alimentos', compact('listAlimentos', 'listTiposAlimentos'));
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -38,7 +48,30 @@ class AlimentosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $a= new Alimento($request->all());
+            $a->save();
+
+            Session::flash('mensajeOk', 'Tipo  Agregado Con Exito');
+            return back();
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+
+    }
+
+    public function  buscar(Request $request)
+    {
+        $a=Alimento::findOrFail($request->id);
+        $response = array(
+            "result" => true,
+            "mensaje" => "No se pudo realizar la operacion",
+            "datos" => $a
+        );
+        return json_encode($response, JSON_HEX_QUOT | JSON_HEX_TAG);
     }
 
     /**
@@ -70,9 +103,26 @@ class AlimentosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try {
+            $a = Alimento::findOrFail($request->id);
+            $a->descripcion=$request->descripcion;
+            $a->nombre=$request->nombre;
+            $a->estado=$request->estado;
+            $a->tipo_alimento_id=$request->tipo_alimento_id;
+            $a->save();
+
+            Session::flash('mensajeOk','Alimento Modificado con exito');
+            return back();
+
+
+        }
+        catch( \Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -81,8 +131,17 @@ class AlimentosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try{
+            Alimento::destroy($request->id);
+            Session::flash('mensajeOk','Alimento Eliminado con exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 }
