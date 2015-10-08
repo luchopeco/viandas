@@ -6,7 +6,8 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="author" content="Wiphala Sistemas">
     <title>::Wiphala Sistemas::Gestor de Viandas</title>
         <!-- favicon -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -85,32 +86,10 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">Menu Navegacion</li>
-
-
-
-
-            <li><a href="#">
-
-            
-
- 
- <?php /*  PROBAR CON ESTOS MÉTODOS TAMBIEN 
-
- Route::currentRouteAction();
-Route::current()->getName(); 
-  */ ?>
-                  
-
-
-            </a>
-              
+            <li <?php if('admin.tiposalimentos.index'== Route::current()->getName()||'admin.tiposalimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposalimentos"><i class="fa fa-lemon-o"></i>Tipos Alimentos</a></li>
+              <li <?php if('admin.alimentos.index'== Route::current()->getName()||'admin.alimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/alimentos"><i class="fa fa-coffee"></i>Alimentos</a></li>
+            <li><a href="#"></a>
             </li>
-
-
-            <!--<li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-danger"></i> Important</a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-warning"></i> Warning</a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-info"></i> Information</a></li>-->
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -258,6 +237,11 @@ Route::current()->getName();
              },
              timepicker:false,
              format:'d/m/Y'
+            });
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
         });
 

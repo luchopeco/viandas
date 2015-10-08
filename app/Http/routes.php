@@ -25,5 +25,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::get('/','HomeController@index');
         Route::resource('home','HomeController');
         Route::post('modificarclave','HomeController@modificarclave');
+
+        Route::resource('tiposalimentos','TiposAlimentosController');
+        Route::post('tiposalimentos/buscar','TiposAlimentosController@buscar');
+
+        Route::resource('alimentos','AlimentosController');
     	}
 );
