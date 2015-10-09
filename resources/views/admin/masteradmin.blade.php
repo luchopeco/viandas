@@ -87,7 +87,8 @@
           <ul class="sidebar-menu">
             <li class="header">Menu Navegacion</li>
             <li <?php if('admin.tiposalimentos.index'== Route::current()->getName()||'admin.tiposalimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposalimentos"><i class="fa fa-lemon-o"></i>Tipos Alimentos</a></li>
-              <li <?php if('admin.alimentos.index'== Route::current()->getName()||'admin.alimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/alimentos"><i class="fa fa-coffee"></i>Alimentos</a></li>
+            <li <?php if('admin.alimentos.index'== Route::current()->getName()||'admin.alimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/alimentos"><i class="fa fa-coffee"></i>Alimentos</a></li>
+            <li <?php if('admin.tiposviandas.index'== Route::current()->getName()||'admin.tiposviandas.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposviandas"><i class="fa fa-leaf"></i>Tipos Viandas</a></li>
             <li><a href="#"></a>
             </li>
           </ul>

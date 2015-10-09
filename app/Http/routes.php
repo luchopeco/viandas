@@ -31,5 +31,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
 
         Route::resource('alimentos','AlimentosController');
         Route::post('alimentos/buscar','AlimentosController@buscar');
+
+        Route::resource('tiposviandas','TiposViandasController');
+        Route::post('tiposviandas/buscar','TiposViandasController@buscar');
     	}
 );
