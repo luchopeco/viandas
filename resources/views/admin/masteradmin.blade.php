@@ -54,7 +54,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="/admin/home" class="logo"><i class="fa fa-home fa-fw"></i><b>Wiphala</b>sistemas</a>
+        <a href="/admin/home" class="logo"><i class="fa fa-home fa-fw"></i><b>Nutrilife</b>Viandas</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -89,6 +89,8 @@
             <li <?php if('admin.tiposalimentos.index'== Route::current()->getName()||'admin.tiposalimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposalimentos"><i class="fa fa-lemon-o"></i>Tipos Alimentos</a></li>
             <li <?php if('admin.alimentos.index'== Route::current()->getName()||'admin.alimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/alimentos"><i class="fa fa-coffee"></i>Alimentos</a></li>
             <li <?php if('admin.tiposviandas.index'== Route::current()->getName()||'admin.tiposviandas.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposviandas"><i class="fa fa-leaf"></i>Tipos Viandas</a></li>
+            <li <?php if('admin.nolaborables.index'== Route::current()->getName()||'admin.nolaborables.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/nolaborables"><i class="fa fa-calendar"></i>Dias no laborables</a></li>
+            
             <li><a href="#"></a>
             </li>
           </ul>
