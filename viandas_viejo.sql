@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2015 a las 15:18:56
+-- Tiempo de generación: 08-10-2015 a las 20:27:25
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -37,15 +37,14 @@ CREATE TABLE IF NOT EXISTS `alimento` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_alimento_tipo_alimento1_idx` (`tipo_alimento_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `alimento`
 --
 
 INSERT INTO `alimento` (`id`, `nombre`, `descripcion`, `estado`, `tipo_alimento_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Carne', 'Carne Vacuna', 'Activo', 3, NULL, NULL, NULL),
-(2, 'Zanahoria', 'znahoria', 'ok', 3, '2015-10-15 05:13:55', '2015-10-15 05:13:55', NULL);
+(1, 'Carne', 'Carne Vacuna', 'Activo', 3, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,17 +130,8 @@ CREATE TABLE IF NOT EXISTS `no_laborables` (
   `fecha` date DEFAULT NULL,
   `motivo` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `no_laborables`
---
-
-INSERT INTO `no_laborables` (`id`, `fecha`, `motivo`, `estado`, `created_at`, `updated_at`) VALUES
-(2, '2014-11-24', 'alguno', NULL, '2015-10-15 03:51:25', '2015-10-15 03:51:40');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -152,8 +142,6 @@ INSERT INTO `no_laborables` (`id`, `fecha`, `motivo`, `estado`, `created_at`, `u
 CREATE TABLE IF NOT EXISTS `no_me_gusta` (
   `cliente_id` int(11) NOT NULL,
   `alimento_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
   KEY `fk_no_me_gusta_cliente_idx` (`cliente_id`),
   KEY `fk_no_me_gusta_alimento1_idx` (`alimento_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -211,18 +199,8 @@ CREATE TABLE IF NOT EXISTS `tipo_vianda` (
   `nombre` varchar(45) DEFAULT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `precio` varchar(45) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `tipo_vianda`
---
-
-INSERT INTO `tipo_vianda` (`id`, `nombre`, `descripcion`, `precio`, `created_at`, `updated_at`) VALUES
-(1, 'light', 'light sss', '33', '2015-10-13 00:50:37', '2015-10-13 00:51:15'),
-(2, 'natural', 'natural', '43', '2015-10-13 00:51:35', '2015-10-13 00:51:35');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -246,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2015-10-15 05:14:54', 'YGuVBbKr7rmiBduRADHd4cVdlabPIFMWCfRhKeqd0qYtsNf2olhnpFTBwg2f');
+(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2015-10-08 17:30:21', 'N8TUKA5E7X1kUS9lazutKd2hyjSWmjTpNLBJcuxuvBRiDzyFRjxH2o8ahRf1');
 
 --
 -- Restricciones para tablas volcadas
