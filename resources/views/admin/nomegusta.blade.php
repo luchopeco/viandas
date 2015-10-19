@@ -1,11 +1,11 @@
 @extends('admin.masterAdmin')
 
 @section('title')
-<h1> Gestión de Clientes</h1>
+<h1>Alimentos que NO le gustan a  <smal>{{$cliente->nombre}} {{$cliente->apellido}}</smal></h1>
 @endsection
 
 @section('breadcrumb')
-<li><a href="/admin/home"><i class="fa fa-home"></i> Home</a></li>
+<li><a href="/admin/home"><i class="fa fa-home"></i> Home</a> / <a href="/admin/home"><i class="fa fa-user"></i> Cliente</a> </li>
 @endsection
 
 @section('content')
@@ -34,7 +34,7 @@
    <div class="row">
        <div class=" col-md-12">
           <div class=" panel panel-default">
-               <div class=" panel-heading">Clientes <a href="" id="btnNuevoCliente" title="Nuevo Cliente" class=" btn-xs btn btn-success" data-toggle="modal" data-target="#modalClienteAgregar"><i class=" fa fa-plus"></i></a>
+               <div class=" panel-heading"> Alimentos que No le Gustan
                    <div class="pull-right">
                        <div class="btn-group">
                            <button type="button" class="multiselect dropdown-toggle btn btn-xs btn-warning" data-toggle="dropdown" title="Ayuda">
@@ -47,32 +47,26 @@
                    </div>
                </div>
                <div class=" panel-body">
-                   <div class="table-responsive">
-                       <table id="editar"  class=" table table-bordered table-condensed table-hover table-responsive">
-                           <tr>
-                               <th>Nombre</th>
-                               <th>DNI</th>
-                               <th>Domicilio</th>
-                               <th>Telefono</th>
-                               <th>Email</th>
-                               <th>Estado Deuda</th>
-                           </tr>
-                           @foreach($listClientes as $cliente)
-                               <tr >
-                                   <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
-                                   <td>{{$cliente->dni}}</td>
-                                   <td>{{$cliente->domicilio}}</td>
-                                   <td>{{$cliente->telefono}}</td>
-                                   <td>{{$cliente->email}}</td>
-                                   <td>{{$cliente->estado_deuda}}</td>
-                                   <td><a href="clientes/nomegusta/{{$cliente->id}}"  class="btn btn-xs btn-info" title="Alimentos No me Gusta"><i class="fa fa-hand-o-down"></i><i class="fa fa-lemon-o"></i></a></td>
-                                   <td><a href="#"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
-                                   <td><a href="#" class="btn btn-xs btn-danger baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
-                                   <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
-                               </tr>
-                           @endforeach
-                       </table>
-                   </div>
+                    <div class="row">
+                    @foreach($listTiposAlimentos as $tipoAlimento)
+                        <div class="col-md-6">
+                            <div class=" panel panel-default">
+                                <div class=" panel-heading">
+                                {{$tipoAlimento->nombre}}
+                                </div>
+                                <div class=" panel-body">
+                                    <div class="row">
+                                        @foreach($tipoAlimento->ListAlimentos as $alimento)
+                                        <div class="col-md-12">
+                                            {{$alimento->nombre}}
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    </div>
                </div>
           </div>
        </div>

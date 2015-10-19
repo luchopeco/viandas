@@ -12,4 +12,9 @@ class TipoAlimento extends Model
 
     protected $primaryKey="id";
 
+    public function ListAlimentos()
+    {
+        return $this->hasMany('viandas\Alimento','tipo_alimento_id', 'id');
+    }
+
 }

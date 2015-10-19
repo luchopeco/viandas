@@ -3,11 +3,19 @@
 namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use viandas\Cliente;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
+use viandas\TipoAlimento;
 
 class ClientesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,31 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        //
+        try {
+
+            $listClientes = Cliente::all();
+            return view('admin.clientes', compact('listClientes'));
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+    }
+
+    public function  nomegusta($id)
+    {
+        try {
+
+            $cliente = Cliente::findOrFail($id);
+            $listTiposAlimentos = TipoAlimento::all();
+            return view('admin.nomegusta', compact('cliente','listTiposAlimentos'));
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     /**
