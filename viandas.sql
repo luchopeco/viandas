@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2015 a las 15:18:56
+-- Tiempo de generación: 19-10-2015 a las 20:10:35
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `alimento` (
 
 INSERT INTO `alimento` (`id`, `nombre`, `descripcion`, `estado`, `tipo_alimento_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Carne', 'Carne Vacuna', 'Activo', 3, NULL, NULL, NULL),
-(2, 'Zanahoria', 'znahoria', 'ok', 3, '2015-10-15 05:13:55', '2015-10-15 05:13:55', NULL);
+(2, 'Zanahoria', 'znahoria', 'ok', 3, '2015-10-15 08:13:55', '2015-10-15 08:13:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -59,12 +59,23 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `apellido` varchar(45) DEFAULT NULL,
   `dni` int(11) DEFAULT NULL,
   `domicilio` varchar(45) DEFAULT NULL,
+  `telefono` varchar(255) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `estadoDeuda` varchar(45) DEFAULT NULL,
-  `valorDeuda` varchar(45) DEFAULT NULL,
+  `estado_deuda` varchar(45) DEFAULT NULL,
+  `valor_deuda` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
+  `deleted_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `dni`, `domicilio`, `telefono`, `email`, `estado_deuda`, `valor_deuda`, `estado`, `deleted_at`, `updated_at`, `created_at`) VALUES
+(1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, '2015-10-19 14:58:33', '2015-10-19 14:58:33', '2015-10-19 14:58:33');
 
 -- --------------------------------------------------------
 
@@ -198,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `tipo_alimento` (
 --
 
 INSERT INTO `tipo_alimento` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 'Mas Dietetico', 'asd', '2015-10-08 17:29:50', '2015-10-08 17:29:50', NULL);
+(3, 'Mas Dietetico', 'asd', '2015-10-08 20:29:50', '2015-10-08 20:29:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -246,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2015-10-15 05:14:54', 'YGuVBbKr7rmiBduRADHd4cVdlabPIFMWCfRhKeqd0qYtsNf2olhnpFTBwg2f');
+(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2015-10-15 08:14:54', 'YGuVBbKr7rmiBduRADHd4cVdlabPIFMWCfRhKeqd0qYtsNf2olhnpFTBwg2f');
 
 --
 -- Restricciones para tablas volcadas
