@@ -141,8 +141,36 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try
+        {
+            $tor = Cliente::withTrashed()->where('id', $request->id)->first();
+            $tor->forceDelete();
+            Session::flash('mensajeOk', 'Cliente Eliminado con Exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+    }
+
+    public function baja(Request $request)
+    {
+
+        try
+        {
+            Cliente::destroy($request->id);
+            Session::flash('mensajeOk', 'Cliente Dado de baja con Exito');
+            return back();
+        }
+        catch(QueryException  $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+
     }
 }

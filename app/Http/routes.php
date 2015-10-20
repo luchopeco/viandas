@@ -41,6 +41,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::resource('clientes','ClientesController');
         Route::get('clientes/nomegusta/{id}','ClientesController@nomegusta');
         Route::post('clientes/nomegustaagregar','ClientesController@nomegustaagregar');
+        Route::post('clientes/baja','ClientesController@baja');
 
 
     	}

@@ -52,6 +52,7 @@
                            <tr>
                                <th>Nombre</th>
                                <th>DNI</th>
+                               <th>No le Gusta</th>
                                <th>Domicilio</th>
                                <th>Telefono</th>
                                <th>Email</th>
@@ -61,13 +62,18 @@
                                <tr >
                                    <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
                                    <td>{{$cliente->dni}}</td>
+                                   <td>
+                                   @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
+                                   {{$alimento->nombre}} -
+                                   @endforeach
+                                   </td>
                                    <td>{{$cliente->domicilio}}</td>
                                    <td>{{$cliente->telefono}}</td>
                                    <td>{{$cliente->email}}</td>
                                    <td>{{$cliente->estado_deuda}}</td>
-                                   <td><a href="clientes/nomegusta/{{$cliente->id}}"  class="btn btn-xs btn-info" title="Alimentos No me Gusta"><i class="fa fa-hand-o-down"></i><i class="fa fa-lemon-o"></i></a></td>
+                                   <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
                                    <td><a href="#"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
-                                   <td><a href="#" class="btn btn-xs btn-danger baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
+                                   <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                </tr>
                            @endforeach
@@ -82,16 +88,16 @@
     <div class="modal fade" id="modalClienteEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog">
               <div class="modal-content">
-                 {!!Form::open(['route'=>['admin.alimentos.destroy'],'method'=>'DELETE'])!!}
+                 {!!Form::open(['route'=>['admin.clientes.destroy'],'method'=>'DELETE'])!!}
                    <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                       <h4 class="modal-title" id="myModalLabel">Eliminando Alimento</h4>
+                       <h4 class="modal-title" id="myModalLabel">Eliminando Cliente</h4>
                    </div>
                    <div class="modal-body">
                           <div class="row">
                                <div class="col-md-12">
                                    {!!Form::Text('id',null,['class'=>'hidden','id'=>'idD'])!!}
-                                   <h3>¿Desea Eliminar el Alimento?</h3>
+                                   <h3>¿Desea Eliminar el Cliente? NO lo podra recuperar perdera todos sus datos y su historia</h3>
                                    <div id="caca"></div>
                                </div>
                           </div>
@@ -110,15 +116,52 @@
            <!-- /.modal-dialog -->
      </div>
     </div>
+
+    <div class="modal fade" id="modalClienteBaja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {!!Form::open(['url'=>['admin/clientes/baja'],'method'=>'POST'])!!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Dando de Baja Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {!!Form::Text('id',null,['class'=>'hidden','id'=>'idB'])!!}
+                            <h3>¿Desea dar de baja un cliente?</h3>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                {!!Form::submit('Aceptar', array('class' => 'btn btn-success'))!!}
+                            </div>
+                        </div>
+                    </div>
+                {!! Form::close() !!}
+                </div>
+               <!-- /.modal-content -->
+            </div>
+           <!-- /.modal-dialog -->
+        </div>
+    </div>
 @endsection
 
 @section('script')
 <script>
     $(function () {
-        $('body').on('click', '.eliminar', function (event) {
+        $('body').on('click', '.baja', function (event) {
             event.preventDefault();
             var id_cliente=$(this).attr('data-idcliente');
-            $("#idD").val(id_alimento);
+            $("#idB").val(id_cliente);
+            $("#modalClienteBaja").modal("show");
+        });
+         $('body').on('click', '.eliminar', function (event) {
+            event.preventDefault();
+            var id_cliente=$(this).attr('data-idcliente');
+            $("#idD").val(id_cliente);
             $("#modalClienteEliminar").modal("show");
         });
 

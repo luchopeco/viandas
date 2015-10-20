@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2015 a las 20:10:35
--- Versión del servidor: 5.6.17
+-- Tiempo de generación: 20-10-2015 a las 23:06:26
+-- Versión del servidor: 5.6.17-log
 -- Versión de PHP: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `estado_deuda` varchar(45) DEFAULT NULL,
   `valor_deuda` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
-  `deleted_at` timestamp NOT NULL,
-  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `dni`, `domicilio`, `telefono`, `email`, `estado_deuda`, `valor_deuda`, `estado`, `deleted_at`, `updated_at`, `created_at`) VALUES
-(1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, '2015-10-19 14:58:33', '2015-10-19 14:58:33', '2015-10-19 14:58:33');
+(1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, NULL, '2015-10-20 21:01:10', '2015-10-20 21:02:26');
 
 -- --------------------------------------------------------
 
@@ -168,6 +168,14 @@ CREATE TABLE IF NOT EXISTS `no_me_gusta` (
   KEY `fk_no_me_gusta_cliente_idx` (`cliente_id`),
   KEY `fk_no_me_gusta_alimento1_idx` (`alimento_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `no_me_gusta`
+--
+
+INSERT INTO `no_me_gusta` (`cliente_id`, `alimento_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
