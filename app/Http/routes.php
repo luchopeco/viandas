@@ -39,6 +39,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('tiposviandas/buscar','TiposViandasController@buscar');
 
         Route::resource('clientes','ClientesController');
-        Route::resource('clientes/nomegusta/{id}','ClientesController@nomegusta');
+        Route::get('clientes/nomegusta/{id}','ClientesController@nomegusta');
+        Route::post('clientes/nomegustaagregar','ClientesController@nomegustaagregar');
+
+
     	}
 );

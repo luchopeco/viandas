@@ -1,7 +1,7 @@
 @extends('admin.masterAdmin')
 
 @section('title')
-<h1>Alimentos que NO le gustan a  <smal>{{$cliente->nombre}} {{$cliente->apellido}}</smal></h1>
+<h1><i class="fa fa-user"></i> {{$cliente->nombre}} {{$cliente->apellido}}<small>Alimentos que NO le gustan </small></h1>
 @endsection
 
 @section('breadcrumb')
@@ -41,15 +41,17 @@
                                <i class="fa fa-question-circle"></i><b class="caret"></b>
                            </button>
                            <ul class="multiselect-container dropdown-menu pull-right">
-                               <li>Desde Aqui Puede Agregar (Click en "+"), editar o eliminar un Cliente</li>
+                               <li>Desde Aqui Puede Agregar (Click en "+"), editar o eliminar un los alimentos que no le gustan a un cliente</li>
                            </ul>
                        </div>
                    </div>
                </div>
                <div class=" panel-body">
+                    {!!Form::open(['url'=>'admin/clientes/nomegustaagregar','method'=>'POST'])!!}
+                    {!!Form::Text('id',$cliente->id,['class'=>' hidden'])!!}
                     <div class="row">
                     @foreach($listTiposAlimentos as $tipoAlimento)
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class=" panel panel-default">
                                 <div class=" panel-heading">
                                 {{$tipoAlimento->nombre}}
@@ -57,8 +59,21 @@
                                 <div class=" panel-body">
                                     <div class="row">
                                         @foreach($tipoAlimento->ListAlimentos as $alimento)
+                                        <?php $desc ='nmg-'.$alimento->id; ?>
                                         <div class="col-md-12">
-                                            {{$alimento->nombre}}
+                                            <p>
+                                                <?php $aux = 0; ?>
+                                                @foreach($cliente->ListAlimentosNoMeGusta as $nomegusta)
+                                                     @if($nomegusta->id == $alimento->id)
+                                                        {!!Form::checkbox($desc, $alimento->id, true)!!}
+                                                        <?php $aux = 1; ?>
+                                                     @endif
+                                                @endforeach
+                                                @if($aux == 0)
+                                                {!!Form::checkbox($desc, $alimento->id)!!}
+                                                @endif
+                                                {{$alimento->nombre}}
+                                            </p>
                                         </div>
                                         @endforeach
                                     </div>
@@ -67,6 +82,12 @@
                         </div>
                     @endforeach
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {!!Form::submit('Aceptar', array('class' => 'btn btn-success btn-block'))!!}
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
                </div>
           </div>
        </div>

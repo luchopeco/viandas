@@ -4,6 +4,7 @@ namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use viandas\Alimento;
 use viandas\Cliente;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
@@ -42,6 +43,35 @@ class ClientesController extends Controller
             $cliente = Cliente::findOrFail($id);
             $listTiposAlimentos = TipoAlimento::all();
             return view('admin.nomegusta', compact('cliente','listTiposAlimentos'));
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+    }
+
+
+    public function nomegustaagregar(Request $request)
+    {
+        try{
+
+            $cliente = Cliente::findOrFail($request->id);
+            $cliente->ListAlimentosNoMeGusta()->detach();
+
+            $listAlimentos = Alimento::all();
+
+            foreach($listAlimentos as $alimento)
+            {
+                $desc ='nmg-'.$alimento->id;
+                if ($request->has($desc)) {
+                    $idali = $request->input($desc);
+                    $cliente->ListAlimentosNoMeGusta()->attach($idali);
+                }
+            }
+
+            Session::flash('mensajeOk','Alimentos que no le gustan agregados con exito ');
+            return back();
         }
         catch(\Exception $ex){
 
