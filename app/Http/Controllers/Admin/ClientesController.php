@@ -9,9 +9,12 @@ use viandas\Cliente;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\TipoAlimento;
+use viandas\Diasdelasemana;
 
 class ClientesController extends Controller
 {
+
+    public $idActual;
 
     public function __construct()
     {
@@ -28,6 +31,31 @@ class ClientesController extends Controller
 
             $listClientes = Cliente::all();
             return view('admin.clientes', compact('listClientes'));
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+    }
+
+    public function gestionarcliente()
+    {
+        try {
+            
+            var_dump($_GET);die();
+            if ($id == null) {
+               // es nuevo cliente
+                $cliente ='nuevo';
+            }
+            else{
+                $cliente = Cliente::findOrFail($id);
+
+            }
+
+            //var_dump($cliente);die();
+           
+            return view('admin.clientesgestionar', compact('cliente'));
         }
         catch(\Exception $ex){
 

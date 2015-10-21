@@ -20,4 +20,9 @@ class Cliente extends Model
         return $this->belongsToMany('viandas\Alimento', 'no_me_gusta', 'cliente_id', 'alimento_id');
     }
 
+    public function ListDiasDeLaSemana()
+    {
+        return $this->belongsToMany('viandas\Diasdelasemana','cliente_dia', 'cliente_id','dia_semana_id');
+    }
+
 }

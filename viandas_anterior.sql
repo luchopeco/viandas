@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2015 a las 13:35:16
--- Versión del servidor: 5.6.17
+-- Tiempo de generación: 20-10-2015 a las 23:06:26
+-- Versión del servidor: 5.6.17-log
 -- Versión de PHP: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -94,13 +94,15 @@ CREATE TABLE IF NOT EXISTS `cliente_dia` (
   KEY `fk_cliente_has_dia_semana_tipo_vianda1_idx` (`tipo_vianda_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `cliente_dia`
+-- Estructura de tabla para la tabla `cliente_dias`
 --
 
-INSERT INTO `cliente_dia` (`cliente_id`, `dia_semana_id`, `tipo_vianda_id`, `cantidad`) VALUES
-(1, 2, 1, 2),
-(1, 4, 2, 2);
+CREATE TABLE IF NOT EXISTS `cliente_dias` (
+  `idcliente_dias` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -113,18 +115,7 @@ CREATE TABLE IF NOT EXISTS `dia_semana` (
   `nombre` varchar(45) DEFAULT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
---
--- Volcado de datos para la tabla `dia_semana`
---
-
-INSERT INTO `dia_semana` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'Lunes', NULL),
-(2, 'Martes', NULL),
-(3, 'Miércoles', NULL),
-(4, 'Jueves', NULL),
-(5, 'Viernes', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -183,7 +174,8 @@ CREATE TABLE IF NOT EXISTS `no_me_gusta` (
 --
 
 INSERT INTO `no_me_gusta` (`cliente_id`, `alimento_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
