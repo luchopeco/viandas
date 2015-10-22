@@ -81,6 +81,20 @@ class ClientesController extends Controller
         }
     }
 
+    public function nomegustalista()
+    {
+        try
+        {
+            $listTiposAlimentos = TipoAlimento::all();
+            return view('admin.loquenogusta', compact('listTiposAlimentos'));
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return view('admin.loquenogusta');
+        }
+    }
+
 
     public function nomegustaagregar(Request $request)
     {

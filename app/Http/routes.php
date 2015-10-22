@@ -42,7 +42,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::get('clientes/nomegusta/{id}','ClientesController@nomegusta');
         Route::post('clientes/nomegustaagregar','ClientesController@nomegustaagregar');
         Route::post('clientes/baja','ClientesController@baja');
-
+        Route::get('loquenogusta','ClientesController@nomegustalista');
         Route::get('clientes/gestionar/{id}','ClientesController@gestionarcliente');
 
 

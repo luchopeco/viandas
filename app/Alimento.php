@@ -16,4 +16,11 @@ class Alimento extends Model
     {
         return $this->hasOne('viandas\TipoAlimento', 'id','tipo_alimento_id');
     }
+
+
+    public function ListClientesNoMeGusta()
+    {
+        return $this->belongsToMany('viandas\Cliente', 'no_me_gusta', 'alimento_id', 'cliente_id');
+    }
+
 }
