@@ -16,6 +16,7 @@ class ClientesController extends Controller
 
     public $idActual;
 
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -39,23 +40,24 @@ class ClientesController extends Controller
         }
     }
 
-    public function gestionarcliente()
+    public function gestionarcliente($id)
     {
         try {
-            
-            var_dump($_GET);die();
-            if ($id == null) {
-               // es nuevo cliente
-                $cliente ='nuevo';
-            }
-            else{
+                
+                $cliente = "";
+            //var_dump($id);die();
+            if($id=='0'){
+                $cliente = new CLiente;
+            }else{
                 $cliente = Cliente::findOrFail($id);
-
             }
 
-            //var_dump($cliente);die();
+
+       
+               
            
             return view('admin.clientesgestionar', compact('cliente'));
+            //return view('admin.clientesgestionar', $cliente);       
         }
         catch(\Exception $ex){
 

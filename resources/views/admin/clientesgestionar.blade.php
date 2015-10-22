@@ -1,5 +1,8 @@
 @extends('admin.masterAdmin')
 
+<?php use viandas\Diasdelasemana; ?>
+<?php use viandas\TipoVianda; ?>
+
 @section('title')
 <h1> Gestión de Clientes</h1>
 @endsection
@@ -35,43 +38,140 @@
        <div class=" col-md-12">
           <div class=" panel panel-default">
                <div class=" panel-heading">
-                  <?php if($cliente=='nuevo'){
+                  <?php
+                      $nuevo=false;
+                       if($cliente->nombre==''){
                          echo 'Nuevo Cliente';
+                         $nuevo=true;
                         }
                         else{
                           echo 'Modificar cliente';
-                        } ?>
+                        } 
+                  ?>
                  
                
                    
                </div>
                <div class=" panel-body">
 
-                  <form>                  
-                         <div class="modal-body"><div class=" panel panel-default">
-                         <div class=" panel-heading">Cliente</div>
-                            <div class=" panel-body">
-                             <div clas="row">
-                                 <div class="col-md-12">
-                                     <div class="form-group">
-                                        {!!Form::label('nombre','Nombre')!!}
-                                        {!!Form::Text('nombre',null,['class'=>' form-control','required'])!!}
-                                        <span class="help-block with-errors"></span>
-                                     </div>
-                                     <div class="form-group">
-                                        {!!Form::label('descripcion','Descripcion')!!}
-                                        {!!Form::Text('descripcion',null,['class'=>' form-control','required'])!!}
-                                        <span class="help-block with-errors"></span>
-                                     </div>
-                                     <div class="form-group">
-                                         {!!Form::label('estado','Estado')!!}
-                                         {!!Form::Text('estado',null,['class'=>' form-control','required'])!!}
-                                         <span class="help-block with-errors"></span>
-                                     </div>                                     
-                                 </div>
-                              </div>
-                         </div>
-                    </div></div>
+                  <form action="validarCliente" id="formularioCliente">                  
+                         <div class="modal-body">
+                          <div class=" panel panel-default">
+                            <div class=" panel-heading">Cliente</div>
+                              <div class=" panel-body">
+                                   <div clas="row">
+                                       <div class="col-md-12">
+                                           <div class="form-group">
+                                              {!!Form::label('nombre','Nombre')!!}
+                                              {!!Form::Text('nombre',null,['class'=>' form-control','required'])!!}
+                                              <span class="help-block with-errors"></span>
+                                           </div>
+                                           <div class="form-group">
+                                              {!!Form::label('apellido','Apellido')!!}
+                                              {!!Form::Text('apellido',null,['class'=>' form-control','required'])!!}
+                                              <span class="help-block with-errors"></span>
+                                           </div>
+                                           <div class="form-group">
+                                              {!!Form::label('telefono','Teléfono')!!}
+                                              {!!Form::Text('telefono',null,['class'=>' form-control','required'])!!}
+                                              <span class="help-block with-errors"></span>
+                                           </div>
+                                           <div class="form-group">
+                                              {!!Form::label('dni','DNI')!!}
+                                              {!!Form::Text('dni',null,['class'=>' form-control','required'])!!}
+                                              <span class="help-block with-errors"></span>
+                                           </div>
+                                           <div class="form-group">
+                                              {!!Form::label('domicilio','Domicilio')!!}
+                                              {!!Form::Text('domicilio',null,['class'=>' form-control','required'])!!}
+                                              <span class="help-block with-errors"></span>
+                                           </div>
+                                           <div class="form-group">
+                                              {!!Form::label('email','Email')!!}
+                                              {!!Form::Text('email',null,['class'=>' form-control','required'])!!}
+                                              <span class="help-block with-errors"></span>
+                                           </div>
+                                                                               
+                                       </div>
+                                   </div>
+                                </div>
+                           </div>
+                      </div>
+
+                    <?php 
+
+                     if($nuevo){
+                      ?>
+                        <div class=" panel panel-default">
+                            <div class=" panel-heading">Días de la semana</div>
+                              <div class=" panel-body">
+                                   <div clas="row">
+                                       <div class="col-md-12">
+                                          
+                                          <table class="table">
+                                            
+
+                                          
+
+                                          <?php
+
+                                          $diasD = Diasdelasemana::all();  
+                                          
+
+                                          foreach ($diasD as $dia) {
+                                            ?>
+
+                                              <tr>
+                                               <td><input type="checkbox"></input></td>
+
+                                              <td><?php echo $dia->nombre; ?></td>
+                                             
+                                              
+                                              <td>Tipo de Viandas: <select>
+                                              <?php foreach (TipoVianda::all() as $tipo) {
+                                                echo '<option  >'.$tipo->nombre.'</option>';
+                                              } ?></select></td>
+
+                                              <td>Cantidad de viandas: <input type="text"></input> </td>
+                                              
+                                              <td>Envío: <input type="checkbox"></input> </td>
+                                             
+                                              
+                                              
+                                            </tr>
+
+
+                                            <?php
+                                                                
+                                          }
+
+                                          ?>
+
+                                          </table>
+                                                                               
+                                       </div>
+                                   </div>
+                                </div>
+                           </div>
+
+
+
+                      <?php
+
+                     }else{
+
+
+                     }
+                  
+
+                  ?>
+                        
+
+
+
+
+
+
                          <div class="modal-footer">
                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                              {!!Form::submit('Aceptar', array('class' => 'btn btn-success'))!!}
@@ -81,7 +181,8 @@
                   </form>
 
                  
-                        
+
+
 
 
 
