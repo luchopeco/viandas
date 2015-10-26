@@ -1,4 +1,4 @@
-@extends('admin.masterAdmin')
+@extends('admin.masteradmin')
 
 <?php use viandas\Diasdelasemana; ?>
 <?php use viandas\TipoVianda; ?>

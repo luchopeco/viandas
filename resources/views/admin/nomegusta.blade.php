@@ -1,4 +1,4 @@
-@extends('admin.masterAdmin')
+@extends('admin.masteradmin')
 
 @section('title')
 <h1><i class="fa fa-user"></i> {{$cliente->nombre}} {{$cliente->apellido}}<small>Alimentos que NO le gustan </small></h1>

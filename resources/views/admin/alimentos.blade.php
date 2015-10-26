@@ -1,4 +1,4 @@
-@extends('admin.masterAdmin')
+@extends('admin.masteradmin')
 
 @section('title')
 <h1> Gestión de Alimentos</h1>

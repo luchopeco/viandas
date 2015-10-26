@@ -1,4 +1,4 @@
-@extends('admin.masterAdmin')
+@extends('admin.masteradmin')
 
 @section('title')
 <h1> Bienvenidos al Sistema de Gestion de Viandas</h1>

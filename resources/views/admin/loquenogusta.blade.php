@@ -1,4 +1,4 @@
-@extends('admin.masterAdmin')
+@extends('admin.masteradmin')
 
 @section('title')
 <h1>Alimentos que NO Gustan</h1>
