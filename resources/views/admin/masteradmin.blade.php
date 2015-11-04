@@ -92,7 +92,8 @@
             <li <?php if('admin.alimentos.index'== Route::current()->getName()||'admin.alimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/alimentos"><i class="fa fa-coffee"></i>Alimentos</a></li>
             <li <?php if('admin.tiposviandas.index'== Route::current()->getName()||'admin.tiposviandas.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposviandas"><i class="fa fa-leaf"></i>Tipos Viandas</a></li>
             <li <?php if('admin.nolaborables.index'== Route::current()->getName()||'admin.nolaborables.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/nolaborables"><i class="fa fa-calendar"></i>Dias no laborables</a></li>
-            
+            <li <?php if('admin.tipogastos.index'== Route::current()->getName()||'admin.tipogastos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tipogastos"><i class="fa fa-money"></i>Tipos Gastos</a></li>
+             <li <?php if('admin.gastos.index'== Route::current()->getName()||'admin.gastos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/gastos"><i class="fa fa-usd"></i>Gastos</a></li>
             <li><a href="#"></a>
             </li>
           </ul>
@@ -100,6 +101,8 @@
         <!-- /.sidebar -->
       </aside>
 
+        <div id="cargando" style="position: fixed; top: 2%; left: 50%; z-index: 1051;">
+        </div>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -207,7 +210,8 @@
         </div>
         <strong>Copyright &copy; 2009-2015 <a href="http://www.wiphalasistemas.com.ar">Wiphala Sistemas</a>.</strong> All rights reserved.
       </footer>
-    </div><!-- ./wrapper -->
+    </div>
+    <!-- ./wrapper -->
 
     <!-- jQuery 2.1.3 -->
     <script src="/js/plugins/jQuery/jQuery-2.1.3.min.js"></script>
