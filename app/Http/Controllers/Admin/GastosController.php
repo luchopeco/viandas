@@ -67,7 +67,20 @@ class GastosController extends Controller
         $fd = Carbon::parse($request->fecha_desde)->format('Y-d-m');
         $fh = Carbon::parse($request->fecha_hasta)->format('Y-d-m');
         $listGastos = Gasto::whereRaw("fecha >= '". $fd. "' AND  fecha <='". $fh."'")->get();
-        return view ('admin.include.gastos',compact('listGastos'));
+        $total =$listGastos ->sum('monto');
+        return view ('admin.include.gastos',compact('listGastos','total'));
+    }
+
+    public function  buscar(Request $request)
+    {
+        $a=Gasto::findOrFail($request->id);
+        $a->fecha = Carbon::parse($a->fecha)->format('d/m/Y');
+        $response = array(
+            "result" => true,
+            "mensaje" => "No se pudo realizar la operacion",
+            "datos" => $a
+        );
+        return json_encode($response, JSON_HEX_QUOT | JSON_HEX_TAG);
     }
     /**
      * Display the specified resource.
@@ -100,7 +113,24 @@ class GastosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $g = Gasto::findOrFail($request->id);
+            $g->descripcion=$request->descripcion;
+            $g->monto=$request->monto;
+            $g->idtipo_gasto=$request->idtipo_gasto;
+            $g->fecha=Carbon::parse($request->fecha)->format('Y-d-m');
+            $g->save();
+
+            Session::flash('mensajeOk','Gasto Modificado con exito');
+            return back();
+
+
+        }
+        catch( \Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -109,8 +139,17 @@ class GastosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try{
+            Gasto::destroy($request->id);
+            Session::flash('mensajeOk','Gastp Eliminado con exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 }

@@ -47,6 +47,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
 
         Route::resource('gastos','GastosController');
         Route::post('gastos/buscarxfechas','GastosController@buscarxfechas');
+        Route::post('gastos/buscar','GastosController@buscar');
 
         Route::resource('tipogastos','TipoGastosController');
         Route::post('tipogastos/buscar','TipoGastosController@buscar');

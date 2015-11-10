@@ -147,28 +147,32 @@
                            <div class=" panel-body">
                             <div clas="row">
                                 <div class="col-md-12">
-                                    {!!Form::Text('id',null,['class'=>' hidden form-control','id'=>'idU'])!!}
+                                {!!Form::Text('id',null,['class'=>' hidden form-control','id'=>'idU'])!!}
                                     <div class="form-group">
-                                          {!!Form::label('nombre','Nombre')!!}
-                                          {!!Form::Text('nombre',null,['class'=>' form-control','id'=>'nombreU','required'])!!}
-                                      <span class="help-block with-errors"></span>
+                                         <label>Fecha</label>
+                                         <div class="input-group">
+                                             <div class="input-group-addon">
+                                                 <i class="fa fa-calendar"></i>
+                                             </div>
+                                              {!!Form::date('fecha',null,['class'=>' form-control datepicker','required','id'=>'fechaU'])!!}
+                                         </div>
                                     </div>
                                     <div class="form-group">
-                                       {!!Form::label('descripcion','Descripcion')!!}
-                                       {!!Form::Text('descripcion',null,['class'=>' form-control','id'=>'descripcionU','required'])!!}
-                                       <span class="help-block with-errors"></span>
+                                        {!!Form::label('descripcion','Descripcion')!!}
+                                        {!!Form::Text('descripcion',null,['class'=>' form-control','required','id'=>'descripcionU'])!!}
+                                        <span class="help-block with-errors"></span>
                                     </div>
-                                     <div class="form-group">
-                                         {!!Form::label('estado','Estado')!!}
-                                         {!!Form::Text('estado',null,['class'=>' form-control','id'=>'estadoU','required'])!!}
+                                    <div class="form-group">
+                                         {!!Form::label('monto','Monto')!!}
+                                         {!!Form::Text('monto',null,['class'=>' form-control','required','id'=>'montoU'])!!}
                                          <span class="help-block with-errors"></span>
-                                     </div>
-                                       <div class="form-group">
-                                           {!!Form::label('tipoAlimento','Tipo Alimento')!!}
-                                           {!!Form::select('tipo_alimento_id', $listTipoGastos,null,array('class' => 'form-control','id'=>'tipo_alimento_idU'))!!}
-                                           <span class="help-block with-errors"></span>
-                                      </div>
-                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                          {!!Form::label('tipoGasto','Tipo Gasto')!!}
+                                          {!!Form::select('idtipo_gasto', $listTipoGastos,null,array('class' => 'form-control','id'=>'idtipo_gastoU'))!!}
+                                          <span class="help-block with-errors"></span>
+                                    </div>
+                                 </div>
                              </div>
                         </div>
                    </div></div>
@@ -241,21 +245,22 @@ $(function () {
         buscarGastos();
         $('body').on('click', '.editar', function (event) {
             event.preventDefault();
-            var id_alimento=$(this).attr('data-idalimento');
+            var id_alimento=$(this).attr('data-idgasto');
             $.ajax({
-                 url:"alimentos/buscar",
+                 url:"gastos/buscar",
                  type: "POST",
                  dataType: "json",
                 data:{'id': id_alimento}
                 })
             .done(function(response){
                     //alert(response.datos.titulo);
-                    $('#nombreU').val(response.datos.nombre);
+                    $('#fechaU').val(response.datos.fecha);
                     $('#descripcionU').val(response.datos.descripcion);
                     $('#idU').val(response.datos.id);
-                    $('#estadoU').val(response.datos.estado);
-                    $('#tipo_alimento_idU').val(response.datos.tipo_alimento_id);
-                    $("#modalAlimentoModificar").modal("show");
+                    $('#idtipo_gastoU').val(response.datos.idtipo_gasto);
+                    $('#montoU').val(response.datos.monto);
+
+                    $("#modalGastoModificar").modal("show");
                 })
                 .fail(function(){
                     alert(id_alimento);
@@ -263,9 +268,9 @@ $(function () {
         });
         $('body').on('click', '.eliminar', function (event) {
             event.preventDefault();
-            var id_alimento=$(this).attr('data-idalimento');
+            var id_alimento=$(this).attr('data-idgasto');
             $("#idD").val(id_alimento);
-            $("#modalAlimentoEliminar").modal("show");
+            $("#modalGastoEliminar").modal("show");
         });
 
         $('body').on('click', '.buscar', function (event) {
