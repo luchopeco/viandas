@@ -2,12 +2,12 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>Wiphala Sistemas -Gestor Viandas</title>
+    <title>Nutrilife - Gestor Viandas</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>::Wiphala Sistemas::Gestor de Viandas</title>
+    <title>::Gestor de Viandas</title>
         <!-- favicon -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
@@ -46,12 +46,12 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="http://www.wiphalasistemas.com.ar" target="_blank"><b>Wiphala</b>Sistemas</a>
-        <p>::e-Pyme::Viandas::</p>
+       
+        <p>::Nutrilife::Viandas::</p>
         <p>Gestor De Viandas</p>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Iniciar Sesion</p>
+        <p class="login-box-msg">Iniciar Sesión</p>
         <div class="row">
             @if(Session::has('mensajeError'))
                     <div class="row">
@@ -87,7 +87,7 @@
         </div>
         <hr>
         <div class="row">
-            <p class="text-center">Si olvidó el usuario y/o clave. <br>Conmuniquese con <a href="mailto:contacto@wiphalasistemas.com.ar">contacto@wiphalasistemas.com.ar</a></p>
+            <!-- <p class="text-center">Si olvidó el usuario y/o clave. <br>Conmuniquese con <a href="mailto:contacto@wiphalasistemas.com.ar">contacto@wiphalasistemas.com.ar</a></p> -->
         </div>
 
       </div><!-- /.login-box-body -->

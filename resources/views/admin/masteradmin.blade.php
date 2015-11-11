@@ -2,13 +2,13 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>Wiphala Sistemas - Gestor Viandas</title>
+    <title>Nutrilife - Gestor Viandas</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="author" content="Wiphala Sistemas">
-    <title>::Wiphala Sistemas::Gestor de Viandas</title>
+    <meta name="author" content="Adapweb Sistemas">
+    <title>::Nutrilife::Gestor de Viandas</title>
         <!-- favicon -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
@@ -206,9 +206,9 @@
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.0
+          
         </div>
-        <strong>Copyright &copy; 2009-2015 <a href="http://www.wiphalasistemas.com.ar">Wiphala Sistemas</a>.</strong> All rights reserved.
+        <strong> <a href="http://www.adapweb.com.ar">ADAPWEB - INGENIERÍA INFORMÁTICA</a>.</strong>
       </footer>
     </div>
     <!-- ./wrapper -->
