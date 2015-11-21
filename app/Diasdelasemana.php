@@ -16,4 +16,5 @@ class Diasdelasemana extends Model
     {
         return $this->belongsToMany('viandas\Clientes','cliente_dia', 'dia_semana_id','cliente_id');
     }
+
 }
