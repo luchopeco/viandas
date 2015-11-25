@@ -14,7 +14,7 @@ class Diasdelasemana extends Model
 
     public function ListClientes()
     {
-        return $this->belongsToMany('viandas\Clientes','cliente_dia', 'dia_semana_id','cliente_id');
+        return $this->belongsToMany('viandas\Clientes','cliente_dia', 'dia_semana_id','cliente_id')->withPivot('tipo_vianda_id','cantidad');
     }
 
 }
