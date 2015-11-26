@@ -40,18 +40,19 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label>Fecha</label>
+                                    <label>Dia</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input  name="fecha" id="fecha" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now()->format('d/m/Y')}}">
+                                         {!!Form::select('id', $listDiaSemanaSelect,null,array('class' => 'form-control','id'=>'cbxDiaSemana'))!!}
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-2">Todos <input type="checkbox" name="todos" id="chkTodos" class="form-control" ></div>
                             <div class="col-md-2">
                             .
-                                <button type="button" title="Buscar" class="btn btn-success btn-block buscar"><i class="fa fa-search"></i></button>
+                                <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-block"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                         <hr>
@@ -68,28 +69,69 @@
 <script>
 function buscarViandas(){
     $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
-   // event.preventDefault();
-    var f =$('#fecha').val();
-    $.ajax({
-        url:"gastos/buscarxfechas",
-        type: "POST",
-        dataType: "html",
-        data:{'fecha_desde': fd,'fecha_hasta': fh}
-    })
-    .done(function(response){
-        $('#tabla-gastos').html(response);
+    //event.preventDefault();
+    ///si tengo q buscar todos
+    if($("#cbxDiaSemana").is(":disabled"))
+    {
+        $.ajax({
+            url:"viandas/buscartodas",
+            type: "POST",
+            dataType: "html"
+        })
+        .done(function(response){
+            $('#tabla-viandas').html(response);
+            $('#cargando').html('');
+        })
+        .fail(function(){
+            alert(fd);
+            $('#cargando').html('');
+        });
+    }
+    else{
+        var id= $("#cbxDiaSemana").val();
+        $.ajax({
+                url:"viandas/buscar",
+                type: "POST",
+                dataType: "html",
+                data:{'id': id}
+            })
+            .done(function(response){
+                $('#tabla-viandas').html(response);
+                $('#cargando').html('');
+            })
+            .fail(function(){
+                alert(fd);
+                $('#cargando').html('');
+            });
         $('#cargando').html('');
-    })
-    .fail(function(){
-        alert(fd);
-        $('#cargando').html('');
-    });
+    }
+
 }
 $(function () {
-        buscarViandas();
-        $('body').on('click', '.buscar', function (event) {
-            buscarGastos();
-         });
+
+
+
+         ///Activo o desactivo el combo del dia de la semana
+        $("#chkTodos").click(function() {
+        if($("#cbxDiaSemana").is(":disabled"))
+          $("#cbxDiaSemana").attr('disabled',false);
+          else
+          $("#cbxDiaSemana").attr('disabled', true);
+        });
+
+       ///seteo el dia de la semana
+       var fecha = new Date();
+       var dia = fecha.getDay()+1;
+       $("#cbxDiaSemana").val(dia);
+
+        ///luego de setear busco las viandas
+       buscarViandas();
+
+        ////cuando busco
+       $("#btnBuscar").click(function(){
+            buscarViandas();
+       });
+
 
     });
 

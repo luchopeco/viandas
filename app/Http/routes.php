@@ -51,5 +51,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
 
         Route::resource('tipogastos','TipoGastosController');
         Route::post('tipogastos/buscar','TipoGastosController@buscar');
+
+        Route::resource('viandas','ViandasController');
+        Route::post('viandas/buscartodas','ViandasController@buscarTodas');
+        Route::post('viandas/buscar','ViandasController@buscar');
     	}
 );

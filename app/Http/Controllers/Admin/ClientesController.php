@@ -9,7 +9,7 @@ use viandas\Cliente;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\TipoAlimento;
-use viandas\Diasdelasemana;
+use viandas\DiaSemana;
 
 class ClientesController extends Controller
 {

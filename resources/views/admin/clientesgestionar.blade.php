@@ -1,6 +1,6 @@
 @extends('admin.masteradmin')
 
-<?php use viandas\Diasdelasemana; ?>
+<?php use viandas\DiaSemana; ?>
 <?php use viandas\TipoVianda; ?>
 
 @section('title')
@@ -115,7 +115,7 @@
 
                                           <?php
 
-                                          $diasD = Diasdelasemana::all();  
+                                          $diasD = DiaSemana::all();
                                           
 
                                           foreach ($diasD as $dia) {

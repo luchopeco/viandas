@@ -2,12 +2,18 @@
 
 namespace viandas\Http\Controllers\Admin;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use viandas\DiaSemana;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 
 class ViandasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +21,24 @@ class ViandasController extends Controller
      */
     public function index()
     {
-        //
-    }
 
+        $listDiaSemanaSelect = DiaSemana::all()->lists('nombre', 'id');
+        return view ('admin.listadoviandas',compact('listDiaSemana','listDiaSemanaSelect'));
+    }
+    public function buscarTodas()
+    {
+        $listDiaSemana = DiaSemana::all();
+        return view ('admin.include.viandas',compact('listDiaSemana'));
+    }
+    ///Busca por dia de la semana
+    public function buscar(Request $request)
+    {
+        $arrDiaSemana = array();
+        $diaSemana = DiaSemana::findOrFail($request->id);
+        $arrDiaSemana[] = $diaSemana;
+        $listDiaSemana = Collection::make($arrDiaSemana);
+        return view ('admin.include.viandas',compact('listDiaSemana'));
+    }
     /**
      * Show the form for creating a new resource.
      *
