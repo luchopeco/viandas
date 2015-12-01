@@ -48,8 +48,8 @@ class GastosController extends Controller
     {
         try{
             $a= new Gasto($request->all());
-            $fd = Carbon::parse($request->fecha)->format('Y-d-m');
-            $a->fecha=$fd;
+            $fd = Carbon::createFromFormat('d/m/Y', $request->fecha);
+            $a->fecha=$fd->format('Y-m-d');
             $a->save();
 
             Session::flash('mensajeOk', 'Gasto  Agregado Con Exito');
@@ -64,9 +64,9 @@ class GastosController extends Controller
     }
     public function  buscarxfechas(Request $request)
     {
-        $fd = Carbon::parse($request->fecha_desde)->format('Y-d-m');
-        $fh = Carbon::parse($request->fecha_hasta)->format('Y-d-m');
-        $listGastos = Gasto::whereRaw("fecha >= '". $fd. "' AND  fecha <='". $fh."'")->get();
+        $fd = Carbon::createFromFormat('d/m/Y', $request->fecha_desde);
+        $fh = Carbon::createFromFormat('d/m/Y', $request->fecha_hasta);
+        $listGastos = Gasto::whereRaw("fecha >='". $fd->format('Y-m-d'). "' AND  fecha <='". $fh->format('Y-m-d')."'")->get();
         $total =$listGastos ->sum('monto');
         return view ('admin.include.gastos',compact('listGastos','total'));
     }
@@ -118,7 +118,8 @@ class GastosController extends Controller
             $g->descripcion=$request->descripcion;
             $g->monto=$request->monto;
             $g->idtipo_gasto=$request->idtipo_gasto;
-            $g->fecha=Carbon::parse($request->fecha)->format('Y-d-m');
+            $g->fecha=Carbon::createFromFormat('d/m/Y', $request->fecha);
+            $g->fecha->format('Y-m-d');
             $g->save();
 
             Session::flash('mensajeOk','Gasto Modificado con exito');

@@ -86,6 +86,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">Menu Navegacion</li>
+            <li <?php if('admin.viandas.index'== Route::current()->getName()||'admin.viandas.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/viandas"> <i class="fa fa-tachometer"></i>Panel Control</a></li>
              <li <?php if('admin.clientes.index'== Route::current()->getName()||'admin.clientes.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/clientes"><i class="fa fa-users"></i>Clientes</a></li>
              <li <?php if('viandas\Http\Controllers\Admin\ClientesController'==substr(\Illuminate\Support\Facades\Route::getCurrentRoute()->getActionName(), 0, -15)){echo 'class="active"';} ?>><a href="/admin/loquenogusta"><i class="fa fa-thumbs-down"></i>Lo que no Gusta</a></li>
             <li <?php if('admin.tiposalimentos.index'== Route::current()->getName()||'admin.tiposalimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposalimentos"><i class="fa fa-lemon-o"></i>Tipos Alimentos</a></li>

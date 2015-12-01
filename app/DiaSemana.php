@@ -4,7 +4,7 @@ namespace viandas;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Diasdelasemana extends Model
+class DiaSemana extends Model
 {
     protected $table = 'dia_semana';
 
@@ -12,8 +12,11 @@ class Diasdelasemana extends Model
 
     protected $primaryKey="id";
 
-    public function ListClientes()
+    public function ListViandasClientes()
     {
-        return $this->belongsToMany('viandas\Clientes','cliente_dia', 'dia_semana_id','cliente_id');
+        return $this->hasMany('viandas\ViandaCliente', 'dia_semana_id','id');
     }
+
+
+
 }

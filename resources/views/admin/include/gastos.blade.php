@@ -20,3 +20,4 @@
             </table>
         </div>
         <div> <h4>Total: ${{$total}}</h4></div>
+
