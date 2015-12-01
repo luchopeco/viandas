@@ -34,7 +34,7 @@
    <div class="row">
        <div class=" col-md-12">
           <div class=" panel panel-default">
-               <div class=" panel-heading">Clientes <a href="clientes/gestionar/0" id="btnNuevoCliente" title="Nuevo Cliente" class=" btn-xs btn btn-success" ><i class=" fa fa-plus"></i></a>
+               <div class=" panel-heading">Clientes <a href="clientes/create" id="btnNuevoCliente" title="Nuevo Cliente" class=" btn-xs btn btn-success" ><i class=" fa fa-plus"></i></a>
                    <div class="pull-right">
                        <div class="btn-group">
                            <button type="button" class="multiselect dropdown-toggle btn btn-xs btn-warning" data-toggle="dropdown" title="Ayuda">
@@ -80,7 +80,7 @@
                                    <td>{{$cliente->email}}</td>
                                    <td>{{$cliente->estado_deuda}}</td>
                                    <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
-                                   <td><a href="clientes/gestionar/{{$cliente->id}}"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
+                                   <td><a href="clientes/{{$cliente->id}}/edit"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                </tr>
