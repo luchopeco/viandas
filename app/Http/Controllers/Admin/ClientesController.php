@@ -9,7 +9,7 @@ use viandas\Cliente;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\TipoAlimento;
-use viandas\Diasdelasemana;
+use viandas\DiaSemana;
 use viandas\TipoVianda;
 
 class ClientesController extends Controller
@@ -129,7 +129,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        $diasdelas = Diasdelasemana::all();
+        $diasdelas = DiaSemana::all();
         $tipos = TipoVianda::all();
         $cliente = new Cliente(); 
         return view('admin.clientesgestionar', compact('cliente','diasdelas','tipos'));
@@ -165,9 +165,9 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-            
+
             $cliente = Cliente::findOrFail($id); 
-            $diasdelas = Diasdelasemana::all();
+            $diasdelas = DiaSemana::all();
             $tipos = TipoVianda::all();
 
 

@@ -43,6 +43,8 @@
                 @endif    
 
                </div>
+
+
                <div class=" panel-body">
 
                   <form action="validarCliente" id="formularioCliente">   
