@@ -11,7 +11,7 @@ class Cliente extends Model
 
     protected $table = 'cliente';
 
-    protected $fillable = ['nombre', 'apellido','dni','domicilio', 'email','estado_deuda','valor_deuda','estado'];
+    protected $fillable = ['nombre', 'apellido','dni','domicilio', 'email','estado_deuda','valor_deuda','estado','idlocalidad','idempresa'];
 
     protected $primaryKey="id";
 
@@ -23,6 +23,16 @@ class Cliente extends Model
     public function ListDiasDeLaSemana()
     {
         return $this->belongsToMany('viandas\DiaSemana','cliente_dia', 'cliente_id','dia_semana_id');
+    }
+
+    public function Localidad()
+    {
+        return $this->hasOne('viandas\Localidad', 'id','idlocalidad');
+    }
+
+    public function Empresa()
+    {
+        return $this->hasOne('viandas\Empresa', 'id','idempresa');
     }
 
 }

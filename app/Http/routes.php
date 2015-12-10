@@ -55,5 +55,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::resource('viandas','ViandasController');
         Route::post('viandas/buscartodas','ViandasController@buscarTodas');
         Route::post('viandas/buscar','ViandasController@buscar');
+
+        Route::resource('empresas','EmpresasController');
+        Route::post('empresas/buscar','EmpresasController@buscar');
+
+        Route::resource('localidades','LocalidadesController');
+        Route::post('localidades/buscar','LocalidadesController@buscar');
     	}
 );
