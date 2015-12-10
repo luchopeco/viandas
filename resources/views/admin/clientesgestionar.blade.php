@@ -1,8 +1,5 @@
 @extends('admin.masteradmin')
 
-<?php use viandas\DiaSemana; ?>
-<?php use viandas\TipoVianda; ?>
-
 @section('title')
 <h1> Gestión de Clientes</h1>
 @endsection
@@ -38,23 +35,22 @@
        <div class=" col-md-12">
           <div class=" panel panel-default">
                <div class=" panel-heading">
-                  <?php
-                      $nuevo=false;
-                       if($cliente->nombre==''){
-                         echo 'Nuevo Cliente';
-                         $nuevo=true;
-                        }
-                        else{
-                          echo 'Modificar cliente';
-                        } 
-                  ?>
-                 
-               
-                   
+                              
+                @if ($cliente->id==null) 
+                  Nuevo Cliente
+                @else
+                  Modificar Cliente
+                @endif    
+
                </div>
+
+
                <div class=" panel-body">
 
-                  <form action="validarCliente" id="formularioCliente">                  
+                  <form action="validarCliente" id="formularioCliente">   
+                  
+                  <input type="hidden" name="accion" value="{{$cliente->id}}">
+                           
                          <div class="modal-body">
                           <div class=" panel panel-default">
                             <div class=" panel-heading">Cliente</div>
@@ -63,32 +59,32 @@
                                        <div class="col-md-12">
                                            <div class="form-group">
                                               {!!Form::label('nombre','Nombre')!!}
-                                              {!!Form::Text('nombre',null,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('nombre',$cliente->nombre,['class'=>' form-control','required'])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('apellido','Apellido')!!}
-                                              {!!Form::Text('apellido',null,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('apellido',$cliente->apellido,['class'=>' form-control','required'])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('telefono','Teléfono')!!}
-                                              {!!Form::Text('telefono',null,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('telefono',$cliente->telefono,['class'=>' form-control','required'])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('dni','DNI')!!}
-                                              {!!Form::Text('dni',null,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('dni',$cliente->dni,['class'=>' form-control','required'])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('domicilio','Domicilio')!!}
-                                              {!!Form::Text('domicilio',null,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('domicilio',$cliente->domicilio,['class'=>' form-control','required'])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('email','Email')!!}
-                                              {!!Form::Text('email',null,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('email',$cliente->email,['class'=>' form-control','required'])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                                                                
@@ -98,10 +94,7 @@
                            </div>
                       </div>
 
-                    <?php 
-
-                     if($nuevo){
-                      ?>
+                   
                         <div class=" panel panel-default">
                             <div class=" panel-heading">Días de la semana</div>
                               <div class=" panel-body">
@@ -109,26 +102,19 @@
                                        <div class="col-md-12">
                                           
                                           <table class="table">
-                                            
-
-                                          
+                                                                                      
 
                                           <?php
 
-                                          $diasD = DiaSemana::all();
-                                          
-
-                                          foreach ($diasD as $dia) {
+                                          foreach ($diasdelas as $dia) {
                                             ?>
-
                                               <tr>
-                                               <td><input type="checkbox"></input></td>
+                                               <td><input type="checkbox" name="{{$dia->id}}"></input></td>
 
-                                              <td><?php echo $dia->nombre; ?></td>
-                                             
+                                              <td><?php echo $dia->nombre; ?></td>                                             
                                               
                                               <td>Tipo de Viandas: <select>
-                                              <?php foreach (TipoVianda::all() as $tipo) {
+                                              <?php foreach ($tipos as $tipo) {
                                                 echo '<option  >'.$tipo->nombre.'</option>';
                                               } ?></select></td>
 
@@ -156,16 +142,8 @@
 
 
 
-                      <?php
-
-                     }else{
-
-
-                     }
+                     
                   
-
-                  ?>
-                        
 
 
 
@@ -187,7 +165,7 @@
 
 
 
-
+<?php /*
                    <div class="table-responsive">
                        <table id="editar"  class=" table table-bordered table-condensed table-hover table-responsive">
                            <tr>
@@ -224,6 +202,8 @@
                         
                        </table>
                    </div>
+
+                   */ ?>
                </div>
           </div>
        </div>
