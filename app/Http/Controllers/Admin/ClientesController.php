@@ -11,6 +11,9 @@ use viandas\Http\Controllers\Controller;
 use viandas\TipoAlimento;
 use viandas\DiaSemana;
 use viandas\TipoVianda;
+use viandas\Empresa;
+use viandas\Localidad;
+
 
 class ClientesController extends Controller
 {
@@ -132,7 +135,10 @@ class ClientesController extends Controller
         $diasdelas = DiaSemana::all();
         $tipos = TipoVianda::all();
         $cliente = new Cliente(); 
-        return view('admin.clientesgestionar', compact('cliente','diasdelas','tipos'));
+        $localidades = Localidad::all();
+        $empresas = Empresa::all();
+
+        return view('admin.clientesgestionar', compact('cliente','diasdelas','tipos','empresas','localidades'));
     }
 
     /**
@@ -154,7 +160,12 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $listtiposViandas = TipoVianda::all()->lists('nombre','id');
+        $listdiasSemana = DiaSemana::all()->lists('nombre','id');
+
+        return view('admin.clientesviandas', compact('cliente','listdiasSemana','listtiposViandas'));
+
     }
 
     /**
