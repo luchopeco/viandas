@@ -24,10 +24,11 @@
                         </div>
                         <div class=" panel-body">
                             @foreach($d->ListViandasClientes as $c)
-                                <div> <i class="fa fa-user"></i> <strong>{{$c->Cliente->nombre}}</strong> | {{$c->TipoVianda->nombre}} | {{$c->cantidad}} unidades. (
-                                    @foreach($c->Cliente->ListAlimentosNoMeGusta as $a)
+                                <div>
+                                    <i class="fa fa-user"></i> <strong>{{$c->Cliente->nombre}}</strong> | {{$c->TipoVianda->nombre}} | {{$c->cantidad}} unidades.(
+                                        @foreach($c->Cliente->ListAlimentosNoMeGusta as $a)
                                         {{$a->nombre}},
-                                    @endforeach
+                                        @endforeach
                                 )</div>
                                 <hr>
                             @endforeach

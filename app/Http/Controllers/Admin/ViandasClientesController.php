@@ -3,18 +3,15 @@
 namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use viandas\Empresa;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
-use viandas\Localidad;
+use viandas\ViandaCliente;
 
-class EmpresasController extends Controller
+class ViandasClientesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,16 +19,7 @@ class EmpresasController extends Controller
      */
     public function index()
     {
-        try {
-            $listEmpresas = Empresa::all();
-            $listLocalidad = Localidad::all()->lists('nombre', 'id');
-            return view('admin.empresas', compact('listEmpresas', 'listLocalidad'));
-        }
-        catch(\Exception $ex){
 
-            Session::flash('mensajeError', $ex->getMessage());
-            return back();
-        }
     }
 
     /**
@@ -53,15 +41,10 @@ class EmpresasController extends Controller
     public function store(Request $request)
     {
         try{
-            $a= new Empresa($request->all());
-            if ($request->envio<> null) {
-                $a->envio= 1;
-            } else {
-                $a->envio= 0;
-            }
+            $a= new ViandaCliente($request->all());
             $a->save();
 
-            Session::flash('mensajeOk', 'Empresa  Agregada Con Exito');
+            Session::flash('mensajeOk', 'Vianda  Agregada Con Exito');
             return back();
         }
         catch(\Exception $ex){
@@ -71,16 +54,6 @@ class EmpresasController extends Controller
         }
     }
 
-    public function  buscar(Request $request)
-    {
-        $a=Empresa::findOrFail($request->id);
-        $response = array(
-            "result" => true,
-            "mensaje" => "No se pudo realizar la operacion",
-            "datos" => $a
-        );
-        return json_encode($response, JSON_HEX_QUOT | JSON_HEX_TAG);
-    }
     /**
      * Display the specified resource.
      *
@@ -110,29 +83,9 @@ class EmpresasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        try {
-            $a = Empresa::findOrFail($request->id);
-            $a->nombre=$request->nombre;
-            $a->idlocalidad=$request->idlocalidad;
-            if ($request->envio<> null) {
-                $a->envio= 1;
-            } else {
-                $a->envio= 0;
-            }
-            $a->save();
-
-            Session::flash('mensajeOk','Empresa Modificada con exito');
-            return back();
-
-
-        }
-        catch( \Exception $ex)
-        {
-            Session::flash('mensajeError', $ex->getMessage());
-            return back();
-        }
+        //
     }
 
     /**
@@ -144,8 +97,13 @@ class EmpresasController extends Controller
     public function destroy(Request $request)
     {
         try{
-            Empresa::destroy($request->id);
-            Session::flash('mensajeOk','Empresa Eliminada con exito');
+            $aux = explode('-',$request->id);
+            $cliente_id = $aux[0];
+            $dia_semana_id=$aux[1];
+            $tipo_vianda_id=$aux[2];
+            DB::table('cliente_dia')->where('cliente_id', '=', $cliente_id)->where('dia_semana_id','=',$dia_semana_id)->where('tipo_vianda_id','=',$tipo_vianda_id)->delete();
+            //ViandaCliente::destroy($cliente_id,$dia_semana_id,$tipo_vianda_id);
+            Session::flash('mensajeOk','Vianda Eliminada con exito');
             return back();
         }
         catch(\Exception $ex)

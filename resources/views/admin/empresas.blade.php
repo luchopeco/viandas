@@ -52,11 +52,13 @@
                            <tr>
                                <th>Nombre</th>
                                <th>Localidad</th>
+                               <th>Envio</th>
                            </tr>
                            @foreach($listEmpresas as $empresa)
                                <tr >
                                    <td>{{$empresa->nombre}}</td>
                                    <td>{{$empresa->Localidad->nombre}}</td>
+                                   <td>{{$empresa->Envio()}}</td>
                                    <td><a href="#"  class="btn btn-xs btn-info editar" data-idempresa="{{$empresa->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idempresa="{{$empresa->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                </tr>
@@ -90,6 +92,12 @@
                                           {!!Form::select('idlocalidad', $listLocalidad, null,array('class' => 'form-control'))!!}
                                           <span class="help-block with-errors"></span>
                                      </div>
+                                     <div class="form-group">
+                                           Envio ?
+                                           {!!Form::checkbox('envio', 0)!!}
+                                           <span class="help-block with-errors"></span>
+                                      </div>
+
                                  </div>
                               </div>
                          </div>
@@ -127,6 +135,11 @@
                                            {!!Form::label('Localidad','Localidad')!!}
                                            {!!Form::select('idlocalidad', $listLocalidad,null,array('class' => 'form-control','id'=>'idlocalidadU'))!!}
                                            <span class="help-block with-errors"></span>
+                                      </div>
+                                      <div class="form-group">
+                                            Envio ?
+                                            {!!Form::checkbox('envio', 0,false,['id'=>'envioU'])!!}
+                                            <span class="help-block with-errors"></span>
                                       </div>
                                 </div>
                              </div>
@@ -192,7 +205,15 @@
                     $('#idU').val(response.datos.id);
                     $('#nombreU').val(response.datos.nombre);
                     $('#idlocalidadU').val(response.datos.idlocalidad);
+                      if(response.datos.envio==1){
+                            $('#envioU').prop('checked',true);
+                        }
+                        else{
+                        $('#envioU').prop('checked',false);
+                        }
+                        //alert(response.datos.envio);
                     $("#modalEmpresaModificar").modal("show");
+
                 })
                 .fail(function(){
                     alert(id_alimento);
