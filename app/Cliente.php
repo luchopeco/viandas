@@ -26,6 +26,11 @@ class Cliente extends Model
         return $this->belongsToMany('viandas\DiaSemana','cliente_dia', 'cliente_id','dia_semana_id');
     }
 
+    public function ListViandas()
+    {
+        return $this->hasMany('viandas\ViandaCliente', 'cliente_id','id');
+    }
+
     public function Localidad()
     {
         return $this->hasOne('viandas\Localidad', 'id','idlocalidad');
