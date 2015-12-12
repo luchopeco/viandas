@@ -68,17 +68,19 @@
                                    @endforeach
                                    </td>
 
-                                   <td>
+                                   <!--<td>
                                    @foreach( $cliente->ListDiasDeLaSemana as $dia)
                                    Requiere el dia: {{$dia->nombre}} -  
                                    @endforeach
                                    </td>
-
+                                  -->
 
                                    <td>{{$cliente->domicilio}}</td>
                                    <td>{{$cliente->telefono}}</td>
                                    <td>{{$cliente->email}}</td>
                                    <td>{{$cliente->estado_deuda}}</td>
+                                   <td><a href="clientes/{{$cliente->id}}" class=" btn btn-xs btn-success color-palette" title="Viandas"><i class="fa fa-leaf"></i> </a></td>
+                                   
                                    <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
                                    <td><a href="clientes/{{$cliente->id}}/edit"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>

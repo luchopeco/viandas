@@ -150,6 +150,29 @@ class ClientesController extends Controller
     public function store(Request $request)
     {
         //
+
+        try{
+            $a= new Cliente($request->all());
+            
+            if($request->envio<>null){
+                $a->envio = 1;
+            }
+            else{
+                $a->envio = 0;
+            }
+
+            $a->save();
+
+
+            Session::flash('mensajeOk', 'Cliente  Agregado Con Exito');
+            return back();
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+
     }
 
     /**
@@ -182,7 +205,11 @@ class ClientesController extends Controller
             $tipos = TipoVianda::all();
 
 
-            return view('admin.clientesgestionar', compact('tipos','cliente','diasdelas'));
+        $localidades = Localidad::all();
+        $empresas = Empresa::all();
+
+
+            return view('admin.clientesgestionar', compact('tipos','cliente','diasdelas','localidades','empresas'));
             //return view('admin.clientesgestionar', $cliente);       
     }
 
@@ -195,7 +222,52 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         try {
+            $a = Cliente::findOrFail($request->id);
+            
+            $a->nombre = $request->nombre;
+            $a->apellido = $request->apellido;
+            $a->email = $request->email;
+            $a->dni = $request->dni;
+            $a->telefono = $request->telefono;
+            $a->idlocalidad = $request->idlocalidad;
+            
+            if($request->idempresa==0){
+                $a->idempresa = null;
+
+            }else{
+                $a->idempresa = $request->idempresa;
+
+            }
+            
+            
+
+            $a->domicilio = $request->domicilio;
+
+
+
+
+            if($request->envio<>null){
+                $a->envio = 1;
+            }
+            else{
+                $a->envio = 0;
+            }
+
+           
+
+            $a->save();
+
+            Session::flash('mensajeOk','Cliente Modificado con éxito');
+            return back();
+
+
+        }
+        catch( \Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     /**
