@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2015 a las 05:00:20
+-- Tiempo de generación: 10-12-2015 a las 15:29:16
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -51,30 +51,6 @@ INSERT INTO `alimento` (`id`, `nombre`, `descripcion`, `estado`, `tipo_alimento_
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cadete`
---
-
-CREATE TABLE IF NOT EXISTS `cadete` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) NOT NULL,
-  `apellido` varchar(255) NOT NULL,
-  `telefono` varchar(11) NOT NULL,
-  `email` varchar(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `cadete`
---
-
-INSERT INTO `cadete` (`id`, `nombre`, `apellido`, `telefono`, `email`, `created_at`, `updated_at`) VALUES
-(3, 'Javier', 'Cracognaa', '12312312313', 'javiercrac@', '2015-12-16 03:45:17', '2015-12-16 03:59:53');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `cliente`
 --
 
@@ -94,19 +70,17 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `created_at` timestamp NOT NULL,
   `idlocalidad` int(11) NOT NULL,
   `idempresa` int(11) DEFAULT NULL,
-  `envio` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_emp_idx` (`idempresa`),
   KEY `fk_loca_idx` (`idlocalidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `dni`, `domicilio`, `telefono`, `email`, `estado_deuda`, `valor_deuda`, `estado`, `deleted_at`, `updated_at`, `created_at`, `idlocalidad`, `idempresa`, `envio`) VALUES
-(1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, NULL, '2015-12-12 21:35:06', '2015-12-12 17:44:38', 1, NULL, 0),
-(4, 'JAVIER', 'CRACOGNA', 1231231, 'DASDASD|', '333233', 'javiercrac@gmail.com', NULL, NULL, NULL, NULL, '2015-12-15 07:03:12', '2015-12-15 07:03:12', 1, 2, 1);
+INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `dni`, `domicilio`, `telefono`, `email`, `estado_deuda`, `valor_deuda`, `estado`, `deleted_at`, `updated_at`, `created_at`, `idlocalidad`, `idempresa`) VALUES
+(1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, NULL, '2015-10-19 14:58:33', '2015-10-19 14:58:33', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,8 +105,7 @@ CREATE TABLE IF NOT EXISTS `cliente_dia` (
 
 INSERT INTO `cliente_dia` (`cliente_id`, `dia_semana_id`, `tipo_vianda_id`, `cantidad`) VALUES
 (1, 2, 2, 2),
-(1, 5, 1, 3),
-(4, 1, 1, 2);
+(1, 5, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -183,17 +156,16 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `envio` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_loc_idx` (`idlocalidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `empresa`
 --
 
-INSERT INTO `empresa` (`id`, `nombre`, `idlocalidad`, `created_at`, `updated_at`, `deleted_at`, `envio`) VALUES
-(2, 'Vicentin', 1, '2015-12-10 16:54:46', '2015-12-12 16:41:11', NULL, 0);
+INSERT INTO `empresa` (`id`, `nombre`, `idlocalidad`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 'Vicentin', 2, '2015-12-10 16:54:46', '2015-12-10 16:54:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -254,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `localidad` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre_UNIQUE` (`nombre`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `localidad`
@@ -262,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `localidad` (
 
 INSERT INTO `localidad` (`id`, `nombre`, `costo_envio`, `updated_at`, `created_at`, `deleted_at`) VALUES
 (1, 'Avellaneda', 13, NULL, '0000-00-00 00:00:00', NULL),
-(3, 'Reconquista', 8, '2015-12-16 06:41:09', '2015-12-16 06:40:58', NULL);
+(2, 'Reconquista', 15, NULL, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -309,8 +281,7 @@ CREATE TABLE IF NOT EXISTS `no_me_gusta` (
 INSERT INTO `no_me_gusta` (`cliente_id`, `alimento_id`, `created_at`, `updated_at`) VALUES
 (1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(1, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 

@@ -104,6 +104,9 @@
                 <li <?php if('admin.tiposalimentos.index'== Route::current()->getName()||'admin.tiposalimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposalimentos"><i class="fa fa-lemon-o"></i>Tipos Alimentos</a></li>
                  <li <?php if('admin.empresas.index'== Route::current()->getName()||'admin.empresas.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/empresas"><i class="fa fa-building-o"></i>Empresas</a></li>
                  <li <?php if('admin.localidades.index'== Route::current()->getName()||'admin.localidades.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/localidades"><i class="fa fa-map-marker"></i>Localidades</a></li>
+                 <li <?php if('admin.cadetes.index'== Route::current()->getName()||'admin.cadetes.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/cadetes"><i class="fa fa-motorcycle"></i>Cadetes</a></li>
+                                
+
               </ul>
             </li>
 

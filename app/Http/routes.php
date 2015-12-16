@@ -62,6 +62,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::resource('localidades','LocalidadesController');
         Route::post('localidades/buscar','LocalidadesController@buscar');
 
+        Route::resource('cadetes','CadetesController');
+        Route::post('cadetes/buscar','CadetesController@buscar');
+
         Route::resource('viandasclientes','ViandasClientesController');
     	}
 );
