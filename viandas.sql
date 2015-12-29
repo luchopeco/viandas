@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2015 a las 05:00:20
+-- Tiempo de generación: 29-12-2015 a las 18:02:32
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `envio` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_loc_idx` (`idlocalidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `empresa`
@@ -322,13 +322,21 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
-  `envio` varchar(45) DEFAULT NULL,
+  `envio` int(1) NOT NULL DEFAULT '0',
   `cliente_id` int(11) NOT NULL,
   `tipo_vianda_id` int(11) NOT NULL,
   `fecha_pedido` date DEFAULT NULL,
+  `cobrado` int(1) NOT NULL DEFAULT '0',
+  `precio_vianda` double NOT NULL DEFAULT '0',
+  `precio_envio` double NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NOT NULL,
+  `cadete_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_pedido_cliente1_idx` (`cliente_id`),
-  KEY `fk_pedido_tipo_vianda1_idx` (`tipo_vianda_id`)
+  KEY `fk_pedido_tipo_vianda1_idx` (`tipo_vianda_id`),
+  KEY `fk_pedido_cadete` (`cadete_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -474,6 +482,7 @@ ALTER TABLE `no_me_gusta`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
+  ADD CONSTRAINT `fk_pedido_cadete` FOREIGN KEY (`cadete_id`) REFERENCES `cadete` (`id`),
   ADD CONSTRAINT `fk_pedido_cliente1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_tipo_vianda1` FOREIGN KEY (`tipo_vianda_id`) REFERENCES `tipo_vianda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 

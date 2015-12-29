@@ -66,5 +66,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('cadetes/buscar','CadetesController@buscar');
 
         Route::resource('viandasclientes','ViandasClientesController');
+
+        Route::resource('pedidos','PedidosController');
+        Route::post('pedidos/buscar','PedidosController@buscar');
+
     	}
 );
