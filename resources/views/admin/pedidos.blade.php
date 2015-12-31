@@ -46,12 +46,11 @@
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                           {!!Form::date('fecha',\Carbon\Carbon::now()->format('d/m/Y'),['class'=>' form-control datepicker','required','id'=>'txtfecha'])!!}
+                                          <div class="input-group-addon">
+                                             <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button>
+                                          </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                            .
-                                <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-block"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                         <hr>

@@ -31,9 +31,13 @@ class PedidosController extends Controller
     {
         $fecha = Carbon::createFromFormat('d/m/Y', $request->fecha);
 
-        $listPedidos = Pedido::where('fecha_pedido', $fecha);
+        $listPedidos = Pedido::where('fecha_pedido','=', $fecha->format('Y-m-d'));
 
-        $listViandas = ViandaCliente::where('dia_semana_id', $fecha->dayOfWeek());
+        $dia= $fecha->dayOfWeek+1;
+
+        $listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
+
+        //$listViandas = ViandaCliente::all();
 
 
         /// recorro los pedidos, y limpio las viandas segun se realizaron los pedidos
@@ -41,6 +45,8 @@ class PedidosController extends Controller
         {
             $listViandas = $listViandas->where('cliente_id','!=',$pedido->cliente_id)->where('tipo_vianda_id','!=', $pedido->tipo_vianda_id);
         }
+
+
 
         $listEmpresas = Empresa::all();
 
