@@ -160,21 +160,6 @@
                         </div>
                         </hr>
                 @endif
-            <div class="row">
-                <div class="col-xs-offset-1 col-xs-10">
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Tifosi -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8435509096817410"
-                         data-ad-slot="5042061489"
-                         data-ad-format="auto"></ins>
-                    <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-            <br>
             @yield('content')
             <div class="modal fade" id="modalClave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">

@@ -27,7 +27,27 @@
                                     <div class="row">
                                         @foreach($listPedidos as $pedido)
                                             @if($pedido->Cliente->idempresa == $empresa->id)
-                                             <div class="col-md-12"> {{$pedido->Cliente->nombre}} | {{$pedido->TipoVianda->nombre}} | {{$pedido->cantidad}}   </div>
+                                             <div class="col-md-4"> {{$pedido->Cliente->nombre}} | {{$pedido->TipoVianda->nombre}} | {{$pedido->cantidad}}   </div>
+                                             <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">Envio</span>
+                                                            {!!Form::checkbox($pedido->id, $pedido->id, false)!!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">Envio: $</span>
+                                                            {!!Form::Text('precio_envio',null,['class'=>' form-control','required'])!!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                         <span class="input-group-addon">Vianda: $</span>
+                                                         {!!Form::Text('precio_vianda',null,['class'=>' form-control','required'])!!}
+                                                    </div>
+                                                </div>
+                                             </div>
                                             @endif
                                         @endforeach
                                     </div>
@@ -47,7 +67,27 @@
                                 <div class="row">
                                     @foreach($listPedidos as $pedido)
                                         @if($pedido->Cliente->idempresa == null)
-                                           <div class="col-md-12"> {{$pedido->Cliente->nombre}} | {{$pedido->TipoVianda->nombre}} | {{$pedido->cantidad}}   </div>
+                                           <div class="col-md-4"> {{$pedido->Cliente->nombre}} | {{$pedido->TipoVianda->nombre}} | {{$pedido->cantidad}}   </div>
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                     <div class="col-md-4">
+                                                         <div class="input-group">
+                                                             <span class="input-group-addon">Envio</span>
+                                                             {!!Form::checkbox($pedido->id, $pedido->id, false)!!}
+                                                         </div>
+                                                     </div>
+                                                     <div class="col-md-4">
+                                                         <div class="input-group">
+                                                             <span class="input-group-addon">Envio: $</span>
+                                                             {!!Form::Text('precio_envio',null,['class'=>' form-control','required'])!!}
+                                                         </div>
+                                                     </div>
+                                                     <div class="col-md-4">
+                                                          <span class="input-group-addon">Vianda: $</span>
+                                                          {!!Form::Text('precio_vianda',null,['class'=>' form-control','required'])!!}
+                                                     </div>
+                                                </div>
+                                            </div>
                                         @endif
                                     @endforeach
                                 </div>
@@ -90,7 +130,39 @@
                                     <div class="row">
                                         @foreach($listViandas as $vianda)
                                             @if($vianda->Cliente->idempresa == $empresa->id)
-                                                 <div class="col-md-12"> {{$vianda->Cliente->nombre}} | {{$vianda->TipoVianda->nombre}} | {{$vianda->cantidad}}   </div>
+                                                 <div class="col-md-4">
+                                                    {{$vianda->Cliente->nombre}} | {{$vianda->TipoVianda->nombre}} | {{$vianda->cantidad}}
+                                                 </div>
+                                                 <div class="col-md-8">
+                                                     <div class="row">
+                                                              <div class="col-md-3">
+                                                                  <div class="input-group">
+                                                                      <span class="input-group-addon">Envio</span>
+                                                                      {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>' form-control'])!!}
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-md-3">
+                                                                  <div class="input-group">
+                                                                      <span class="input-group-addon">Envio: $</span>
+                                                                      {!!Form::Text('precio_envio',null,['class'=>' form-control','required'])!!}
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-md-3">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">Vianda: $</span>
+                                                                        {!!Form::Text('precio_vianda',$vianda->TipoVianda->precio,['class'=>' form-control','required'])!!}
+                                                                    </div>
+                                                              </div>
+                                                              <div class="col-md-3">
+                                                                  <div class="input-group">
+                                                                      <div class="input-group-btn">
+                                                                        <button type="button" class="btn btn-danger">OK</button>
+                                                                      </div>
+                                                                       {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>' form-control'])!!}
+                                                                   </div>
+                                                              </div>
+                                                     </div>
+                                                  </div>
                                             @endif
                                         @endforeach
                                     </div>
@@ -110,7 +182,37 @@
                                  <div class="row">
                                     @foreach($listViandas as $vianda)
                                         @if($vianda->Cliente->idempresa == null)
-                                           <div class="col-md-12"> {{$vianda->Cliente->nombre}} | {{$vianda->TipoVianda->nombre}} | {{$vianda->cantidad}}   </div>
+                                            <div class="col-md-4"> {{$vianda->Cliente->nombre}} | {{$vianda->TipoVianda->nombre}} | {{$vianda->cantidad}}   </div>
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">Envio</span>
+                                                            {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>' form-control'])!!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">Envio: $</span>
+                                                            {!!Form::Text('precio_envio',null,['class'=>' form-control','required'])!!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">Vianda: $</span>
+                                                            {!!Form::Text('precio_vianda',$vianda->TipoVianda->precio,['class'=>' form-control','required'])!!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                          <div class="input-group">
+                                                              <div class="input-group-btn">
+                                                                <button type="button" class="btn btn-danger">OK</button>
+                                                              </div>
+                                                               {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>' form-control'])!!}
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                           </div>
                                         @endif
                                     @endforeach
                                 </div>
