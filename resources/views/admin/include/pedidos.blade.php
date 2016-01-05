@@ -33,6 +33,12 @@
                                                     {!!Form::select('id', $listCadetes,null,array('class' => 'form-control'))!!}
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="input-group ">
+                                                      <span class="input-group-addon" title="Costo Envio"> $</span>
+                                                      {!!Form::Text('precio_envio',$empresa->Localidad->costo_envio,['class'=>' form-control','required'])!!}
+                                                </div>
+                                            </div>
                                         @else
                                             <div class="col-md-5">Sin Envio</div>
                                         @endif
@@ -49,32 +55,26 @@
                                                          </div>
                                                          <div class="col-md-9">
                                                              <div class="row">
-                                                                @if($empresa->envio == 1)
-                                                                      <div class="col-md-2"></div>
-                                                                      <div class="col-md-2">
-                                                                          <div class="input-group">
-                                                                              <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
-                                                                              {!!Form::Text('precio_envio',$empresa->Localidad->costo_envio,['class'=>' form-control','required'])!!}
-                                                                          </div>
+                                                                      <div class="col-md-1"></div>
+                                                                      <div class="col-md-3"></div>
+                                                                      <div class="col-md-1">
+                                                                         <a href="#" class="btn btn-primary btn-xs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a>
                                                                       </div>
-                                                                @else
-                                                                      <div class="col-md-2"></div>
-                                                                      <div class="col-md-2"></div>
-                                                                @endif
-                                                                      <div class="col-md-5">
+                                                                      <div class="col-md-3">
                                                                             <div class="input-group">
-                                                                                <span class="input-group-addon" title="Costo Vianda">{{$vianda->cantidad}} {{$vianda->TipoVianda->nombre}}: $</span>
+                                                                                <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}} </span>
+                                                                                {!!Form::Number('cantidad_vianda',$vianda->cantidad,['class'=>' form-control','required'])!!}
+                                                                            </div>
+                                                                      </div>
+                                                                      <div class="col-md-3">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-addon" title="Costo Vianda"> $</span>
                                                                                  <?php $subtotal = $vianda->cantidad * $vianda->TipoVianda->precio; ?>
                                                                                 {!!Form::Text('precio_vianda',$subtotal,['class'=>' form-control','required'])!!}
                                                                             </div>
                                                                       </div>
-                                                                      <div class="col-md-3">
-                                                                          <div class="input-group">
-                                                                              <div class="input-group-btn">
-                                                                                <button type="button" class="btn btn-danger">OK</button>
-                                                                              </div>
-                                                                               {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>' form-control'])!!}
-                                                                           </div>
+                                                                      <div class="col-md-1">
+                                                                            {!!Form::checkbox($vianda->id, $vianda->id, true)!!}
                                                                       </div>
                                                              </div>
                                                          </div>
@@ -105,32 +105,34 @@
                                                     <div class="col-md-3"> {{$vianda->Cliente->nombre}} {{$vianda->Cliente->apellido}}    </div>
                                                     <div class="col-md-9">
                                                         <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon" title="¿Realizar Envio?"><i class="fa fa-motorcycle"></i>:</span>
-                                                                    {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>' form-control'])!!}
-                                                                </div>
+                                                            <div class="col-md-1">
+                                                                    <i class="fa fa-motorcycle" title="¿Desea Envio?"></i>
+                                                                    {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>''])!!}
                                                             </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-3">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
                                                                     {!!Form::Text('precio_envio',$vianda->Cliente->Localidad->costo_envio,['class'=>' form-control','required'])!!}
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-5">
+                                                            <div class="col-md-1">
+                                                               <a href="#" class="btn btn-primary btn-xs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a>
+                                                            </div>
+                                                             <div class="col-md-3">
                                                                 <div class="input-group">
-                                                                    <span class="input-group-addon" title="Costo Vianda">{{$vianda->cantidad}} {{$vianda->TipoVianda->nombre}}: $</span>
+                                                                    <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}}</span>
+                                                                    {!!Form::Number('cantidad_vianda',$vianda->cantidad,['class'=>' form-control','required'])!!}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon" title="Costo Vianda"> $</span>
                                                                     <?php $subtotal = $vianda->cantidad * $vianda->TipoVianda->precio; ?>
                                                                     {!!Form::Text('precio_vianda',$subtotal,['class'=>' form-control','required'])!!}
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                  <div class="input-group">
-                                                                      <div class="input-group-btn">
-                                                                        <button type="button" class="btn btn-danger">OK</button>
-                                                                      </div>
-                                                                       {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>' form-control'])!!}
-                                                                  </div>
+                                                            <div class="col-md-1">
+                                                                {!!Form::checkbox($vianda->id, $vianda->id, true)!!}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -176,6 +178,12 @@
                                                     {!!Form::select('id', $listCadetes,null,array('class' => 'form-control'))!!}
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                      <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
+                                                      {!!Form::Text('precio_envio',$empresa->Localidad->costo_envio,['class'=>' form-control','required'])!!}
+                                                </div>
+                                            </div>
                                         @else
                                             <div class="col-md-5">Sin Envio</div>
                                         @endif
@@ -190,29 +198,25 @@
                                                      <div class="col-md-3"> {{$pedido->Cliente->nombre}}   </div>
                                                      <div class="col-md-9">
                                                         <div class="row">
-                                                             @if($empresa->envio == 1)
-                                                                    <div class="col-md-2"></div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
-                                                                            {!!Form::Text('precio_envio',$empresa->Localidad->costo_envio,['class'=>' form-control','required'])!!}
-                                                                        </div>
-                                                                    </div>
-                                                             @else
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-2"></div>
-                                                             @endif
-                                                            <div class="col-md-5">
-                                                                 <span class="input-group-addon" title="Costo Vianda">{{$pedido->cantidad}}  {{$pedido->TipoVianda->nombre}} : $</span>
-                                                                 {!!Form::Text('precio_vianda',null,['class'=>' form-control','required'])!!}
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="input-group">
-                                                                   <div class="input-group-btn">
-                                                                     <button type="button" class="btn btn-danger">OK</button>
-                                                                   </div>
-                                                                    {!!Form::checkbox($pedido->id, $pedido->id, false,['class'=>' form-control'])!!}
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-3"></div>
+                                                                <div class="col-md-1">
+                                                                     <a href="#" class="btn btn-primary btn-xs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a>
                                                                 </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon" title="Cantidad">{{$pedido->TipoVianda->nombre}}</span>
+                                                                        {!!Form::Text('cantidad_vianda',$pedido->cantidad,['class'=>' form-control','required'])!!}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon" title="Costo Vianda">$</span>
+                                                                        {!!Form::Text('precio_vianda',$pedido->TipoVianda->precio,['class'=>' form-control','required'])!!}
+                                                                    </div>
+                                                                </div>
+                                                            <div class="col-md-1">
+                                                                {!!Form::checkbox($pedido->id, $pedido->id, true)!!}
                                                             </div>
                                                         </div>
                                                      </div>
@@ -243,29 +247,35 @@
                                                     <div class="col-md-3"> {{$pedido->Cliente->nombre}}    </div>
                                                     <div class="col-md-9">
                                                         <div class="row">
-                                                             <div class="col-md-2">
+                                                             <div class="col-md-1">
                                                                  <div class="input-group">
-                                                                     <span class="input-group-addon">Envio</span>
+                                                                      <span class="input-group-addon" title="¿Realizar Envio?"><i class="fa fa-motorcycle"></i>:</span>
                                                                      {!!Form::checkbox($pedido->id, $pedido->id, false)!!}
                                                                  </div>
                                                              </div>
-                                                             <div class="col-md-2">
+                                                             <div class="col-md-3">
                                                                  <div class="input-group">
                                                                      <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
                                                                      {!!Form::Text('precio_envio',null,['class'=>' form-control','required'])!!}
                                                                  </div>
                                                              </div>
-                                                             <div class="col-md-5">
-                                                                  <span class="input-group-addon" title="Costo Vianda">{{$pedido->cantidad}}{{$pedido->TipoVianda->nombre}}: $</span>
-                                                                  {!!Form::Text('precio_vianda',null,['class'=>' form-control','required'])!!}
+                                                             <div class="col-md-1">
+                                                                  <a href="#" class="btn btn-primary btn-xs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a>
+                                                             </div>
+                                                             <div class="col-md-3">
+                                                                  <div class="input-group">
+                                                                      <span class="input-group-addon" title="Cantidad">{{$pedido->TipoVianda->nombre}}</span>
+                                                                      {!!Form::Number('cantidad_vianda',$pedido->cantidad,['class'=>' form-control','required'])!!}
+                                                                  </div>
                                                              </div>
                                                              <div class="col-md-3">
                                                                 <div class="input-group">
-                                                                   <div class="input-group-btn">
-                                                                     <button type="button" class="btn btn-danger">OK</button>
-                                                                   </div>
-                                                                    {!!Form::checkbox($pedido->id, $pedido->id, false,['class'=>' form-control'])!!}
+                                                                    <span class="input-group-addon" title="Costo Vianda">$</span>
+                                                                    {!!Form::Text('precio_vianda',$pedido->TipoVianda->precio,['class'=>' form-control','required'])!!}
                                                                 </div>
+                                                             </div>
+                                                             <div class="col-md-1">
+                                                                {!!Form::checkbox($pedido->id, $pedido->id, true)!!}
                                                              </div>
                                                         </div>
                                                     </div>
