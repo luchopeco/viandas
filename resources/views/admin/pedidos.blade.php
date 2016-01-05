@@ -35,6 +35,17 @@
        <div class=" col-md-12">
              <div class=" panel panel-default">
                    <div class=" panel-heading">Pedidos
+                      <div class="pull-right">
+                          <div class="btn-group">
+                              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                  <i class="fa fa-question-circle"></i><span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu pull-right" role="menu">
+                                  <li>Desde aquí se confirman los pedidos realizados en el dia. Solo puede buscar pedidos de 4 dias atras, no mayores al dia actual.</li>
+                                  <li></li>
+                              </ul>
+                          </div>
+                       </div>
                    </div>
                    <div class=" panel-body">
                         <div class="row">
@@ -68,6 +79,7 @@
 function buscarPedidos(){
     $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
     //event.preventDefault();
+
     ///si tengo q buscar todos
         var fecha= $("#txtfecha").val();
         $.ajax({

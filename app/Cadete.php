@@ -11,4 +11,9 @@ class Cadete extends Model
     protected $fillable = ['nombre', 'apellido', 'telefono','email'];
 
     protected $primaryKey="id";
+
+    public function NombreApellido()
+    {
+        return $this->nombre . " ". $this->apellido;
+    }
 }
