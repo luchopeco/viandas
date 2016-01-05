@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2015 a las 18:02:32
+-- Tiempo de generación: 05-01-2016 a las 16:21:40
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   PRIMARY KEY (`id`),
   KEY `fk_emp_idx` (`idempresa`),
   KEY `fk_loca_idx` (`idlocalidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -106,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `dni`, `domicilio`, `telefono`, `email`, `estado_deuda`, `valor_deuda`, `estado`, `deleted_at`, `updated_at`, `created_at`, `idlocalidad`, `idempresa`, `envio`) VALUES
 (1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, NULL, '2015-12-12 21:35:06', '2015-12-12 17:44:38', 1, NULL, 0),
-(4, 'JAVIER', 'CRACOGNA', 1231231, 'DASDASD|', '333233', 'javiercrac@gmail.com', NULL, NULL, NULL, NULL, '2015-12-15 07:03:12', '2015-12-15 07:03:12', 1, 2, 1);
+(4, 'JAVIER', 'CRACOGNA', 1231231, 'DASDASD|', '333233', 'javiercrac@gmail.com', NULL, NULL, NULL, NULL, '2015-12-15 07:03:12', '2015-12-15 07:03:12', 1, 2, 1),
+(6, 'Luciano', 'Peco', 341, 'ayo', '341', 'liuc@ad.com', NULL, NULL, NULL, NULL, '2016-01-04 21:39:33', '2016-01-04 21:39:33', 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -130,9 +131,12 @@ CREATE TABLE IF NOT EXISTS `cliente_dia` (
 --
 
 INSERT INTO `cliente_dia` (`cliente_id`, `dia_semana_id`, `tipo_vianda_id`, `cantidad`) VALUES
+(1, 1, 2, 2),
 (1, 2, 2, 2),
 (1, 5, 1, 3),
-(4, 1, 1, 2);
+(4, 1, 1, 2),
+(6, 1, 2, 1),
+(6, 7, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +197,28 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 --
 
 INSERT INTO `empresa` (`id`, `nombre`, `idlocalidad`, `created_at`, `updated_at`, `deleted_at`, `envio`) VALUES
-(2, 'Vicentin', 1, '2015-12-10 16:54:46', '2015-12-12 16:41:11', NULL, 0);
+(2, 'Vicentin', 1, '2015-12-10 16:54:46', '2016-01-04 21:09:18', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresa_vianda`
+--
+
+CREATE TABLE IF NOT EXISTS `empresa_vianda` (
+  `empresa_id` int(11) NOT NULL,
+  `tipo_vianda_id` int(11) NOT NULL,
+  `precio` double NOT NULL DEFAULT '0',
+  PRIMARY KEY (`empresa_id`,`tipo_vianda_id`),
+  KEY `fk_tipo_vianda_idx` (`tipo_vianda_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `empresa_vianda`
+--
+
+INSERT INTO `empresa_vianda` (`empresa_id`, `tipo_vianda_id`, `precio`) VALUES
+(2, 1, 30);
 
 -- --------------------------------------------------------
 
@@ -432,7 +457,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2015-11-10 16:08:38', 'gIMgr0DDFCky5jCQmbIRpCsaojUzs1vMe6GowCRB454FjTowdYyeYp7pjTy5');
+(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2016-01-04 22:11:16', 'NzgpgFMneK3QSdsqwHY4heuxUy4Ti0esOHByEG9teu8U7fbwwo3C0Zpv3ECt');
 
 --
 -- Restricciones para tablas volcadas
@@ -464,6 +489,13 @@ ALTER TABLE `cliente_dia`
 --
 ALTER TABLE `empresa`
   ADD CONSTRAINT `fk_loc` FOREIGN KEY (`idlocalidad`) REFERENCES `localidad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `empresa_vianda`
+--
+ALTER TABLE `empresa_vianda`
+  ADD CONSTRAINT `fk_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tipo_vianda` FOREIGN KEY (`tipo_vianda_id`) REFERENCES `tipo_vianda` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `gasto`

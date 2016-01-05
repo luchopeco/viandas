@@ -3,11 +3,13 @@
 namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use viandas\Empresa;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\Localidad;
+use viandas\TipoVianda;
 
 class EmpresasController extends Controller
 {
@@ -89,7 +91,48 @@ class EmpresasController extends Controller
      */
     public function show($id)
     {
-        //
+        $listTiposViandas = TipoVianda::all()->lists('nombre', 'id');;
+        $empresa = Empresa::findOrFail($id);
+        return view('admin.empresa', compact('empresa','listTiposViandas'));
+    }
+
+    public function preciovianda(Request $request)
+    {
+        try {
+
+            $emp = Empresa::findOrFail($request->empresa_id);
+
+            $emp->ListPreciosViandas()->attach($request->tipo_vianda_id,['precio'=>$request->precio]);
+            Session::flash('mensajeOk', 'Precio Vianda Agregado con Exito');
+            return Redirect::route('admin.empresas.show',$request->empresa_id);
+
+        }
+        catch(\Exception  $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return Redirect::route('admin.empresas.show',$request->empresa_id);
+
+        }
+
+    }
+
+    public function precioviandaeliminar(Request $request)
+    {
+        try {
+            $emp = Empresa::findOrFail($request->empresa_id);
+            $tipo = TipoVianda::findOrFail($request->tipo_vianda_id);
+            $emp->ListPreciosViandas()->detach($tipo);
+            Session::flash('mensajeOk', 'Precio Vianda Eliminado con Exito');
+            return Redirect::route('admin.empresas.show',$request->empresa_id);
+
+        }
+        catch(\Exception  $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return Redirect::route('admin.empresas.show',$request->empresa_id);
+
+        }
+
     }
 
     /**

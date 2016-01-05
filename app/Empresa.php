@@ -26,4 +26,10 @@ class Empresa extends Model
             return 'NO';
         }
     }
+
+
+    public function ListPreciosViandas()
+    {
+        return $this->belongsToMany('viandas\TipoVianda','empresa_vianda','empresa_id','tipo_vianda_id')->withPivot('precio');
+    }
 }

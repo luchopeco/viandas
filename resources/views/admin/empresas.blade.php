@@ -53,12 +53,14 @@
                                <th>Nombre</th>
                                <th>Localidad</th>
                                <th>Envio</th>
+                               <th>$ Viandas</th>
                            </tr>
                            @foreach($listEmpresas as $empresa)
                                <tr >
                                    <td>{{$empresa->nombre}}</td>
                                    <td>{{$empresa->Localidad->nombre}}</td>
                                    <td>{{$empresa->Envio()}}</td>
+                                   <td><a href="empresas/{{$empresa->id}}"  class="btn btn-xs btn-success"   title="Precio Viandas"><i class="fa fa-usd"></i></a></td>
                                    <td><a href="#"  class="btn btn-xs btn-info editar" data-idempresa="{{$empresa->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idempresa="{{$empresa->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                </tr>
