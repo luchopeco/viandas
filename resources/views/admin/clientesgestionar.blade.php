@@ -40,23 +40,20 @@
 
 
 
-              <?php 
-              $action = '';
-              if(Route::current()->getName()=='admin.clientes.create'){
-               
-                ?>
-                {!!Form::open(['route'=>'admin.clientes.store','method'=>'POST', 'data-toggle='>'validator'])!!}
-              <?php
-              }
-              else{
-                 ?>
-                {!!Form::open(['route'=>'admin.clientes.update','method'=>'PUT', 'data-toggle='>'validator'])!!}
-              <?php               
-              }
-              ?>           
-
-
-
+                    <?php 
+                    $action = '';
+                    if(Route::current()->getName()=='admin.clientes.create'){
+                     
+                      ?>
+                      {!!Form::open(['route'=>'admin.clientes.store','method'=>'POST', 'data-toggle='>'validator'])!!}
+                    <?php
+                    }
+                    else{
+                       ?>
+                      {!!Form::open(['route'=>'admin.clientes.update','method'=>'PUT', 'data-toggle='>'validator'])!!}
+                    <?php               
+                    }
+                    ?>           
                  
                   
                   <input type="hidden" name="id" value="{{$cliente->id}}">
@@ -118,7 +115,7 @@
                                            <div class="form-group">
                                               {!!Form::label('empresa','Empresa')!!}
 
-                                              <select class="form-control" name="idempresa" id="empresa">
+                                              <select class="form-control" name="idempresa" id="empresa" onchange="cambiaEmpresa();">
                                                  <option value="0" <?php if($cliente->idempresa==0){echo 'selected="selected"';} ?> >NINGUNA</option>
                                                <?php foreach ($empresas as $empresa) {                                               
                                                  ?> 
@@ -131,7 +128,7 @@
                                               <span class="help-block with-errors"></span>
                                            </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group enviocliente">
                                               {!!Form::label('envio','Envío a domicilio ?')!!}
 
                                               <div class="form-group checkbox">
@@ -150,7 +147,8 @@
                                 </div>
                            </div>
                       </div>
-
+    
+    
                 
 
 
@@ -201,5 +199,28 @@
     });
 
 </script>
+
+<script>
+        $(document).ready(function(){
+          
+          if($('#empresa').val()==0){
+            $('.enviocliente').show();
+          }
+          else{
+            $('.enviocliente').hide();
+          }
+
+        });
+
+        function cambiaEmpresa(){
+
+          if($('#empresa').val()==0){
+            $('.enviocliente').show();
+          }else{
+            $('.enviocliente').hide();
+          }
+
+        }
+    </script>
 @endsection
 
