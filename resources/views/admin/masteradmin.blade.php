@@ -88,12 +88,11 @@
             <li class="header">Menu Navegacion</li>
             <li <?php if('admin.viandas.index'== Route::current()->getName()||'admin.viandas.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/viandas"> <i class="fa fa-tachometer"></i>Panel Control</a></li>
             <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedidos"> <i class="fa fa-cart-plus"></i>Pedidos</a></li>
-
-             <li <?php if('admin.clientes.index'== Route::current()->getName()||'admin.clientes.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/clientes"><i class="fa fa-users"></i>Clientes</a></li>
-             <li <?php if('viandas\Http\Controllers\Admin\ClientesController'==substr(\Illuminate\Support\Facades\Route::getCurrentRoute()->getActionName(), 0, -15)){echo 'class="active"';} ?>><a href="/admin/loquenogusta"><i class="fa fa-thumbs-down"></i>Lo que no Gusta</a></li>
+            <li <?php if('admin.clientes.index'== Route::current()->getName()||'admin.clientes.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/clientes"><i class="fa fa-users"></i>Clientes</a></li>
+            <li <?php if('viandas\Http\Controllers\Admin\ClientesController'==substr(\Illuminate\Support\Facades\Route::getCurrentRoute()->getActionName(), 0, -15)){echo 'class="active"';} ?>><a href="/admin/loquenogusta"><i class="fa fa-thumbs-down"></i>Lo que no Gusta</a></li>
             <li <?php if('admin.alimentos.index'== Route::current()->getName()||'admin.alimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/alimentos"><i class="fa fa-coffee"></i>Alimentos</a></li>
             <li <?php if('admin.tiposviandas.index'== Route::current()->getName()||'admin.tiposviandas.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposviandas"><i class="fa fa-leaf"></i>Tipos Viandas</a></li>
-             <li <?php if('admin.gastos.index'== Route::current()->getName()||'admin.gastos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/gastos"><i class="fa fa-usd"></i>Gastos</a></li>
+            <li <?php if('admin.gastos.index'== Route::current()->getName()||'admin.gastos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/gastos"><i class="fa fa-usd"></i>Gastos</a></li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-cogs"></i>
@@ -107,8 +106,6 @@
                  <li <?php if('admin.empresas.index'== Route::current()->getName()||'admin.empresas.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/empresas"><i class="fa fa-building-o"></i>Empresas</a></li>
                  <li <?php if('admin.localidades.index'== Route::current()->getName()||'admin.localidades.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/localidades"><i class="fa fa-map-marker"></i>Localidades</a></li>
                  <li <?php if('admin.cadetes.index'== Route::current()->getName()||'admin.cadetes.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/cadetes"><i class="fa fa-motorcycle"></i>Cadetes</a></li>
-                                
-
               </ul>
             </li>
 

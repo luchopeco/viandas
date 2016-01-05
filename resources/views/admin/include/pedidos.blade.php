@@ -304,3 +304,12 @@
 <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="/dist/js/app.min.js" type="text/javascript"></script>
+
+<script>
+  $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+</script>
+

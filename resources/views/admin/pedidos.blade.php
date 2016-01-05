@@ -107,6 +107,7 @@ $(function () {
        $("#btnBuscar").click(function(){
             buscarPedidos();
        });
+
     });
 
 </script>
