@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-01-2016 a las 16:21:40
--- Versión del servidor: 5.6.17
+-- Tiempo de generación: 06-01-2016 a las 23:18:11
+-- Versión del servidor: 5.6.17-log
 -- Versión de PHP: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   PRIMARY KEY (`id`),
   KEY `fk_emp_idx` (`idempresa`),
   KEY `fk_loca_idx` (`idlocalidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -107,7 +107,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `dni`, `domicilio`, `telefono`, `email`, `estado_deuda`, `valor_deuda`, `estado`, `deleted_at`, `updated_at`, `created_at`, `idlocalidad`, `idempresa`, `envio`) VALUES
 (1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, NULL, '2015-12-12 21:35:06', '2015-12-12 17:44:38', 1, NULL, 0),
 (4, 'JAVIER', 'CRACOGNA', 1231231, 'DASDASD|', '333233', 'javiercrac@gmail.com', NULL, NULL, NULL, NULL, '2015-12-15 07:03:12', '2015-12-15 07:03:12', 1, 2, 1),
-(6, 'Luciano', 'Peco', 341, 'ayo', '341', 'liuc@ad.com', NULL, NULL, NULL, NULL, '2016-01-04 21:39:33', '2016-01-04 21:39:33', 1, 2, 0);
+(6, 'Luciano', 'Peco', 341, 'ayo', '341', 'liuc@ad.com', NULL, NULL, NULL, NULL, '2016-01-04 21:39:33', '2016-01-04 21:39:33', 1, 2, 0),
+(7, 'pedro', 'alfonso', 0, 'asdas', 'asdads', 'asdasdads@asd.ciom', NULL, NULL, NULL, NULL, '2016-01-05 23:27:41', '2016-01-05 23:27:41', 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,8 @@ INSERT INTO `cliente_dia` (`cliente_id`, `dia_semana_id`, `tipo_vianda_id`, `can
 (1, 5, 1, 3),
 (4, 1, 1, 2),
 (6, 1, 2, 1),
-(6, 7, 2, 1);
+(6, 7, 2, 1),
+(7, 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -190,14 +192,15 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   `envio` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_loc_idx` (`idlocalidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `empresa`
 --
 
 INSERT INTO `empresa` (`id`, `nombre`, `idlocalidad`, `created_at`, `updated_at`, `deleted_at`, `envio`) VALUES
-(2, 'Vicentin', 1, '2015-12-10 16:54:46', '2016-01-04 21:09:18', NULL, 1);
+(2, 'Vicentin', 1, '2015-12-10 16:54:46', '2016-01-04 21:09:18', NULL, 1),
+(3, 'Coca Cola', 3, '2016-01-05 23:27:10', '2016-01-05 23:27:10', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -358,10 +361,12 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NOT NULL,
   `cadete_id` int(11) DEFAULT NULL,
+  `empresa_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_pedido_cliente1_idx` (`cliente_id`),
   KEY `fk_pedido_tipo_vianda1_idx` (`tipo_vianda_id`),
-  KEY `fk_pedido_cadete` (`cadete_id`)
+  KEY `fk_pedido_cadete` (`cadete_id`),
+  KEY `FK_pedido_empresa` (`empresa_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -514,6 +519,7 @@ ALTER TABLE `no_me_gusta`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
+  ADD CONSTRAINT `FK_pedido_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
   ADD CONSTRAINT `fk_pedido_cadete` FOREIGN KEY (`cadete_id`) REFERENCES `cadete` (`id`),
   ADD CONSTRAINT `fk_pedido_cliente1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_tipo_vianda1` FOREIGN KEY (`tipo_vianda_id`) REFERENCES `tipo_vianda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
