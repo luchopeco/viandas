@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-01-2016 a las 23:18:11
+-- Tiempo de generación: 07-01-2016 a las 03:30:34
 -- Versión del servidor: 5.6.17-log
 -- Versión de PHP: 5.5.12
 
@@ -362,12 +362,23 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `updated_at` timestamp NOT NULL,
   `cadete_id` int(11) DEFAULT NULL,
   `empresa_id` int(11) DEFAULT NULL,
+  `observaciones` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_pedido_cliente1_idx` (`cliente_id`),
   KEY `fk_pedido_tipo_vianda1_idx` (`tipo_vianda_id`),
   KEY `fk_pedido_cadete` (`cadete_id`),
   KEY `FK_pedido_empresa` (`empresa_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `cantidad`, `estado`, `envio`, `cliente_id`, `tipo_vianda_id`, `fecha_pedido`, `cobrado`, `precio_vianda`, `precio_envio`, `created_at`, `deleted_at`, `updated_at`, `cadete_id`, `empresa_id`, `observaciones`) VALUES
+(21, 2, NULL, 1, 4, 1, '2016-01-03', 0, 66, 13, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', 3, 2, NULL),
+(22, 1, NULL, 1, 6, 2, '2016-01-03', 0, 43, 13, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', 3, 2, NULL),
+(23, 4, NULL, 0, 7, 1, '2016-01-03', 0, 132, 0, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', NULL, 3, NULL),
+(24, 2, NULL, 0, 1, 2, '2016-01-03', 0, 86, 0, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -519,9 +530,9 @@ ALTER TABLE `no_me_gusta`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `FK_pedido_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
   ADD CONSTRAINT `fk_pedido_cadete` FOREIGN KEY (`cadete_id`) REFERENCES `cadete` (`id`),
   ADD CONSTRAINT `fk_pedido_cliente1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_pedido_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
   ADD CONSTRAINT `fk_pedido_tipo_vianda1` FOREIGN KEY (`tipo_vianda_id`) REFERENCES `tipo_vianda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

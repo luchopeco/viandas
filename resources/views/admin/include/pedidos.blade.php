@@ -1,4 +1,5 @@
 {!!Form::open(['route'=>'admin.pedidos.store','method'=>'POST', 'data-toggle='>'validator'])!!}
+<?php $contador=0; ?>
 <div class="row">
     <div class="col-md-12">
         <div class=" box box-primary">
@@ -27,6 +28,7 @@
                                             <i class="fa fa-building-o"></i> {{$empresa->nombre}}
                                         </div>
                                         @if($empresa->envio == 1)
+                                        <?php $env = true; ?>
                                             <div class="col-md-3">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"title="Cadete"><i class="fa fa-motorcycle"></i>:</span>
@@ -40,6 +42,7 @@
                                                 </div>
                                             </div>
                                         @else
+                                             <?php $env = false; ?>
                                             <div class="col-md-5">Sin Envio</div>
                                         @endif
                                     </div>
@@ -49,12 +52,20 @@
                                         <div class="col-md-12">
                                             @foreach($listViandas as $vianda)
                                                 @if($vianda->Cliente->idempresa == $empresa->id)
+                                                    <?php $contador++; ?>
                                                     <div class="row">
                                                          <div class="col-md-3">
                                                             {{$vianda->Cliente->nombre}} {{$vianda->Cliente->apellido}}
+                                                           {!!Form::Text('pedidos['.$contador.'][cliente_id]',$vianda->Cliente->id,['class'=>' form-control hidden'])!!}
                                                          </div>
                                                          <div class="col-md-9">
                                                              <div class="row">
+                                                                      {!!Form::Text('pedidos['.$contador.'][fecha_pedido]', $fecha_pedido,['class'=>'hidden'])!!}
+                                                                      {!!Form::Text('pedidos['.$contador.'][empresa_id]', $empresa->id ,['class'=>'hidden'])!!}
+                                                                      {!!Form::checkbox('pedidos['.$contador.'][envio]', $vianda->id, $env,['class'=>'hidden'])!!}
+                                                                      {!!Form::select('pedidos['.$contador.'][cadete_id]', $listCadetes,null,array('class' => 'hidden form-control'))!!}
+                                                                      {!!Form::Text('pedidos['.$contador.'][precio_envio]',$empresa->Localidad->costo_envio,['class'=>' form-control hidden'])!!}
+                                                                      {!!Form::Text('pedidos['.$contador.'][tipo_vianda_id]',$vianda->TipoVianda->id,['class'=>' form-control hidden'])!!}
                                                                       <div class="col-md-1"></div>
                                                                       <div class="col-md-3"></div>
                                                                       <div class="col-md-1">
@@ -63,18 +74,18 @@
                                                                       <div class="col-md-3">
                                                                             <div class="input-group">
                                                                                 <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}} </span>
-                                                                                {!!Form::Number('cantidad_vianda',$vianda->cantidad,['class'=>' form-control','required'])!!}
+                                                                                {!!Form::Number('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control','required'])!!}
                                                                             </div>
                                                                       </div>
                                                                       <div class="col-md-3">
                                                                             <div class="input-group">
                                                                                 <span class="input-group-addon" title="Costo Vianda"> $</span>
                                                                                  <?php $subtotal = $vianda->cantidad * $vianda->TipoVianda->precio; ?>
-                                                                                {!!Form::Text('precio_vianda',$subtotal,['class'=>' form-control','required'])!!}
+                                                                                {!!Form::Text('pedidos['.$contador.'][precio_vianda]',$subtotal,['class'=>' form-control','required'])!!}
                                                                             </div>
                                                                       </div>
                                                                       <div class="col-md-1">
-                                                                            {!!Form::checkbox($vianda->id, $vianda->id, true)!!}
+                                                                            {!!Form::checkbox('pedidos['.$contador.'][confirmado]', $vianda->id, true)!!}
                                                                       </div>
                                                              </div>
                                                          </div>
@@ -101,18 +112,24 @@
                                     <div class="col-md-12">
                                         @foreach($listViandas as $vianda)
                                             @if($vianda->Cliente->idempresa == null)
+                                            <?php $contador++; ?>
+                                              {!!Form::Text('pedidos[][cliente_id]',$vianda->Cliente->id,['class'=>' form-control hidden'])!!}
                                                 <div class="row">
                                                     <div class="col-md-3"> {{$vianda->Cliente->nombre}} {{$vianda->Cliente->apellido}}    </div>
                                                     <div class="col-md-9">
                                                         <div class="row">
+                                                                      {!!Form::Text('pedidos['.$contador.'][fecha_pedido]', $fecha_pedido,['class'=>'hidden'])!!}
+                                                                      {!!Form::Text('pedidos['.$contador.'][empresa_id]', '0' ,['class'=>'hidden'])!!}
+                                                                      {!!Form::select('pedidos['.$contador.'][cadete_id]', $listCadetes,null,array('class' => 'hidden form-control'))!!}
+                                                                      {!!Form::Text('pedidos['.$contador.'][tipo_vianda_id]',$vianda->TipoVianda->id,['class'=>' form-control hidden'])!!}
                                                             <div class="col-md-1">
                                                                     <i class="fa fa-motorcycle" title="¿Desea Envio?"></i>
-                                                                    {!!Form::checkbox($vianda->id, $vianda->id, false,['class'=>''])!!}
+                                                                    {!!Form::checkbox('pedidos['.$contador.'][envio]', $vianda->id, false,['class'=>''])!!}
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="input-group">
-                                                                    <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
-                                                                    {!!Form::Text('precio_envio',$vianda->Cliente->Localidad->costo_envio,['class'=>' form-control','required'])!!}
+                                                                    <span class="input-group-addon" title="Costo Envio">{!!Form::select('pedidos['.$contador.'][cadete_id]', $listCadetes,null,array('class' => 'form-control'))!!}$</span>
+                                                                    {!!Form::Text('pedidos['.$contador.'][precio_envio]',$vianda->Cliente->Localidad->costo_envio,['class'=>' form-control','required'])!!}
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-1">
@@ -121,18 +138,18 @@
                                                              <div class="col-md-3">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}}</span>
-                                                                    {!!Form::Number('cantidad_vianda',$vianda->cantidad,['class'=>' form-control','required'])!!}
+                                                                    {!!Form::Number('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control','required'])!!}
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon" title="Costo Vianda"> $</span>
                                                                     <?php $subtotal = $vianda->cantidad * $vianda->TipoVianda->precio; ?>
-                                                                    {!!Form::Text('precio_vianda',$subtotal,['class'=>' form-control','required'])!!}
+                                                                    {!!Form::Text('pedidos['.$contador.'][precio_vianda]',$subtotal,['class'=>' form-control','required'])!!}
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-1">
-                                                                {!!Form::checkbox($vianda->id, $vianda->id, true)!!}
+                                                                {!!Form::checkbox('pedidos['.$contador.'][confirmado]', $vianda->id, true)!!}
                                                             </div>
                                                         </div>
                                                     </div>

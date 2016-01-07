@@ -32,41 +32,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="pedidos.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pedidos.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6849817" vertical-offset="170" max-vertical-offset="3247">
-              <caret line="32" column="71" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
+            <state vertical-scroll-proportion="-1.9615384" vertical-offset="680" max-vertical-offset="3060">
+              <caret line="211" column="61" selection-start-line="211" selection-start-column="61" selection-end-line="211" selection-end-column="61" />
               <folding>
-                <element signature="tag#div#1" expanded="false" />
+                <element signature="tag#div#0" expanded="false" />
+                <marker date="1452131864433" expanded="true" signature="4061:4225" placeholder="..." />
+                <marker date="1452131864433" expanded="true" signature="4140:4225" placeholder="..." />
+                <marker date="1452131864433" expanded="true" signature="5482:5740" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PedidosController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PedidosController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.230769" vertical-offset="170" max-vertical-offset="1207">
-              <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.53479856" vertical-offset="575" max-vertical-offset="2822">
+              <caret line="61" column="145" selection-start-line="61" selection-start-column="145" selection-end-line="61" selection-end-column="145" />
               <folding>
-                <element signature="e#304#380#0#PHP" expanded="false" />
-                <element signature="e#385#486#0#PHP" expanded="false" />
-                <element signature="e#491#565#0#PHP" expanded="false" />
-                <element signature="e#851#1050#0#PHP" expanded="false" />
-                <element signature="e#1059#1268#0#PHP" expanded="false" />
-                <element signature="e#2063#2172#0#PHP" expanded="false" />
-                <element signature="e#2177#2224#0#PHP" expanded="false" />
-                <element signature="e#2230#2389#0#PHP" expanded="false" />
-                <element signature="e#2394#2456#0#PHP" expanded="false" />
-                <element signature="e#2462#2584#0#PHP" expanded="false" />
-                <element signature="e#2589#2637#0#PHP" expanded="false" />
-                <element signature="e#2643#2783#0#PHP" expanded="false" />
-                <element signature="e#2788#2836#0#PHP" expanded="false" />
-                <element signature="e#2842#3024#0#PHP" expanded="false" />
-                <element signature="e#3029#3097#0#PHP" expanded="false" />
-                <element signature="e#3103#3237#0#PHP" expanded="false" />
-                <element signature="e#3242#3293#0#PHP" expanded="false" />
+                <element signature="e#50#68#0#PHP" expanded="true" />
+                <element signature="e#344#420#0#PHP" expanded="false" />
+                <element signature="e#425#526#0#PHP" expanded="false" />
+                <element signature="e#531#605#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pedido.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Pedido.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="612">
+              <caret line="10" column="103" selection-start-line="10" selection-start-column="97" selection-end-line="10" selection-end-column="103" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GastosController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GastosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.615385" vertical-offset="854" max-vertical-offset="2754">
+              <caret line="68" column="126" selection-start-line="68" selection-start-column="126" selection-end-line="68" selection-end-column="126" />
+              <folding>
+                <element signature="e#50#68#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,19 +145,19 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ViandasClientesController.php" />
         <option value="$PROJECT_DIR$/app/ViandaCliente.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/clientesviandas.blade.php" />
-        <option value="$PROJECT_DIR$/app/Pedido.php" />
         <option value="$PROJECT_DIR$/app/Cadete.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/include/pedidos-error.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php" />
-        <option value="$PROJECT_DIR$/app/Empresa.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/empresas.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/empresa.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/EmpresasController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pedidos.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php" />
+        <option value="$PROJECT_DIR$/app/Pedido.php" />
+        <option value="$PROJECT_DIR$/app/Empresa.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" />
       </list>
     </option>
   </component>
@@ -443,7 +455,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16490166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21558245" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789558" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -498,7 +510,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -508,7 +520,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5627">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="tag#div#1" expanded="false" />
+            <element signature="tag#div#0" expanded="false" />
+            <marker date="1452131864433" expanded="true" signature="4061:4225" placeholder="..." />
+            <marker date="1452131864433" expanded="true" signature="4140:4225" placeholder="..." />
+            <marker date="1452131864433" expanded="true" signature="5482:5740" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -517,25 +532,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="338" max-vertical-offset="1207">
           <caret line="60" column="63" selection-start-line="60" selection-start-column="61" selection-end-line="60" selection-end-column="63" />
-          <folding>
-            <element signature="e#304#380#0#PHP" expanded="false" />
-            <element signature="e#385#486#0#PHP" expanded="false" />
-            <element signature="e#491#565#0#PHP" expanded="false" />
-            <element signature="e#851#1050#0#PHP" expanded="false" />
-            <element signature="e#1059#1268#0#PHP" expanded="false" />
-            <element signature="e#2063#2172#0#PHP" expanded="false" />
-            <element signature="e#2177#2224#0#PHP" expanded="false" />
-            <element signature="e#2230#2389#0#PHP" expanded="false" />
-            <element signature="e#2394#2456#0#PHP" expanded="false" />
-            <element signature="e#2462#2584#0#PHP" expanded="false" />
-            <element signature="e#2589#2637#0#PHP" expanded="false" />
-            <element signature="e#2643#2783#0#PHP" expanded="false" />
-            <element signature="e#2788#2836#0#PHP" expanded="false" />
-            <element signature="e#2842#3024#0#PHP" expanded="false" />
-            <element signature="e#3029#3097#0#PHP" expanded="false" />
-            <element signature="e#3103#3237#0#PHP" expanded="false" />
-            <element signature="e#3242#3293#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -756,14 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Pedido.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19517796" vertical-offset="0" max-vertical-offset="871">
-          <caret line="10" column="36" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Cadete.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27324915" vertical-offset="0" max-vertical-offset="871">
@@ -772,24 +761,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GastosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4098737" vertical-offset="102" max-vertical-offset="2635">
-          <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Localidad.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="897">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5499426" vertical-offset="2088" max-vertical-offset="5219">
-          <caret line="161" column="13" selection-start-line="161" selection-start-column="13" selection-end-line="161" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -814,27 +789,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/nomegusta.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4684271" vertical-offset="493" max-vertical-offset="2550">
-          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/clientes.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2972028" vertical-offset="1173" max-vertical-offset="3196">
           <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Empresa.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4098737" vertical-offset="0" max-vertical-offset="871">
-          <caret line="30" column="38" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="38" />
-          <folding>
-            <element signature="e#347#504#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,6 +825,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4847943" vertical-offset="341" max-vertical-offset="1258">
+          <caret line="111" column="27" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
+          <folding>
+            <element signature="e#424#500#0#PHP" expanded="false" />
+            <element signature="e#505#606#0#PHP" expanded="false" />
+            <element signature="e#611#915#0#PHP" expanded="false" />
+            <element signature="e#649#909#0#PHP" expanded="false" />
+            <element signature="e#786#909#0#PHP" expanded="false" />
+            <element signature="e#921#1598#0#PHP" expanded="false" />
+            <element signature="e#973#1592#0#PHP" expanded="false" />
+            <element signature="e#1073#1212#0#PHP" expanded="false" />
+            <element signature="e#1140#1212#0#PHP" expanded="false" />
+            <element signature="e#1469#1592#0#PHP" expanded="false" />
+            <element signature="e#1604#1993#0#PHP" expanded="false" />
+            <element signature="e#1864#1987#0#PHP" expanded="false" />
+            <element signature="e#1999#2368#0#PHP" expanded="false" />
+            <element signature="e#2046#2362#0#PHP" expanded="false" />
+            <element signature="e#2211#2362#0#PHP" expanded="false" />
+            <element signature="e#3056#3179#0#PHP" expanded="false" />
+            <element signature="e#3191#3300#0#PHP" expanded="false" />
+            <element signature="e#3305#3642#0#PHP" expanded="false" />
+            <element signature="e#3648#3807#0#PHP" expanded="false" />
+            <element signature="e#3812#4363#0#PHP" expanded="false" />
+            <element signature="e#3878#4356#0#PHP" expanded="false" />
+            <element signature="e#3954#4088#0#PHP" expanded="false" />
+            <element signature="e#4038#4088#0#PHP" expanded="false" />
+            <element signature="e#4233#4356#0#PHP" expanded="false" />
+            <element signature="e#4369#4491#0#PHP" expanded="false" />
+            <element signature="e#4496#4817#0#PHP" expanded="false" />
+            <element signature="e#4823#4963#0#PHP" expanded="false" />
+            <element signature="e#4968#5408#0#PHP" expanded="false" />
+            <element signature="e#5414#5596#0#PHP" expanded="false" />
+            <element signature="e#5601#6703#0#PHP" expanded="false" />
+            <element signature="e#5662#6697#0#PHP" expanded="false" />
+            <element signature="e#6026#6179#0#PHP" expanded="false" />
+            <element signature="e#6106#6179#0#PHP" expanded="false" />
+            <element signature="e#6272#6406#0#PHP" expanded="false" />
+            <element signature="e#6356#6406#0#PHP" expanded="false" />
+            <element signature="e#6565#6697#0#PHP" expanded="false" />
+            <element signature="e#6709#6843#0#PHP" expanded="false" />
+            <element signature="e#6848#7284#0#PHP" expanded="false" />
+            <element signature="e#6904#7278#0#PHP" expanded="false" />
+            <element signature="e#7147#7278#0#PHP" expanded="false" />
+            <element signature="e#7290#7665#0#PHP" expanded="false" />
+            <element signature="e#7344#7658#0#PHP" expanded="false" />
+            <element signature="e#7522#7658#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Empresa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8095238" vertical-offset="0" max-vertical-offset="578">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+          <folding>
+            <element signature="e#347#504#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/ViandaCliente.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="561">
@@ -875,38 +895,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/nomegusta.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769" vertical-offset="170" max-vertical-offset="1207">
-          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
-          <folding>
-            <element signature="e#304#380#0#PHP" expanded="false" />
-            <element signature="e#385#486#0#PHP" expanded="false" />
-            <element signature="e#491#565#0#PHP" expanded="false" />
-            <element signature="e#851#1050#0#PHP" expanded="false" />
-            <element signature="e#1059#1268#0#PHP" expanded="false" />
-            <element signature="e#2063#2172#0#PHP" expanded="false" />
-            <element signature="e#2177#2224#0#PHP" expanded="false" />
-            <element signature="e#2230#2389#0#PHP" expanded="false" />
-            <element signature="e#2394#2456#0#PHP" expanded="false" />
-            <element signature="e#2462#2584#0#PHP" expanded="false" />
-            <element signature="e#2589#2637#0#PHP" expanded="false" />
-            <element signature="e#2643#2783#0#PHP" expanded="false" />
-            <element signature="e#2788#2836#0#PHP" expanded="false" />
-            <element signature="e#2842#3024#0#PHP" expanded="false" />
-            <element signature="e#3029#3097#0#PHP" expanded="false" />
-            <element signature="e#3103#3237#0#PHP" expanded="false" />
-            <element signature="e#3242#3293#0#PHP" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="3.9230769" vertical-offset="1003" max-vertical-offset="2550">
+          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Pedido.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="612">
+          <caret line="10" column="103" selection-start-line="10" selection-start-column="97" selection-end-line="10" selection-end-column="103" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6849817" vertical-offset="170" max-vertical-offset="3247">
-          <caret line="32" column="71" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
+        <state vertical-scroll-proportion="-1.9615384" vertical-offset="680" max-vertical-offset="3060">
+          <caret line="211" column="61" selection-start-line="211" selection-start-column="61" selection-end-line="211" selection-end-column="61" />
           <folding>
-            <element signature="tag#div#1" expanded="false" />
+            <element signature="tag#div#0" expanded="false" />
+            <marker date="1452131864433" expanded="true" signature="4061:4225" placeholder="..." />
+            <marker date="1452131864433" expanded="true" signature="4140:4225" placeholder="..." />
+            <marker date="1452131864433" expanded="true" signature="5482:5740" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GastosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.615385" vertical-offset="854" max-vertical-offset="2754">
+          <caret line="68" column="126" selection-start-line="68" selection-start-column="126" selection-end-line="68" selection-end-column="126" />
+          <folding>
+            <element signature="e#50#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53479856" vertical-offset="575" max-vertical-offset="2822">
+          <caret line="61" column="145" selection-start-line="61" selection-start-column="145" selection-end-line="61" selection-end-column="145" />
+          <folding>
+            <element signature="e#50#68#0#PHP" expanded="true" />
+            <element signature="e#344#420#0#PHP" expanded="false" />
+            <element signature="e#425#526#0#PHP" expanded="false" />
+            <element signature="e#531#605#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

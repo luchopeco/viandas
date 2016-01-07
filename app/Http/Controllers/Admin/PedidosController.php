@@ -4,6 +4,7 @@ namespace viandas\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use viandas\Cadete;
 use viandas\Empresa;
 use viandas\Http\Requests;
@@ -46,7 +47,7 @@ class PedidosController extends Controller
             return view ('admin.include.pedidos-error',compact('mensajeError'));
         }
 
-        $listPedidos = Pedido::where('fecha_pedido','=', $fecha->format('Y-m-d'));
+        $listPedidos = Pedido::whereRaw("fecha_pedido = '". ($fecha->format('Y-m-d'))."'")->get();
 
         $dia= $fecha->dayOfWeek+1;
 
@@ -58,15 +59,17 @@ class PedidosController extends Controller
         /// recorro los pedidos, y limpio las viandas segun se realizaron los pedidos
         foreach ($listPedidos as $pedido)
         {
-            $listViandas = $listViandas->where('cliente_id','!=',$pedido->cliente_id)->where('tipo_vianda_id','!=', $pedido->tipo_vianda_id);
+            $listViandas = $listViandas->where('cliente_id',' != ', $pedido->cliente_id)->where('tipo_vianda_id','!= ', $pedido->tipo_vianda_id);
         }
 
+        $fecha_pedido=$request->fecha;
 
         $listEmpresas = Empresa::all();
 
         $listCadetes = Cadete::all()->lists('nombre', 'id');
 
-        return view ('admin.include.pedidos',compact('listPedidos','listViandas','listEmpresas','listCadetes'));
+
+        return view ('admin.include.pedidos',compact('listPedidos','listViandas','listEmpresas','listCadetes','fecha_pedido'));
 
     }
 
@@ -88,7 +91,36 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            foreach ($request->pedidos as $p) {
+                if (isset($p['confirmado'])) {
+                    $ped = new Pedido();
+                    $f = Carbon::createFromFormat('d/m/Y', $p['fecha_pedido']);
+                    $ped->fecha_pedido = $f->format('Y-m-d');
+                    $ped->cantidad = $p['cantidad'];
+                    if (isset($p['envio'])) {
+                        $ped->envio = 1;
+                        $ped->cadete_id = $p['cadete_id'];
+                        $ped->precio_envio = $p['precio_envio'];
+                    }
+                    if (!empty($p['empresa_id'])) {
+                        $ped->empresa_id = $p['empresa_id'];
+                    }
+                    $ped->cliente_id = $p['cliente_id'];
+                    $ped->tipo_vianda_id = $p['tipo_vianda_id'];
+                    $ped->precio_vianda = $p['precio_vianda'];
+                    $ped->save();
+
+                }
+            }
+            Session::flash('mensajeOk', 'Pedidos Confirmados Con Exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     /**
