@@ -167,4 +167,59 @@ class PedidosController extends Controller
     {
         //
     }
+
+    public function listarPedidos(){
+
+        $listaDePedidos =  Pedido::all();
+        $empresas = Empresa::all();
+
+
+        return view ('admin.cobros',compact('listaDePedidos','empresas'));
+    }
+
+    ///Busca por dia
+    public function buscarCobros(Request $request)
+    {
+        $fechaHoy = new Carbon('now');
+        $fechadesde = Carbon::createFromFormat('d/m/Y', $request->fechaDesde);
+        $fechahasta = Carbon::createFromFormat('d/m/Y', $request->fechaHasta);
+        $eID=$request->empresa;
+        $empresaSQL='';
+        if($eID=='999'){
+            //no tiene empresa
+            $empresaSQL='';
+        }
+        else{
+            $empresaActual = Empresa::find($request->empresa);    
+
+            $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
+
+        }
+       
+        $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '2010-01-30 14:15:55' AND '2016-09-29 14:15:55')")->get();
+
+//. ($fechadesde->format('Y-m-d'))."'"
+      //  $dia= $fecha->dayOfWeek+1;
+
+      //  $listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
+
+        //$listViandas = ViandaCliente::all();
+
+
+        /// recorro los pedidos, y limpio las viandas segun se realizaron los pedidos
+  /*      foreach ($listPedidos as $pedido)
+        {
+            $listViandas = $listViandas->where('cliente_id',' != ', $pedido->cliente_id)->where('tipo_vianda_id','!= ', $pedido->tipo_vianda_id);
+        }
+*/
+       // $fecha_pedido=$request->fecha;
+
+        $listEmpresas = Empresa::all();
+
+        $listCadetes = Cadete::all()->lists('nombre', 'id');
+
+
+        return view ('admin.include.cobros',compact('listPedidos','listEmpresas','listCadetes'));
+
+    }
 }
