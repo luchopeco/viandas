@@ -53,20 +53,22 @@
                                 <div class="form-group">
                                     <label>Dia</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
+                                         <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
-                                        </div>
-                                          {!!Form::date('fecha',\Carbon\Carbon::now()->format('d/m/Y'),['class'=>' form-control datepicker','required','id'=>'txtfecha'])!!}
-                                          <div class="input-group-addon">
+                                          </span>
+                                          {!!Form::date('fecha',\Carbon\Carbon::now()->format('d/m/Y'),['class'=>'form-control datepicker','required','id'=>'txtfecha'])!!}
+                                          <span class="input-group-addon">
                                              <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button>
-                                          </div>
+                                          </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-12" id="tabla-pedidos"></div>
+                            <div class="col-md-12">
+                                <div id="tabla-pedidos"></div>
+                            </div>
                         </div>
                    </div>
               </div>
@@ -97,8 +99,6 @@ function buscarPedidos(){
                 $('#cargando').html('');
             });
         $('#cargando').html('');
-
-
 }
 $(function () {
         ///busco los pedidos del dia
