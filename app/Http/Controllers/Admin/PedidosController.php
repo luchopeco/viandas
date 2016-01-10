@@ -51,16 +51,12 @@ class PedidosController extends Controller
 
         $dia= $fecha->dayOfWeek+1;
 
-        $listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
-
+        //$listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
+        $listViandas = ViandaCliente::whereRaw("NOT EXISTS (SELECT * FROM pedido p WHERE p.cliente_id = cliente_dia.cliente_id AND p.tipo_vianda_id = cliente_dia.tipo_vianda_id AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."') AND dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
         //$listViandas = ViandaCliente::all();
 
 
         /// recorro los pedidos, y limpio las viandas segun se realizaron los pedidos
-        foreach ($listPedidos as $pedido)
-        {
-            $listViandas = $listViandas->where('cliente_id',' != ', $pedido->cliente_id)->where('tipo_vianda_id','!= ', $pedido->tipo_vianda_id);
-        }
 
         $fecha_pedido=$request->fecha;
 
@@ -69,7 +65,7 @@ class PedidosController extends Controller
         $listCadetes = Cadete::all()->lists('nombre', 'id');
 
 
-        return view ('admin.include.pedidos',compact('listPedidos','listViandas','listEmpresas','listCadetes','fecha_pedido'));
+        return view ('admin.include.pedidos', compact('listPedidos','listViandas','listEmpresas','listCadetes','fecha_pedido'));
 
     }
 

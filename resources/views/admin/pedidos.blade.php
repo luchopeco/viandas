@@ -56,7 +56,8 @@
                                          <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                           </span>
-                                          {!!Form::date('fecha',\Carbon\Carbon::now()->format('d/m/Y'),['class'=>'form-control datepicker','required','id'=>'txtfecha'])!!}
+                                           <input class="form-control datepicker" name="fecha" id="txtfecha" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now()->format('d/m/Y')}}">
+
                                           <span class="input-group-addon">
                                              <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button>
                                           </span>
@@ -95,21 +96,17 @@ function buscarPedidos(){
                 $('#cargando').html('');
             })
             .fail(function(){
-                alert(fd);
                 $('#cargando').html('');
             });
-        $('#cargando').html('');
 }
 $(function () {
         ///busco los pedidos del dia
        buscarPedidos();
         ////cuando busco
-       $("#btnBuscar").click(function(){
+       $("#btnBuscar").click(function(event){
             buscarPedidos();
        });
 
-    });
-
+});
 </script>
 @endsection
-
