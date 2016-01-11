@@ -56,7 +56,7 @@
                                          <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                           </span>
-                                           <input class="form-control datepicker" name="fecha" id="txtfecha" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now()->format('d/m/Y')}}">
+                                           <input class="form-control datepicker" name="fecha" id="txtfecha" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
 
                                           <span class="input-group-addon">
                                              <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-xs"><i class="fa fa-search"></i></button>

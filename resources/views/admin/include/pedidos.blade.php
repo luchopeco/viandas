@@ -188,7 +188,7 @@
                                             <div class="col-md-3">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"title="Cadete"><i class="fa fa-motorcycle"></i>:</span>
-                                                    @if($listPedidos==null)
+                                                    @if($listPedidos->isEmpty())
                                                     {!!Form::select('id', $listCadetes,null,array('class' => 'form-control'))!!}
                                                     @else
                                                     {!!Form::select('id', $listCadetes,$listPedidos[0]->cadete_id,array('class' => 'form-control'))!!}
@@ -198,7 +198,7 @@
                                             <div class="col-md-3">
                                                 <div class="input-group">
                                                     <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
-                                                     @if($listPedidos==null)
+                                                     @if($listPedidos->isEmpty())
                                                     {!!Form::Text('precio_envio',$empresa->Localidad->costo_envio,['class'=>' form-control','required'])!!}
                                                     @else
                                                     {!!Form::Text('precio_envio',$listPedidos[0]->precio_envio,['class'=>' form-control','required'])!!}

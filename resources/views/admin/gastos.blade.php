@@ -55,7 +55,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input  name="fecha_desde" id="fecha_desde" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now()->format('d/m/Y')}}">
+                                    <input  name="fecha_desde" id="fecha_desde" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input class="form-control datepicker" name="fecha_hasta" id="fecha_hasta" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now()->format('d/m/Y')}}">
+                                    <input class="form-control datepicker" name="fecha_hasta" id="fecha_hasta" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
                                 </div>
                             </div>
                         </div>
