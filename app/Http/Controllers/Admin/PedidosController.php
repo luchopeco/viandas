@@ -179,9 +179,12 @@ class PedidosController extends Controller
         $fechaHoy = new Carbon('now');
         $fechadesde = Carbon::createFromFormat('d/m/Y', $request->fechaDesde);
         $fechahasta = Carbon::createFromFormat('d/m/Y', $request->fechaHasta);
+        
+        //var_dump($fechadesde);die();
+
         $eID=$request->empresa;
         $empresaSQL='';
-        if($eID=='999'){
+        if($eID=='9999'){
             //no tiene empresa
             $empresaSQL='';
         }
@@ -191,8 +194,10 @@ class PedidosController extends Controller
             $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
 
         }
+
        
-        $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '2010-01-30 14:15:55' AND '2016-09-29 14:15:55')")->get();
+        $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+
 
 //. ($fechadesde->format('Y-m-d'))."'"
       //  $dia= $fecha->dayOfWeek+1;

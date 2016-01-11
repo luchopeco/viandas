@@ -57,7 +57,7 @@
                                     ?>
                                       <option value="<?php echo $e->id; ?>" > <?php echo $e->nombre; ?></option>
                                     <?php  } ?>
-                                    <option value="99">SIN EMPRESA</option>
+                                    <option value="9999">SIN EMPRESA</option>
                                   
                                 </select>
                               </div>
