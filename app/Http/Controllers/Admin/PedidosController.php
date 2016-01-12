@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use viandas\Cadete;
+use viandas\Cliente;
 use viandas\Empresa;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\Pedido;
+use viandas\TipoVianda;
 use viandas\ViandaCliente;
 
 class PedidosController extends Controller
@@ -76,7 +78,10 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        //
+        $listClientes=Cliente::all()->lists('nombre', 'id');;
+        $listTipoViandas = TipoVianda::all()->lists('nombre', 'id');;
+        return view ('admin.pedido',compact('listClientes','listTipoViandas'));
+
     }
 
     /**

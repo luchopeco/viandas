@@ -87,9 +87,24 @@
           <ul class="sidebar-menu">
             <li class="header">Menu Navegacion</li>
             <li <?php if('admin.viandas.index'== Route::current()->getName()||'admin.viandas.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/viandas"> <i class="fa fa-tachometer"></i>Panel Control</a></li>
-            <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedidos"> <i class="fa fa-cart-plus"></i>Pedidos</a></li>
-            <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/cobros"> <i class="fa fa-cart-plus"></i>Cobros</a></li>
-            
+            <li class="treeview
+            @if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.create'== Route::current()->getName())
+            active
+            @endif
+            ">
+                <a href="#">
+                    <i class="fa fa-cart-plus"></i>
+                    <span>Pedidos</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedidos"><i class="fa fa-check"></i>Registar Pedidos</a></li>
+                    <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedidos/create"><i class="fa fa-plus"></i>Nuevo Pedido</a></li>
+
+                </ul>
+            </li>
+
+            <li <?php if(strpos(\Illuminate\Support\Facades\URL::current(),'cobros') ==true){echo 'class="active"';} ?>><a href="/admin/cobros"><i class="fa fa-money"></i>Cobros</a></li>
             <li <?php if('admin.clientes.index'== Route::current()->getName()||'admin.clientes.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/clientes"><i class="fa fa-users"></i>Clientes</a></li>
             <li <?php if('viandas\Http\Controllers\Admin\ClientesController'==substr(\Illuminate\Support\Facades\Route::getCurrentRoute()->getActionName(), 0, -15)){echo 'class="active"';} ?>><a href="/admin/loquenogusta"><i class="fa fa-thumbs-down"></i>Lo que no Gusta</a></li>
             <li <?php if('admin.alimentos.index'== Route::current()->getName()||'admin.alimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/alimentos"><i class="fa fa-coffee"></i>Alimentos</a></li>

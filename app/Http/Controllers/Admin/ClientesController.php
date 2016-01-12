@@ -165,7 +165,7 @@ class ClientesController extends Controller
 
 
             Session::flash('mensajeOk', 'Cliente  Agregado Con Exito');
-            return back();
+            return redirect()->route('admin.clientes.index');
         }
         catch(\Exception $ex){
 
@@ -259,7 +259,7 @@ class ClientesController extends Controller
             $a->save();
 
             Session::flash('mensajeOk','Cliente Modificado con éxito');
-            return back();
+             return redirect()->route('admin.clientes.index');
 
 
         }
