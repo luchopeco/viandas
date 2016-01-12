@@ -102,6 +102,7 @@ class PedidosController extends Controller
                     if (!empty($p['empresa_id'])) {
                         $ped->empresa_id = $p['empresa_id'];
                     }
+                    $ped->observaciones=$p['observaciones'];
                     $ped->cliente_id = $p['cliente_id'];
                     $ped->tipo_vianda_id = $p['tipo_vianda_id'];
                     $ped->precio_vianda = $p['precio_vianda'];

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2016 a las 03:30:34
+-- Tiempo de generación: 12-01-2016 a las 03:22:59
 -- Versión del servidor: 5.6.17-log
 -- Versión de PHP: 5.5.12
 
@@ -63,14 +63,15 @@ CREATE TABLE IF NOT EXISTS `cadete` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `cadete`
 --
 
 INSERT INTO `cadete` (`id`, `nombre`, `apellido`, `telefono`, `email`, `created_at`, `updated_at`) VALUES
-(3, 'Javier', 'Cracognaa', '12312312313', 'javiercrac@', '2015-12-16 03:45:17', '2015-12-16 03:59:53');
+(3, 'Javier', 'Cracognaa', '12312312313', 'javiercrac@', '2015-12-16 03:45:17', '2015-12-16 03:59:53'),
+(4, 'Otro', 'Cadete', 'asd', 'asd@asd.com', '2016-01-09 20:14:31', '2016-01-09 20:14:31');
 
 -- --------------------------------------------------------
 
@@ -105,8 +106,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nombre`, `apellido`, `dni`, `domicilio`, `telefono`, `email`, `estado_deuda`, `valor_deuda`, `estado`, `deleted_at`, `updated_at`, `created_at`, `idlocalidad`, `idempresa`, `envio`) VALUES
-(1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, NULL, '2015-12-12 21:35:06', '2015-12-12 17:44:38', 1, NULL, 0),
-(4, 'JAVIER', 'CRACOGNA', 1231231, 'DASDASD|', '333233', 'javiercrac@gmail.com', NULL, NULL, NULL, NULL, '2015-12-15 07:03:12', '2015-12-15 07:03:12', 1, 2, 1),
+(1, 'Pepe', 'Argento', 35796548, 'San martin 1540', '341-654', 'asdasd@asd.com', 'Deudor', NULL, NULL, NULL, '2016-01-10 02:03:11', '2015-12-12 17:44:38', 1, 2, 0),
+(4, 'JAVIER', 'CRACOGNA', 1231231, 'DASDASD|', '333233', 'javiercrac@gmail.com', NULL, NULL, NULL, NULL, '2016-01-12 02:44:23', '2015-12-15 07:03:12', 1, NULL, 0),
 (6, 'Luciano', 'Peco', 341, 'ayo', '341', 'liuc@ad.com', NULL, NULL, NULL, NULL, '2016-01-04 21:39:33', '2016-01-04 21:39:33', 1, 2, 0),
 (7, 'pedro', 'alfonso', 0, 'asdas', 'asdads', 'asdasdads@asd.ciom', NULL, NULL, NULL, NULL, '2016-01-05 23:27:41', '2016-01-05 23:27:41', 1, 3, 0);
 
@@ -136,6 +137,7 @@ INSERT INTO `cliente_dia` (`cliente_id`, `dia_semana_id`, `tipo_vianda_id`, `can
 (1, 2, 2, 2),
 (1, 5, 1, 3),
 (4, 1, 1, 2),
+(4, 1, 2, 1),
 (6, 1, 2, 1),
 (6, 7, 2, 1),
 (7, 1, 1, 4);
@@ -200,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 
 INSERT INTO `empresa` (`id`, `nombre`, `idlocalidad`, `created_at`, `updated_at`, `deleted_at`, `envio`) VALUES
 (2, 'Vicentin', 1, '2015-12-10 16:54:46', '2016-01-04 21:09:18', NULL, 1),
-(3, 'Coca Cola', 3, '2016-01-05 23:27:10', '2016-01-05 23:27:10', NULL, 0);
+(3, 'Coca Cola', 3, '2016-01-05 23:27:10', '2016-01-12 04:03:33', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -221,7 +223,10 @@ CREATE TABLE IF NOT EXISTS `empresa_vianda` (
 --
 
 INSERT INTO `empresa_vianda` (`empresa_id`, `tipo_vianda_id`, `precio`) VALUES
-(2, 1, 30);
+(2, 1, 30),
+(2, 2, 100),
+(3, 1, 2),
+(3, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -348,7 +353,7 @@ INSERT INTO `no_me_gusta` (`cliente_id`, `alimento_id`, `created_at`, `updated_a
 
 CREATE TABLE IF NOT EXISTS `pedido` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cantidad` int(11) DEFAULT NULL,
+  `cantidad` double DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
   `envio` int(1) NOT NULL DEFAULT '0',
   `cliente_id` int(11) NOT NULL,
@@ -368,17 +373,17 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   KEY `fk_pedido_tipo_vianda1_idx` (`tipo_vianda_id`),
   KEY `fk_pedido_cadete` (`cadete_id`),
   KEY `FK_pedido_empresa` (`empresa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
 
 --
 -- Volcado de datos para la tabla `pedido`
 --
 
 INSERT INTO `pedido` (`id`, `cantidad`, `estado`, `envio`, `cliente_id`, `tipo_vianda_id`, `fecha_pedido`, `cobrado`, `precio_vianda`, `precio_envio`, `created_at`, `deleted_at`, `updated_at`, `cadete_id`, `empresa_id`, `observaciones`) VALUES
-(21, 2, NULL, 1, 4, 1, '2016-01-03', 0, 66, 13, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', 3, 2, NULL),
-(22, 1, NULL, 1, 6, 2, '2016-01-03', 0, 43, 13, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', 3, 2, NULL),
-(23, 4, NULL, 0, 7, 1, '2016-01-03', 0, 132, 0, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', NULL, 3, NULL),
-(24, 2, NULL, 0, 1, 2, '2016-01-03', 0, 86, 0, '2016-01-07 04:29:29', NULL, '2016-01-07 04:29:29', NULL, NULL, NULL);
+(90, 2, NULL, 1, 1, 2, '2016-01-10', 0, 200, 13, '2016-01-12 05:22:07', NULL, '2016-01-12 05:22:07', 3, 2, ''),
+(91, 1, NULL, 1, 6, 2, '2016-01-10', 0, 100, 13, '2016-01-12 05:22:07', NULL, '2016-01-12 05:22:07', 3, 2, ''),
+(92, 2, NULL, 0, 4, 1, '2016-01-10', 0, 66, 0, '2016-01-12 05:22:07', NULL, '2016-01-12 05:22:07', NULL, NULL, ''),
+(93, 1, NULL, 0, 4, 2, '2016-01-10', 0, 43, 0, '2016-01-12 05:22:07', NULL, '2016-01-12 05:22:07', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -473,7 +478,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2016-01-04 22:11:16', 'NzgpgFMneK3QSdsqwHY4heuxUy4Ti0esOHByEG9teu8U7fbwwo3C0Zpv3ECt');
+(1, 'admin', '$2y$10$guP8JGpR8xVTWR0LVww2OuLlcjPNogPnOXwrwPmXxAF/krhM8hSm2', NULL, NULL, '2016-01-12 05:22:21', 'nRn8AVTJvHXearMJdNsiYfQaCmbqqowuqVUxSq7uMSryVaf81H0krP03aYA8');
 
 --
 -- Restricciones para tablas volcadas

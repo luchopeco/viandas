@@ -62,22 +62,35 @@
                                                         {!!Form::select('pedidos['.$contador.'][cadete_id]', $listCadetes,null,array('class' => 'hidden form-control cbx-cadete'))!!}
                                                         {!!Form::Text('pedidos['.$contador.'][precio_envio]',$empresa->Localidad->costo_envio,['class'=>' form-control hidden costo_envio'])!!}
                                                         {!!Form::Text('pedidos['.$contador.'][tipo_vianda_id]',$vianda->TipoVianda->id,['class'=>' form-control hidden'])!!}
-                                                        <tr>
+                                                        <tr class="tabla-pedidos-padre">
                                                             <td>
                                                                 {{$vianda->Cliente->nombre}} {{$vianda->Cliente->apellido}}
                                                                 {!!Form::Text('pedidos['.$contador.'][cliente_id]',$vianda->Cliente->id,['class'=>' form-control hidden'])!!}
                                                             </td>
                                                             <td>
+                                                                <span class=" pull-left"><a href="#" class="btn btn-primary btn-xs btn-obs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a></span>
+                                                                <div class="input-group txt-obs hidden">
+                                                                        {!!Form::Text('pedidos['.$contador.'][observaciones]','',['class'=>' form-control '])!!}
+                                                                </div>
+                                                            </td>
+                                                            @if($empresa->ListPreciosViandas->contains($vianda->TipoVianda))
+                                                            <?php
+                                                                $precio_vianda= $empresa->ListPreciosViandas->find($vianda->TipoVianda->id)->pivot->precio;
+                                                            ?>
+                                                            @else
+                                                               <?php $precio_vianda= $vianda->TipoVianda->precio;?>
+                                                            @endif
+                                                            <td>
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}} </span>
-                                                                    {!!Form::Number('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control','required'])!!}
+                                                                    {!!Form::Text('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control cantidad-pedido','required|between:0,99.99', 'data-precio'=> $precio_vianda])!!}
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon" title="Costo Vianda"> $</span>
-                                                                    <?php $subtotal = $vianda->cantidad * $vianda->TipoVianda->precio; ?>
-                                                                    {!!Form::Text('pedidos['.$contador.'][precio_vianda]',$subtotal,['class'=>' form-control','required'])!!}
+                                                                    <?php $subtotal = $vianda->cantidad * $precio_vianda ?>
+                                                                    {!!Form::Text('pedidos['.$contador.'][precio_vianda]',$subtotal,['class'=>' form-control precio-pedido','required'])!!}
                                                                 </div>
                                                             </td>
                                                             <td>{!!Form::checkbox('pedidos['.$contador.'][confirmado]', $vianda->id, true)!!}</td>
@@ -113,38 +126,43 @@
                                                 {!!Form::Text('pedidos['.$contador.'][empresa_id]', '0' ,['class'=>'hidden'])!!}
                                                 {!!Form::select('pedidos['.$contador.'][cadete_id]', $listCadetes,null,array('class' => 'hidden form-control'))!!}
                                                 {!!Form::Text('pedidos['.$contador.'][tipo_vianda_id]',$vianda->TipoVianda->id,['class'=>' form-control hidden'])!!}
-                                                <tr>
+                                                <tr class="tabla-pedidos-padre">
                                                     <td>{{$vianda->Cliente->nombre}} {{$vianda->Cliente->apellido}}</td>
                                                     <td>
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="¿Desea Envio?"><i class="fa fa-motorcycle"></i></span>
-                                                            {!!Form::checkbox('pedidos['.$contador.'][envio]', $vianda->id, false,['class'=>''])!!}
+                                                            {!!Form::checkbox('pedidos['.$contador.'][envio]', $vianda->id, $vianda->Cliente->envio,['class'=>'cbx-pedido'])!!}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="input-group">
+                                                        <div class="input-group @if( $vianda->Cliente->envio==0) hidden  @endif cadete-pedido">
                                                             <span class="input-group-addon" title="Cadete"><i class="fa fa-motorcycle"></i></span>
                                                             {!!Form::select('pedidos['.$contador.'][cadete_id]', $listCadetes,null,array('class' => 'form-control'))!!}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="input-group">
+                                                        <div class="input-group @if( $vianda->Cliente->envio==0) hidden  @endif precio-envio-pedido">
                                                             <span class="input-group-addon" title="Costo Envio">$</span>
                                                             {!!Form::Text('pedidos['.$contador.'][precio_envio]',$vianda->Cliente->Localidad->costo_envio,['class'=>' form-control','required'])!!}
                                                         </div>
                                                     </td>
-                                                    <td> <a href="#" class="btn btn-primary btn-xs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a></td>
+                                                    <td>
+                                                    <span class=" pull-left"><a href="#" class="btn btn-primary btn-xs btn-obs" title="Observaciones" ><i class="fa fa-pencil-square-o"></i> </a></span>
+                                                    <div class="input-group txt-obs hidden">
+                                                            {!!Form::Text('pedidos['.$contador.'][observaciones]','',['class'=>' form-control '])!!}
+                                                    </div>
+                                                    </td>
                                                     <td>
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}}</span>
-                                                            {!!Form::Number('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control','required'])!!}
+                                                            {!!Form::Text('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control cantidad-pedido','required|between:0,99.99', 'data-precio'=> $vianda->TipoVianda->precio])!!}
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="Costo Vianda"> $</span>
                                                             <?php $subtotal = $vianda->cantidad * $vianda->TipoVianda->precio; ?>
-                                                            {!!Form::Text('pedidos['.$contador.'][precio_vianda]',$subtotal,['class'=>' form-control','required'])!!}
+                                                            {!!Form::Text('pedidos['.$contador.'][precio_vianda]',$subtotal,['class'=>' form-control precio-pedido','required'])!!}
                                                         </div>
                                                     </td>
                                                     <td> {!!Form::checkbox('pedidos['.$contador.'][confirmado]', $vianda->id, true)!!}</td>
@@ -170,7 +188,7 @@
             <div class="box-header with-border">
                 <i class="fa fa-leaf"></i> Pedidos Registrados
                 <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" id="btn-collapsed"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-box-tool" id="btn-collapsed" ><i class="fa fa-plus"></i></button>
                 </div><!-- /.box-tools -->
             </div>
             <div class=" box-body">
@@ -189,9 +207,9 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"title="Cadete"><i class="fa fa-motorcycle"></i>:</span>
                                                     @if($listPedidos->isEmpty())
-                                                    {!!Form::select('id', $listCadetes,null,array('class' => 'form-control'))!!}
+                                                    {!!Form::select('id', $listCadetes,null,array('class' => 'form-control','disabled'))!!}
                                                     @else
-                                                    {!!Form::select('id', $listCadetes,$listPedidos[0]->cadete_id,array('class' => 'form-control'))!!}
+                                                    {!!Form::select('id', $listCadetes,$listPedidos[0]->cadete_id,array('class' => 'form-control','disabled'))!!}
                                                     @endif
                                                 </div>
                                             </div>
@@ -199,9 +217,9 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon" title="Costo Envio"><i class="fa fa-motorcycle"></i>: $</span>
                                                      @if($listPedidos->isEmpty())
-                                                    {!!Form::Text('precio_envio',$empresa->Localidad->costo_envio,['class'=>' form-control','required'])!!}
+                                                    {!!Form::Text('precio_envio',$empresa->Localidad->costo_envio,['class'=>' form-control','required','disabled'])!!}
                                                     @else
-                                                    {!!Form::Text('precio_envio',$listPedidos[0]->precio_envio,['class'=>' form-control','required'])!!}
+                                                    {!!Form::Text('precio_envio',$listPedidos[0]->precio_envio,['class'=>' form-control','required','disabled'])!!}
                                                       @endif
                                                 </div>
                                             </div>
@@ -233,21 +251,20 @@
                                                                     {!!Form::Text('pedidos_r['.$contadorR.'][cliente_id]',$pedido->Cliente->id,['class'=>' form-control hidden'])!!}
                                                                 </td>
                                                                 <td>
-                                                                    <a href="#" class="btn btn-primary btn-xs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a>
+                                                                  @if(!empty($pedido->observaciones)) {!!Form::Text('pedidos['.$contadorR.'][observaciones]',$pedido->observaciones,['class'=>' form-control ','title'=>'Observaciones','disabled'])!!}@endif
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon" title="Cantidad">{{$pedido->TipoVianda->nombre}}</span>
-                                                                        {!!Form::Text('pedidos_r['.$contadorR.'][cantidad]',$pedido->cantidad,['class'=>' form-control','required'])!!}
+                                                                        {!!Form::Text('pedidos_r['.$contadorR.'][cantidad]',$pedido->cantidad,['class'=>' form-control','required','disabled'])!!}
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon" title="Costo Vianda">$</span>
-                                                                        {!!Form::Text('pedidos_r['.$contadorR.'][precio_vianda]',$pedido->precio_vianda,['class'=>' form-control','required'])!!}
+                                                                        {!!Form::Text('pedidos_r['.$contadorR.'][precio_vianda]',$pedido->precio_vianda,['class'=>' form-control','required','disabled'])!!}
                                                                     </div>
                                                                 </td>
-                                                                <td>{!!Form::checkbox('pedidos_r['.$contadorR.'][confirmado]', $pedido->id, true)!!}</td>
                                                             </tr>
                                                             @endif
                                                         @endforeach
@@ -286,39 +303,45 @@
                                                 <tr>
                                                     <td>{{$pedido->Cliente->nombre}} {{$pedido->Cliente->apellido}} </td>
                                                     <td>
+                                                        @if($envp==1)
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="¿Realizar Envio?"><i class="fa fa-motorcycle"></i>:</span>
-                                                            {!!Form::checkbox('pedidos_r['.$contadorR.'][envio]', $pedido->id, $envp)!!}
+                                                            {!!Form::checkbox('pedidos_r['.$contadorR.'][envio]', $pedido->id, $envp,['disabled'])!!}
                                                         </div>
+                                                        @endif
                                                     </td>
                                                     <td>
+                                                     @if($envp==1)
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="Cadete"><i class="fa fa-motorcycle"></i></span>
-                                                            {!!Form::select('pedidos_r['.$contador.'][cadete_id]', $listCadetes , $pedido->cadete_id ,array('class' => 'form-control'))!!}
+                                                            {!!Form::select('pedidos_r['.$contador.'][cadete_id]', $listCadetes , $pedido->cadete_id ,array('class' => 'form-control','disabled'))!!}
                                                         </div>
+                                                     @endif
                                                     </td>
                                                     <td>
+                                                    @if($envp==1)
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="Costo Envio">$</span>
-                                                            {!!Form::Text('pedidos_r['.$contadorR.'][precio_envio]',$pedido->precio_envio,['class'=>' form-control','required'])!!}
+                                                            {!!Form::Text('pedidos_r['.$contadorR.'][precio_envio]',$pedido->precio_envio,['class'=>' form-control','required','disabled'])!!}
                                                         </div>
+                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="btn btn-primary btn-xs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a>
+                                                       @if(!empty($pedido->observaciones)) {!!Form::Text('pedidos['.$contadorR.'][observaciones]',$pedido->observaciones,['class'=>' form-control ','title'=>'Observaciones','disabled'])!!}@endif
                                                     </td>
                                                     <td>
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="Cantidad">{{$pedido->TipoVianda->nombre}}</span>
-                                                            {!!Form::Number('pedidos_r['.$contadorR.'][cantidad]',$pedido->cantidad,['class'=>' form-control','required'])!!}
+                                                            {!!Form::Number('pedidos_r['.$contadorR.'][cantidad]',$pedido->cantidad,['class'=>' form-control','required','disabled'])!!}
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="input-group">
                                                             <span class="input-group-addon" title="Costo Vianda">$</span>
-                                                            {!!Form::Text('pedidos_r['.$contadorR.'][precio_vianda]',$pedido->precio_vianda,['class'=>' form-control','required'])!!}
+                                                            {!!Form::Text('pedidos_r['.$contadorR.'][precio_vianda]',$pedido->precio_vianda,['class'=>' form-control','required','disabled'])!!}
                                                         </div>
                                                     </td>
-                                                    <td>  {!!Form::checkbox('pedidos_r['.$contadorR.'][confirmado]', $pedido->id, true)!!}</td>
+
                                                 </tr>
                                                 @endif
                                                 @endforeach
@@ -358,17 +381,34 @@ $.ajaxSetup({
         });
 $(function () {
 
+    ///para cambiar los valores de cada pedido segun la empresa
     $( ".viandas-cadete-empresa" ).change(function() {
         $(this).closest('.viandas-empresa').find('.cbx-cadete').val($(this).val());
     });
     $( ".costo-envio-empresa" ).blur(function() {
             $(this).closest('.viandas-empresa').find('.costo_envio').val($(this).val());
     });
+    ///para colapsar los pedidos registrados
     $('#btn-collapsed').click(function(event) {
         event.preventDefault();
       $('#box-collapse').toggleClass('collapsed-box',500);
     });
+    /// para multiplicar la cantidad por el precio
+    $( ".cantidad-pedido" ).change(function() {
+       var precio_actual= $(this).attr('data-precio');
+       var precio = $(this).val() * precio_actual;
+       $(this).closest('.tabla-pedidos-padre').find('.precio-pedido').val(precio);
+    });
+    ///para esconder lo referente a envio segun si desea realizar o no envio
+     $(".cbx-pedido").click(function() {
+        $(this).closest('.tabla-pedidos-padre').find('.cadete-pedido').toggleClass('hidden');
+        $(this).closest('.tabla-pedidos-padre').find('.precio-envio-pedido').toggleClass('hidden');
+        });
 
+      $(".btn-obs").click(function(event) {
+      event.preventDefault();
+        $(this).closest('.tabla-pedidos-padre').find('.txt-obs').toggleClass('hidden');
+        });
 
 });
 </script>
