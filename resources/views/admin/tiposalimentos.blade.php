@@ -70,7 +70,7 @@
    <div class="modal fade" id="modalTipoAlimentoAgregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
          <div class="modal-dialog">
                <div class="modal-content">
-                     {!!Form::open(['route'=>'admin.tiposalimentos.store','method'=>'POST', 'data-toggle='>'validator'])!!}
+                     {!!Form::open(['route'=>'admin.tiposalimentos.store','method'=>'POST', 'data-toggle'=>'validator'])!!}
                          <div class="modal-header">
                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                              <h4 class="modal-title" id="myModalLabel">Agregando Tipo Alimento</h4>
@@ -107,7 +107,7 @@
    <div class="modal fade" id="modalTipoAlimentoModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
               <div class="modal-content">
-                    {!!Form::open(['route'=>'admin.tiposalimentos.update','method'=>'PUT', 'data-toggle='>'validator'])!!}
+                    {!!Form::open(['route'=>'admin.tiposalimentos.update','method'=>'PUT', 'data-toggle'=>'validator'])!!}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <h4 class="modal-title" id="myModalLabel">Modificando Tipo Alimento</h4>

@@ -34,6 +34,7 @@
    <div class="row">
        <div class=" col-md-12">
              <div class=" panel panel-default">
+              {!!Form::open(['url'=>'admin/pedidos/agregarPedidoManual','method'=>'POST', 'data-toggle'=>'validator'])!!}
                    <div class=" panel-heading">Nuevo Pedido Manual
                       <div class="pull-right">
                           <div class="btn-group">
@@ -49,43 +50,90 @@
                    </div>
                    <div class=" panel-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
+                                Fecha
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input class="form-control datepicker" name="fecha" id="txtfecha" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                             Cliente
                                 <div class="input-group ">
                                     <span class="input-group-addon" title="Cliente"> <i class="fa fa-user"></i></span>
-                                   {!!Form::select('cliente_id', $listClientes,null,array('class' => 'form-control'))!!}
+                                    <select name="cliente_id" class="form-control" id="cbx-cliente"  required>
+                                        <option value="">Seleccionar</option>
+                                        @foreach($listClientes as $c)
+                                            <option value="{{$c->id}}" data-direccion="{{$c->domicilio}}" data-precio-envio="{{$c->Localidad->costo_envio}}">{{$c->nombre}} {{$c->apellido}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                            Tipo Vianda
-                            <div class="input-group ">
-                                <span class="input-group-addon" title="Tipo Vianda"> <i class="fa fa-user"></i></span>
-                               {!!Form::select('tipo_vianda_id', $listTipoViandas,null,array('class' => 'form-control'))!!}
+                            <div class="col-md-3">
+                                Tipo Vianda
+                                <div class="input-group ">
+                                    <span class="input-group-addon" title="Tipo Vianda"> <i class="fa fa-user"></i></span>
+                                    <select name="tipo_vianda_id" class="form-control" id="cbx-tipo-vianda"  required>
+                                        <option value="0" data-precio="0">Seleccionar</option>
+                                        @foreach($listTipoViandas as $tv)
+                                            <option value="{{$tv->id}}" data-precio="{{$tv->precio}}">{{$tv->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
+                            <div class="col-md-3">
+                                Precio Vianda
+                                <div class="input-group ">
+                                    <span class="input-group-addon" title="Precio Vianda"> $</span>
+                                    {!!Form::Number('precio_vianda',0,['class'=>' form-control ','required||between:0,99.99','id'=>'txt-precio-vianda'])!!}
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                Empresa
-                                <div class="input-group ">
+                            <div class="col-md-2">
+                                Cantidad
+                                {!!Form::Number('cantidad', '1',['class' => 'form-control','required|between:0,99.99'])!!}
+                            </div>
+                            <div class="col-md-2">
+                                 Envio
+                                 <div class="input-group ">
                                     <span class="input-group-addon" title="¿Desea Envio?"><i class="fa fa-motorcycle"></i></span>
-                                     {!!Form::Text('empresa_id', '',['class'=>' hidden','disabled '])!!}
-                                    {!!Form::Text('empresa', '',['class'=>' form-control','disabled'])!!}
+                                    {!!Form::checkbox('envio', '', false ,['class'=>'','id'=>'chk-envio'])!!}
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                Cantidad
-                                {!!Form::Text('cantidad', '1',['class' => 'form-control','required|between:0,99.99'])!!}
+                            <div class="col-md-3 envio hidden">
+                                Direccion
+                                <div class="input-group ">
+                                    <span class="input-group-addon" title="Costo Envio"> $</span>
+                                    {!!Form::Text('domicilio',0,['class'=>' form-control ','id'=>'txt-domicilio'])!!}
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                Envio
-                             <div class="input-group ">
-                                <span class="input-group-addon" title="¿Desea Envio?"><i class="fa fa-motorcycle"></i></span>
-                                {!!Form::checkbox('envio', '', false ,['class'=>''])!!}
+                            <div class="col-md-3 envio hidden">
+                                Cadete
+                                <div class="input-group">
+                                    <span class="input-group-addon"title="Cadete"><i class="fa fa-motorcycle"></i>:</span>
+                                    {!!Form::select('id', $listCadetes,null,array('class' => 'form-control viandas-cadete-empresa'))!!}
+                                </div>
                             </div>
+                            <div class="col-md-2 envio hidden">
+                                Precio Envio
+                                <div class="input-group ">
+                                    <span class="input-group-addon" title="Costo Envio"> $</span>
+                                    {!!Form::Number('precio_envio',0,['class'=>' form-control ','required|between:0,99.99','id'=>'txt-precio-envio'])!!}
+                                </div>
                             </div>
                         </div>
                    </div>
+                   <div class="panel-footer">
+                       <div class="row">
+                            <div class="col-md-12">
+                                {!!Form::submit('Agregar', array('class' => 'btn btn-success btn-block'))!!}
+                            </div>
+                       </div>
+                   </div>
+              {!! Form::close() !!}
               </div>
        </div>
    </div>
@@ -94,7 +142,26 @@
 @section('script')
 <script>
 $(function () {
+    ///para cambiar los valores de precio pedido segun tipo Vianda
+    $("#cbx-tipo-vianda").change(function() {
+        var precio=$("#cbx-tipo-vianda option:selected").attr('data-precio');
+        $('#txt-precio-vianda').val(precio);
+    });
 
+    ///cambio segun tengo envio o no
+    $("#chk-envio").click(function() {
+        $('.envio').toggleClass('hidden');
+    });
+
+    ///para cambiar los valores de precio pedido segun tipo Vianda
+    $("#cbx-cliente").change(function() {
+        var direccion=$("#cbx-cliente option:selected").attr('data-direccion');
+        $('#txt-domicilio').val(direccion);
+        var precio=$("#cbx-cliente option:selected").attr('data-precio-envio');
+        $('#txt-precio-envio').val(precio);
+        var cliente=$("#cbx-cliente").val()
+        $('#cliente-id').val(cliente);
+    });
 
 });
 </script>

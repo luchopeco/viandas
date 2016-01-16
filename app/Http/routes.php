@@ -71,6 +71,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
 
         Route::resource('pedidos','PedidosController');
         Route::post('pedidos/buscar','PedidosController@buscar');
+        Route::post('pedidos/agregarPedidoManual','PedidosController@agregarPedidoManual');
+
         
         Route::get('cobros','PedidosController@listarPedidos');
         

@@ -78,9 +78,10 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        $listClientes=Cliente::all()->lists('nombre', 'id');;
-        $listTipoViandas = TipoVianda::all()->lists('nombre', 'id');;
-        return view ('admin.pedido',compact('listClientes','listTipoViandas'));
+        $listClientes=Cliente::orderBy('apellido','desc')->get();
+        $listTipoViandas = TipoVianda::orderBy('nombre','desc')->get();
+        $listCadetes=Cadete::orderBy('nombre')->lists('nombre', 'id');
+        return view ('admin.pedido',compact('listClientes','listTipoViandas','listCadetes'));
 
     }
 
@@ -227,6 +228,11 @@ class PedidosController extends Controller
 
 
         return view ('admin.include.cobros',compact('empresaActual','listPedidos','listEmpresas','listCadetes'));
+
+    }
+
+    public function agregarPedidoManual(Request $request)
+    {
 
     }
 }
