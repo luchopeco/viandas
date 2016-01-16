@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class=" box box-primary">
             <div class="box-header with-border">
-               <i class="fa fa-leaf"></i> ESTOY DE ESTE LADO
+               <i class="fa fa-leaf"></i> 
                     <div class="pull-right">
                        <div class="btn-group">
                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -18,29 +18,92 @@
                     </div>
             </div>
             <div class="box-body">
-
+              
                 <div class="row">
                     <div class="col-md-12">
                         <div class=" panel panel-default">
                             <div class=" panel-heading">
-                                <i class="fa fa-building-o"></i> empresa: 
+                                <i class="fa fa-building-o"></i>  COBROS
                             </div>
-                            <div class=" panel-body">
-                                 <div class="row">
+                            <div class=" panel-body">                     
+
 
                                   <?php 
-                                  foreach ($listPedidos as $p ) {
-                                    
-                                    echo $p->id;    
 
+                                  $montoTotal=0;
+
+                                 // echo 'La empresa actual seleccionada es: '.$empresaActual;
+                                  if (empty($empresaActual)) {
+                                    // SIN EMPRESA
+
+                                      foreach ($listPedidos as $p ) {
+                                        $totalpedido=$p->precio_vianda + $p->precio_envio;
+                                        $montoTotal = $montoTotal + $totalpedido;
+                                        ?>
+                                        <div class="row">
+                                        <?php 
+                                        // aca vamos generando las columnas
+                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
+                                        echo $p->cliente->nombre.' - '.$p->cliente->apellido; 
+                                        echo '</div>';
+
+                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
+                                        echo $p->fecha_pedido; 
+                                        echo '</div>';
+
+                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
+                                        echo $p->tipovianda->nombre." - ".$p->cantidad;  
+                                        echo '</div>';
+                                        
+                                       
+                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">Precio: ';        
+                                        echo $p->precio_vianda.' + Envio: '.$p->precio_envio; 
+                                        echo '</div>'; 
+
+                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">Total: ';        
+                                        echo $totalpedido;
+                                        echo '</div>'; 
+                                                                            
+
+                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
+                                        $c='';
+                                        if(!empty($p->cobrado)){$c='checked="checked"';}
+
+                                        echo '<input type="checkbox" '.$c.' name="'.$p->id.' id="pedido_'.$p->id.'" "></input>';
+
+                                        echo '</div>';
+
+
+                                        ?>
+                                        </div>
+                                        <?php 
+                                      }
+
+                                  } // CIERRA IF EMPRESA
+
+                                  else{
+
+                                      ?>
+                                        <div class="row">
+                                      <?php 
+                                        echo "La liquidacion total de una empresa:";
+
+                                      ?>
+                                        </div>
+                                      <?php 
                                   }
+
+                                  
                                    ?>
-                                   
-                                </div>
+
+
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+             
 
 
             </div>
@@ -50,11 +113,18 @@
 <div class="row">
    
 </div>
+   <div class="row">
+                                   <div class="col-md-6">
+                                     monto total = <?php echo $montoTotal; ?>
+                                   </div>
+                                   </div>
 <div class="row">
     <div class="col-md-12">
     {!!Form::submit('Aceptar', array('class' => 'btn btn-success btn-block'))!!}
     </div>
 </div>
+
+
 
 <!-- Cargo de nuevo las librerias por el ajax -->
 <!-- jQuery 2.1.3 -->

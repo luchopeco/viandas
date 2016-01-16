@@ -185,7 +185,7 @@ class PedidosController extends Controller
         $fechaHoy = new Carbon('now');
         $fechadesde = Carbon::createFromFormat('d/m/Y', $request->fechaDesde);
         $fechahasta = Carbon::createFromFormat('d/m/Y', $request->fechaHasta);
-        
+        $empresaActual ="";
         //var_dump($fechadesde);die();
 
         $eID=$request->empresa;
@@ -226,7 +226,7 @@ class PedidosController extends Controller
         $listCadetes = Cadete::all()->lists('nombre', 'id');
 
 
-        return view ('admin.include.cobros',compact('listPedidos','listEmpresas','listCadetes'));
+        return view ('admin.include.cobros',compact('empresaActual','listPedidos','listEmpresas','listCadetes'));
 
     }
 }
