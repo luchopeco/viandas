@@ -113,7 +113,6 @@ class AlimentosController extends Controller
             $a = Alimento::findOrFail($request->id);
             $a->descripcion=$request->descripcion;
             $a->nombre=$request->nombre;
-            $a->estado=$request->estado;
             $a->tipo_alimento_id=$request->tipo_alimento_id;
             $a->save();
 

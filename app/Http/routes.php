@@ -77,7 +77,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::get('cobros','PedidosController@listarPedidos');
         
         Route::post('cobros/buscarcobros','PedidosController@buscarCobros');
-        
+
+        Route::resource('reportes','PdfController');
+        Route::get('repor/planillasemanal','PdfController@planillasemanal');
 
 
     	}
