@@ -8,7 +8,7 @@ class Alimento extends Model
 {
     protected $table = 'alimento';
 
-    protected $fillable = ['nombre', 'descripcion','estado','tipo_alimento_id'];
+    protected $fillable = ['nombre', 'descripcion','tipo_alimento_id'];
 
     protected $primaryKey="id";
 

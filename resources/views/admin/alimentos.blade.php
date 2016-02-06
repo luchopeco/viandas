@@ -52,14 +52,12 @@
                            <tr>
                                <th>Nombre</th>
                                <th>Descripcion</th>
-                               <th>Estado</th>
                                <th>Tipo Alimento</th>
                            </tr>
                            @foreach($listAlimentos as $alimento)
                                <tr >
                                    <td>{{$alimento->nombre}}</td>
                                    <td>{{$alimento->descripcion}}</td>
-                                   <td>{{$alimento->estado}}</td>
                                    <td>{{$alimento->TipoAlimento->nombre}}</td>
                                    <td><a href="#"  class="btn btn-xs btn-info editar" data-idalimento="{{$alimento->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idalimento="{{$alimento->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
@@ -91,13 +89,8 @@
                                      </div>
                                      <div class="form-group">
                                         {!!Form::label('descripcion','Descripcion')!!}
-                                        {!!Form::Text('descripcion',null,['class'=>' form-control','required'])!!}
+                                       {!!Form::Text('descripcion',null,['class'=>' form-control'])!!}
                                         <span class="help-block with-errors"></span>
-                                     </div>
-                                     <div class="form-group">
-                                         {!!Form::label('estado','Estado')!!}
-                                         {!!Form::Text('estado',null,['class'=>' form-control','required'])!!}
-                                         <span class="help-block with-errors"></span>
                                      </div>
                                      <div class="form-group">
                                           {!!Form::label('tipoAlimento','Tipo Alimento')!!}
@@ -139,14 +132,9 @@
                                     </div>
                                     <div class="form-group">
                                        {!!Form::label('descripcion','Descripcion')!!}
-                                       {!!Form::Text('descripcion',null,['class'=>' form-control','id'=>'descripcionU','required'])!!}
+                                       {!!Form::Text('descripcion',null,['class'=>' form-control','id'=>'descripcionU'])!!}
                                        <span class="help-block with-errors"></span>
                                     </div>
-                                     <div class="form-group">
-                                         {!!Form::label('estado','Estado')!!}
-                                         {!!Form::Text('estado',null,['class'=>' form-control','id'=>'estadoU','required'])!!}
-                                         <span class="help-block with-errors"></span>
-                                     </div>
                                        <div class="form-group">
                                            {!!Form::label('tipoAlimento','Tipo Alimento')!!}
                                            {!!Form::select('tipo_alimento_id', $listTiposAlimentos,null,array('class' => 'form-control','id'=>'tipo_alimento_idU'))!!}
@@ -216,7 +204,6 @@
                     $('#nombreU').val(response.datos.nombre);
                     $('#descripcionU').val(response.datos.descripcion);
                     $('#idU').val(response.datos.id);
-                    $('#estadoU').val(response.datos.estado);
                     $('#tipo_alimento_idU').val(response.datos.tipo_alimento_id);
                     $("#modalAlimentoModificar").modal("show");
                 })

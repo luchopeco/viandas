@@ -41,4 +41,5 @@ class Cliente extends Model
         return $this->hasOne('viandas\Empresa', 'id','idempresa');
     }
 
+
 }
