@@ -34,8 +34,10 @@ class ClientesController extends Controller
     {
         try {
 
-            $listClientes = Cliente::all();
-            return view('admin.clientes', compact('listClientes'));
+            $listEmpresas = Empresa::All();
+
+            $listClientes = Cliente::orderBy('apellido')->get();
+            return view('admin.clientes', compact('listClientes','listEmpresas'));
         }
         catch(\Exception $ex){
 
@@ -154,6 +156,10 @@ class ClientesController extends Controller
         try{
             $a= new Cliente($request->all());
             
+            if ($request->idempresa == 0) {
+                 $a->idempresa = null;
+            }
+
             if($request->envio<>null){
                 $a->envio = 1;
             }
@@ -203,6 +209,8 @@ class ClientesController extends Controller
             $cliente = Cliente::findOrFail($id); 
             $diasdelas = DiaSemana::all();
             $tipos = TipoVianda::all();
+
+
 
 
         $localidades = Localidad::all();

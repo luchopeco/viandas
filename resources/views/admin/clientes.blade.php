@@ -47,48 +47,135 @@
                    </div>
                </div>
                <div class=" panel-body">
-                   <div class="table-responsive">
-                       <table id="editar"  class=" table table-bordered table-condensed table-hover table-responsive">
-                           <tr>
-                               <th>Nombre</th>
-                               <th>DNI</th>
-                               <th>No le Gusta</th>
-                               <th>Domicilio</th>
-                               <th>Telefono</th>
-                               <th>Email</th>
-                               <th>Estado Deuda</th>
-                           </tr>
-                           @foreach($listClientes as $cliente)
-                               <tr >
-                                   <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
-                                   <td>{{$cliente->dni}}</td>
-                                   <td>
-                                   @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
-                                   {{$alimento->nombre}} -
-                                   @endforeach
-                                   </td>
 
-                                   <!--<td>
-                                   @foreach( $cliente->ListDiasDeLaSemana as $dia)
-                                   Requiere el dia: {{$dia->nombre}} -  
-                                   @endforeach
-                                   </td>
-                                  -->
+                @foreach($listEmpresas as $empresa)
+                    <div class=" panel panel-primary">
+                         <div class=" panel-heading"> 
+                              {{$empresa->nombre}}                              
+                         </div>
+                         <div class="panel-body">
 
-                                   <td>{{$cliente->domicilio}}</td>
-                                   <td>{{$cliente->telefono}}</td>
-                                   <td>{{$cliente->email}}</td>
-                                   <td>{{$cliente->estado_deuda}}</td>
-                                   <td><a href="clientes/{{$cliente->id}}" class=" btn btn-xs btn-success color-palette" title="Viandas"><i class="fa fa-leaf"></i> </a></td>
-                                   
-                                   <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
-                                   <td><a href="clientes/{{$cliente->id}}/edit"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
-                                   <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
-                                   <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
-                               </tr>
-                           @endforeach
-                       </table>
-                   </div>
+
+                             <div class="table-responsive">
+                                 <table id="editar"  class=" table table-bordered table-condensed table-hover table-responsive">
+                                     <tr>
+                                         <th>Nombre</th>
+                                         <th>DNI</th>
+                                         <th>No le Gusta</th>
+                                         <th>Domicilio</th>
+                                         <th>Telefono</th>
+                                         <th>Email</th>
+                                         
+                                     </tr>
+                                     @foreach($listClientes as $cliente)
+                                         
+                                        @if($cliente->idempresa==$empresa->id)
+                                         <tr >
+                                             <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
+                                             <td>{{$cliente->dni}}</td>
+                                             <td>
+                                             @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
+                                             {{$alimento->nombre}} -
+                                             @endforeach
+                                             </td>
+
+                                             <!--<td>
+                                             @foreach( $cliente->ListDiasDeLaSemana as $dia)
+                                             Requiere el dia: {{$dia->nombre}} -  
+                                             @endforeach
+                                             </td>
+                                            -->
+
+                                             <td>{{$cliente->domicilio}}</td>
+                                             <td>{{$cliente->telefono}}</td>
+                                             <td>{{$cliente->email}}</td>
+                                            
+                                             <td><a href="clientes/{{$cliente->id}}" class=" btn btn-xs btn-success color-palette" title="Viandas"><i class="fa fa-leaf"></i> </a></td>
+                                             
+                                             <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
+                                             <td><a href="clientes/{{$cliente->id}}/edit"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
+                                             <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
+                                             <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
+                                         </tr>
+
+                                         @endif
+
+                                     @endforeach
+                                 </table>
+                             </div>
+                            
+
+
+                         </div>
+
+                     </div>
+
+                @endforeach
+
+                <div class=" panel panel-success">
+                         <div class=" panel-heading"> 
+                              Sin Empresa                           
+                         </div>
+                         <div class="panel-body">
+
+
+                             <div class="table-responsive">
+                                 <table id="editar"  class=" table table-bordered table-condensed table-hover table-responsive">
+                                     <tr>
+                                         <th>Nombre</th>
+                                         <th>DNI</th>
+                                         <th>No le Gusta</th>
+                                         <th>Domicilio</th>
+                                         <th>Telefono</th>
+                                         <th>Email</th>
+                                         
+                                     </tr>
+                                     @foreach($listClientes as $cliente)
+                                         
+                                        @if($cliente->idempresa==null)
+                                         <tr >
+                                             <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
+                                             <td>{{$cliente->dni}}</td>
+                                             <td>
+                                             @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
+                                             {{$alimento->nombre}} -
+                                             @endforeach
+                                             </td>
+
+                                             <!--<td>
+                                             @foreach( $cliente->ListDiasDeLaSemana as $dia)
+                                             Requiere el dia: {{$dia->nombre}} -  
+                                             @endforeach
+                                             </td>
+                                            -->
+
+                                             <td>{{$cliente->domicilio}}</td>
+                                             <td>{{$cliente->telefono}}</td>
+                                             <td>{{$cliente->email}}</td>
+                                             
+                                             <td><a href="clientes/{{$cliente->id}}" class=" btn btn-xs btn-success color-palette" title="Viandas"><i class="fa fa-leaf"></i> </a></td>
+                                             
+                                             <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
+                                             <td><a href="clientes/{{$cliente->id}}/edit"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
+                                             <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
+                                             <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
+                                         </tr>
+
+                                         @endif
+                                         
+                                     @endforeach
+                                 </table>
+                             </div>
+                            
+
+
+                         </div>
+
+                     </div>
+                
+
+
+
                </div>
           </div>
        </div>

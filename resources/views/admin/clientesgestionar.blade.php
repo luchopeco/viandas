@@ -116,7 +116,7 @@
                                               {!!Form::label('empresa','Empresa')!!}
 
                                               <select class="form-control" name="idempresa" id="empresa" onchange="cambiaEmpresa();">
-                                                 <option value="0" <?php if($cliente->idempresa==0){echo 'selected="selected"';} ?> >NINGUNA</option>
+                                                 <option value="0" <?php if($cliente->idempresa==null){echo 'selected="selected"';} ?> >NINGUNA</option>
                                                <?php foreach ($empresas as $empresa) {                                               
                                                  ?> 
                                                        <option value="<?php echo $empresa->id; ?>"
