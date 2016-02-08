@@ -35,7 +35,7 @@ class PdfController extends Controller
 
         $view =  \View::make('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'))->render();
         $pdf =  \App::make('dompdf.wrapper');
-        $pdf->setPaper("A4", "landscape");
+        $pdf->setPaper("A4", "portrait");
         $pdf->loadHTML($view);
         return $pdf->stream('planilaa');
     }

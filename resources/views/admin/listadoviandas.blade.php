@@ -54,6 +54,11 @@
                             .
                                 <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-block"><i class="fa fa-search"></i></button>
                             </div>
+                            <div class="col-md-2">
+                               . <a href="repor/planillasemanal" target="_blank" class="btn btn-primary btn-block" title="Imprimir Planilla Semanal">
+                                    <i class="fa fa-print"></i>
+                                </a>
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
