@@ -49,7 +49,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">Todos <input type="checkbox" name="todos" id="chkTodos" class="form-control" ></div>
+                            <div class="col-md-2"> Todos
+                            <div><input type="checkbox" name="todos" id="chkTodos" class="" ></div>
+                            </div>
                             <div class="col-md-2">
                             .
                                 <button type="button" id="btnBuscar" title="Buscar" class="btn btn-success btn-block"><i class="fa fa-search"></i></button>

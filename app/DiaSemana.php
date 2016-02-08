@@ -14,7 +14,7 @@ class DiaSemana extends Model
 
     public function ListViandasClientes()
     {
-        return $this->hasMany('viandas\ViandaCliente', 'dia_semana_id','id');
+        return $this->hasMany('viandas\ViandaCliente', 'dia_semana_id','id')->whereRaw('cliente_id not in (select id from cliente where deleted_at is not null)');
     }
 
 
