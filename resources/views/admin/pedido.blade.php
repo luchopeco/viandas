@@ -56,20 +56,17 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
-                                    <input class="form-control datepicker" name="fecha" id="txtfecha" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
+                                    <input class="form-control datepicker" name="fecha_pedido" id="txtfecha" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                             Cliente
-                                <div class="input-group ">
-                                    <span class="input-group-addon" title="Cliente"> <i class="fa fa-user"></i></span>
-                                    <select name="cliente_id" class="form-control" id="cbx-cliente"  required>
-                                        <option value="">Seleccionar</option>
-                                        @foreach($listClientes as $c)
-                                            <option value="{{$c->id}}" data-direccion="{{$c->domicilio}}" data-precio-envio="{{$c->Localidad->costo_envio}}">{{$c->nombre}} {{$c->apellido}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <div class="input-group ">
+                                <span class="input-group-addon" title="Comience a escribir el apellido del cliente"> <i class="fa fa-user"></i></span>
+                                {!!Form::text('cliente', '', array('id' => 'auto', 'class'=>'form-control'))!!}
+                                {!!Form::text('cliente_id', '', array('id' =>'response', 'style'=>'display:none'))!!}
+                            </div>
+
                             </div>
                             <div class="col-md-3">
                                 Tipo Vianda
@@ -114,7 +111,7 @@
                                 Cadete
                                 <div class="input-group">
                                     <span class="input-group-addon"title="Cadete"><i class="fa fa-motorcycle"></i>:</span>
-                                    {!!Form::select('id', $listCadetes,null,array('class' => 'form-control viandas-cadete-empresa'))!!}
+                                    {!!Form::select('cadete_id', $listCadetes,null,array('class' => 'form-control viandas-cadete-empresa'))!!}
                                 </div>
                             </div>
                             <div class="col-md-2 envio hidden">
@@ -123,6 +120,12 @@
                                     <span class="input-group-addon" title="Costo Envio"> $</span>
                                     {!!Form::Number('precio_envio',0,['class'=>' form-control ','required|between:0,99.99','id'=>'txt-precio-envio'])!!}
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                Observaciones
+                                {!!Form::text('observaciones', '', array('class'=>'form-control'))!!}
                             </div>
                         </div>
                    </div>
@@ -161,6 +164,13 @@ $(function () {
         $('#txt-precio-envio').val(precio);
         var cliente=$("#cbx-cliente").val()
         $('#cliente-id').val(cliente);
+    });
+    $("#auto").autocomplete({
+        source: "../clientes/like/like",
+        minLength: 2,
+        select: function( event, ui ) {
+            $('#response').val(ui.item.id);
+        }
     });
 
 });

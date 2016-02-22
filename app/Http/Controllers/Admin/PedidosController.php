@@ -54,7 +54,7 @@ class PedidosController extends Controller
         $dia= $fecha->dayOfWeek+1;
 
         //$listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
-        $listViandas = ViandaCliente::whereRaw("NOT EXISTS (SELECT * FROM pedido p WHERE p.cliente_id = cliente_dia.cliente_id AND p.tipo_vianda_id = cliente_dia.tipo_vianda_id AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."') AND dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
+        $listViandas = ViandaCliente::whereRaw("NOT EXISTS (SELECT * FROM pedido p WHERE p.cliente_id = cliente_dia.cliente_id AND p.tipo_vianda_id = cliente_dia.tipo_vianda_id AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."') AND dia_semana_id = ".$dia." AND cliente_id NOT IN (SELECT id FROM cliente where deleted_at is not null)")->orderBy("cliente_id")->get();
         //$listViandas = ViandaCliente::all();
 
 
@@ -78,7 +78,7 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        $listClientes=Cliente::orderBy('apellido','desc')->get();
+        //$listClientes=Cliente::orderBy('apellido','desc')->get();
         $listTipoViandas = TipoVianda::orderBy('nombre','desc')->get();
         $listCadetes=Cadete::orderBy('nombre')->lists('nombre', 'id');
         return view ('admin.pedido',compact('listClientes','listTipoViandas','listCadetes'));
@@ -233,6 +233,34 @@ class PedidosController extends Controller
 
     public function agregarPedidoManual(Request $request)
     {
+        try {
 
+
+                    $ped = new Pedido();
+                    $f = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido);
+                    $ped->fecha_pedido = $f->format('Y-m-d');
+                    $ped->cantidad = $request->cantidad;
+                    if (isset($request->envio)) {
+                        $ped->envio = 1;
+                        $ped->cadete_id = $request->cadete_id;
+                        $ped->precio_envio = $request->precio_envio;
+                    }
+                    $ped->observaciones=$request->observaciones;
+                    $ped->cliente_id = $request->cliente_id;
+                    $ped->tipo_vianda_id = $request->tipo_vianda_id;
+                    $ped->precio_vianda = $request->precio_vianda;
+                    $ped->cobrado=1;
+                    $ped->save();
+
+
+
+            Session::flash('mensajeOk', 'Pedido Agregado Con Exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 }

@@ -44,6 +44,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('clientes/baja','ClientesController@baja');
         Route::get('loquenogusta','ClientesController@nomegustalista');
         Route::get('clientes/gestionar/{id}','ClientesController@gestionarcliente');
+        Route::get('clientes/like/like','ClientesController@likecliente');
 
         Route::resource('gastos','GastosController');
         Route::post('gastos/buscarxfechas','GastosController@buscarxfechas');
