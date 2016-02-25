@@ -60,7 +60,7 @@
                                  <table id="editar"  class=" table table-bordered table-condensed table-hover table-responsive">
                                      <tr>
                                          <th>Nombre</th>
-                                         <th>DNI</th>
+                                    
                                          <th>No le Gusta</th>
                                          <th>Domicilio</th>
                                          <th>Telefono</th>
@@ -72,7 +72,7 @@
                                         @if($cliente->idempresa==$empresa->id)
                                          <tr >
                                              <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
-                                             <td>{{$cliente->dni}}</td>
+                                           
                                              <td>
                                              @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
                                              {{$alimento->nombre}} -
@@ -123,7 +123,7 @@
                                  <table id="editar"  class=" table table-bordered table-condensed table-hover table-responsive">
                                      <tr>
                                          <th>Nombre</th>
-                                         <th>DNI</th>
+                                         
                                          <th>No le Gusta</th>
                                          <th>Domicilio</th>
                                          <th>Telefono</th>
@@ -135,7 +135,7 @@
                                         @if($cliente->idempresa==null)
                                          <tr >
                                              <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
-                                             <td>{{$cliente->dni}}</td>
+                                             
                                              <td>
                                              @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
                                              {{$alimento->nombre}} -

@@ -76,17 +76,17 @@
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('telefono','Teléfono')!!}
-                                              {!!Form::Text('telefono',$cliente->telefono,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('telefono',$cliente->telefono,['class'=>' form-control',''])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('dni','DNI')!!}
-                                              {!!Form::Text('dni',$cliente->dni,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('dni',$cliente->dni,['class'=>' form-control',''])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
                                            <div class="form-group">
                                               {!!Form::label('domicilio','Domicilio')!!}
-                                              {!!Form::Text('domicilio',$cliente->domicilio,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('domicilio',$cliente->domicilio,['class'=>' form-control',''])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
 
@@ -108,7 +108,7 @@
 
                                            <div class="form-group">
                                               {!!Form::label('email','Email')!!}
-                                              {!!Form::Text('email',$cliente->email,['class'=>' form-control','required'])!!}
+                                              {!!Form::Text('email',$cliente->email,['class'=>' form-control',''])!!}
                                               <span class="help-block with-errors"></span>
                                            </div>
 
