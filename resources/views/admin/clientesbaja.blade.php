@@ -1,7 +1,7 @@
 @extends('admin.masteradmin')
 
 @section('title')
-<h1> Gestión de Clientes</h1>
+<h1> Gestión de Clientes en Baja</h1>
 @endsection
 
 @section('breadcrumb')
@@ -34,11 +34,9 @@
    <div class="row">
        <div class=" col-md-12">
           <div class=" panel panel-default">
-               <div class=" panel-heading">Clientes <a href="clientes/create" id="btnNuevoCliente" title="Nuevo Cliente" class=" btn-xs btn btn-success" ><i class=" fa fa-plus"></i></a>
+               <div class=" panel-heading">Clientes de baja 
                    <div class="pull-right">
-                      <div class="btn-group">
-                        <a href="clientesdebaja">Clientes de BAJA</a>
-                      </div>
+                      
                        <div class="btn-group">
                            <button type="button" class="multiselect dropdown-toggle btn btn-xs btn-warning" data-toggle="dropdown" title="Ayuda">
                                <i class="fa fa-question-circle"></i><b class="caret"></b>
@@ -64,23 +62,19 @@
                                      <tr>
                                          <th>Nombre</th>
                                          
-                                         <th>No le Gusta</th>
+                                        
                                          <th>Domicilio</th>
                                          <th>Telefono</th>
                                          <th>Email</th>
                                          
                                      </tr>
-                                     @foreach($listClientes as $cliente)
+                                     @foreach($listDeleted as $cliente)
                                          
                                         @if($cliente->idempresa==$empresa->id)
                                          <tr >
-                                             <td>{{$cliente->apellido}} {{$cliente->nombre}} </td>
+                                             <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
                                              
-                                             <td>
-                                             @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
-                                             {{$alimento->nombre}} -
-                                             @endforeach
-                                             </td>
+                                            
 
                                              <!--<td>
                                              @foreach( $cliente->ListDiasDeLaSemana as $dia)
@@ -93,11 +87,11 @@
                                              <td>{{$cliente->telefono}}</td>
                                              <td>{{$cliente->email}}</td>
                                             
-                                             <td><a href="clientes/{{$cliente->id}}" class=" btn btn-xs btn-success color-palette" title="Viandas"><i class="fa fa-leaf"></i> </a></td>
                                              
-                                             <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
-                                             <td><a href="clientes/{{$cliente->id}}/edit"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
-                                             <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
+                                                                                          
+                                             
+                                             <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Alta"><i class="fa fa-thumbs-up"></i></a></td>
+                                             
                                              <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                          </tr>
 
@@ -127,23 +121,18 @@
                                      <tr>
                                          <th>Nombre</th>
                                          
-                                         <th>No le Gusta</th>
+                                        
                                          <th>Domicilio</th>
                                          <th>Telefono</th>
                                          <th>Email</th>
                                          
                                      </tr>
-                                     @foreach($listClientes as $cliente)
+                                     @foreach($listDeleted as $cliente)
                                          
                                         @if($cliente->idempresa==null)
                                          <tr >
-                                             <td>{{$cliente->apellido}} {{$cliente->nombre}} </td>
-                                             
-                                             <td>
-                                             @foreach( $cliente->ListAlimentosNoMeGusta as $alimento)
-                                             {{$alimento->nombre}} -
-                                             @endforeach
-                                             </td>
+                                             <td>{{$cliente->nombre}} {{$cliente->apellido}}</td>
+                                            
 
                                              <!--<td>
                                              @foreach( $cliente->ListDiasDeLaSemana as $dia)
@@ -156,11 +145,8 @@
                                              <td>{{$cliente->telefono}}</td>
                                              <td>{{$cliente->email}}</td>
                                              
-                                             <td><a href="clientes/{{$cliente->id}}" class=" btn btn-xs btn-success color-palette" title="Viandas"><i class="fa fa-leaf"></i> </a></td>
                                              
-                                             <td><a href="clientes/nomegusta/{{$cliente->id}}"  class=" btn btn-xs bg-black-active color-palette" title="Alimentos No me Gusta"><i class="fa fa-thumbs-down"></i> <i class="fa fa-lemon-o"></i></a></td>
-                                             <td><a href="clientes/{{$cliente->id}}/edit"  class="btn btn-xs btn-info editar" data-idcliente="{{$cliente->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
-                                             <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Baja"><i class="fa fa-thumbs-down"></i></a></td>
+                                             <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cliente->id}}"  title="Dar de Alta"><i class="fa fa-thumbs-up"></i></a></td>
                                              <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cliente->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                          </tr>
 
@@ -220,16 +206,16 @@
     <div class="modal fade" id="modalClienteBaja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!!Form::open(['url'=>['admin/clientes/baja'],'method'=>'POST'])!!}
+                {!!Form::open(['url'=>['admin/clientes/alta'],'method'=>'POST'])!!}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel">Dando de Baja Cliente</h4>
+                    <h4 class="modal-title" id="myModalLabel">Dando de Alta Cliente</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
                             {!!Form::Text('id',null,['class'=>'hidden','id'=>'idB'])!!}
-                            <h3>¿Desea dar de baja un cliente?</h3>
+                            <h3>¿Desea dar de alta un cliente?</h3>
                         </div>
                     </div>
                     <div class="modal-footer">

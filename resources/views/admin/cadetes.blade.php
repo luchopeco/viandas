@@ -52,14 +52,14 @@
                            <tr>
                                <th>Nombre</th>
                                <th>Apellido</th>
-                               <th>Email</th>
+                               
                                <th>Teléfono</th>
                            </tr>
                            @foreach($listCadetes as $loc)
                                <tr >
                                    <td>{{$loc->nombre}}</td>
                                    <td>{{$loc->apellido}}</td>
-                                   <td>{{$loc->email}}</td>
+                                  
                                    <td>{{$loc->telefono}}</td>
                                    
 
@@ -96,15 +96,11 @@
                                         {!!Form::Text('apellido',null,['class'=>' form-control','required'])!!}
                                         <span class="help-block with-errors"></span>
                                      </div>
-                                     <div class="form-group">
-                                        {!!Form::label('email','Email')!!}
-                                        {!!Form::Text('email',null,['class'=>' form-control','required'])!!}
-                                        <span class="help-block with-errors"></span>
-                                     </div>
+                                    
 
                                      <div class="form-group">
                                           {!!Form::label('telefono','Teléfono')!!}
-                                          {!!Form::Text('telefono',null,['class'=>' form-control','required'])!!}
+                                          {!!Form::Text('telefono',null,['class'=>' form-control',''])!!}
                                           <span class="help-block with-errors"></span>
                                      </div>
                                  </div>
@@ -145,14 +141,10 @@
                                           {!!Form::Text('apellido',null,['class'=>' form-control','id'=>'apellidoU','required'])!!}
                                       <span class="help-block with-errors"></span>
                                     </div>
-                                    <div class="form-group">
-                                          {!!Form::label('email','Email')!!}
-                                          {!!Form::Text('email',null,['class'=>' form-control','id'=>'emailU','required'])!!}
-                                      <span class="help-block with-errors"></span>
-                                    </div>
+                                   
                                     <div class="form-group">
                                           {!!Form::label('telefono','Telefono')!!}
-                                          {!!Form::Text('telefono',null,['class'=>' form-control','id'=>'telefonoU','required'])!!}
+                                          {!!Form::Text('telefono',null,['class'=>' form-control','id'=>'telefonoU',''])!!}
                                       <span class="help-block with-errors"></span>
                                     </div>
                                       
@@ -220,7 +212,7 @@
                     $('#idU').val(response.datos.id);
                     $('#nombreU').val(response.datos.nombre);
                     $('#apellidoU').val(response.datos.apellido);
-                    $('#emailU').val(response.datos.email);
+                    
                     $('#telefonoU').val(response.datos.telefono);
                     $("#modalLocalidadModificar").modal("show");
                 })

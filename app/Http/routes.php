@@ -40,11 +40,18 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
 
         Route::resource('clientes','ClientesController');
         Route::get('clientes/nomegusta/{id}','ClientesController@nomegusta');
+
+       // Route::get('clientes/nomegusta/{id}', ['as' => 'book_view', 'uses' => 'ClientesController@nomegusta']);
+
+
         Route::post('clientes/nomegustaagregar','ClientesController@nomegustaagregar');
         Route::post('clientes/baja','ClientesController@baja');
+        Route::post('clientes/alta','ClientesController@alta');
+
+        Route::get('clientesdebaja','ClientesController@listaDeBaja');
+        
         Route::get('loquenogusta','ClientesController@nomegustalista');
         Route::get('clientes/gestionar/{id}','ClientesController@gestionarcliente');
-        Route::get('clientes/like/like','ClientesController@likecliente');
 
         Route::resource('gastos','GastosController');
         Route::post('gastos/buscarxfechas','GastosController@buscarxfechas');

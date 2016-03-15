@@ -3,10 +3,7 @@
 namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\Input;
 use viandas\Alimento;
 use viandas\Cliente;
 use viandas\Http\Requests;
@@ -16,6 +13,8 @@ use viandas\DiaSemana;
 use viandas\TipoVianda;
 use viandas\Empresa;
 use viandas\Localidad;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 
 
 class ClientesController extends Controller
@@ -41,6 +40,29 @@ class ClientesController extends Controller
 
             $listClientes = Cliente::orderBy('apellido')->get();
             return view('admin.clientes', compact('listClientes','listEmpresas'));
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+    }
+
+    public function listaDeBaja()
+    {
+        try {
+
+            $listEmpresas = Empresa::All();
+
+          //  $listClientesBaja = Cliente::orderBy('apellido')->get();
+
+           $listDeleted = Cliente::onlyTrashed()->get();
+         //   $listDeleted = Cliente::where('deleted_at is not null');
+           
+           
+           
+            
+            return view('admin.clientesbaja', compact('listDeleted','listEmpresas'));
         }
         catch(\Exception $ex){
 
@@ -121,7 +143,9 @@ class ClientesController extends Controller
             }
 
             Session::flash('mensajeOk','Alimentos que no le gustan agregados con exito ');
-            return back();
+
+            header("Location: http://nutrilifeviandas.com/admin/clientes/".$request->id);
+           // return back();
         }
         catch(\Exception $ex){
 
@@ -172,9 +196,25 @@ class ClientesController extends Controller
 
             $a->save();
 
+// http://nutrilifeviandas.com/admin/clientes/nomegusta/99   debe redireccionar a NO ME GUSTA
+
+          //  admin.nomegusta
+
 
             Session::flash('mensajeOk', 'Cliente  Agregado Con Exito');
-            return redirect()->route('admin.clientes.index');
+           
+            header("Location: http://nutrilifeviandas.com/admin/clientes/nomegusta/".$a->id);
+
+             // return redirect()->action('ClientesController@nomegusta',$a->id);
+         
+
+           // return redirect()->route('admin.clientes.nomegusta',$a->id);
+
+           // return view('admin.nomegusta', $a->id);
+            
+          //  return redirect()->route('clientes/nomegusta/{id}',$a->id);
+       		
+             //return back();
         }
         catch(\Exception $ex){
 
@@ -319,29 +359,21 @@ class ClientesController extends Controller
         }
 
     }
-    public function likecliente()
+    public function alta(Request $request)
     {
-        $term = Str::lower(\Illuminate\Support\Facades\Input::get('term'));
-        $listClientes = Cliente::where('apellido', 'like', '%' . $term . '%')->get();
-//        $data = array(
-//            'R' => 'Red',
-//            'O' => 'Orange',
-//            'Y' => 'Yellow',
-//            'G' => 'Green',
-//            'B' => 'Blue',
-//            'I' => 'Indigo',
-//            'V' => 'Violet',
-//        );
-        $return_array = array();
-        foreach ($listClientes as $cli)
-        {
-            $return_array[] = array('value' => $cli->apellido.' '.$cli->nombre, 'id' =>$cli->id);
+
+        try
+        {  
+            Cliente::withTrashed()->where('id', $request->id)->restore();
+            //Cliente::restore($request->id);
+            Session::flash('mensajeOk', 'Cliente Dado de Alta con Exito');
+            return back();
         }
-//        foreach ($data as $k => $v) {
-//            if (strpos(Str::lower($v), $term) !== FALSE) {
-//                $return_array[] = array('value' => $v, 'id' =>$k);
-//            }
-//        }
-        return  json_encode($return_array);
+        catch(QueryException  $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+
     }
 }
