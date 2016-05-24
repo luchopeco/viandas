@@ -18,5 +18,4 @@ class DiaSemana extends Model
     }
 
 
-
 }

@@ -38,6 +38,7 @@
         <br>
 
         @foreach($listDiaSemana as $d)
+         <?php $cantidadViandas =0; ?>
             <div style="font-size: 12px; font-weight: bold">{{$d->nombre}}</div>
             @foreach($listEmpresas as $emp)
                 <?php $muestroEmpresa=0; ?>
@@ -60,6 +61,7 @@
                             <th>Envio</th>
                         </tr>
                     @foreach($d->ListViandasClientes as $vianda)
+                        <?php ++$cantidadViandas; ?>
                         @if( $vianda->Cliente->idempresa == $emp->id)
                         <tr >
                             <td>{{$vianda->Cliente->nombre}} {{$vianda->Cliente->apellido}}</td>
@@ -104,6 +106,7 @@
                 <table>
                     <tr>
                         <th>Cliente</th>
+                        <th>Cantidad</th>
                         <th>Pedido</th>
                         <th>Total</th>
                         <th>No Gusta</th>
@@ -120,6 +123,7 @@
                          ?>
                         @foreach($cliente->ListViandas as $vianda)
                             @if($vianda->DiaSemana->id == $d->id)
+                             <?php ++$cantidadViandas; ?>
                             <?php
                                 $cli=$cliente->nombre ." ".$cliente->apellido;
                                 $pedido.= "(".$vianda->cantidad ."-". $vianda->TipoVianda->nombre."-$".$vianda->TipoVianda->precio.")";
@@ -148,7 +152,8 @@
                 </table>
                 <div style="height:20px"></div>
             @endif
-        <div style="">-----------------------------------------</div>
+        Cantidad De viandas: {{$cantidadViandas}}
+        <div style="">----------------------------------------------------------------------------------------------</div>
         @endforeach
     </body>
 </html>

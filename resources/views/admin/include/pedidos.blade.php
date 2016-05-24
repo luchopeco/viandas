@@ -58,7 +58,7 @@
                                 <div class=" panel-body">
                                     <div class="row">
                                         <div class="table-responsive no-padding">
-                                            <table class="table table-hover">
+                                            <table class="table table-hover  table-striped">
                                                 <tbody>
                                                     @foreach($listViandas as $vianda)
                                                         @if($vianda->Cliente->idempresa == $empresa->id)
@@ -131,7 +131,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive no-padding">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover table-striped">
                                             <tbody>
                                             @foreach($listViandas as $vianda)
                                             @if($vianda->Cliente->idempresa == null)

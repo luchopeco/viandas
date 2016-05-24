@@ -110,7 +110,7 @@ function buscarViandas(){
                 alert(fd);
                 $('#cargando').html('');
             });
-        $('#cargando').html('');
+
     }
 
 }

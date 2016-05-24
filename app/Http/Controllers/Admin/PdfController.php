@@ -33,11 +33,12 @@ class PdfController extends Controller
         $listEmpresas = Empresa::all();
         $listClientesSinEmpresa= Cliente::whereRaw(' id in (select distinct cliente_id from cliente_dia ) and idempresa is null')->get();
 
-        $view =  \View::make('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'))->render();
-        $pdf =  \App::make('dompdf.wrapper');
-        $pdf->setPaper("A4", "portrait");
-        $pdf->loadHTML($view);
-        return $pdf->stream('planilaa');
+//        $view =  \View::make('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'))->render();
+//        $pdf =  \App::make('dompdf.wrapper');
+//        $pdf->setPaper("A4", "portrait");
+//        $pdf->loadHTML($view);
+//        return $pdf->stream('planilaa');
+        return view('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'));
     }
 
     /**
