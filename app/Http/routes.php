@@ -47,7 +47,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('clientes/nomegustaagregar','ClientesController@nomegustaagregar');
         Route::post('clientes/baja','ClientesController@baja');
         Route::post('clientes/alta','ClientesController@alta');
-
+        Route::get('clientes/like/like','ClientesController@likecliente');
         Route::get('clientesdebaja','ClientesController@listaDeBaja');
         
         Route::get('loquenogusta','ClientesController@nomegustalista');

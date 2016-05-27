@@ -4,6 +4,7 @@ namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use viandas\Alimento;
 use viandas\Cliente;
 use viandas\Http\Requests;
@@ -375,5 +376,31 @@ class ClientesController extends Controller
             return back();
         }
 
+    }
+
+    public function likecliente()
+    {
+        $term = Str::lower(\Illuminate\Support\Facades\Input::get('term'));
+        $listClientes = Cliente::where('apellido', 'like', '%' . $term . '%')->get();
+//        $data = array(
+//            'R' => 'Red',
+//            'O' => 'Orange',
+//            'Y' => 'Yellow',
+//            'G' => 'Green',
+//            'B' => 'Blue',
+//            'I' => 'Indigo',
+//            'V' => 'Violet',
+//        );
+        $return_array = array();
+        foreach ($listClientes as $cli)
+        {
+            $return_array[] = array('value' => $cli->apellido.' '.$cli->nombre, 'id' =>$cli->id);
+        }
+//        foreach ($data as $k => $v) {
+//            if (strpos(Str::lower($v), $term) !== FALSE) {
+//                $return_array[] = array('value' => $v, 'id' =>$k);
+//            }
+//        }
+        return  json_encode($return_array);
     }
 }

@@ -87,20 +87,20 @@
                                                             @else
                                                                <?php $precio_vianda= $vianda->TipoVianda->precio;?>
                                                             @endif
-                                                            <td>
+                                                            <td style=" width: 200px">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}} </span>
                                                                     {!!Form::Number('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control cantidad-pedido', 'data-precio'=> $precio_vianda,'required||between:0,999.99'])!!}
                                                                 </div>
                                                             </td>
-                                                            <td>
+                                                            <td style=" width: 120px">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon" title="Costo Vianda"> $</span>
                                                                     <?php $subtotal = $vianda->cantidad * $precio_vianda ?>
                                                                     {!!Form::Number('pedidos['.$contador.'][precio_vianda]',$subtotal,['class'=>' form-control precio-pedido','required|between:0,999.99'])!!}
                                                                 </div>
                                                             </td>
-                                                            <td>{!!Form::checkbox('pedidos['.$contador.'][confirmado]', $vianda->id, true)!!}</td>
+                                                            <td style="text-align: center">{!!Form::checkbox('pedidos['.$contador.'][confirmado]', $vianda->id, true)!!}</td>
                                                         </tr>
                                                         @endif
                                                     @endforeach
@@ -149,13 +149,13 @@
                                                         {!!Form::checkbox('pedidos['.$contador.'][envio]', $vianda->id, $vianda->Cliente->envio,['class'=>'cbx-pedido'])!!}
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td style=" width: 200px">
                                                     <div class="input-group @if( $vianda->Cliente->envio==0) hidden  @endif cadete-pedido">
                                                         <span class="input-group-addon" title="Cadete"><i class="fa fa-motorcycle"></i></span>
                                                         {!!Form::select('pedidos['.$contador.'][cadete_id]', $listCadetes,null,array('class' => 'form-control'))!!}
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td style=" width: 120px">
                                                     <div class="input-group @if( $vianda->Cliente->envio==0) hidden  @endif precio-envio-pedido">
                                                         <span class="input-group-addon" title="Costo Envio">$</span>
                                                         {!!Form::Number('pedidos['.$contador.'][precio_envio]',$vianda->Cliente->Localidad->costo_envio,['class'=>' form-control','required|between:0,99.99'])!!}
@@ -167,13 +167,13 @@
                                                         {!!Form::Text('pedidos['.$contador.'][observaciones]','',['class'=>' form-control '])!!}
                                                 </div>
                                                 </td>
-                                                <td>
+                                                <td style=" width: 200px">
                                                     <div class="input-group">
                                                         <span class="input-group-addon" title="Cantidad">{{$vianda->TipoVianda->nombre}}</span>
                                                         {!!Form::Number('pedidos['.$contador.'][cantidad]',$vianda->cantidad,['class'=>' form-control cantidad-pedido','required|between:0,999.99', 'data-precio'=> $vianda->TipoVianda->precio])!!}
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td style=" width: 120px">
                                                     <div class="input-group">
                                                         <span class="input-group-addon" title="Costo Vianda"> $</span>
                                                         <?php $subtotal = $vianda->cantidad * $vianda->TipoVianda->precio; ?>
