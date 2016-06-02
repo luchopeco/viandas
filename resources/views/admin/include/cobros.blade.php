@@ -32,9 +32,8 @@
 
                                   $montoTotal=0;
 
-                                 // echo 'La empresa actual seleccionada es: '.$empresaActual;
-                                  if (empty($empresaActual)) {
-                                    // SIN EMPRESA
+                                  echo '<div class="panel panel-success">'.$empresaActual."</div>";
+                                 
 
                                       foreach ($listPedidos as $p ) {
                                         $totalpedido=$p->precio_vianda + $p->precio_envio;
@@ -79,19 +78,6 @@
                                         <?php 
                                       }
 
-                                  } // CIERRA IF EMPRESA
-
-                                  else{
-
-                                      ?>
-                                        <div class="row">
-                                      <?php 
-                                        echo "La liquidacion total de una empresa:";
-
-                                      ?>
-                                        </div>
-                                      <?php 
-                                  }
 
                                   
                                    ?>
