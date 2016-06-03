@@ -146,5 +146,18 @@ $(function () {
     });
 
 </script>
+<script type="text/javascript" src="code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" media="screen" />
+<script>
+  $(document).ready(function() {
+    $('#cobros').DataTable();
+} );
+
+function activardatatable(){
+    alert();
+     $('#cobros').DataTable();
+  }
+</script>
 @endsection
 

@@ -29,58 +29,70 @@
 
 
                                   <?php 
-
                                   $montoTotal=0;
-
                                   echo '<div class="panel panel-success">'.$empresaActual."</div>";
-                                 
+                                 ?>
 
+
+<table id="cobros" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Fecha Pedido</th>
+                <th>Tipo Vianda</th>
+                <th>Precio</th>
+                <th>Envío</th>
+                <th>Total</th>
+                <th>COBRADO ?</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Cliente</th>
+                <th>Fecha Pedido</th>
+                <th>Tipo Vianda</th>
+                <th>Precio</th>
+                <th>Envío</th>
+                <th>Total</th>
+                <th>COBRADO ?</th>
+            </tr>
+        </tfoot>
+        <tbody>
+           
+         
+
+<?php
                                       foreach ($listPedidos as $p ) {
                                         $totalpedido=$p->precio_vianda + $p->precio_envio;
                                         $montoTotal = $montoTotal + $totalpedido;
                                         ?>
-                                        <div class="row">
-                                        <?php 
-                                        // aca vamos generando las columnas
-                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
-                                        echo $p->cliente->nombre.' - '.$p->cliente->apellido; 
-                                        echo '</div>';
-
-                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
-                                        echo $p->fecha_pedido; 
-                                        echo '</div>';
-
-                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
-                                        echo $p->tipovianda->nombre." - ".$p->cantidad;  
-                                        echo '</div>';
                                         
-                                       
-                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">Precio: ';        
-                                        echo $p->precio_vianda.' + Envio: '.$p->precio_envio; 
-                                        echo '</div>'; 
+                                         <tr>
+                                            <td data-search="<?php echo $p->cliente->nombre.' - '.$p->cliente->apellido; ?>"><?php echo $p->cliente->nombre.' - '.$p->cliente->apellido; ?></td>
+                                            <td data-order="<?php echo $p->fecha_pedido; ?>"><?php echo $p->fecha_pedido; ?></td>
+                                            <td><?php echo $p->tipovianda->nombre." - ".$p->cantidad;   ?></td>
+                                            <td><?php echo $p->precio_vianda; ?></td>
+                                            <td><?php echo $p->precio_envio; ?></td>
+                                            <td data-order="<?php echo $totalpedido; ?>"><?php echo $totalpedido; ?></td>     
 
-                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">Total: ';        
-                                        echo $totalpedido;
-                                        echo '</div>'; 
-                                                                            
+                                        <?php                                                       
+    
+                                          $c='';
+                                          if(!empty($p->cobrado)){$c='checked="checked"';}
 
-                                        echo '<div class="col-md-2 col-sm-4 col-xs-6">';        
-                                        $c='';
-                                        if(!empty($p->cobrado)){$c='checked="checked"';}
-
-                                        echo '<input type="checkbox" '.$c.' name="'.$p->id.' id="pedido_'.$p->id.'" "></input>';
-
-                                        echo '</div>';
-
+                                          echo '<td><input type="checkbox" '.$c.' name="'.$p->id.' id="pedido_'.$p->id.'" "></input></td>';                                     
 
                                         ?>
-                                        </div>
+                                         </tr>
+                                        
                                         <?php 
                                       }
 
 
                                   
                                    ?>
+</tbody>
+                                   </table>
 
 
 
@@ -133,5 +145,13 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+</script>
+
+<script>
+
+
+ activardatatable();
+   
+
 </script>
 
