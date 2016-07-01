@@ -43,7 +43,7 @@
                 <th>Precio</th>
                 <th>Envío</th>
                 <th>Total</th>
-                <th>COBRADO ?</th>
+                <!--<th>COBRADO ?</th>-->
             </tr>
         </thead>
         <tfoot>
@@ -54,7 +54,7 @@
                 <th>Precio</th>
                 <th>Envío</th>
                 <th>Total</th>
-                <th>COBRADO ?</th>
+                 <!--<th>COBRADO ?</th>-->
             </tr>
         </tfoot>
         <tbody>

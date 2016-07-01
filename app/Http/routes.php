@@ -87,6 +87,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         
         Route::post('cobros/buscarcobros','PedidosController@buscarCobros');
 
+        Route::get('cobros/buscarcobrosajax', 'PedidosController@buscarCobrosAjax');
+
+
+
         Route::resource('reportes','PdfController');
         Route::get('repor/planillasemanal','PdfController@planillasemanal');
 

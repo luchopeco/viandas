@@ -8,6 +8,8 @@
 <li><a href="/admin/home"><i class="fa fa-home"></i> Home</a></li>
 @endsection
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" media="screen" />
+
 @section('content')
    @if(Session::has('mensajeOk'))
         <div class="row">
@@ -98,7 +100,47 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-12" id="tabla-pedidos"></div>
+                            <div class="col-md-12" id="tabla-pedidos">
+                              <form action="actualizarCobros" method="post">
+                                
+                                <input class="button" type="submit" name="ACTUALIZAR COBROS" value="ACTUALIZAR COBROS" style="display:none;">
+                                
+                                <br>
+                              
+                                <table id="cobros" class="display" style="display:none;" cellspacing="0" width="100%">
+                                  <thead>
+                                      <tr>
+                                          <th>Cliente</th>
+                                          <th>Fecha Pedido</th>
+                                          <th>Tipo Vianda</th>
+                                          <th>Precio</th>
+                                          <th>Envío</th>
+                                          <th>Total</th>
+                                          <th>COBRADO ?</th>
+                                      </tr>
+                                  </thead>
+                                  <tfoot>
+                                      <tr>
+                                          <th>Cliente</th>
+                                          <th>Fecha Pedido</th>
+                                          <th>Tipo Vianda</th>
+                                          <th>Precio</th>
+                                          <th>Envío</th>
+                                          <th>Total</th>
+                                          <th>COBRADO ?</th>
+                                      </tr>
+                                  </tfoot>
+                                  <tbody>
+                                  </tbody>
+                                </table>
+
+                                <div id="respuesta">
+                                  
+                                </div>
+
+                              </form>
+
+                            </div>
                         </div>
                    </div>
               </div>
@@ -109,6 +151,7 @@
 @section('script')
 <script>
 function buscarPedidos(){
+
     $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
     //event.preventDefault();
 
@@ -118,20 +161,24 @@ function buscarPedidos(){
         var empresa = $("#empresa").val();
         
         $.ajax({
-                url:"cobros/buscarcobros",
-                type: "POST",
+                url:"cobros/buscarcobrosajax",
+                type: "GET",
                 dataType: "html",
-                data:{'empresa': empresa, 'fechaHasta':fechaHasta , 'fechaDesde':fechaDesde  }
+                data:{'idempresa': empresa, 'fechahasta':fechaHasta , 'fechadesde':fechaDesde  }
+                
             })
             .done(function(response){
-                $('#tabla-pedidos').html(response);
+                //$('#respuesta').html(response);
+               // $('#cargando').html('');
+                activardatatable(response);
                 $('#cargando').html('');
             })
             .fail(function(){
                 //alert(fd);
                 $('#cargando').html('');
             });
-        $('#cargando').html('');
+       
+        //$('#cargando').html('');
 
 
 }
@@ -146,17 +193,35 @@ $(function () {
     });
 
 </script>
-<script type="text/javascript" src="code.jquery.com/jquery-1.12.3.min.js"></script>
+
+
+
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" media="screen" />
+
+
+
 <script>
   $(document).ready(function() {
-    $('#cobros').DataTable();
+    // $('#cobros').DataTable();
 } );
 
-function activardatatable(){
-    alert();
-     $('#cobros').DataTable();
+function activardatatable(respuesta){
+
+  $('#cobros').show();
+
+    console.log(respuesta);
+    var dataT = null;
+    
+     if(dataT!=null){
+      table.destroy();
+     }
+      dataT= $('#cobros').DataTable({
+        "data": JSON.parse(respuesta) ,
+        "filter": true,
+        "destroy": true,
+        "pageLength": 50
+     });
+     
   }
 </script>
 @endsection

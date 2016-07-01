@@ -251,6 +251,77 @@ class PedidosController extends Controller
 
     }
 
+    public function buscarCobrosAjax()
+    {
+
+        $fechaHoy = new Carbon('now');
+        $fechadesde = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechadesde']));
+        $fechahasta = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechahasta']));
+        $empresaActual ="";
+        //var_dump($fechadesde);die();
+
+        $eID=$_GET['idempresa'];
+        $empresaSQL='';
+        if($eID=='9999'){
+            //no tiene empresa
+            $empresaSQL='';
+        }
+        else{
+            $empresaActual = Empresa::find($eID);    
+
+            $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
+
+        }
+        /* ejemplo andando
+                $arreglo = Array();
+                $cont = Array();
+                $cont[] = '1'; 
+                $cont[] = '2011-04-25';
+                $cont[] = 'System Architect';
+                $cont[] = 'Edinburgh';
+                $cont[] = '5421';
+                $cont[] = '2011-04-25';
+                $cont[] = '<input type="checkbox"/>';
+                $arreglo[] = $cont;    
+
+        return json_encode($arreglo);
+        die();
+        */
+
+        $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+
+        $arreglo = Array();
+
+        foreach ($listPedidos as $pedido) {
+          
+                $cont = Array();
+                $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido; 
+                $cont[] = $pedido->fecha_pedido;
+                $cont[] = $pedido->TipoVianda->nombre;
+                $cont[] = $pedido->precio_vianda;
+                $cont[] = $pedido->precio_envio;
+                $cont[] = $pedido->precio_vianda + $pedido->precio_envio;        
+                $cobrado='';
+                if($pedido->cobrado == 1){
+                  $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'" checked="checked">';
+                }else{
+                  $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'">';
+                }
+                $cont[] = $cobrado;
+                $arreglo[] = $cont;
+        }
+
+        return json_encode($arreglo);
+        die();
+
+        // ----------------------------------
+
+
+        $listEmpresas = Empresa::all();
+        $listCadetes = Cadete::all()->lists('nombre', 'id');
+        return view ('admin.include.cobros',compact('empresaActual','listPedidos','listEmpresas','listCadetes'));
+    }
+
     public function agregarPedidoManual(Request $request)
     {
         try {
