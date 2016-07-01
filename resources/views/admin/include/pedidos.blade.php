@@ -74,12 +74,6 @@
                                                                 {{$vianda->Cliente->nombre}} {{$vianda->Cliente->apellido}}
                                                                 {!!Form::Text('pedidos['.$contador.'][cliente_id]',$vianda->Cliente->id,['class'=>' form-control hidden'])!!}
                                                             </td>
-                                                            <td>
-                                                                <span class=" pull-left"><a href="#" class="btn btn-primary btn-xs btn-obs" title="Observaciones"><i class="fa fa-pencil-square-o"></i> </a></span>
-                                                                <div class="input-group txt-obs hidden">
-                                                                        {!!Form::Text('pedidos['.$contador.'][observaciones]','',['class'=>' form-control '])!!}
-                                                                </div>
-                                                            </td>
                                                             @if($empresa->ListPreciosViandas->contains($vianda->TipoVianda))
                                                             <?php
                                                                 $precio_vianda= $empresa->ListPreciosViandas->find($vianda->TipoVianda->id)->pivot->precio;
@@ -162,10 +156,6 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                <span class=" pull-left"><a href="#" class="btn btn-primary btn-xs btn-obs" title="Observaciones" ><i class="fa fa-pencil-square-o"></i> </a></span>
-                                                <div class="input-group txt-obs hidden">
-                                                        {!!Form::Text('pedidos['.$contador.'][observaciones]','',['class'=>' form-control '])!!}
-                                                </div>
                                                 </td>
                                                 <td style=" width: 200px">
                                                     <div class="input-group">
@@ -423,10 +413,6 @@ $(function () {
         $(this).closest('.tabla-pedidos-padre').find('.precio-envio-pedido').toggleClass('hidden');
         });
 
-      $(".btn-obs").click(function(event) {
-      event.preventDefault();
-        $(this).closest('.tabla-pedidos-padre').find('.txt-obs').toggleClass('hidden');
-        });
 
 });
 </script>

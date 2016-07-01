@@ -100,7 +100,7 @@
                 <ul class="treeview-menu">
                     <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedidos"><i class="fa fa-check"></i>Registar Pedidos</a></li>
                     <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedidos/create"><i class="fa fa-plus"></i>Nuevo Pedido</a></li>
-
+                    <li <?php if('admin.pedidos.index'== Route::current()->getName()||'admin.pedidos.index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedido/gestion"><i class="fa fa-edit"></i>Gestionar Pedidos</a></li>
                 </ul>
             </li>
 

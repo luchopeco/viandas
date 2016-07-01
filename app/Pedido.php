@@ -2,6 +2,7 @@
 
 namespace viandas;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
@@ -12,6 +13,7 @@ class Pedido extends Model
         'cobrado','precio_vianda','precio_envio','empresa_id','observaciones'];
 
     protected $primaryKey="id";
+
 
     public function Cliente()
     {
@@ -27,4 +29,22 @@ class Pedido extends Model
     {
         return $this->hasOne('viandas\Cadete', 'id', 'cadete_id');
     }
+    public function FueCobrado(){
+        if($this->cobrado==1)
+        {
+            return "SI";
+        }
+        else
+        {
+            return "NO";
+        }
+    }
+    public function FechaPedido()
+    {
+        if($this->fecha_pedido!="")
+        {return  Carbon::createFromFormat('Y-m-d', $this->fecha_pedido)->format('d/m/Y');}
+
+    }
+
+
 }

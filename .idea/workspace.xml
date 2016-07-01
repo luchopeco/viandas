@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69b569f9-2e34-45de-a12e-c25a4c27fb46" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/gestionpedidos.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Pedido.php" afterPath="$PROJECT_DIR$/app/Pedido.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ViandaCliente.php" afterPath="$PROJECT_DIR$/app/ViandaCliente.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/css/css.css" afterPath="$PROJECT_DIR$/public/dist/css/css.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -40,120 +41,88 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PedidosController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PedidosController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6238532" vertical-offset="340" max-vertical-offset="4437">
-              <caret line="65" column="40" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+            <state vertical-scroll-proportion="-9.153846" vertical-offset="289" max-vertical-offset="1343">
+              <caret line="162" column="60" selection-start-line="162" selection-start-column="60" selection-end-line="162" selection-end-column="60" />
               <folding>
                 <element signature="e#389#465#0#PHP" expanded="false" />
                 <element signature="e#470#571#0#PHP" expanded="false" />
+                <element signature="e#677#3413#0#PHP" expanded="false" />
                 <element signature="e#936#1135#0#PHP" expanded="false" />
                 <element signature="e#1144#1353#0#PHP" expanded="false" />
+                <element signature="e#1619#2421#0#PHP" expanded="false" />
+                <element signature="e#1619#2494#0#PHP" expanded="false" />
+                <element signature="e#1619#2536#0#PHP" expanded="false" />
+                <element signature="e#2553#2591#0#PHP" expanded="false" />
+                <element signature="e#3419#3528#0#PHP" expanded="false" />
+                <element signature="e#3533#3875#0#PHP" expanded="false" />
+                <element signature="e#3881#4040#0#PHP" expanded="false" />
+                <element signature="e#4045#5375#0#PHP" expanded="false" />
+                <element signature="e#4099#5369#0#PHP" expanded="false" />
+                <element signature="e#4117#5118#0#PHP" expanded="false" />
+                <element signature="e#4169#5104#0#PHP" expanded="false" />
+                <element signature="e#4456#4668#0#PHP" expanded="false" />
+                <element signature="e#4689#4803#0#PHP" expanded="false" />
+                <element signature="e#5238#5369#0#PHP" expanded="false" />
+                <element signature="e#5381#5503#0#PHP" expanded="false" />
+                <element signature="e#5508#5556#0#PHP" expanded="false" />
+                <element signature="e#5562#5702#0#PHP" expanded="false" />
+                <element signature="e#6010#6192#0#PHP" expanded="false" />
+                <element signature="e#6271#6405#0#PHP" expanded="false" />
+                <element signature="e#6410#6461#0#PHP" expanded="false" />
+                <element signature="e#6467#6661#0#PHP" expanded="false" />
+                <element signature="e#6688#8278#0#PHP" expanded="false" />
+                <element signature="e#7070#7308#0#PHP" expanded="false" />
+                <element signature="e#7165#7308#0#PHP" expanded="false" />
+                <element signature="e#7801#8011#0#PHP" expanded="false" />
+                <element signature="e#8284#9437#0#PHP" expanded="false" />
+                <element signature="e#8352#9431#0#PHP" expanded="false" />
+                <element signature="e#8624#8848#0#PHP" expanded="false" />
+                <element signature="e#9300#9431#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="AlimentosController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AlimentosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.076923" vertical-offset="340" max-vertical-offset="1547">
-              <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+            <state vertical-scroll-proportion="37.576923" vertical-offset="2031" max-vertical-offset="2567">
+              <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php">
+      <file leaf-file-name="pedidos-gestion.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos-gestion.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.423077" vertical-offset="819" max-vertical-offset="1377">
-              <caret line="389" column="28" selection-start-line="389" selection-start-column="28" selection-end-line="389" selection-end-column="28" />
-              <folding>
-                <element signature="e#525#601#0#PHP" expanded="false" />
-                <element signature="e#606#707#0#PHP" expanded="false" />
-                <element signature="e#712#1097#0#PHP" expanded="false" />
-                <element signature="e#750#1091#0#PHP" expanded="false" />
-                <element signature="e#968#1091#0#PHP" expanded="false" />
-                <element signature="e#1103#1681#0#PHP" expanded="false" />
-                <element signature="e#1147#1675#0#PHP" expanded="false" />
-                <element signature="e#1552#1675#0#PHP" expanded="false" />
-                <element signature="e#1687#2364#0#PHP" expanded="false" />
-                <element signature="e#1739#2358#0#PHP" expanded="false" />
-                <element signature="e#1839#1978#0#PHP" expanded="false" />
-                <element signature="e#1906#1978#0#PHP" expanded="false" />
-                <element signature="e#2235#2358#0#PHP" expanded="false" />
-                <element signature="e#2370#2759#0#PHP" expanded="false" />
-                <element signature="e#2416#2753#0#PHP" expanded="false" />
-                <element signature="e#2630#2753#0#PHP" expanded="false" />
-                <element signature="e#2765#3134#0#PHP" expanded="false" />
-                <element signature="e#2812#3128#0#PHP" expanded="false" />
-                <element signature="e#2977#3128#0#PHP" expanded="false" />
-                <element signature="e#3141#4044#0#PHP" expanded="false" />
-                <element signature="e#3206#4038#0#PHP" expanded="false" />
-                <element signature="e#3388#3684#0#PHP" expanded="false" />
-                <element signature="e#3500#3670#0#PHP" expanded="false" />
-                <element signature="e#3915#4038#0#PHP" expanded="false" />
-                <element signature="e#4050#4159#0#PHP" expanded="false" />
-                <element signature="e#4164#4501#0#PHP" expanded="false" />
-                <element signature="e#4507#4666#0#PHP" expanded="false" />
-                <element signature="e#4671#5876#0#PHP" expanded="false" />
-                <element signature="e#4737#5869#0#PHP" expanded="false" />
-                <element signature="e#4813#4897#0#PHP" expanded="false" />
-                <element signature="e#4911#5045#0#PHP" expanded="false" />
-                <element signature="e#4995#5045#0#PHP" expanded="false" />
-                <element signature="e#5746#5869#0#PHP" expanded="false" />
-                <element signature="e#5882#6004#0#PHP" expanded="false" />
-                <element signature="e#6009#6330#0#PHP" expanded="false" />
-                <element signature="e#6336#6476#0#PHP" expanded="false" />
-                <element signature="e#6481#6923#0#PHP" expanded="false" />
-                <element signature="e#6929#7111#0#PHP" expanded="false" />
-                <element signature="e#7116#8254#0#PHP" expanded="false" />
-                <element signature="e#7177#8248#0#PHP" expanded="false" />
-                <element signature="e#7541#7694#0#PHP" expanded="false" />
-                <element signature="e#7621#7694#0#PHP" expanded="false" />
-                <element signature="e#7787#7921#0#PHP" expanded="false" />
-                <element signature="e#7871#7921#0#PHP" expanded="false" />
-                <element signature="e#8116#8248#0#PHP" expanded="false" />
-                <element signature="e#8260#8394#0#PHP" expanded="false" />
-                <element signature="e#8399#8835#0#PHP" expanded="false" />
-                <element signature="e#8455#8829#0#PHP" expanded="false" />
-                <element signature="e#8698#8829#0#PHP" expanded="false" />
-                <element signature="e#8841#9216#0#PHP" expanded="false" />
-                <element signature="e#8895#9209#0#PHP" expanded="false" />
-                <element signature="e#9073#9209#0#PHP" expanded="false" />
-                <element signature="e#9221#9674#0#PHP" expanded="false" />
-                <element signature="e#9275#9667#0#PHP" expanded="false" />
-                <element signature="e#9531#9667#0#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViandaCliente.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/ViandaCliente.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="561">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+            <state vertical-scroll-proportion="-11.038462" vertical-offset="291" max-vertical-offset="850">
+              <caret line="34" column="88" selection-start-line="34" selection-start-column="88" selection-end-line="34" selection-end-column="101" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pedidos.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php">
+      <file leaf-file-name="gestionpedidos.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/gestionpedidos.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.423077" vertical-offset="1359" max-vertical-offset="7463">
-              <caret line="102" column="89" selection-start-line="102" selection-start-column="89" selection-end-line="102" selection-end-column="89" />
+            <state vertical-scroll-proportion="0.46703297" vertical-offset="1530" max-vertical-offset="3332">
+              <caret line="105" column="94" selection-start-line="105" selection-start-column="94" selection-end-line="105" selection-end-column="94" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pedido.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Pedido.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.115385" vertical-offset="0" max-vertical-offset="952">
+              <caret line="17" column="27" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="27" />
               <folding>
-                <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#27#45#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -174,10 +143,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/admin/home.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/loquenogusta.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/nolaborables.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/nomegusta.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
         <option value="$PROJECT_DIR$/app/TipoGasto.php" />
         <option value="$PROJECT_DIR$/app/Gasto.php" />
@@ -196,7 +161,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/empresas.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/empresa.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/EmpresasController.php" />
-        <option value="$PROJECT_DIR$/app/Pedido.php" />
         <option value="$PROJECT_DIR$/app/Empresa.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/gastos.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/clientesviandas.blade.php" />
@@ -218,13 +182,18 @@
         <option value="$PROJECT_DIR$/resources/views/admin/include/viandas.blade.php" />
         <option value="$PROJECT_DIR$/app/DiaSemana.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pedidos.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php" />
         <option value="$PROJECT_DIR$/public/dist/css/css.css" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" />
         <option value="$PROJECT_DIR$/app/ViandaCliente.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/include/cobros.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/cobros.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Pedido.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/include/pedidos-gestion.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/gestionpedidos.blade.php" />
       </list>
     </option>
   </component>
@@ -269,6 +238,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -297,60 +267,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -378,32 +294,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pdf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,78 +334,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="viandas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -601,7 +419,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -684,7 +501,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -694,19 +511,19 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1580938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23373677" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789558" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -727,47 +544,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="23" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="106403">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/loquenogusta.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6245695" vertical-offset="0" max-vertical-offset="1360">
-          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/include/gastos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65384614" vertical-offset="0" max-vertical-offset="546">
-          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/html5/block.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3675213" vertical-offset="2440" max-vertical-offset="4301">
-          <caret line="225" column="16" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GastosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5670841" vertical-offset="720" max-vertical-offset="2635">
-          <caret line="68" column="126" selection-start-line="68" selection-start-column="126" selection-end-line="68" selection-end-column="126" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/gastos.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4047619" vertical-offset="680" max-vertical-offset="4947">
@@ -824,13 +605,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Pedido.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25581396" vertical-offset="27" max-vertical-offset="612">
-          <caret line="10" column="103" selection-start-line="10" selection-start-column="97" selection-end-line="10" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/EmpresasController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.5839553" vertical-offset="0" max-vertical-offset="3383">
@@ -859,13 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/alimentos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52747256" vertical-offset="1990" max-vertical-offset="3927">
-          <caret line="134" column="20" selection-start-line="134" selection-start-column="20" selection-end-line="134" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Alimento.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.82462686" vertical-offset="0" max-vertical-offset="544">
@@ -880,24 +647,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/TipoVianda.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31716418" vertical-offset="0" max-vertical-offset="536">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/clientesgestionar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43636364" vertical-offset="2130" max-vertical-offset="3944">
           <caret line="138" column="45" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Empresa.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75457877" vertical-offset="132" max-vertical-offset="731">
-          <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -943,20 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/clientes.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31135532" vertical-offset="1258" max-vertical-offset="4675">
-          <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AlimentosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5612053" vertical-offset="1543" max-vertical-offset="2567">
-          <caret line="47" column="12" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/storage/framework/views/1a02579c747be65c1abd1345b0b63592">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50174826" vertical-offset="2297" max-vertical-offset="8381">
@@ -992,13 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/pedido.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03119266" vertical-offset="1105" max-vertical-offset="3111">
-          <caret line="66" column="57" selection-start-line="66" selection-start-column="57" selection-end-line="66" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/pdf/planillasemanal.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.031135531" vertical-offset="697" max-vertical-offset="2788">
@@ -1024,22 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7863398" vertical-offset="1020" max-vertical-offset="106403">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47609943" vertical-offset="465" max-vertical-offset="4828">
-          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/pedidos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="610" max-vertical-offset="2006">
-          <caret line="53" column="54" selection-start-line="53" selection-start-column="54" selection-end-line="53" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1047,124 +763,201 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8938356" vertical-offset="73" max-vertical-offset="697">
           <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ViandaCliente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42218247" vertical-offset="2" max-vertical-offset="561">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/tiposgastos.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3485">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/include/cobros.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.50091743" vertical-offset="2209" max-vertical-offset="2771">
+          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pedidos.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0275229" vertical-offset="1461" max-vertical-offset="2006">
+          <caret line="53" column="54" selection-start-line="53" selection-start-column="54" selection-end-line="53" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.576923" vertical-offset="512" max-vertical-offset="1411">
+          <caret line="379" column="0" selection-start-line="379" selection-start-column="0" selection-end-line="379" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/TipoVianda.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3041145" vertical-offset="0" max-vertical-offset="559">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Empresa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0149254" vertical-offset="0" max-vertical-offset="731">
+          <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Cliente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.15201466" vertical-offset="304" max-vertical-offset="850">
+          <caret line="14" column="46" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.423077" vertical-offset="1359" max-vertical-offset="7463">
-          <caret line="102" column="89" selection-start-line="102" selection-start-column="89" selection-end-line="102" selection-end-column="89" />
-          <folding>
-            <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="11.98718" vertical-offset="340" max-vertical-offset="7225">
+          <caret line="405" column="54" selection-start-line="405" selection-start-column="54" selection-end-line="405" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Cliente.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/cobros.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40550458" vertical-offset="0" max-vertical-offset="850">
-          <caret line="14" column="46" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.45970696" vertical-offset="2180" max-vertical-offset="2873">
+          <caret line="143" column="10" selection-start-line="141" selection-start-column="7" selection-end-line="143" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33204633" vertical-offset="2123" max-vertical-offset="4828">
+          <caret line="135" column="25" selection-start-line="135" selection-start-column="17" selection-end-line="135" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pedido.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5531135" vertical-offset="2380" max-vertical-offset="3111">
+          <caret line="58" column="182" selection-start-line="58" selection-start-column="182" selection-end-line="58" selection-end-column="196" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.076923" vertical-offset="340" max-vertical-offset="1547">
-          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.83363146" vertical-offset="792" max-vertical-offset="1564">
+          <caret line="83" column="76" selection-start-line="83" selection-start-column="76" selection-end-line="83" selection-end-column="76" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php">
+    <entry file="file://$PROJECT_DIR$/app/Pedido.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.423077" vertical-offset="819" max-vertical-offset="1377">
-          <caret line="389" column="28" selection-start-line="389" selection-start-column="28" selection-end-line="389" selection-end-column="28" />
+        <state vertical-scroll-proportion="-11.115385" vertical-offset="0" max-vertical-offset="952">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="27" />
           <folding>
-            <element signature="e#525#601#0#PHP" expanded="false" />
-            <element signature="e#606#707#0#PHP" expanded="false" />
-            <element signature="e#712#1097#0#PHP" expanded="false" />
-            <element signature="e#750#1091#0#PHP" expanded="false" />
-            <element signature="e#968#1091#0#PHP" expanded="false" />
-            <element signature="e#1103#1681#0#PHP" expanded="false" />
-            <element signature="e#1147#1675#0#PHP" expanded="false" />
-            <element signature="e#1552#1675#0#PHP" expanded="false" />
-            <element signature="e#1687#2364#0#PHP" expanded="false" />
-            <element signature="e#1739#2358#0#PHP" expanded="false" />
-            <element signature="e#1839#1978#0#PHP" expanded="false" />
-            <element signature="e#1906#1978#0#PHP" expanded="false" />
-            <element signature="e#2235#2358#0#PHP" expanded="false" />
-            <element signature="e#2370#2759#0#PHP" expanded="false" />
-            <element signature="e#2416#2753#0#PHP" expanded="false" />
-            <element signature="e#2630#2753#0#PHP" expanded="false" />
-            <element signature="e#2765#3134#0#PHP" expanded="false" />
-            <element signature="e#2812#3128#0#PHP" expanded="false" />
-            <element signature="e#2977#3128#0#PHP" expanded="false" />
-            <element signature="e#3141#4044#0#PHP" expanded="false" />
-            <element signature="e#3206#4038#0#PHP" expanded="false" />
-            <element signature="e#3388#3684#0#PHP" expanded="false" />
-            <element signature="e#3500#3670#0#PHP" expanded="false" />
-            <element signature="e#3915#4038#0#PHP" expanded="false" />
-            <element signature="e#4050#4159#0#PHP" expanded="false" />
-            <element signature="e#4164#4501#0#PHP" expanded="false" />
-            <element signature="e#4507#4666#0#PHP" expanded="false" />
-            <element signature="e#4671#5876#0#PHP" expanded="false" />
-            <element signature="e#4737#5869#0#PHP" expanded="false" />
-            <element signature="e#4813#4897#0#PHP" expanded="false" />
-            <element signature="e#4911#5045#0#PHP" expanded="false" />
-            <element signature="e#4995#5045#0#PHP" expanded="false" />
-            <element signature="e#5746#5869#0#PHP" expanded="false" />
-            <element signature="e#5882#6004#0#PHP" expanded="false" />
-            <element signature="e#6009#6330#0#PHP" expanded="false" />
-            <element signature="e#6336#6476#0#PHP" expanded="false" />
-            <element signature="e#6481#6923#0#PHP" expanded="false" />
-            <element signature="e#6929#7111#0#PHP" expanded="false" />
-            <element signature="e#7116#8254#0#PHP" expanded="false" />
-            <element signature="e#7177#8248#0#PHP" expanded="false" />
-            <element signature="e#7541#7694#0#PHP" expanded="false" />
-            <element signature="e#7621#7694#0#PHP" expanded="false" />
-            <element signature="e#7787#7921#0#PHP" expanded="false" />
-            <element signature="e#7871#7921#0#PHP" expanded="false" />
-            <element signature="e#8116#8248#0#PHP" expanded="false" />
-            <element signature="e#8260#8394#0#PHP" expanded="false" />
-            <element signature="e#8399#8835#0#PHP" expanded="false" />
-            <element signature="e#8455#8829#0#PHP" expanded="false" />
-            <element signature="e#8698#8829#0#PHP" expanded="false" />
-            <element signature="e#8841#9216#0#PHP" expanded="false" />
-            <element signature="e#8895#9209#0#PHP" expanded="false" />
-            <element signature="e#9073#9209#0#PHP" expanded="false" />
-            <element signature="e#9221#9674#0#PHP" expanded="false" />
-            <element signature="e#9275#9667#0#PHP" expanded="false" />
-            <element signature="e#9531#9667#0#PHP" expanded="false" />
+            <element signature="e#27#45#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ViandaCliente.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AlimentosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="561">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        <state vertical-scroll-proportion="37.576923" vertical-offset="2031" max-vertical-offset="2567">
+          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/alimentos.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.17017208" vertical-offset="2010" max-vertical-offset="2703">
+          <caret line="155" column="10" selection-start-line="113" selection-start-column="3" selection-end-line="155" selection-end-column="10" />
+          <folding>
+            <element signature="tag#div#4" expanded="false" />
+            <element signature="tag#div#5" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/clientes.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.642857" vertical-offset="4180" max-vertical-offset="4726">
+          <caret line="161" column="67" selection-start-line="161" selection-start-column="67" selection-end-line="161" selection-end-column="88" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6238532" vertical-offset="340" max-vertical-offset="4437">
-          <caret line="65" column="40" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+        <state vertical-scroll-proportion="-9.153846" vertical-offset="289" max-vertical-offset="1343">
+          <caret line="162" column="60" selection-start-line="162" selection-start-column="60" selection-end-line="162" selection-end-column="60" />
           <folding>
             <element signature="e#389#465#0#PHP" expanded="false" />
             <element signature="e#470#571#0#PHP" expanded="false" />
+            <element signature="e#677#3413#0#PHP" expanded="false" />
             <element signature="e#936#1135#0#PHP" expanded="false" />
             <element signature="e#1144#1353#0#PHP" expanded="false" />
+            <element signature="e#1619#2421#0#PHP" expanded="false" />
+            <element signature="e#1619#2494#0#PHP" expanded="false" />
+            <element signature="e#1619#2536#0#PHP" expanded="false" />
+            <element signature="e#2553#2591#0#PHP" expanded="false" />
+            <element signature="e#3419#3528#0#PHP" expanded="false" />
+            <element signature="e#3533#3875#0#PHP" expanded="false" />
+            <element signature="e#3881#4040#0#PHP" expanded="false" />
+            <element signature="e#4045#5375#0#PHP" expanded="false" />
+            <element signature="e#4099#5369#0#PHP" expanded="false" />
+            <element signature="e#4117#5118#0#PHP" expanded="false" />
+            <element signature="e#4169#5104#0#PHP" expanded="false" />
+            <element signature="e#4456#4668#0#PHP" expanded="false" />
+            <element signature="e#4689#4803#0#PHP" expanded="false" />
+            <element signature="e#5238#5369#0#PHP" expanded="false" />
+            <element signature="e#5381#5503#0#PHP" expanded="false" />
+            <element signature="e#5508#5556#0#PHP" expanded="false" />
+            <element signature="e#5562#5702#0#PHP" expanded="false" />
+            <element signature="e#6010#6192#0#PHP" expanded="false" />
+            <element signature="e#6271#6405#0#PHP" expanded="false" />
+            <element signature="e#6410#6461#0#PHP" expanded="false" />
+            <element signature="e#6467#6661#0#PHP" expanded="false" />
+            <element signature="e#6688#8278#0#PHP" expanded="false" />
+            <element signature="e#7070#7308#0#PHP" expanded="false" />
+            <element signature="e#7165#7308#0#PHP" expanded="false" />
+            <element signature="e#7801#8011#0#PHP" expanded="false" />
+            <element signature="e#8284#9437#0#PHP" expanded="false" />
+            <element signature="e#8352#9431#0#PHP" expanded="false" />
+            <element signature="e#8624#8848#0#PHP" expanded="false" />
+            <element signature="e#9300#9431#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos-gestion.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.038462" vertical-offset="291" max-vertical-offset="850">
+          <caret line="34" column="88" selection-start-line="34" selection-start-column="88" selection-end-line="34" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/gestionpedidos.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46703297" vertical-offset="1530" max-vertical-offset="3332">
+          <caret line="105" column="94" selection-start-line="105" selection-start-column="94" selection-end-line="105" selection-end-column="94" />
+          <folding />
         </state>
       </provider>
     </entry>

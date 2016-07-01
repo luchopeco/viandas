@@ -122,7 +122,7 @@ class PedidosController extends Controller
                     if (!empty($p['empresa_id'])) {
                         $ped->empresa_id = $p['empresa_id'];
                     }
-                    $ped->observaciones=$p['observaciones'];
+                    //$ped->observaciones=$p['observaciones'];
                     $ped->cliente_id = $p['cliente_id'];
                     $ped->tipo_vianda_id = $p['tipo_vianda_id'];
                     $ped->precio_vianda = $p['precio_vianda'];
@@ -159,7 +159,13 @@ class PedidosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $p = Pedido::findOrFail($id);
+        ///para cargar el cliente y q me lo envie en el ajax
+        $per = $p->Cliente;
+        $response = array(
+            "datos" => $p
+        );
+        return json_encode($response, JSON_HEX_QUOT | JSON_HEX_TAG);
     }
 
     /**
@@ -276,5 +282,23 @@ class PedidosController extends Controller
             Session::flash('mensajeError', $ex->getMessage());
             return back();
         }
+    }
+
+    public function gestion()
+    {
+        return view ('admin.gestionpedidos');
+    }
+    //Busca Pedidos Por Cliente y Por Fecha
+    public function buscarpedidos(Request $request)
+    {
+        $cliente_id = $request->cliente_id;
+        $fechaDesde = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido_desde);
+        $fechaHasta = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido_hasta);
+
+        $listPedidos = Pedido::where('cliente_id', '=', $cliente_id)
+            ->where('fecha_pedido', '>=', $fechaDesde->format('Y-m-d'))
+            ->where('fecha_pedido', '<=', $fechaHasta->format('Y-m-d'))
+            ->get();
+        return view('admin.include.pedidos-gestion', compact('listPedidos'));
     }
 }

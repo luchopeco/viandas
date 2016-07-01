@@ -80,8 +80,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::resource('pedidos','PedidosController');
         Route::post('pedidos/buscar','PedidosController@buscar');
         Route::post('pedidos/agregarPedidoManual','PedidosController@agregarPedidoManual');
+        Route::get('pedido/gestion','PedidosController@gestion');
+        Route::post('pedidos/buscarpedidos','PedidosController@buscarpedidos');
 
-        
         Route::get('cobros','PedidosController@listarPedidos');
         
         Route::post('cobros/buscarcobros','PedidosController@buscarCobros');
