@@ -4,6 +4,7 @@ namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use viandas\Cliente;
 use viandas\DiaSemana;
 use viandas\Empresa;
@@ -28,17 +29,43 @@ class PdfController extends Controller
 
     public function planillasemanal()
     {
+       $listPedidos= DB::select(DB::raw("SELECT
+                        c.apellido,
+                        c.nombre,
+                        cd.cantidad,
+                        CONCAT(tv.nombre, ' - $', tv.precio ) AS pedido,
+                        cd.cantidad * tv.precio AS total,
+                        GROUP_CONCAT(DISTINCT a.nombre ORDER BY a.nombre SEPARATOR  ', ' ) no_me_gusta,
+                        e.nombre AS empresa,
+                        cd.dia_semana_id AS dia
+                    FROM
+                        cliente_dia cd
+                        INNER JOIN tipo_vianda tv
+                            ON   tv.id = cd.tipo_vianda_id
+                            INNER JOIN cliente c ON c.id = cd.cliente_id
+                            LEFT JOIN no_me_gusta nmg ON nmg.cliente_id = c.id
+                            LEFT JOIN alimento a ON a.id = nmg.alimento_id
+                            LEFT JOIN empresa e ON e.id = c.idempresa
+                    GROUP BY 	c.apellido,
+                        c.nombre,
+                        cd.cantidad,
+                         pedido,
+                        total
+                    ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
+                    "));
 
         $listDiaSemana = DiaSemana::all();
         $listEmpresas = Empresa::all();
-        $listClientesSinEmpresa= Cliente::whereRaw(' id in (select distinct cliente_id from cliente_dia ) and idempresa is null')->get();
+        //$listClientesSinEmpresa= Cliente::whereRaw(' id in (select distinct cliente_id from cliente_dia ) and idempresa is null')->get();
 
-//        $view =  \View::make('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'))->render();
-//        $pdf =  \App::make('dompdf.wrapper');
-//        $pdf->setPaper("A4", "portrait");
-//        $pdf->loadHTML($view);
-//        return $pdf->stream('planilaa');
-        return view('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'));
+        //$view =  \View::make('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'))->render();
+        $view =  \View::make('admin.pdf.planilla',compact('listDiaSemana','listEmpresas','listPedidos'))->render();
+        $pdf =  \App::make('dompdf.wrapper');
+        $pdf->setPaper("A4", "portrait");
+        $pdf->loadHTML($view);
+        return $pdf->stream('planilaa');
+//        return view('admin.pdf.planillasemanal',compact('listDiaSemana','listEmpresas','listClientesSinEmpresa'));
+        //return view('admin.pdf.planilla',compact('listDiaSemana','listEmpresas','listPedidos'));
     }
 
     /**
