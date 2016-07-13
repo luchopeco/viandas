@@ -99,11 +99,21 @@
                             </div>
                         </div>
                         <hr>
+                        
                         <div class="row">
                             <div class="col-md-12" id="tabla-pedidos">
-                              <form action="actualizarCobros" method="post">
-                                
-                                <input class="button" type="submit" name="ACTUALIZAR COBROS" value="ACTUALIZAR COBROS" style="display:none;">
+                              
+
+                          <form action="cobros/actualizarcobros">
+  
+
+
+                                <input class="button btn btn-success " type="submit" name="actualizaCobros" id="actualizaBoton" value="ACTUALIZAR COBROS" style="display:none;">
+
+                                <input type="hidden" name="fechaDesdeInput" id="fechaDesdeInput" value="">
+                                <input type="hidden" name="fechaHastaInput" id="fechaHastaInput" value="">
+                                <input type="hidden" name="empresaInput" id="empresaInput" value="">
+
                                 
                                 <br>
                               
@@ -138,7 +148,7 @@
                                   
                                 </div>
 
-                              </form>
+                          </form>
 
                             </div>
                         </div>
@@ -158,6 +168,12 @@ function buscarPedidos(){
     ///si tengo q buscar todos
         var fechaDesde= $("#txtfechaDesde").val();
         var fechaHasta= $("#txtfechaHasta").val();
+        
+        $('#fechaDesdeInput').val(fechaDesde);
+        $('#fechaHastaInput').val(fechaHasta);
+        $('#empresaInput').val($('#empresa').val());
+
+
         var empresa = $("#empresa").val();
         
         $.ajax({
@@ -172,6 +188,7 @@ function buscarPedidos(){
                // $('#cargando').html('');
                 activardatatable(response);
                 $('#cargando').html('');
+                $('#actualizaBoton').show();
             })
             .fail(function(){
                 //alert(fd);
@@ -219,7 +236,7 @@ function activardatatable(respuesta){
         "data": JSON.parse(respuesta) ,
         "filter": true,
         "destroy": true,
-        "pageLength": 50
+        "pageLength": 20
      });
      
   }

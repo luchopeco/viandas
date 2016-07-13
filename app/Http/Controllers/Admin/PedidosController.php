@@ -322,27 +322,68 @@ class PedidosController extends Controller
         return view ('admin.include.cobros',compact('empresaActual','listPedidos','listEmpresas','listCadetes'));
     }
 
+    public function actualizarCobros(){
+
+        $fechadesde = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechaDesdeInput']));
+        $fechahasta = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechaHastaInput']));
+
+        $empresaActual ="";
+
+        $eID=$_GET['empresaInput'];
+        $empresaSQL='';
+        if($eID=='9999'){
+            //no tiene empresa
+            $empresaSQL='';
+        }
+        else{
+            $empresaActual = Empresa::find($eID);
+            $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
+        }       
+
+        $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+        $arreglo = Array();
+
+        foreach ($listPedidos as $pedido) {
+          if(isset($_GET[$pedido->id])){   // está cobrado el pedido
+            $pedido->cobrado = 1;            
+          }
+          else{
+            $pedido->cobrado=0;
+          }
+          $pedido->save();
+        }
+        
+        Session::flash('mensajeOk', 'COBROS ACTUALIZADOS !');
+        return redirect('admin/cobros');
+
+
+        $empresas = Empresa::all();
+        $listCadetes = Cadete::all()->lists('nombre', 'id');
+        return view ('admin.cobros',compact('empresaActual','listPedidos','empresas','listCadetes'));
+
+
+    }
+
     public function agregarPedidoManual(Request $request)
     {
         try {
 
 
-                    $ped = new Pedido();
-                    $f = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido);
-                    $ped->fecha_pedido = $f->format('Y-m-d');
-                    $ped->cantidad = $request->cantidad;
-                    if (isset($request->envio)) {
-                        $ped->envio = 1;
-                        $ped->cadete_id = $request->cadete_id;
-                        $ped->precio_envio = $request->precio_envio;
-                    }
-                    $ped->observaciones=$request->observaciones;
-                    $ped->cliente_id = $request->cliente_id;
-                    $ped->tipo_vianda_id = $request->tipo_vianda_id;
-                    $ped->precio_vianda = $request->precio_vianda;
-                    $ped->cobrado=1;
-                    $ped->save();
-
+              $ped = new Pedido();
+              $f = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido);
+              $ped->fecha_pedido = $f->format('Y-m-d');
+              $ped->cantidad = $request->cantidad;
+              if (isset($request->envio)) {
+                  $ped->envio = 1;
+                  $ped->cadete_id = $request->cadete_id;
+                  $ped->precio_envio = $request->precio_envio;
+              }
+              $ped->observaciones=$request->observaciones;
+              $ped->cliente_id = $request->cliente_id;
+              $ped->tipo_vianda_id = $request->tipo_vianda_id;
+              $ped->precio_vianda = $request->precio_vianda;
+              $ped->cobrado=1;
+              $ped->save();
 
 
             Session::flash('mensajeOk', 'Pedido Agregado Con Exito');

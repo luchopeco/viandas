@@ -89,6 +89,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
 
         Route::get('cobros/buscarcobrosajax', 'PedidosController@buscarCobrosAjax');
 
+        
+        Route::get('cobros/actualizarcobros', 'PedidosController@actualizarCobros');
+
 
 
         Route::resource('reportes','PdfController');
