@@ -145,6 +145,8 @@ class ClientesController extends Controller
 
             Session::flash('mensajeOk','Alimentos que no le gustan agregados con exito ');
 
+            return redirect('admin/clientes/'.$request->id);
+
             header("Location: http://nutrilifeviandas.com/admin/clientes/".$request->id);
            // return back();
         }
@@ -203,6 +205,8 @@ class ClientesController extends Controller
 
 
             Session::flash('mensajeOk', 'Cliente  Agregado Con Exito');
+
+            return redirect('admin/clientes/nomegusta/'.$a->id);
            
             header("Location: http://nutrilifeviandas.com/admin/clientes/nomegusta/".$a->id);
 
