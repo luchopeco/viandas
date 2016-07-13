@@ -16,7 +16,6 @@
     <div class=" panel-body">
 
         @foreach($listDiaSemana as $d)
-            @if($d->ListViandasClientes->count()>0)
             <div class="row">
                 <div class="col-md-12">
                     <div class=" panel panel-default">
@@ -24,24 +23,18 @@
                         <i class="fa fa-calendar"></i> {{$d->nombre}} - Total Pedidos: {{$d->ListViandasClientes->count()}}
                         </div>
                         <div class=" panel-body">
-                            @foreach($listClientes as $c)
-                                @foreach($c->ListViandas as $v)
-                                    @if($v->DiaSemana->id == $d->id)
+                            @foreach($listPedidos as $p)
+                                    @if($p->dia == $d->id)
                                      <div>
-                                        <i class="fa fa-user"></i> <strong>{{$c->nombre}}</strong> | {{$v->TipoVianda->nombre}} | {{$v->cantidad}} unidades.(
-                                            @foreach($c->ListAlimentosNoMeGusta as $a)
-                                            {{$a->nombre}},
-                                            @endforeach
-                                    )</div>
+                                        <i class="fa fa-user"></i> <strong>{{$p->apellido}}, {{$p->nombre}}</strong> | {{$p->tipo_vianda}} | {{$p->cantidad}} unidades.({{$p->no_me_gusta}})
+                                     </div>
                                     <hr>
                                     @endif
-                                   @endforeach
-                                @endforeach
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-            @endif
         @endforeach
     </div>
 </div>

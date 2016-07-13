@@ -16,6 +16,7 @@ class Cliente extends Model
 
     protected $primaryKey="id";
 
+
     public function ListAlimentosNoMeGusta()
     {
         return $this->belongsToMany('viandas\Alimento', 'no_me_gusta', 'cliente_id', 'alimento_id');

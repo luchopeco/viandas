@@ -2,24 +2,27 @@
 <html lang="es">
     <head>
     <style>
+    @page {
+                margin-top: 10mm;
+                margin-left: 10mm;
+                margin-right: 10mm;
+                margin-bottom: 10mm;
+            }
     body{
     font-family: verdana, sans-serif;
-    font-size: 10px;
+    font-size: 10pt;
     }
     table{
     border-collapse: collapse;
     }
     table,td,th{
-        border: 1px solid #000000;
-        width: 100%;
+        border: 0.5mm solid #000000;
     }
     th{
-        height: 30px;
         text-align: center;
     }
     td{
-        height: 30px;
-        padding-left: 5px;
+
     }
     </style>
         <!-- Bootstrap 3.3.2 -->
@@ -34,60 +37,66 @@
     </head>
     <body>
         <div style="font-size: 8; text-align: right" >Nutrilife::Viandas::{{\Carbon\Carbon::now()->format('d-m-Y')}}</div>
-        <div style="font-size: 14; font-weight: bold">Planilla Semanal </div>
-        <br>
-
+        <div style="fontsize: 14; font-weight: bold; text-align: center">Planilla Semanal </div>
         @foreach($listDiaSemana as $d)
-            {{$d->nombre}}
-            <div style="font-size: 11px">Sin Empresa</div>
+            <h1>{{$d->nombre}}</h1>
+            <div ><h2>Sin Empresa</h2></div>
             <table>
                 <tr>
-                    <th>Cliente</th>
-                    <th>Cantidad</th>
-                    <th>Pedido</th>
-                    <th>Total</th>
-                    <th>No Gusta</th>
-                    <th>Envio</th>
+                    <th style="width:45mm ;">Cliente</th>
+                    <th style="width: 65mm">No Gusta</th>
+                    <th style="width:10mm ">Cant.</th>
+                    <th style="width: 30mm">Pedido</th>
+                    <th style="width: 15mm">Total</th>
+                    <th style="width: 10mm">Envio</th>
                 </tr>
             @foreach($listPedidos as $p)
                 @if($d->id == $p->dia && $p->empresa == null)
                     <tr >
-                        <td>{{$p->apellido}}, {{$p->apellido}}</td>
-                        <td>{{$p->cantidad}}</td>
-                        <td>{{$p->pedido}}</td>
-                        <td>{{$p->total}}</td>
-                        <td>{{$p->no_me_gusta}}</td>
-                        <td></td>
+                        <td>{{$p->apellido}}, {{$p->nombre}}</td>
+                        <td style="font-size: 8pt">{{$p->no_me_gusta}}</td>
+                        <td style="text-align: center;">{{$p->cantidad}}</td>
+                        <td style="text-align: center;">{{$p->pedido}}</td>
+                        <td style="text-align: center;">$ {{$p->total}}</td>
+                        <td style="text-align: center;">{{$p->envio}}</td>
                     </tr>
                 @endif
             @endforeach
             </table>
 
             @foreach($listEmpresas as $emp)
-                <div style="font-size: 11px">{{$emp->nombre}}</div>
+                <?php $contador=0; ?>
+                @foreach($listPedidos as $p)
+                    @if($d->id == $p->dia && $p->empresa == $emp->nombre)
+                           <?php $contador =1;
+                            break;?>
+                    @endif
+                @endforeach
+                @if($contador==1)
+                <div><h2>{{$emp->nombre}} @if($emp->envio==1) - Con Envio @else - Sin Envio @endif</h2></div>
                 <table>
                     <tr>
-                        <th>Cliente</th>
-                        <th>Cantidad</th>
-                        <th>Pedido</th>
-                        <th>Total</th>
-                        <th>No Gusta</th>
-                        <th>Envio</th>
+                      <th style="width:45mm ;">Cliente</th>
+                      <th style="width: 75mm;">No Gusta</th>
+                      <th style="width:10mm ">Cant.</th>
+                      <th style="width: 35mm">Pedido</th>
+                      <th style="width: 15mm">Total</th>
                     </tr>
                 @foreach($listPedidos as $p)
                     @if($d->id == $p->dia && $p->empresa == $emp->nombre)
                         <tr >
-                            <td>{{$p->apellido}}, {{$p->apellido}}</td>
-                            <td>{{$p->cantidad}}</td>
-                            <td>{{$p->pedido}}</td>
-                            <td>{{$p->total}}</td>
-                            <td>{{$p->no_me_gusta}}</td>
-                            <td></td>
+                            <td>{{$p->apellido}}, {{$p->nombre}}</td>
+                            <td style="font-size: 8pt">{{$p->no_me_gusta}}</td>
+                            <td style="text-align: center;">{{$p->cantidad}}</td>
+                            <td style="text-align: center;">{{$p->pedido}}</td>
+                            <td style="text-align: center;">$ {{$p->total}}</td>
                         </tr>
                     @endif
                 @endforeach
                 </table>
+                @endif
             @endforeach
+             <div style="page-break-after: always;"></div>
         @endforeach
     </body>
 </html>

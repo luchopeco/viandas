@@ -29,9 +29,10 @@ class PdfController extends Controller
 
     public function planillasemanal()
     {
-       $listPedidos= DB::select(DB::raw("SELECT
+       $listPedidos= DB::select("SELECT
                         c.apellido,
                         c.nombre,
+                        case c.envio when 1 then 'SI'  when 0 then 'NO' end as envio,
                         cd.cantidad,
                         CONCAT(tv.nombre, ' - $', tv.precio ) AS pedido,
                         cd.cantidad * tv.precio AS total,
@@ -49,10 +50,11 @@ class PdfController extends Controller
                     GROUP BY 	c.apellido,
                         c.nombre,
                         cd.cantidad,
+                        c.envio,
                          pedido,
                         total
                     ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
-                    "));
+                    ");
 
         $listDiaSemana = DiaSemana::all();
         $listEmpresas = Empresa::all();

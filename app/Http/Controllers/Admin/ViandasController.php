@@ -4,6 +4,7 @@ namespace viandas\Http\Controllers\Admin;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use viandas\Cliente;
 use viandas\DiaSemana;
 use viandas\Http\Requests;
@@ -28,19 +29,72 @@ class ViandasController extends Controller
     }
     public function buscarTodas()
     {
-        $listClientes = Cliente::orderBy('nombre')->get();
+        $listPedidos= DB::select("SELECT
+                        c.apellido,
+                        c.nombre,
+                        case c.envio when 1 then 'SI'  when 0 then 'NO' end as envio,
+                        cd.cantidad,
+                        tv.nombre tipo_vianda,
+                        cd.cantidad * tv.precio AS total,
+                        GROUP_CONCAT(DISTINCT a.nombre ORDER BY a.nombre SEPARATOR  ', ' ) no_me_gusta,
+                        e.nombre AS empresa,
+                        cd.dia_semana_id AS dia
+                    FROM
+                        cliente_dia cd
+                        INNER JOIN tipo_vianda tv
+                            ON   tv.id = cd.tipo_vianda_id
+                            INNER JOIN cliente c ON c.id = cd.cliente_id
+                            LEFT JOIN no_me_gusta nmg ON nmg.cliente_id = c.id
+                            LEFT JOIN alimento a ON a.id = nmg.alimento_id
+                            LEFT JOIN empresa e ON e.id = c.idempresa
+                    GROUP BY 	c.apellido,
+                        c.nombre,
+                        cd.cantidad,
+                        c.envio,
+                         tipo_vianda,
+                        total
+                    ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
+                    ");
         $listDiaSemana = DiaSemana::all();
-        return view ('admin.include.viandas',compact('listClientes','listDiaSemana'));
+        return view ('admin.include.viandas',compact('listPedidos','listDiaSemana'));
     }
     ///Busca por dia de la semana
     public function buscar(Request $request)
     {
-        $listClientes = Cliente::orderBy('nombre')->get();
-        $arrDiaSemana = array();
+        $listPedidos= DB::select("SELECT
+                        c.apellido,
+                        c.nombre,
+                        case c.envio when 1 then 'SI'  when 0 then 'NO' end as envio,
+                        cd.cantidad,
+                        tv.nombre tipo_vianda,
+                        cd.cantidad * tv.precio AS total,
+                        GROUP_CONCAT(DISTINCT a.nombre ORDER BY a.nombre SEPARATOR  ', ' ) no_me_gusta,
+                        e.nombre AS empresa,
+                        cd.dia_semana_id AS dia
+                    FROM
+                        cliente_dia cd
+                        INNER JOIN tipo_vianda tv
+                            ON   tv.id = cd.tipo_vianda_id
+                            INNER JOIN cliente c ON c.id = cd.cliente_id
+                            LEFT JOIN no_me_gusta nmg ON nmg.cliente_id = c.id
+                            LEFT JOIN alimento a ON a.id = nmg.alimento_id
+                            LEFT JOIN empresa e ON e.id = c.idempresa
+                    WHERE cd.dia_semana_id = ".$request->id."
+                    GROUP BY 	c.apellido,
+                        c.nombre,
+                        cd.cantidad,
+                        c.envio,
+                         tipo_vianda,
+                        total
+                    ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
+                    ");
+
+       // $listClientes = Cliente::orderBy('nombre')->get();
+        //$arrDiaSemana = array();
         $diaSemana = DiaSemana::findOrFail($request->id);
         $arrDiaSemana[] = $diaSemana;
         $listDiaSemana = Collection::make($arrDiaSemana);
-        return view ('admin.include.viandas',compact('listDiaSemana','listClientes'));
+        return view ('admin.include.viandas',compact('listPedidos','listDiaSemana'));
     }
     /**
      * Show the form for creating a new resource.
