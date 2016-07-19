@@ -14,13 +14,20 @@
             </div>
     </div>
     <div class=" panel-body">
-
         @foreach($listDiaSemana as $d)
             <div class="row">
                 <div class="col-md-12">
                     <div class=" panel panel-default">
                         <div class=" panel-heading">
-                        <i class="fa fa-calendar"></i> {{$d->nombre}} - Total Pedidos: {{$d->ListViandasClientes->count()}}
+                        <i class="fa fa-calendar"></i> {{$d->nombre}}  ||
+                             <?php $total =0; ?>
+                        @foreach($cantidades as $cant)
+                             @if($cant->dia == $d->id)
+                             <?php $total = $total+$cant->cantidad ?>
+                             {{$cant->nombre}}: {{$cant->cantidad}} ||
+                             @endif
+                        @endforeach
+                         Total: {{$total}}
                         </div>
                         <div class=" panel-body">
                             @foreach($listPedidos as $p)

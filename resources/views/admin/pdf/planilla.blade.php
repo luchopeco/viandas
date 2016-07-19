@@ -38,17 +38,42 @@
     <body>
         <div style="font-size: 8; text-align: right" >Nutrilife::Viandas::{{\Carbon\Carbon::now()->format('d-m-Y')}}</div>
         <div style="fontsize: 14; font-weight: bold; text-align: center">Planilla Semanal </div>
+        <div style="fontsize: 14; text-align: center">Resumen</div>
+        <table style="text-align: center">
+        <tr>
+        <th style="width:26mm ;">Tipo Vianda</th>
+        <th style="width:26mm ;">Lunes</th>
+        <th style="width:26mm ;">Martes</th>
+        <th style="width:26mm ;">Miercoles</th>
+        <th style="width:26mm ;">Jueves</th>
+        <th style="width:26mm ;">Viernes</th>
+        <th style="width:26mm ;">Total</th>
+        </tr>
+        @foreach($cantidades as  $cant)
+        <tr>
+        <td>{{$cant->nombre}}</td>
+        <td>{{$cant->lunes}}</td>
+        <td>{{$cant->martes}}</td>
+        <td>{{$cant->miercoles}}</td>
+        <td>{{$cant->jueves}}</td>
+        <td>{{$cant->viernes}}</td>
+        <td>{{$cant->total}}</td>
+        </tr>
+        @endforeach
+        </table>
         @foreach($listDiaSemana as $d)
             <h1>{{$d->nombre}}</h1>
             <div ><h2>Sin Empresa</h2></div>
             <table>
                 <tr>
                     <th style="width:45mm ;">Cliente</th>
-                    <th style="width: 65mm">No Gusta</th>
+                    <th style="width: 50mm">No Gusta</th>
                     <th style="width:10mm ">Cant.</th>
                     <th style="width: 30mm">Pedido</th>
                     <th style="width: 15mm">Total</th>
                     <th style="width: 10mm">Envio</th>
+                    <th style="width: 15mm">Confirma</th>
+                    <th style="width: 10mm">Pago</th>
                 </tr>
             @foreach($listPedidos as $p)
                 @if($d->id == $p->dia && $p->empresa == null)
@@ -59,6 +84,8 @@
                         <td style="text-align: center;">{{$p->pedido}}</td>
                         <td style="text-align: center;">$ {{$p->total}}</td>
                         <td style="text-align: center;">{{$p->envio}}</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 @endif
             @endforeach

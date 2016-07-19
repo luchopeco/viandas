@@ -47,16 +47,28 @@ class ViandasController extends Controller
                             LEFT JOIN no_me_gusta nmg ON nmg.cliente_id = c.id
                             LEFT JOIN alimento a ON a.id = nmg.alimento_id
                             LEFT JOIN empresa e ON e.id = c.idempresa
+                     where c.deleted_at is NULL
                     GROUP BY 	c.apellido,
                         c.nombre,
                         cd.cantidad,
                         c.envio,
                          tipo_vianda,
-                        total
+                        total,
+                        dia
                     ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
                     ");
         $listDiaSemana = DiaSemana::all();
-        return view ('admin.include.viandas',compact('listPedidos','listDiaSemana'));
+
+        $cantidades = DB::select("SELECT tv.nombre , sum(cd.cantidad) AS cantidad, cd.dia_semana_id AS dia
+                        FROM
+                            cliente_dia cd
+                            INNER JOIN tipo_vianda tv
+                                ON   tv.id = cd.tipo_vianda_id
+                                INNER JOIN cliente c ON c.id = cd.cliente_id
+                        WHERE c.deleted_at IS NULL
+                        GROUP BY tv.nombre, dia
+                        ORDER BY cantidad, dia");
+                       return view ('admin.include.viandas',compact('listPedidos','listDiaSemana','cantidades'));
     }
     ///Busca por dia de la semana
     public function buscar(Request $request)
@@ -80,21 +92,33 @@ class ViandasController extends Controller
                             LEFT JOIN alimento a ON a.id = nmg.alimento_id
                             LEFT JOIN empresa e ON e.id = c.idempresa
                     WHERE cd.dia_semana_id = ".$request->id."
+                    and c.deleted_at is NULL
                     GROUP BY 	c.apellido,
                         c.nombre,
                         cd.cantidad,
                         c.envio,
                          tipo_vianda,
-                        total
+                        total,
+                        dia
                     ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
                     ");
 
+        $cantidades = DB::select("SELECT tv.nombre , sum(cd.cantidad) AS cantidad, cd.dia_semana_id AS dia
+                        FROM
+                            cliente_dia cd
+                            INNER JOIN tipo_vianda tv
+                                ON   tv.id = cd.tipo_vianda_id
+                                INNER JOIN cliente c ON c.id = cd.cliente_id
+                        WHERE c.deleted_at IS NULL
+                        and cd.dia_semana_id = ".$request->id."
+                        GROUP BY tv.nombre, dia
+                        ORDER BY cantidad, dia");
        // $listClientes = Cliente::orderBy('nombre')->get();
         //$arrDiaSemana = array();
         $diaSemana = DiaSemana::findOrFail($request->id);
         $arrDiaSemana[] = $diaSemana;
         $listDiaSemana = Collection::make($arrDiaSemana);
-        return view ('admin.include.viandas',compact('listPedidos','listDiaSemana'));
+        return view ('admin.include.viandas',compact('listPedidos','listDiaSemana','cantidades'));
     }
     /**
      * Show the form for creating a new resource.
