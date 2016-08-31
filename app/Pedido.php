@@ -9,8 +9,8 @@ class Pedido extends Model
 {
     protected $table = 'pedido';
 
-    protected $fillable = ['cantidad', 'estado', 'envio', 'cliente_id', 'tipo_vianda_id', 'fecha_pedido','cadete_id',
-        'cobrado','precio_vianda','precio_envio','empresa_id','observaciones'];
+    protected $fillable = ['estado', 'envio', 'cliente_id', 'fecha_pedido','cadete_id',
+        'cobrado','precio_envio','observaciones','pedido_empresa_id','total'];
 
     protected $primaryKey="id";
 
@@ -20,9 +20,9 @@ class Pedido extends Model
         return $this->hasOne('viandas\Cliente', 'id', 'cliente_id');
     }
 
-    public function TipoVianda()
+    public function ListLineasPedido()
     {
-        return $this->hasOne('viandas\TipoVianda', 'id', 'tipo_vianda_id');
+        return $this->hasMany('viandas\LineaPedido','pedido_id', 'id');
     }
 
     public function Cadete()

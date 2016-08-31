@@ -10,6 +10,7 @@ use viandas\Cliente;
 use viandas\Empresa;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
+use viandas\LineaPedido;
 use viandas\Pedido;
 use viandas\TipoVianda;
 use viandas\ViandaCliente;
@@ -368,23 +369,31 @@ class PedidosController extends Controller
     {
         try {
 
+                $ped = new Pedido();
+                $f = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido);
+                $lp = new LineaPedido();
+                $lp->cantidad = $request->cantidad;
+                $lp->tipo_vianda_id = $request->tipo_vianda_id;
+                $lp->precio_vianda = $request->precio_vianda;
 
-              $ped = new Pedido();
-              $f = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido);
-              $ped->fecha_pedido = $f->format('Y-m-d');
-              $ped->cantidad = $request->cantidad;
-              if (isset($request->envio)) {
-                  $ped->envio = 1;
-                  $ped->cadete_id = $request->cadete_id;
-                  $ped->precio_envio = $request->precio_envio;
+                $ped->fecha_pedido = $f->format('Y-m-d');
+                  //$ped->cantidad =
+                if (isset($request->envio)) {
+                $ped->envio = 1;
+                $ped->cadete_id = $request->cadete_id;
+                $ped->precio_envio = $request->precio_envio;
               }
-              $ped->observaciones=$request->observaciones;
-              $ped->cliente_id = $request->cliente_id;
-              $ped->tipo_vianda_id = $request->tipo_vianda_id;
-              $ped->precio_vianda = $request->precio_vianda;
-              $ped->cobrado=1;
-              $ped->save();
+                $ped->observaciones=$request->observaciones;
+                $ped->cliente_id = $request->cliente_id;
 
+                $ped->total = $lp->precio_vianda * $lp->cantidad;
+                $ped->cobrado=1;
+                $ped->save();
+                $ped->ListLineasPedido() ->save($lp);
+
+
+                //$lp->pedido_id = $ped->id;
+                //$lp->save();
 
             Session::flash('mensajeOk', 'Pedido Agregado Con Exito');
             return back();
