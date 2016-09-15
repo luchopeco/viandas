@@ -56,8 +56,10 @@ class PedidosController extends Controller
 
         //$listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
         $listViandas = ViandaCliente::whereRaw("NOT EXISTS
-                                                (SELECT * FROM pedido p WHERE p.cliente_id = cliente_dia.cliente_id
-                                                                        AND p.tipo_vianda_id = cliente_dia.tipo_vianda_id
+                                                (SELECT * FROM pedido p
+                                                inner join linea_pedido lp on p.id = lp.pedido_id
+                                                 WHERE p.cliente_id = cliente_dia.cliente_id
+                                                                        AND lp.tipo_vianda_id = cliente_dia.tipo_vianda_id
                                                                         AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."')
                                                                         AND dia_semana_id = ".$dia."
                                                                         AND cliente_id NOT IN
