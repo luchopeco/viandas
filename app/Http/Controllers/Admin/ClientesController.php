@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use viandas\Alimento;
 use viandas\Cliente;
+use viandas\Cadete;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\TipoAlimento;
@@ -263,9 +264,9 @@ class ClientesController extends Controller
 
         $localidades = Localidad::all();
         $empresas = Empresa::all();
+		$cadetes = Cadete::all();
 
-
-            return view('admin.clientesgestionar', compact('tipos','cliente','diasdelas','localidades','empresas'));
+            return view('admin.clientesgestionar', compact('tipos','cliente','diasdelas','localidades','empresas','cadetes'));
             //return view('admin.clientesgestionar', $cliente);       
     }
 
@@ -287,6 +288,7 @@ class ClientesController extends Controller
             $a->dni = $request->dni;
             $a->telefono = $request->telefono;
             $a->idlocalidad = $request->idlocalidad;
+            $a->idcadete = $request->idcadete;
             
             if($request->idempresa==0){
                 $a->idempresa = null;

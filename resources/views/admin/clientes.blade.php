@@ -65,7 +65,7 @@
                                          <th>Nombre</th>
                                          
                                          <th>No le Gusta</th>
-                                         <th>Domicilio</th>
+                                        
                                          <th>Telefono</th>
                                          <th>Email</th>
                                          
@@ -89,7 +89,7 @@
                                              </td>
                                             -->
 
-                                             <td>{{$cliente->domicilio}}</td>
+                                             
                                              <td>{{$cliente->telefono}}</td>
                                              <td>{{$cliente->email}}</td>
                                             

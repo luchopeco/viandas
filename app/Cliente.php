@@ -12,7 +12,7 @@ class Cliente extends Model
     protected $table = 'cliente';
 
 
-    protected $fillable = ['nombre', 'apellido','dni','domicilio', 'email','telefono','estado_deuda','valor_deuda','estado','idlocalidad','idempresa','envio'];
+    protected $fillable = ['nombre', 'apellido','dni','domicilio', 'email','telefono','estado_deuda','valor_deuda','estado','idlocalidad','idempresa','envio','idcadete'];
 
     protected $primaryKey="id";
 
@@ -40,6 +40,11 @@ class Cliente extends Model
     public function Empresa()
     {
         return $this->hasOne('viandas\Empresa', 'id','idempresa');
+    }
+
+     public function Cadete()
+    {
+        return $this->hasOne('viandas\Cadete', 'id','idcadete');
     }
 
 

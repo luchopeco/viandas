@@ -140,6 +140,23 @@
                                               <span class="help-block with-errors"></span>
                                            </div>
 
+
+                                            <div class="form-group">
+                                              {!!Form::label('cadete','Cadete')!!}
+
+                                              <select class="form-control" name="idcadete" id="cadete" >
+                                                 <option value="0" <?php if($cliente->idcadete==null){echo 'selected="selected"';} ?> >NINGUNO</option>
+                                               <?php foreach ($cadetes as $cadete) {                                               
+                                                 ?> 
+                                                       <option value="<?php echo $cadete->id; ?>"
+                                                       <?php if($cliente->idcadete==$cadete->id){echo 'selected="selected"';} ?> ><?php echo $cadete->nombre.' '.$cadete->apellido; ?>
+                                                       </option>
+                                              <?php  } ?>
+                                             </select>
+                                             
+                                              <span class="help-block with-errors"></span>
+                                           </div>
+
                                            
                                                                                
                                        </div>
