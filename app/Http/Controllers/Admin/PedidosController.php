@@ -300,10 +300,15 @@ class PedidosController extends Controller
                 $cont = Array();
                 $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido; 
                 $cont[] = $pedido->fecha_pedido;
-                $cont[] = $pedido->TipoVianda->nombre;
-                $cont[] = $pedido->precio_vianda;
+                $lineaP = '';
+                foreach ($pedido->ListLineasPedido as $lp) {
+                    $lineaP .= $lp->TipoVianda->nombre.' Cant: '.$lp->cantidad.'; '; 
+                }
+
+                $cont[] = $lineaP;
+                 
                 $cont[] = $pedido->precio_envio;
-                $cont[] = $pedido->precio_vianda + $pedido->precio_envio;        
+                $cont[] = $pedido->total;        
                 $cobrado='';
                 if($pedido->cobrado == 1){
                   $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'" checked="checked">';
@@ -389,7 +394,7 @@ class PedidosController extends Controller
                 $ped->cliente_id = $request->cliente_id;
 
                 $ped->total = $lp->precio_vianda * $lp->cantidad;
-                $ped->cobrado=1;
+                $ped->cobrado=0;
                 $ped->save();
                 $ped->ListLineasPedido() ->save($lp);
 
