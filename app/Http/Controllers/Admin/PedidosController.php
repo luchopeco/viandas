@@ -429,4 +429,51 @@ class PedidosController extends Controller
             ->get();
         return view('admin.include.pedidos-gestion', compact('listPedidos'));
     }
+
+    public function liquidarCadetes(){
+
+        $cadetes = Cadete::all();
+
+
+          return view ('admin.liquidarcadete', compact('cadetes'));
+
+
+    }
+
+    public function liquidarCadeteUnico(){
+        
+        $cadete = Cadete::findOrFail($_GET['idcadete']);
+        
+
+        $fechaHoy = new Carbon('now');
+        $fechadesde = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechadesde']));
+        $fechahasta = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechahasta']));
+        
+//        $pedidoscadete = Pedido::where('cadete_id','=',$cadete->id);
+
+        $listPedidos = Pedido::whereRaw("cadete_id='".$cadete->id."' AND (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+
+        $arreglo = Array();
+        $liquidacion=0;
+        foreach ($listPedidos as $pedido) {
+          
+                $cont = Array();
+                $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido; 
+                $cont[] = $pedido->fecha_pedido;                
+                $cont[] = $pedido->precio_envio;                       
+              
+                $arreglo[] = $cont;
+
+                $liquidacion += $pedido->precio_envio; 
+        }
+        $arreglo[] = $liquidacion;
+
+        return json_encode($arreglo);
+        die();
+
+          
+
+
+    }
+
 }
