@@ -171,7 +171,9 @@ class ClientesController extends Controller
         $localidades = Localidad::all();
         $empresas = Empresa::all();
 
-        return view('admin.clientesgestionar', compact('cliente','diasdelas','tipos','empresas','localidades'));
+        $cadetes = Cadete::all();
+
+        return view('admin.clientesgestionar', compact('cliente','diasdelas','tipos','empresas','localidades','cadetes'));
     }
 
     /**
