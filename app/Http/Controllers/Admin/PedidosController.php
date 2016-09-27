@@ -115,8 +115,13 @@ class PedidosController extends Controller
                 if (isset($p['confirmado'])) {
                     $ped = new Pedido();
                     $f = Carbon::createFromFormat('d/m/Y', $p['fecha_pedido']);
+
+                    $lp = new LineaPedido();
+                    $lp->cantidad =$p['cantidad'];
+                    $lp->tipo_vianda_id = $p['tipo_vianda_id'];
+                    $lp->precio_vianda = $p['precio_vianda'];
+
                     $ped->fecha_pedido = $f->format('Y-m-d');
-                    $ped->cantidad = $p['cantidad'];
                     if (isset($p['envio'])) {
                         $ped->envio = 1;
                         $ped->cadete_id = $p['cadete_id'];
@@ -127,10 +132,9 @@ class PedidosController extends Controller
                     }
                     //$ped->observaciones=$p['observaciones'];
                     $ped->cliente_id = $p['cliente_id'];
-                    $ped->tipo_vianda_id = $p['tipo_vianda_id'];
-                    $ped->precio_vianda = $p['precio_vianda'];
-                    $ped->save();
 
+                    $ped->save();
+                    $ped->ListLineasPedido() ->save($lp);
                 }
             }
             Session::flash('mensajeOk', 'Pedidos Confirmados Con Exito');
@@ -380,16 +384,18 @@ class PedidosController extends Controller
 
                 $ped->fecha_pedido = $f->format('Y-m-d');
                   //$ped->cantidad =
+                $precioEnvio = 0;
                 if (isset($request->envio)) {
                 $ped->envio = 1;
                 $ped->cadete_id = $request->cadete_id;
                 $ped->precio_envio = $request->precio_envio;
-              }
+                    $precioEnvio =$ped->precio_envio;
+                }
                 $ped->observaciones=$request->observaciones;
                 $ped->cliente_id = $request->cliente_id;
 
-                $ped->total = $lp->precio_vianda * $lp->cantidad;
-                $ped->cobrado=1;
+                $ped->total = ($lp->precio_vianda * $lp->cantidad) + $precioEnvio;
+                $ped->cobrado=0;
                 $ped->save();
                 $ped->ListLineasPedido() ->save($lp);
 
