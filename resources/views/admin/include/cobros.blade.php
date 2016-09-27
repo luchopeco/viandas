@@ -39,8 +39,7 @@
             <tr>
                 <th>Cliente</th>
                 <th>Fecha Pedido</th>
-                <th>Tipo Vianda</th>
-                <th>Precio</th>
+                <th>Detalle</th>
                 <th>Envío</th>
                 <th>Total</th>
                 <!--<th>COBRADO ?</th>-->
@@ -50,8 +49,7 @@
             <tr>
                 <th>Cliente</th>
                 <th>Fecha Pedido</th>
-                <th>Tipo Vianda</th>
-                <th>Precio</th>
+                <th>Detalle</th>
                 <th>Envío</th>
                 <th>Total</th>
                  <!--<th>COBRADO ?</th>-->

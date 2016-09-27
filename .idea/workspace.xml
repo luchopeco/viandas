@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69b569f9-2e34-45de-a12e-c25a4c27fb46" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/liquidarcadete.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/CadetesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/CadetesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ClientesController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/cobros.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/cobros.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/include/cobros.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/include/cobros.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/masteradmin.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="viandas.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,7 +45,7 @@
       <file leaf-file-name="Cliente.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Cliente.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.1538463" vertical-offset="406" max-vertical-offset="952">
+            <state vertical-scroll-proportion="0.0" vertical-offset="406" max-vertical-offset="952">
               <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
@@ -47,8 +55,8 @@
       <file leaf-file-name="PedidosController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6062271" vertical-offset="349" max-vertical-offset="1836">
-              <caret line="61" column="77" selection-start-line="61" selection-start-column="77" selection-end-line="61" selection-end-column="77" />
+            <state vertical-scroll-proportion="13.886447" vertical-offset="0" max-vertical-offset="7752">
+              <caret line="483" column="0" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
               <folding>
                 <element signature="e#414#490#0#PHP" expanded="false" />
                 <element signature="e#495#596#0#PHP" expanded="false" />
@@ -58,48 +66,6 @@
                 <element signature="e#3592#3701#0#PHP" expanded="false" />
                 <element signature="e#3706#4048#0#PHP" expanded="false" />
                 <element signature="e#4054#4213#0#PHP" expanded="false" />
-                <element signature="e#4218#5548#0#PHP" expanded="false" />
-                <element signature="e#4272#5542#0#PHP" expanded="false" />
-                <element signature="e#4290#5291#0#PHP" expanded="false" />
-                <element signature="e#4342#5277#0#PHP" expanded="false" />
-                <element signature="e#4629#4841#0#PHP" expanded="false" />
-                <element signature="e#4862#4976#0#PHP" expanded="false" />
-                <element signature="e#5411#5542#0#PHP" expanded="false" />
-                <element signature="e#5554#5676#0#PHP" expanded="false" />
-                <element signature="e#5681#5729#0#PHP" expanded="false" />
-                <element signature="e#5735#5875#0#PHP" expanded="false" />
-                <element signature="e#5880#6177#0#PHP" expanded="false" />
-                <element signature="e#6059#6101#0#PHP" expanded="false" />
-                <element signature="e#6183#6365#0#PHP" expanded="false" />
-                <element signature="e#6370#6438#0#PHP" expanded="false" />
-                <element signature="e#6444#6578#0#PHP" expanded="false" />
-                <element signature="e#6583#6634#0#PHP" expanded="false" />
-                <element signature="e#6640#6834#0#PHP" expanded="false" />
-                <element signature="e#6861#8451#0#PHP" expanded="false" />
-                <element signature="e#7243#7481#0#PHP" expanded="false" />
-                <element signature="e#7338#7481#0#PHP" expanded="false" />
-                <element signature="e#7974#8184#0#PHP" expanded="false" />
-                <element signature="e#8457#11020#0#PHP" expanded="false" />
-                <element signature="e#8877#9102#0#PHP" expanded="false" />
-                <element signature="e#8972#9102#0#PHP" expanded="false" />
-                <element signature="e#9111#9588#0#PHP" expanded="false" />
-                <element signature="e#9789#10696#0#PHP" expanded="false" />
-                <element signature="e#10285#10614#0#PHP" expanded="false" />
-                <element signature="e#10469#10614#0#PHP" expanded="false" />
-                <element signature="e#11026#12383#0#PHP" expanded="false" />
-                <element signature="e#11377#11596#0#PHP" expanded="false" />
-                <element signature="e#11472#11596#0#PHP" expanded="false" />
-                <element signature="e#11803#12062#0#PHP" expanded="false" />
-                <element signature="e#11849#12025#0#PHP" expanded="false" />
-                <element signature="e#11976#12025#0#PHP" expanded="false" />
-                <element signature="e#12389#13740#0#PHP" expanded="false" />
-                <element signature="e#12457#13734#0#PHP" expanded="false" />
-                <element signature="e#12912#13106#0#PHP" expanded="false" />
-                <element signature="e#13603#13734#0#PHP" expanded="false" />
-                <element signature="e#13746#13829#0#PHP" expanded="false" />
-                <element signature="e#13878#14468#0#PHP" expanded="false" />
-                <element signature="e#14174#14291#0#PHP" expanded="false" />
-                <element signature="e#14174#14363#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -108,7 +74,7 @@
       <file leaf-file-name="ViandaCliente.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/ViandaCliente.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="561">
+            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="561">
               <caret line="11" column="31" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="31" />
               <folding />
             </state>
@@ -118,7 +84,7 @@
       <file leaf-file-name="pedidos.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5" vertical-offset="170" max-vertical-offset="7225">
+            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="7225">
               <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
               <folding />
             </state>
@@ -478,15 +444,15 @@
       <BehatRunner />
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-env-vars>false</pass-parent-env-vars>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -525,8 +491,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -535,7 +501,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2677761" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27155825" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32626426" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -908,7 +874,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Cliente.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.1538463" vertical-offset="406" max-vertical-offset="952">
+        <state vertical-scroll-proportion="0.0" vertical-offset="406" max-vertical-offset="952">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
@@ -916,7 +882,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/include/pedidos.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5" vertical-offset="170" max-vertical-offset="7225">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="7225">
           <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
           <folding />
         </state>
@@ -924,7 +890,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ViandaCliente.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="561">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="561">
           <caret line="11" column="31" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="31" />
           <folding />
         </state>
@@ -932,8 +898,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PedidosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6062271" vertical-offset="349" max-vertical-offset="1836">
-          <caret line="61" column="77" selection-start-line="61" selection-start-column="77" selection-end-line="61" selection-end-column="77" />
+        <state vertical-scroll-proportion="13.886447" vertical-offset="0" max-vertical-offset="7752">
+          <caret line="483" column="0" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
           <folding>
             <element signature="e#414#490#0#PHP" expanded="false" />
             <element signature="e#495#596#0#PHP" expanded="false" />
@@ -943,48 +909,6 @@
             <element signature="e#3592#3701#0#PHP" expanded="false" />
             <element signature="e#3706#4048#0#PHP" expanded="false" />
             <element signature="e#4054#4213#0#PHP" expanded="false" />
-            <element signature="e#4218#5548#0#PHP" expanded="false" />
-            <element signature="e#4272#5542#0#PHP" expanded="false" />
-            <element signature="e#4290#5291#0#PHP" expanded="false" />
-            <element signature="e#4342#5277#0#PHP" expanded="false" />
-            <element signature="e#4629#4841#0#PHP" expanded="false" />
-            <element signature="e#4862#4976#0#PHP" expanded="false" />
-            <element signature="e#5411#5542#0#PHP" expanded="false" />
-            <element signature="e#5554#5676#0#PHP" expanded="false" />
-            <element signature="e#5681#5729#0#PHP" expanded="false" />
-            <element signature="e#5735#5875#0#PHP" expanded="false" />
-            <element signature="e#5880#6177#0#PHP" expanded="false" />
-            <element signature="e#6059#6101#0#PHP" expanded="false" />
-            <element signature="e#6183#6365#0#PHP" expanded="false" />
-            <element signature="e#6370#6438#0#PHP" expanded="false" />
-            <element signature="e#6444#6578#0#PHP" expanded="false" />
-            <element signature="e#6583#6634#0#PHP" expanded="false" />
-            <element signature="e#6640#6834#0#PHP" expanded="false" />
-            <element signature="e#6861#8451#0#PHP" expanded="false" />
-            <element signature="e#7243#7481#0#PHP" expanded="false" />
-            <element signature="e#7338#7481#0#PHP" expanded="false" />
-            <element signature="e#7974#8184#0#PHP" expanded="false" />
-            <element signature="e#8457#11020#0#PHP" expanded="false" />
-            <element signature="e#8877#9102#0#PHP" expanded="false" />
-            <element signature="e#8972#9102#0#PHP" expanded="false" />
-            <element signature="e#9111#9588#0#PHP" expanded="false" />
-            <element signature="e#9789#10696#0#PHP" expanded="false" />
-            <element signature="e#10285#10614#0#PHP" expanded="false" />
-            <element signature="e#10469#10614#0#PHP" expanded="false" />
-            <element signature="e#11026#12383#0#PHP" expanded="false" />
-            <element signature="e#11377#11596#0#PHP" expanded="false" />
-            <element signature="e#11472#11596#0#PHP" expanded="false" />
-            <element signature="e#11803#12062#0#PHP" expanded="false" />
-            <element signature="e#11849#12025#0#PHP" expanded="false" />
-            <element signature="e#11976#12025#0#PHP" expanded="false" />
-            <element signature="e#12389#13740#0#PHP" expanded="false" />
-            <element signature="e#12457#13734#0#PHP" expanded="false" />
-            <element signature="e#12912#13106#0#PHP" expanded="false" />
-            <element signature="e#13603#13734#0#PHP" expanded="false" />
-            <element signature="e#13746#13829#0#PHP" expanded="false" />
-            <element signature="e#13878#14468#0#PHP" expanded="false" />
-            <element signature="e#14174#14291#0#PHP" expanded="false" />
-            <element signature="e#14174#14363#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
