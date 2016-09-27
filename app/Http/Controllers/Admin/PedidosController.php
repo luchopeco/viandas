@@ -5,6 +5,7 @@ namespace viandas\Http\Controllers\Admin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Scalar\LNumber;
 use viandas\Cadete;
 use viandas\Cliente;
 use viandas\Empresa;
@@ -12,6 +13,7 @@ use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\LineaPedido;
 use viandas\Pedido;
+use viandas\PedidoEmpresa;
 use viandas\TipoVianda;
 use viandas\ViandaCliente;
 
@@ -82,6 +84,53 @@ class PedidosController extends Controller
         $listEmpresas = Empresa::all();
 
         $listCadetes = Cadete::all()->lists('nombre', 'id');
+
+
+
+        $listPedidosClientes = collect();
+        $listPedidosEmpresa = collect();
+
+        ///agrupo por Empresa
+        $listAgrupacionViandasClientesXEmpresas = $listViandas->groupBy('Cliente.idempresa');
+        //$listAgrupacionClientes->toArray();
+
+        ////recorro los pedidos agrupados por empresa, es decir recorro las empresas
+        foreach ( $listAgrupacionViandasClientesXEmpresas as $empresaConViandas)
+        {
+            $pedidoEmpresa = new PedidoEmpresa();
+            $listAgrupacionViandasClientesXCliente = $empresaConViandas->groupBy('cliente_id');
+            $lisPedidosTemporal = collect();
+            foreach($listAgrupacionViandasClientesXCliente as $listViandasClientesEmpresa)
+            {
+                $pedidoCliente = new Pedido();
+                $idempresa=null;
+                foreach($listViandasClientesEmpresa as $viandaClienteEmpresa)
+                {
+                    $pedidoCliente->cliente_id = $viandaClienteEmpresa->cliente_id;
+                    $lp = new LineaPedido();
+                    $lp->cantidad = $viandaClienteEmpresa->cantidad;
+                    $lp->tipo_vianda_id = $viandaClienteEmpresa->tipo_vianda_id;
+                    $lp->precio_vianda = $viandaClienteEmpresa->TipoVianda->precio;
+                    $pedidoCliente->ListLineasPedido->push($lp);
+
+                    $idempresa = $pedidoCliente->Cliente->idempresa;
+                }
+                if ($idempresa !=null)
+                {
+                    $pedidoEmpresa->ListPedidos->push($pedidoCliente);
+                }
+                else
+                {
+                    $listPedidosClientes->push($pedidoCliente);
+                }
+
+            }
+            if($pedidoEmpresa->ListPedidos->count() >0){
+                $listPedidosEmpresa->push($pedidoEmpresa);
+            }
+        }
+
+        var_dump($listPedidosClientes->count());
 
 
         return view ('admin.include.pedidos', compact('listPedidos','listViandas','listEmpresas','listCadetes','fecha_pedido'));
@@ -481,6 +530,105 @@ class PedidosController extends Controller
 
           
 
+
+    }
+
+
+    ///Busca por dia
+    public function buscarpedidosxdia(Request $request)
+    {
+        $fechaHoy = new Carbon('now');
+        $fechaManana = new Carbon('tomorrow');
+        $fecha = Carbon::createFromFormat('d/m/Y', $request->fecha);
+        $fechaAnterior = $fechaHoy->subDays(7);
+        $fecha_pedido=$request->fecha;
+        if($fecha>=$fechaManana)
+        {
+            $mensajeError ="No puede registar pedidos para dias futuros";
+            return view ('admin.include.pedidos-error',compact('mensajeError'));
+        }
+        if  ($fecha<$fechaAnterior)
+        {
+            $mensajeError ="Solo puede registrar pedidos de los ultimos 7 dias";
+            return view ('admin.include.pedidos-error',compact('mensajeError'));
+        }
+
+        $dia= $fecha->dayOfWeek+1;
+
+        //$listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
+        $listViandas = ViandaCliente::whereRaw("NOT EXISTS
+                                                (SELECT * FROM pedido p
+                                                inner join linea_pedido lp on p.id = lp.pedido_id
+                                                 WHERE p.cliente_id = cliente_dia.cliente_id
+                                                                        AND lp.tipo_vianda_id = cliente_dia.tipo_vianda_id
+                                                                        AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."')
+                                                                        AND dia_semana_id = ".$dia."
+                                                                        AND cliente_id NOT IN
+                                                                            (SELECT id FROM cliente where deleted_at is not null)
+                                                                            ")
+            ->join('cliente', 'cliente_dia.cliente_id','=','cliente.id')
+            ->orderBy("cliente.apellido")->get();
+
+        $listPedidosClientes = collect();
+        $listPedidosEmpresa = collect();
+
+        ///agrupo por Empresa
+        $listAgrupacionViandasClientesXEmpresas = $listViandas->groupBy('Cliente.idempresa');
+        //$listAgrupacionClientes->toArray();
+
+        ////recorro los pedidos agrupados por empresa, es decir recorro las empresas
+        foreach ( $listAgrupacionViandasClientesXEmpresas as $empresaConViandas)
+        {
+            $pedidoEmpresa = new PedidoEmpresa();
+            $listAgrupacionViandasClientesXCliente = $empresaConViandas->groupBy('cliente_id');
+            $lisPedidosTemporal = collect();
+            foreach($listAgrupacionViandasClientesXCliente as $listViandasClientesEmpresa)
+            {
+                $pedidoCliente = new Pedido();
+                $idempresa=null;
+                foreach($listViandasClientesEmpresa as $viandaClienteEmpresa)
+                {
+                    $pedidoCliente->cliente_id = $viandaClienteEmpresa->cliente_id;
+                    $lp = new LineaPedido();
+                    $lp->cantidad = $viandaClienteEmpresa->cantidad;
+                    $lp->tipo_vianda_id = $viandaClienteEmpresa->tipo_vianda_id;
+                    $lp->precio_vianda = $viandaClienteEmpresa->TipoVianda->precio;
+                    $pedidoCliente->ListLineasPedido->push($lp);
+
+                    $idempresa = $pedidoCliente->Cliente->idempresa;
+                }
+                if ($idempresa !=null)
+                {
+                    $pedidoEmpresa->envio = $pedidoCliente->Cliente->Empresa->envio;
+                    $pedidoEmpresa->empresa_id = $idempresa;
+                    $pedidoEmpresa->ListPedidos->push($pedidoCliente);
+                }
+                else
+                {
+                    $listPedidosClientes->push($pedidoCliente);
+                }
+
+            }
+            if($pedidoEmpresa->ListPedidos->count() >0){
+                $listPedidosEmpresa->push($pedidoEmpresa);
+            }
+        }
+        //$l = $listp->groupBy('Cliente.idempresa');
+        //foreach($l as $ll){
+        //  foreach ($ll as $lll)
+          //  {
+            //    $llll = $lll->Cliente;
+           // }
+
+//        }
+  //      var_dump($llll->Empresa->nombre);
+
+
+
+
+
+
+        return view ('admin.include.pedidosV1', compact('listPedidosEmpresa','listPedidosClientes','fecha_pedido'));
 
     }
 

@@ -87,7 +87,7 @@ function buscarPedidos(){
     ///si tengo q buscar todos
         var fecha= $("#txtfecha").val();
         $.ajax({
-                url:"pedidos/buscar",
+                url:"pedidos/buscarpedidosxdia",
                 type: "POST",
                 dataType: "html",
                 data:{'fecha': fecha}
