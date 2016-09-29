@@ -10,7 +10,31 @@ $cpc=0;
   {!!Form::Text('pedEmp['.$cpe.'][empresa_id]', $emp->Empresa->id ,['class'=>'hidden'])!!}
      <div class=" box box-primary">
         <div class="box-header with-border">
-                <i class="fa fa-leaf"></i>  Empresa: {{$emp->Empresa->nombre}} :: Envio {!!Form::checkbox('pedEmp['.$cpe.'][envio]', $emp->id, $emp->envio,['class'=>''])!!} <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <i class="fa fa-leaf"></i>  Empresa: {{$emp->Empresa->nombre}}
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">Envio</span>
+                        {!!Form::checkbox('pedEmp['.$cpe.'][envio]', $emp->id, $emp->envio,['class'=>''])!!}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        {!!Form::Number('pedEmp['.$cpe.'][precio_envio]',$emp->precio_envio,['class'=>'form-control'])!!}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-motorcycle"></i></span>
+                        {!!Form::select('pedEmp['.$cpe.'][cadete_id]', $listCadetes,null,array('class' => 'form-control'))!!}
+                    </div>
+                </div>
+
+            </div>
+
         </div>
         <div class="box-body">
             <div class="row">
@@ -67,10 +91,34 @@ $cpc=0;
         {!!Form::Text('pedCli['.$cpc.'][fecha_pedido]', $fecha_pedido,['class'=>'hidden'])!!}
            {!!Form::Text('pedCli['.$cpc.'][cliente_id]', $p->cliente_id,['class'=>'hidden'])!!}
             <div class="row">
-                <div class="col-md-4">
-                    {{$p->Cliente->nombre }} {{$p->Cliente->apellido}} :: Envio {!!Form::checkbox('pedCli['.$cpc.'][envio]', $p->Cliente->envio, $p->Cliente->envio,['class'=>''])!!}
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-3">{{$p->Cliente->nombre }} {{$p->Cliente->apellido}}</div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Envio</span>
+                                        {!!Form::checkbox('pedCli['.$cpc.'][envio]', $p->Cliente->envio, $p->Cliente->envio,['class'=>''])!!}
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        {!!Form::Number('pedCli['.$cpc.'][precio_envio]',$p->Cliente->Localidad->costo_envio,['class'=>'form-control'])!!}
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-motorcycle"></i></span>
+                                        {!!Form::select('pedCli['.$cpc.'][cadete_id]', $listCadetes,null,array('class' => 'form-control'))!!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-5">
                     <?php $contadorLinea=0 ?>
                     @foreach($p->ListLineasPedido as $lp)
                         <div class="row">

@@ -169,13 +169,18 @@ class PedidosController extends Controller
                 $pem->empresa_id = $pe['empresa_id'];
                 if (isset($pe['envio'])) {
                     $pem->envio = 1;
+                    $pem->precio_envio = $pe['precio_envio'];
+                    $pem->cadete_id = $pe['cadete_id'];
                 }
                 $pem->cobrado=0;
+                $pem->total=0;
                 foreach($pe['ped'] as $pc)
                 {
                     $pedido = new Pedido();
                     $pedido->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pc['fecha_pedido']);
                     $pedido->cliente_id =$pc['cliente_id'];
+                    $pedido->cobrado=0;
+                    $pedido->total=0;
                     $almenosUnaLineaPedido=0;
                     foreach ($pc['linea'] as $lp)
                     {
@@ -187,33 +192,62 @@ class PedidosController extends Controller
                             $lpp->tipo_vianda_id = $lp['tipo_vianda_id'];
                             $lpp->precio_vianda = $lp['precio_vianda'];
                             $pedido->ListLineasPedido->add($lpp);
-
+                            $pedido->total = $pedido->total + ($lpp->cantidad * $lpp->precio_vianda);
                         }
-
                     }
-
                     if ($almenosUnaLineaPedido ==1)
                     {
                         $pem->ListPedidos->add($pedido);
+                        $pem->total= $pem->total + $pedido->total;
                     }
-
                 }
-                $listPem->push($pem);
-
-            }
-        foreach ($listPem as $pedidoEmpresa)
-        {
-            $pedidoEmpresa->save();
-            foreach ($pedidoEmpresa->ListPedidos as $pedidoCliente)
-            {
-                $pedidoEmpresa->ListPedidos()->save($pedidoCliente);
-                foreach($pedidoCliente->ListLineasPedido as $linPed )
+                if($pem->ListPedidos->count() >0)
                 {
-                    $pedidoCliente->ListLineasPedido()->save($linPed);
+                    $listPem->push($pem);
+                }
+            }
+            $listPedCli = collect();
+            foreach($rq['pedCli'] as $pcl)
+            {
+                $pedido = new Pedido();
+                $pedido->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pcl['fecha_pedido']);
+                $pedido->cliente_id =$pcl['cliente_id'];
+                $pedido->cobrado=0;
+                $pedido->total=0;
+                $almenosUnaLineaPedidoc=0;
+                foreach ($pcl['linea'] as $lpc)
+                {
+                    if(isset($lpc['confirmado']))
+                    {
+                        $almenosUnaLineaPedidoc=1;
+                        $lppp = new LineaPedido();
+                        $lppp->cantidad =$lpc['cantidad'];
+                        $lppp->tipo_vianda_id = $lpc['tipo_vianda_id'];
+                        $lppp->precio_vianda = $lpc['precio_vianda'];
+                        $pedido->ListLineasPedido->add($lppp);
+                        $pedido->total = $pedido->total + ($lppp->cantidad * $lppp->precio_vianda);
+                    }
+                }
+                if ($almenosUnaLineaPedidoc ==1)
+                {
+                    $listPedCli->push($pedido);
                 }
             }
 
-        }
+
+            foreach ($listPem as $pedidoEmpresa)
+            {
+                $pedidoEmpresa->save();
+                foreach ($pedidoEmpresa->ListPedidos as $pedidoCliente)
+                {
+                    $pedidoEmpresa->ListPedidos()->save($pedidoCliente);
+                    foreach($pedidoCliente->ListLineasPedido as $linPed )
+                    {
+                        $pedidoCliente->ListLineasPedido()->save($linPed);
+                    }
+                }
+
+            }
 
             Session::flash('mensajeOk', 'Pedidos Confirmados Con Exito');
             return back();
@@ -625,6 +659,7 @@ class PedidosController extends Controller
                 if ($idempresa !=null)
                 {
                     $pedidoEmpresa->envio = $pedidoCliente->Cliente->Empresa->envio;
+                    $pedidoEmpresa->precio_envio =$pedidoCliente->Cliente->Empresa->Localidad->costo_envio;
                     $pedidoEmpresa->empresa_id = $idempresa;
                     $pedidoEmpresa->ListPedidos->push($pedidoCliente);
                 }
@@ -648,12 +683,12 @@ class PedidosController extends Controller
 //        }
   //      var_dump($llll->Empresa->nombre);
 
+        $listCadetes = Cadete::all()->lists('nombre', 'id');
 
 
 
 
-
-        return view ('admin.include.pedidosV1', compact('listPedidosEmpresa','listPedidosClientes','fecha_pedido'));
+        return view ('admin.include.pedidosV1', compact('listPedidosEmpresa','listPedidosClientes','fecha_pedido','listCadetes'));
 
     }
 
