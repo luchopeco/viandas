@@ -10,9 +10,8 @@
                                     <th>Fecha</th>
                                     <th>Cliente</th>
                                     <th>Empresa</th>
-                                    <th>Tipo Vianda</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
+                                    <th>Pedido</th>
+                                    <th>Total</th>
                                     <th>Envio</th>
                                     <th>Observaciones</th>
                                     <th>Cobrado</th>
@@ -26,10 +25,21 @@
                                     @else
                                         <td>Sin Empresa</td>
                                     @endif
-                                    <td>{{$p->TipoVianda->nombre}}</td>
-                                    <td>{{$p->cantidad}}</td>
-                                    <td>$ {{$p->precio_vianda}}</td>
-                                    <td>$ {{$p->precio_envio}}</td>
+                                    <td>
+                                    @foreach($p->ListLineasPedido as $lp)
+                                        {{$lp->cantidad}} {{$lp->TipoVianda->nombre}} <br>
+                                    @endforeach
+
+                                    </td>
+
+                                    <td>$ {{$p->total}}</td>
+                                    <td>
+                                    @if($p->envio==1)
+                                        ${{$p->precio_envio}}
+                                    @else
+                                        Sin Envio
+                                    @endif
+                                    </td>
                                     <td>{{$p->observaciones}}</td>
                                     <td>{{$p->FueCobrado()}}</td>
                                     <td><a href="#"  class="btn btn-xs btn-info editar" data-idpedido="{{$p->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>

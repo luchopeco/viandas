@@ -214,6 +214,11 @@ class PedidosController extends Controller
                 $pedido->cliente_id =$pcl['cliente_id'];
                 $pedido->cobrado=0;
                 $pedido->total=0;
+                if (isset($pedido['envio'])) {
+                    $pedido->envio = 1;
+                    $pedido->precio_envio = $pe['precio_envio'];
+                    $pedido->cadete_id = $pe['cadete_id'];
+                }
                 $almenosUnaLineaPedidoc=0;
                 foreach ($pcl['linea'] as $lpc)
                 {
@@ -248,6 +253,18 @@ class PedidosController extends Controller
                 }
 
             }
+
+
+            foreach ($listPedCli as $pedidoCli)
+            {
+                $pedidoCli->save();
+                foreach($pedidoCli->ListLineasPedido as $linPedi )
+                {
+                    $pedidoCli->ListLineasPedido()->save($linPedi);
+                }
+            }
+
+
 
             Session::flash('mensajeOk', 'Pedidos Confirmados Con Exito');
             return back();

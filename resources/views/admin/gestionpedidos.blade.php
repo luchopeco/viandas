@@ -166,7 +166,7 @@ $(function () {
                 event.preventDefault();
                 var idpedido=$(this).attr('data-idpedido');
                 $.ajax({
-                     url:"pedidos/"+idpedido+"/edit",
+                     url:"../pedidos/"+ idpedido+"/edit",
                      type: "GET",
                      dataType: "json"
                     })
