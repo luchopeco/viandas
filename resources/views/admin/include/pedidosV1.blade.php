@@ -62,7 +62,7 @@ $cpc=0;
                                     <div class="input-group">
                                         <span class="input-group-addon" title="Cantidad">{{$lp->TipoVianda->nombre}} </span>
                                         {!!Form::Number('pedEmp['.$cpe.'][ped]['.$cpep.'][linea]['.$contadorLinea.'][tipo_vianda_id]',$lp->tipo_vianda_id,['class'=>' form-control hidden'])!!}
-                                        {!!Form::Number('pedEmp['.$cpe.'][ped]['.$cpep.'][linea]['.$contadorLinea.'][cantidad]',$lp->cantidad,['class'=>' form-control cantidad-pedido', 'data-precio'=> $lp->TipoVianda->precio,'required||between:0,999.99'])!!}
+                                        {!!Form::Number('pedEmp['.$cpe.'][ped]['.$cpep.'][linea]['.$contadorLinea.'][cantidad]',$lp->cantidad,['class'=>' form-control cantidad-pedido', 'data-precio'=> $emp->Empresa->getPrecioVianda($lp->tipo_vianda_id),'required||between:0,999.99'])!!}
                                     </div>
                                 </div>
                                 <div class="col-md-5">

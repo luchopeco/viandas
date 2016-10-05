@@ -14,6 +14,9 @@ class PedidoEmpresa extends Model
 
     protected $primaryKey="id";
 
+    //lo utilizo cuando paso un pedido al listado para filtrar por dia
+    public $dia_id;
+
     public function Cadete()
     {
         return $this->hasOne('viandas\Cadete', 'id', 'cadete_id');

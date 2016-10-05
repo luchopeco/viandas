@@ -14,6 +14,8 @@ class Pedido extends Model
 
     protected $primaryKey="id";
 
+    //lo utilizo cuando paso un pedido al listado para filtrar por dia
+    public $dia_id;
 
     public function Cliente()
     {

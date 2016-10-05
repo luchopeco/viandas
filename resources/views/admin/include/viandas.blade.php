@@ -66,12 +66,12 @@
                         </div>
                         <div class=" box-body">
                             @foreach($listPedidosEmpresa as $emp)
+                            @if($emp->dia_id = $d->id)
                                 <div class="row">
                                     <div class="callout callout-info">
                                         <h4>{{$emp->Empresa->nombre}}</h4>
                                     </div>
                                  @foreach($emp->ListPedidos as $p)
-
                                      <div class="col-md-3" style="height: 180px; overflow: visible">
                                         <div class="box box-default">
                                             <div class="box-header with-border">
@@ -89,16 +89,16 @@
                                             </div>
                                         </div>
                                      </div>
-
                                 @endforeach
                                 </div>
+                            @endif
                             @endforeach
                             <div class="row">
                                 <div class="callout callout-info">
                                     <h4>Clientes Sin Empresa</h4>
                                 </div>
                              @foreach($listPedidosClientes as $p)
-
+                                @if( $p->dia_id = $d->id)
                                  <div class="col-md-3" style="height: 180px; overflow: visible">
                                     <div class="box box-default">
                                         <div class="box-header with-border">
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                  </div>
-
+                                @endif
                             @endforeach
                             </div>
                         </div>

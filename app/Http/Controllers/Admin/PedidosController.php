@@ -70,15 +70,6 @@ class PedidosController extends Controller
                                                                             ")
             ->join('cliente', 'cliente_dia.cliente_id','=','cliente.id')
             ->orderBy("cliente.apellido")->get();
-        //$listViandas = ViandaCliente::all();
-        //$listViandas= ViandaCliente::with(['cliente' => function($query)
-        //{
-         //   $query->orderBy('apellido');
-
-//        }])->whereRaw("NOT EXISTS (SELECT * FROM pedido p WHERE p.cliente_id = cliente_dia.cliente_id AND p.tipo_vianda_id = cliente_dia.tipo_vianda_id AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."') AND dia_semana_id = ".$dia." AND cliente_id NOT IN (SELECT id FROM cliente where deleted_at is not null)")->get();
-
-
-        /// recorro los pedidos, y limpio las viandas segun se realizaron los pedidos
 
         $fecha_pedido=$request->fecha;
 
@@ -131,7 +122,7 @@ class PedidosController extends Controller
             }
         }
 
-        var_dump($listPedidosClientes->count());
+        //var_dump($listPedidosClientes->count());
 
 
         return view ('admin.include.pedidos', compact('listPedidos','listViandas','listEmpresas','listCadetes','fecha_pedido'));
@@ -193,7 +184,7 @@ class PedidosController extends Controller
                             $lpp->tipo_vianda_id = $lp['tipo_vianda_id'];
                             $lpp->precio_vianda = $lp['precio_vianda'];
                             $pedido->ListLineasPedido->add($lpp);
-                            $pedido->total = $pedido->total + ($lpp->cantidad * $lpp->precio_vianda);
+                            $pedido->total = $pedido->total + ($lpp->precio_vianda);
                         }
                     }
                     if ($almenosUnaLineaPedido ==1)
@@ -233,7 +224,7 @@ class PedidosController extends Controller
                         $lppp->tipo_vianda_id = $lpc['tipo_vianda_id'];
                         $lppp->precio_vianda = $lpc['precio_vianda'];
                         $pedido->ListLineasPedido->add($lppp);
-                        $pedido->total = $pedido->total + ($lppp->cantidad * $lppp->precio_vianda);
+                        $pedido->total = $pedido->total + ($lppp->precio_vianda);
                     }
                 }
                 if ($almenosUnaLineaPedidoc ==1)

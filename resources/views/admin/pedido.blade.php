@@ -33,8 +33,8 @@
    @endif
    <div class="row">
        <div class=" col-md-12">
+        {!!Form::open(['url'=>'admin/pedidos/agregarPedidoManual','method'=>'POST', 'data-toggle'=>'validator'])!!}
              <div class=" panel panel-default">
-              {!!Form::open(['url'=>'admin/pedidos/agregarPedidoManual','method'=>'POST', 'data-toggle'=>'validator'])!!}
                    <div class=" panel-heading">Nuevo Pedido Manual
                       <div class="pull-right">
                           <div class="btn-group">
@@ -136,8 +136,8 @@
                             </div>
                        </div>
                    </div>
-              {!! Form::close() !!}
               </div>
+          {!! Form::close() !!}
        </div>
    </div>
 @endsection
