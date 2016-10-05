@@ -34,3 +34,7 @@
     background-color: #f5f5f5;
     border-color: #ddd;
 }
+.info-box, .info-box-content, .info-box-icon{
+    height: 80px !important;
+    min-height: 80px !important;
+}

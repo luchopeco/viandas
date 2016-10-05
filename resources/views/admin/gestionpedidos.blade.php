@@ -32,16 +32,16 @@
         </hr>
    @endif
    <div class="row">
-       <div class=" col-md-12">
+        <div class=" col-md-12">
              <div class=" panel panel-default">
-
-                   <div class=" panel-heading">Buscar Pedido
+                   <div class=" panel-heading"> <i class="fa fa-users"></i> Pedidos Cliente
                       <div class="pull-right">
                           <div class="btn-group">
                               <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                   <i class="fa fa-question-circle"></i><span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu pull-right" role="menu">
+                                  <li>Solo Busca Pedidos sin Empresa</li>
                                   <li>Desde aqui puede buscar el pedido, y modificarlo</li>
                               </ul>
                           </div>
@@ -85,7 +85,69 @@
                         </div>
                    </div>
               </div>
-       </div>
+        </div>
+
+        <hr>
+        <div class="col-md-12">
+            <div class=" panel panel-default">
+               <div class=" panel-heading"><i class="fa fa-building-o"></i> Pedidos Empresa
+                  <div class="pull-right">
+                      <div class="btn-group">
+                          <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-question-circle"></i><span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu pull-right" role="menu">
+                              <li>Solo Busca Pedidos Por Empresa</li>
+                              <li>Desde aqui puede buscar el pedido, y modificarlo</li>
+                          </ul>
+                      </div>
+                   </div>
+               </div>
+               <div class=" panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Fecha Desde
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input class="form-control datepicker" name="fecha_pedido_desde" id="txtfechaDesdeEmpresa" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            Fecha Hasta
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input class="form-control datepicker" name="fecha_pedido_hasta" id="txtfechaHastaEmpresa" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            Empresa
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-building-o"></i>
+                                </span>
+                                <select class="form-control" name="empresa" id="empresa">
+                                <option value="0">TODAS</option>
+                                  @foreach($listEmpresas as $e)
+                                      <option value="<?php echo $e->id; ?>" > <?php echo $e->nombre; ?></option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">.
+                            {!!Form::submit('Buscar', array('class' => 'btn btn-success btn-block','id'=>'btnBuscarPedidoEmpresa'))!!}
+                        </div>
+                    </div>
+                    <br>
+                    <div id="pedidos-empresa-encontrados">
+
+                    </div>
+               </div>
+            </div>
+        </div>
    </div>
 
 
@@ -149,6 +211,33 @@ function buscarPedidos(){
 
 
 }
+function buscarPedidosEmpresa(){
+    $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
+    //event.preventDefault();
+
+    ///si tengo q buscar todos
+        var fechaDesde= $("#txtfechaDesdeEmpresa").val();
+        var fechaHasta= $("#txtfechaHastaEmpresa").val();
+
+        var empresa = $("#empresa").val();
+        $.ajax({
+                url:"../pedidos/buscarpedidosempresas",
+                type: "POST",
+                dataType: "html",
+                data:{'empresa_id': empresa, 'fecha_pedido_desde':fechaDesde , 'fecha_pedido_hasta':fechaHasta  }
+            })
+            .done(function(response){
+                $('#pedidos-empresa-encontrados').html(response);
+                $('#cargando').html('');
+            })
+            .fail(function(){
+                //alert(fd);
+                $('#cargando').html('');
+            });
+
+
+
+}
 $(function () {
 
     $("#cliente").autocomplete({
@@ -161,6 +250,9 @@ $(function () {
     $("#btnBuscar").click(function(){
             buscarPedidos();
        });
+   $("#btnBuscarPedidoEmpresa").click(function(){
+           buscarPedidosEmpresa();
+      });
     $('body').on('click', '.editar', function (event) {
                 $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
                 event.preventDefault();

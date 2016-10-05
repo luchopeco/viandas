@@ -2,6 +2,7 @@
 
 namespace viandas;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class PedidoEmpresa extends Model
@@ -24,6 +25,23 @@ class PedidoEmpresa extends Model
     public function ListPedidos()
     {
         return $this->hasMany('viandas\Pedido','pedido_empresa_id', 'id');
+    }
+    public function FueCobrado(){
+        if($this->cobrado==1)
+        {
+            return "SI";
+        }
+        else
+        {
+            return "NO";
+        }
+    }
+    public function FechaPedido()
+    {
+
+        if($this->fecha_pedido!="")
+        {return  Carbon::createFromFormat('Y-m-d', $this->fecha_pedido)->format('d/m/Y');}
+
     }
 
 }

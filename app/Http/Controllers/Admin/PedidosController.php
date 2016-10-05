@@ -167,13 +167,14 @@ class PedidosController extends Controller
                 $pem = new PedidoEmpresa();
                 $pem->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pe['fecha_pedido']);
                 $pem->empresa_id = $pe['empresa_id'];
+                $pem->precio_envio=0;
                 if (isset($pe['envio'])) {
                     $pem->envio = 1;
                     $pem->precio_envio = $pe['precio_envio'];
                     $pem->cadete_id = $pe['cadete_id'];
                 }
                 $pem->cobrado=0;
-                $pem->total=0;
+                $pem->total=$pem->precio_envio;
                 foreach($pe['ped'] as $pc)
                 {
                     $pedido = new Pedido();
@@ -214,11 +215,13 @@ class PedidosController extends Controller
                 $pedido->cliente_id =$pcl['cliente_id'];
                 $pedido->cobrado=0;
                 $pedido->total=0;
-                if (isset($pedido['envio'])) {
+                $pedido->precio_envio =0;
+                if (isset($pcl['envio'])) {
                     $pedido->envio = 1;
-                    $pedido->precio_envio = $pe['precio_envio'];
-                    $pedido->cadete_id = $pe['cadete_id'];
+                    $pedido->precio_envio = $pcl['precio_envio'];
+                    $pedido->cadete_id = $pcl['cadete_id'];
                 }
+                $pedido->total=$pedido->precio_envio;
                 $almenosUnaLineaPedidoc=0;
                 foreach ($pcl['linea'] as $lpc)
                 {
@@ -547,7 +550,8 @@ class PedidosController extends Controller
 
     public function gestion()
     {
-        return view ('admin.gestionpedidos');
+        $listEmpresas = Empresa::all();
+        return view ('admin.gestionpedidos', compact('listEmpresas'));
     }
     //Busca Pedidos Por Cliente y Por Fecha
     public function buscarpedidos(Request $request)
@@ -559,8 +563,32 @@ class PedidosController extends Controller
         $listPedidos = Pedido::where('cliente_id', '=', $cliente_id)
             ->where('fecha_pedido', '>=', $fechaDesde->format('Y-m-d'))
             ->where('fecha_pedido', '<=', $fechaHasta->format('Y-m-d'))
+            ->where('pedido_empresa_id', NULL)
             ->get();
         return view('admin.include.pedidos-gestion', compact('listPedidos'));
+    }
+    public function buscarpedidosempresas(Request $request)
+    {
+        $empresa_id = $request->empresa_id;
+        $fechaDesde = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido_desde);
+        $fechaHasta = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido_hasta);
+
+        if($empresa_id==0)
+        {
+            $listPedidos = PedidoEmpresa::where('fecha_pedido', '>=', $fechaDesde->format('Y-m-d'))
+                ->where('fecha_pedido', '<=', $fechaHasta->format('Y-m-d'))
+                ->get();
+        }
+        else
+        {
+            $listPedidos = PedidoEmpresa::where('empresa_id', '=', $empresa_id)
+                ->where('fecha_pedido', '>=', $fechaDesde->format('Y-m-d'))
+                ->where('fecha_pedido', '<=', $fechaHasta->format('Y-m-d'))
+                ->get();
+        }
+
+
+        return view('admin.include.pedidos-empresa-gestion', compact('listPedidos'));
     }
 
     public function liquidarCadetes(){
