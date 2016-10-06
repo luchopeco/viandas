@@ -340,8 +340,7 @@ class ClientesController extends Controller
     {
         try
         {
-            $tor = Cliente::withTrashed()->where('id', $request->id)->first();
-            $tor->forceDelete();
+            Cliente::destroy($request->id);
             Session::flash('mensajeOk', 'Cliente Eliminado con Exito');
             return back();
         }

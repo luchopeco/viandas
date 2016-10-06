@@ -5,6 +5,7 @@ namespace viandas\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use viandas\Cliente;
 use viandas\Empresa;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
@@ -25,9 +26,10 @@ class EmpresasController extends Controller
     public function index()
     {
         try {
-            $listEmpresas = Empresa::all();
+            $listEmpresas = Empresa::orderBy('nombre')->get();
+            $listEmpresasBajas = Empresa::onlyTrashed()->get();
             $listLocalidad = Localidad::all()->lists('nombre', 'id');
-            return view('admin.empresas', compact('listEmpresas', 'listLocalidad'));
+            return view('admin.empresas', compact('listEmpresas', 'listLocalidad','listEmpresasBajas'));
         }
         catch(\Exception $ex){
 
@@ -187,6 +189,11 @@ class EmpresasController extends Controller
     public function destroy(Request $request)
     {
         try{
+            $listC = Cliente::where('idempresa',$request->id)->get();
+            foreach($listC as $c)
+            {
+                Cliente::destroy($c->id);
+            }
             Empresa::destroy($request->id);
             Session::flash('mensajeOk','Empresa Eliminada con exito');
             return back();
@@ -196,5 +203,27 @@ class EmpresasController extends Controller
             Session::flash('mensajeError', $ex->getMessage());
             return back();
         }
+    }
+
+    public function alta(Request $request)
+    {
+
+        try {
+            $tor = Empresa::withTrashed()->where('id', $request->id)->first();
+            $tor->restore();
+            $listC = Cliente::withTrashed()->where('idempresa',$request->id)->get();
+            foreach($listC as $c)
+            {
+                $c->restore();
+            }
+            Session::flash('mensajeOk', 'Empresa dada de alta con exito');
+
+            return back();
+        } catch (QueryException  $ex) {
+            Session::flash('mensajeError', $ex->getMessage());
+            $listJugador = Jugador::onlyTrashed()->get();
+            return view('admin.listanegra', compact('listJugador'));
+        }
+
     }
 }

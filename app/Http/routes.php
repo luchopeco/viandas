@@ -68,6 +68,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('empresas/buscar','EmpresasController@buscar');
         Route::post('empresas/preciovianda','EmpresasController@preciovianda');
         Route::post('empresas/precioviandaeliminar','EmpresasController@precioviandaeliminar');
+        Route::post('empresas/alta','EmpresasController@alta');
 
         Route::resource('localidades','LocalidadesController');
         Route::post('localidades/buscar','LocalidadesController@buscar');

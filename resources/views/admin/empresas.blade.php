@@ -71,6 +71,44 @@
           </div>
        </div>
    </div>
+   <hr>
+   @if($listEmpresasBajas->count()>0)
+   <div class="row">
+    <div class="col-md-12">
+        <div class=" panel panel-danger">
+           <div class=" panel-heading">Empresas Dadas de baja
+               <div class="pull-right">
+                   <div class="btn-group">
+                       <button type="button" class="multiselect dropdown-toggle btn btn-xs btn-warning" data-toggle="dropdown" title="Ayuda">
+                           <i class="fa fa-question-circle"></i><b class="caret"></b>
+                       </button>
+                       <ul class="multiselect-container dropdown-menu pull-right">
+                           <li>Desde Aqui Puede Dar de Altas las empresas dadas de baja</li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+           <div class=" panel-body">
+               <div class="table-responsive">
+                   <table class=" table table-bordered table-condensed table-hover table-responsive">
+                       <tr>
+                           <th>Nombre</th>
+                           <th>Localidad</th>
+                       </tr>
+                       @foreach($listEmpresasBajas as $empresa)
+                           <tr >
+                               <td>{{$empresa->nombre}}</td>
+                               <td>{{$empresa->Localidad->nombre}}</td>
+                               <td><a href="#"  class="btn btn-xs btn-success alta" data-idempresa="{{$empresa->id}}"  title="Dar de Alta Empresa"><i class="fa fa-thumbs-up"></i></a></td>
+                           </tr>
+                       @endforeach
+                   </table>
+               </div>
+           </div>
+      </div>
+    </div>
+   </div>
+   @endif
    <div class="modal fade" id="modalEmpresaAgregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
          <div class="modal-dialog">
                <div class="modal-content">
@@ -188,6 +226,37 @@
            <!-- /.modal-dialog -->
      </div>
     </div>
+
+<div class="modal fade" id="modalalta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+   <div class="modal-content">
+      {!!Form::open(['url'=>['admin/empresas/alta'],'method'=>'POST'])!!}
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Alta Empresa</h4>
+        </div>
+        <div class="modal-body">
+               <div class="row">
+                    <div class="col-md-12">
+                        {!!Form::Text('id',null,['class'=>'hidden','id'=>'idempresaA'])!!}
+                        <h3>¿Desea dar de alta la Empresa?</h3>
+                    </div>
+               </div>
+        <div class="modal-footer">
+            <div class="row ">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    {!!Form::submit('Aceptar', array('class' => 'btn btn-success'))!!}
+                </div>
+            </div>
+        </div>
+      {!! Form::close() !!}
+   </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
+</div>
 @endsection
 
 @section('script')
@@ -227,6 +296,12 @@
             $("#idD").val(id_alimento);
             $("#modalEmpresaEliminar").modal("show");
         });
+        $('body').on('click', '.alta', function (event) {
+                        event.preventDefault();
+                        var id_arbitro=$(this).attr('data-idempresa');
+                        $("#idempresaA").val(id_arbitro);
+                        $("#modalalta").modal("show");
+                    });
 
     });
 

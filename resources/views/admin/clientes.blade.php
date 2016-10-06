@@ -37,7 +37,7 @@
                <div class=" panel-heading">Clientes <a href="clientes/create" id="btnNuevoCliente" title="Nuevo Cliente" class=" btn-xs btn btn-success" ><i class=" fa fa-plus"></i></a>
                    <div class="pull-right">
                       <div class="btn-group">
-                        <a href="clientesdebaja">Clientes de BAJA</a>
+                        <a href="clientesdebaja" class="btn btn-xs btn-danger">Clientes dados de BAJA</a>
                       </div>
                        <div class="btn-group">
                            <button type="button" class="multiselect dropdown-toggle btn btn-xs btn-warning" data-toggle="dropdown" title="Ayuda">

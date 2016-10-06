@@ -3,10 +3,12 @@
 namespace viandas;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Empresa extends Model
 {
+    use SoftDeletes;
     protected $table = 'empresa';
 
     protected $fillable = ['nombre', 'idlocalidad','envio'];
@@ -17,6 +19,7 @@ class Empresa extends Model
     {
         return $this->hasOne('viandas\Localidad', 'id','idlocalidad');
     }
+
     public function Envio()
     {
         if($this->envio==1)
@@ -44,6 +47,8 @@ class Empresa extends Model
 
         return $tabla[0]->precio;
     }
+
+
 
 
 }

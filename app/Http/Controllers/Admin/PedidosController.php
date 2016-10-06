@@ -66,7 +66,13 @@ class PedidosController extends Controller
                                                                         AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."')
                                                                         AND dia_semana_id = ".$dia."
                                                                         AND cliente_id NOT IN
-                                                                            (SELECT id FROM cliente where deleted_at is not null)
+                                                                            (SELECT
+                                                                              c.id
+                                                                            FROM cliente c
+                                                                              LEFT JOIN empresa e
+                                                                                ON c.idempresa = e.id
+                                                                            WHERE c.deleted_at IS NOT NULL
+                                                                                OR e.deleted_at IS NOT NULL)
                                                                             ")
             ->join('cliente', 'cliente_dia.cliente_id','=','cliente.id')
             ->orderBy("cliente.apellido")->get();
@@ -659,7 +665,13 @@ class PedidosController extends Controller
                                                                         AND p.fecha_pedido ='".($fecha->format('Y-m-d'))."')
                                                                         AND dia_semana_id = ".$dia."
                                                                         AND cliente_id NOT IN
-                                                                            (SELECT id FROM cliente where deleted_at is not null)
+                                                                           (SELECT
+                                                                              c.id
+                                                                            FROM cliente c
+                                                                              LEFT JOIN empresa e
+                                                                                ON c.idempresa = e.id
+                                                                            WHERE c.deleted_at IS NOT NULL
+                                                                                OR e.deleted_at IS NOT NULL)
                                                                             ")
             ->join('cliente', 'cliente_dia.cliente_id','=','cliente.id')
             ->orderBy("cliente.apellido")->get();
