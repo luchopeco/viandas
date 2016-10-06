@@ -127,14 +127,10 @@
                                 Observaciones
                                 {!!Form::text('observaciones', '', array('class'=>'form-control'))!!}
                             </div>
-                        </div>
-                   </div>
-                   <div class="panel-footer">
-                       <div class="row">
-                            <div class="col-md-12">
-                                {!!Form::submit('Agregar', array('class' => 'btn btn-success btn-block'))!!}
+                            <div class="col-md-6">.
+                                 {!!Form::submit('Agregar', array('class' => 'btn btn-success btn-block'))!!}
                             </div>
-                       </div>
+                        </div>
                    </div>
               </div>
           {!! Form::close() !!}

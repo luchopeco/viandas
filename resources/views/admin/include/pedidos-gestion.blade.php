@@ -50,6 +50,22 @@
                     </div>
                 </div>
             </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-aqua">
+                                <i class="fa fa-line-chart" aria-hidden="true"></i>
+                            </span>
+                            <div class="info-box-content">
+                              <span class="info-box-text">Cantidad</span>
+                              <span class="info-box-number"> <strong>{{$listPedidos->count()}}</strong></span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

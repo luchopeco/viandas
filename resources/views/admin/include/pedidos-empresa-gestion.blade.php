@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="info-box">
-                            <span class="info-box-icon bg-green">
+                            <span class="info-box-icon bg-red">
                                 <i class="fa fa-usd" aria-hidden="true"></i>
                             </span>
                             <div class="info-box-content">

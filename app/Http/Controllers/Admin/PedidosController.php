@@ -728,4 +728,10 @@ class PedidosController extends Controller
 
     }
 
+    public function buscarpedidoempresa(Request $request)
+    {
+        $pedido=PedidoEmpresa::findOrFail($request->id);
+        return view ('admin.include.pedido-empresa-detalle', compact('pedido'));
+    }
+
 }

@@ -34,7 +34,7 @@
    <div class="row">
         <div class=" col-md-12">
              <div class=" panel panel-default">
-                   <div class=" panel-heading"> <i class="fa fa-users"></i> Pedidos Cliente
+                   <div class=" panel-heading " > <i class="fa fa-users"></i> Pedidos Cliente
                       <div class="pull-right">
                           <div class="btn-group">
                               <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -64,7 +64,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
-                                    <input class="form-control datepicker" name="fecha_pedido_hasta" id="txtfechaHasta" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
+                                    <input class="form-control datepicker " name="fecha_pedido_hasta" id="txtfechaHasta" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text" value="{{\Carbon\Carbon::now('America/Argentina/Buenos_Aires')->format('d/m/Y')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">.
-                                {!!Form::submit('Buscar', array('class' => 'btn btn-success btn-block','id'=>'btnBuscar'))!!}
+                                {!!Form::submit('Buscar', array('class' => 'btn btn-success btn-block ','id'=>'btnBuscar'))!!}
                             </div>
                         </div>
                         <br>
@@ -86,7 +86,6 @@
                    </div>
               </div>
         </div>
-
         <hr>
         <div class="col-md-12">
             <div class=" panel panel-default">
@@ -180,6 +179,23 @@
            </div>
            <!-- /.modal-dialog -->
        </div>
+
+<div class="modal fade" id="modalPedidoEmpresaDetalle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div id="pedido-empresa-detalle"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">Cerrar</button>
+            </div>
+    </div>
+    <!-- /.modal-content -->
+    </div>
+</div>
+
 @endsection
 
 @section('script')
@@ -238,6 +254,10 @@ function buscarPedidosEmpresa(){
 
 
 }
+
+
+
+
 $(function () {
 
     $("#cliente").autocomplete({
@@ -254,6 +274,7 @@ $(function () {
            buscarPedidosEmpresa();
       });
     $('body').on('click', '.editar', function (event) {
+
                 $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
                 event.preventDefault();
                 var idpedido=$(this).attr('data-idpedido');
@@ -277,6 +298,30 @@ $(function () {
                     });
 
     });
+
+
+
+
+     $('body').on('click', '.detalle-pedido-empresa', function (event) {
+                $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
+                event.preventDefault();
+                var id_empresa=$(this).attr('data-idpedido');
+                $.ajax({
+                     url:"../pedidos/buscarpedidoempresa",
+                     type: "POST",
+                     dataType: "html",
+                    data:{'id': id_empresa}
+                    })
+                .done(function(response){
+                    $('#cargando').html('');
+                        //alert(response.datos.titulo);
+                       $('#pedido-empresa-detalle').html(response);
+                        $("#modalPedidoEmpresaDetalle").modal("show");
+                    })
+                    .fail(function(){
+                        alert(id_alimento);
+                    });
+            });
 
 });
 </script>

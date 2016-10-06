@@ -90,7 +90,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::get('pedido/gestion','PedidosController@gestion');
         Route::post('pedidos/buscarpedidos','PedidosController@buscarpedidos');
         Route::post('pedidos/buscarpedidosempresas','PedidosController@buscarpedidosempresas');
-
+        Route::post('pedidos/buscarpedidoempresa','PedidosController@buscarpedidoempresa');
 
         Route::get('cobros','PedidosController@listarPedidos');
         

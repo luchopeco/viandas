@@ -79,7 +79,9 @@
                                             </div>
                                             <div class="box-body">
                                                 @foreach($p->ListLineasPedido as $lp)
+                                                    @if($lp->dia_id == $d->id)
                                                     <span>{{$lp->cantidad}} {{$lp->TipoVianda->nombre}} / </span>
+                                                    @endif
                                                 @endforeach
                                                 <div>
                                                 @foreach($p->Cliente->ListAlimentosNoMeGusta as $nmg)
@@ -106,7 +108,9 @@
                                         </div>
                                         <div class="box-body">
                                             @foreach($p->ListLineasPedido as $lp)
+                                                @if($lp->dia_id == $d->id)
                                                 <span>{{$lp->cantidad}} {{$lp->TipoVianda->nombre}} / </span>
+                                                @endif
                                             @endforeach
                                             <div>
                                             @foreach($p->Cliente->ListAlimentosNoMeGusta as $nmg)

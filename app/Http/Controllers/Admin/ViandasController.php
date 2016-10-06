@@ -67,6 +67,7 @@ class ViandasController extends Controller
                     $lp->cantidad = $viandaClienteEmpresa->cantidad;
                     $lp->tipo_vianda_id = $viandaClienteEmpresa->tipo_vianda_id;
                     $lp->precio_vianda = $viandaClienteEmpresa->TipoVianda->precio;
+                    $lp->dia_id = $viandaClienteEmpresa->dia_semana_id;
                     $pedidoCliente->ListLineasPedido->push($lp);
 
                     $idempresa = $pedidoCliente->Cliente->idempresa;
@@ -136,6 +137,7 @@ class ViandasController extends Controller
                     $lp->cantidad = $viandaClienteEmpresa->cantidad;
                     $lp->tipo_vianda_id = $viandaClienteEmpresa->tipo_vianda_id;
                     $lp->precio_vianda = $viandaClienteEmpresa->TipoVianda->precio;
+                    $lp->dia_id =  $request->id;
                     $pedidoCliente->ListLineasPedido->push($lp);
 
                     $idempresa = $pedidoCliente->Cliente->idempresa;
