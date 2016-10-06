@@ -720,11 +720,16 @@ class PedidosController extends Controller
   //      var_dump($llll->Empresa->nombre);
 
         $listCadetes = Cadete::all()->lists('nombre', 'id');
+        $cantidadTotal=0;
+        foreach($listPedidosEmpresa as $lpe )
+        {
+           $cantidadTotal= $cantidadTotal+ $lpe->ListPedidos->count();
+        }
+        $cantidadTotal = $cantidadTotal+ $listPedidosClientes->count();
 
 
 
-
-        return view ('admin.include.pedidosV1', compact('listPedidosEmpresa','listPedidosClientes','fecha_pedido','listCadetes'));
+        return view ('admin.include.pedidosV1', compact('cantidadTotal','listPedidosEmpresa','listPedidosClientes','fecha_pedido','listCadetes'));
 
     }
 

@@ -1,3 +1,10 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="callout callout-info">
+            <h4>{{$cantidadTotal}} Pedidos en Total</h4>
+        </div>
+    </div>
+</div>
 {!!Form::open(['route'=>'admin.pedidos.store','method'=>'POST', 'data-toggle'=>'validator'])!!}
 <?php
 //contador Pedido Empresa
@@ -12,7 +19,7 @@ $cpc=0;
         <div class="box-header with-border">
             <div class="row agrupacion-envio">
                 <div class="col-md-3">
-                    <i class="fa fa-leaf"></i>  Empresa: {{$emp->Empresa->nombre}}
+                    <i class="fa fa-leaf"></i>  Empresa: {{$emp->Empresa->nombre}} <span class="label label-success">{{$emp->ListPedidos->count()}} Pedidos</span>
                 </div>
                 <div class="col-md-2">
                     <div class="input-group">
@@ -94,7 +101,7 @@ $cpc=0;
     <div class="box-header with-border">
         <div class="row">
             <div class="col-md-9">
-                <i class="fa fa-leaf"></i>  Sin Empresa
+                <i class="fa fa-leaf"></i>  Sin Empresa <span class="label label-success">{{$listPedidosClientes->count()}} Pedidos</span>
             </div>
             <div class="col-md-3" title="Confirma todos o ninguno de los pedidos de la empresa">
                 <div class="input-group">
