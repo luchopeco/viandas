@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use viandas\Cliente;
 use viandas\DiaSemana;
+use viandas\Empresa;
 use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\LineaPedido;
@@ -100,7 +101,7 @@ class ViandasController extends Controller
                         WHERE c.deleted_at IS NULL
                         GROUP BY tv.nombre, dia
                         ORDER BY cantidad, dia");
-                       return view ('admin.include.viandas',compact('listPedidosClientes','listPedidosEmpresa','listDiaSemana','cantidades'));
+        return view ('admin.include.viandas',compact('listPedidosClientes','listPedidosEmpresa','listDiaSemana','cantidades'));
     }
     ///Busca por dia de la semana
     public function buscar(Request $request)
@@ -108,7 +109,13 @@ class ViandasController extends Controller
         //$listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
         $listViandas =  ViandaCliente::whereRaw("dia_semana_id = ".$request->id."
                                                 AND cliente_id NOT IN
-                                                    (SELECT id FROM cliente where deleted_at is not null)
+                                                    (SELECT
+                                                                              c.id
+                                                                            FROM cliente c
+                                                                              LEFT JOIN empresa e
+                                                                                ON c.idempresa = e.id
+                                                                            WHERE c.deleted_at IS NOT NULL
+                                                                                OR e.deleted_at IS NOT NULL)
                                                     ")
             ->join('cliente', 'cliente_dia.cliente_id','=','cliente.id')
             ->orderBy("cliente.apellido")->get();
@@ -142,6 +149,7 @@ class ViandasController extends Controller
 
                     $idempresa = $pedidoCliente->Cliente->idempresa;
                 }
+
                 if ($idempresa !=null)
                 {
                     $pedidoEmpresa->dia_id = $request->id;
@@ -172,7 +180,7 @@ class ViandasController extends Controller
                         and cd.dia_semana_id = ".$request->id."
                         GROUP BY tv.nombre, dia
                         ORDER BY cantidad, dia");
-       // $listClientes = Cliente::orderBy('nombre')->get();
+        // $listClientes = Cliente::orderBy('nombre')->get();
         //$arrDiaSemana = array();
         $diaSemana = DiaSemana::findOrFail($request->id);
         $arrDiaSemana[] = $diaSemana;
