@@ -157,111 +157,111 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-            $rq = $request->all();
-            $listPem = collect();
-            if(isset($rq['pedEmp']) )
-            {
-                foreach ($rq['pedEmp'] as $pe) {
-                    $pem = new PedidoEmpresa();
-                    $pem->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pe['fecha_pedido']);
-                    $pem->empresa_id = $pe['empresa_id'];
-                    $pem->precio_envio = 0;
-                    if (isset($pe['envio'])) {
-                        $pem->envio = 1;
-                        $pem->precio_envio = $pe['precio_envio'];
-                        $pem->cadete_id = $pe['cadete_id'];
-                    }
-                    $pem->cobrado = 0;
-                    $pem->total = $pem->precio_envio;
-                    foreach ($pe['ped'] as $pc) {
-                        $pedido = new Pedido();
-                        $pedido->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pc['fecha_pedido']);
-                        $pedido->cliente_id = $pc['cliente_id'];
-                        $pedido->cobrado = 0;
-                        $pedido->total = 0;
-                        $almenosUnaLineaPedido = 0;
-                        foreach ($pc['linea'] as $lp) {
-                            if (isset($lp['confirmado'])) {
-                                $almenosUnaLineaPedido = 1;
-                                $lpp = new LineaPedido();
-                                $lpp->cantidad = $lp['cantidad'];
-                                $lpp->tipo_vianda_id = $lp['tipo_vianda_id'];
-                                $lpp->precio_vianda = $lp['precio_vianda'];
-                                $pedido->ListLineasPedido->add($lpp);
-                                $pedido->total = $pedido->total + ($lpp->precio_vianda);
-                            }
-                        }
-                        if ($almenosUnaLineaPedido == 1) {
-                            $pem->ListPedidos->add($pedido);
-                            $pem->total = $pem->total + $pedido->total;
-                        }
-                    }
-                    if ($pem->ListPedidos->count() > 0) {
-                        $listPem->push($pem);
-                    }
+        $rq = $request->all();
+        $listPem = collect();
+        if(isset($rq['pedEmp']) )
+        {
+            foreach ($rq['pedEmp'] as $pe) {
+                $pem = new PedidoEmpresa();
+                $pem->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pe['fecha_pedido']);
+                $pem->empresa_id = $pe['empresa_id'];
+                $pem->precio_envio = 0;
+                if (isset($pe['envio'])) {
+                    $pem->envio = 1;
+                    $pem->precio_envio = $pe['precio_envio'];
+                    $pem->cadete_id = $pe['cadete_id'];
                 }
-            }
-            $listPedCli = collect();
-            if(isset($rq['pedEmp']) ) {
-                foreach ($rq['pedCli'] as $pcl) {
+                $pem->cobrado = 0;
+                $pem->total = $pem->precio_envio;
+                foreach ($pe['ped'] as $pc) {
                     $pedido = new Pedido();
-                    $pedido->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pcl['fecha_pedido']);
-                    $pedido->cliente_id = $pcl['cliente_id'];
+                    $pedido->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pc['fecha_pedido']);
+                    $pedido->cliente_id = $pc['cliente_id'];
                     $pedido->cobrado = 0;
                     $pedido->total = 0;
-                    $pedido->precio_envio = 0;
-                    if (isset($pcl['envio'])) {
-                        $pedido->envio = 1;
-                        $pedido->precio_envio = $pcl['precio_envio'];
-                        $pedido->cadete_id = $pcl['cadete_id'];
-                    }
-                    $pedido->total = $pedido->precio_envio;
-                    $almenosUnaLineaPedidoc = 0;
-                    foreach ($pcl['linea'] as $lpc) {
-                        if (isset($lpc['confirmado'])) {
-                            $almenosUnaLineaPedidoc = 1;
-                            $lppp = new LineaPedido();
-                            $lppp->cantidad = $lpc['cantidad'];
-                            $lppp->tipo_vianda_id = $lpc['tipo_vianda_id'];
-                            $lppp->precio_vianda = $lpc['precio_vianda'];
-                            $pedido->ListLineasPedido->add($lppp);
-                            $pedido->total = $pedido->total + ($lppp->precio_vianda);
+                    $almenosUnaLineaPedido = 0;
+                    foreach ($pc['linea'] as $lp) {
+                        if (isset($lp['confirmado'])) {
+                            $almenosUnaLineaPedido = 1;
+                            $lpp = new LineaPedido();
+                            $lpp->cantidad = $lp['cantidad'];
+                            $lpp->tipo_vianda_id = $lp['tipo_vianda_id'];
+                            $lpp->precio_vianda = $lp['precio_vianda'];
+                            $pedido->ListLineasPedido->add($lpp);
+                            $pedido->total = $pedido->total + ($lpp->precio_vianda);
                         }
                     }
-                    if ($almenosUnaLineaPedidoc == 1) {
-                        $listPedCli->push($pedido);
+                    if ($almenosUnaLineaPedido == 1) {
+                        $pem->ListPedidos->add($pedido);
+                        $pem->total = $pem->total + $pedido->total;
                     }
                 }
+                if ($pem->ListPedidos->count() > 0) {
+                    $listPem->push($pem);
+                }
             }
-
-            foreach ($listPem as $pedidoEmpresa)
-            {
-                $pedidoEmpresa->save();
-                foreach ($pedidoEmpresa->ListPedidos as $pedidoCliente)
-                {
-                    $pedidoEmpresa->ListPedidos()->save($pedidoCliente);
-                    foreach($pedidoCliente->ListLineasPedido as $linPed )
-                    {
-                        $pedidoCliente->ListLineasPedido()->save($linPed);
+        }
+        $listPedCli = collect();
+        if(isset($rq['pedEmp']) ) {
+            foreach ($rq['pedCli'] as $pcl) {
+                $pedido = new Pedido();
+                $pedido->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pcl['fecha_pedido']);
+                $pedido->cliente_id = $pcl['cliente_id'];
+                $pedido->cobrado = 0;
+                $pedido->total = 0;
+                $pedido->precio_envio = 0;
+                if (isset($pcl['envio'])) {
+                    $pedido->envio = 1;
+                    $pedido->precio_envio = $pcl['precio_envio'];
+                    $pedido->cadete_id = $pcl['cadete_id'];
+                }
+                $pedido->total = $pedido->precio_envio;
+                $almenosUnaLineaPedidoc = 0;
+                foreach ($pcl['linea'] as $lpc) {
+                    if (isset($lpc['confirmado'])) {
+                        $almenosUnaLineaPedidoc = 1;
+                        $lppp = new LineaPedido();
+                        $lppp->cantidad = $lpc['cantidad'];
+                        $lppp->tipo_vianda_id = $lpc['tipo_vianda_id'];
+                        $lppp->precio_vianda = $lpc['precio_vianda'];
+                        $pedido->ListLineasPedido->add($lppp);
+                        $pedido->total = $pedido->total + ($lppp->precio_vianda);
                     }
                 }
-
+                if ($almenosUnaLineaPedidoc == 1) {
+                    $listPedCli->push($pedido);
+                }
             }
+        }
 
-
-            foreach ($listPedCli as $pedidoCli)
+        foreach ($listPem as $pedidoEmpresa)
+        {
+            $pedidoEmpresa->save();
+            foreach ($pedidoEmpresa->ListPedidos as $pedidoCliente)
             {
-                $pedidoCli->save();
-                foreach($pedidoCli->ListLineasPedido as $linPedi )
+                $pedidoEmpresa->ListPedidos()->save($pedidoCliente);
+                foreach($pedidoCliente->ListLineasPedido as $linPed )
                 {
-                    $pedidoCli->ListLineasPedido()->save($linPedi);
+                    $pedidoCliente->ListLineasPedido()->save($linPed);
                 }
             }
 
+        }
 
 
-            Session::flash('mensajeOk', 'Pedidos Confirmados Con Exito');
-            return back();
+        foreach ($listPedCli as $pedidoCli)
+        {
+            $pedidoCli->save();
+            foreach($pedidoCli->ListLineasPedido as $linPedi )
+            {
+                $pedidoCli->ListLineasPedido()->save($linPedi);
+            }
+        }
+
+
+
+        Session::flash('mensajeOk', 'Pedidos Confirmados Con Exito');
+        return back();
 
 
     }
@@ -342,31 +342,31 @@ class PedidosController extends Controller
             $empresaSQL='';
         }
         else{
-            $empresaActual = Empresa::find($request->empresa);    
+            $empresaActual = Empresa::find($request->empresa);
 
             $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
 
         }
 
-       
+
         $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
 
 
 //. ($fechadesde->format('Y-m-d'))."'"
-      //  $dia= $fecha->dayOfWeek+1;
+        //  $dia= $fecha->dayOfWeek+1;
 
-      //  $listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
+        //  $listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
 
         //$listViandas = ViandaCliente::all();
 
 
         /// recorro los pedidos, y limpio las viandas segun se realizaron los pedidos
-  /*      foreach ($listPedidos as $pedido)
-        {
-            $listViandas = $listViandas->where('cliente_id',' != ', $pedido->cliente_id)->where('tipo_vianda_id','!= ', $pedido->tipo_vianda_id);
-        }
-*/
-       // $fecha_pedido=$request->fecha;
+        /*      foreach ($listPedidos as $pedido)
+              {
+                  $listViandas = $listViandas->where('cliente_id',' != ', $pedido->cliente_id)->where('tipo_vianda_id','!= ', $pedido->tipo_vianda_id);
+              }
+      */
+        // $fecha_pedido=$request->fecha;
 
         $listEmpresas = Empresa::all();
 
@@ -393,7 +393,7 @@ class PedidosController extends Controller
             $empresaSQL='';
         }
         else{
-            $empresaActual = Empresa::find($eID);    
+            $empresaActual = Empresa::find($eID);
 
             $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
 
@@ -419,27 +419,27 @@ class PedidosController extends Controller
         $arreglo = Array();
 
         foreach ($listPedidos as $pedido) {
-          
-                $cont = Array();
-                $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido; 
-                $cont[] = $pedido->fecha_pedido;
-                $lineaP = '';
-                foreach ($pedido->ListLineasPedido as $lp) {
-                    $lineaP .= $lp->TipoVianda->nombre.' Cant: '.$lp->cantidad.'; '; 
-                }
 
-                $cont[] = $lineaP;
-                 
-                $cont[] = $pedido->precio_envio;
-                $cont[] = $pedido->total;        
-                $cobrado='';
-                if($pedido->cobrado == 1){
-                  $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'" checked="checked">';
-                }else{
-                  $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'">';
-                }
-                $cont[] = $cobrado;
-                $arreglo[] = $cont;
+            $cont = Array();
+            $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido;
+            $cont[] = $pedido->fecha_pedido;
+            $lineaP = '';
+            foreach ($pedido->ListLineasPedido as $lp) {
+                $lineaP .= $lp->TipoVianda->nombre.' Cant: '.$lp->cantidad.'; ';
+            }
+
+            $cont[] = $lineaP;
+
+            $cont[] = $pedido->precio_envio;
+            $cont[] = $pedido->total;
+            $cobrado='';
+            if($pedido->cobrado == 1){
+                $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'" checked="checked">';
+            }else{
+                $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'">';
+            }
+            $cont[] = $cobrado;
+            $arreglo[] = $cont;
         }
 
         return json_encode($arreglo);
@@ -469,21 +469,21 @@ class PedidosController extends Controller
         else{
             $empresaActual = Empresa::find($eID);
             $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
-        }       
+        }
 
         $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
         $arreglo = Array();
 
         foreach ($listPedidos as $pedido) {
-          if(isset($_GET[$pedido->id])){   // está cobrado el pedido
-            $pedido->cobrado = 1;            
-          }
-          else{
-            $pedido->cobrado=0;
-          }
-          $pedido->save();
+            if(isset($_GET[$pedido->id])){   // está cobrado el pedido
+                $pedido->cobrado = 1;
+            }
+            else{
+                $pedido->cobrado=0;
+            }
+            $pedido->save();
         }
-        
+
         Session::flash('mensajeOk', 'COBROS ACTUALIZADOS !');
         return redirect('admin/cobros');
 
@@ -499,35 +499,35 @@ class PedidosController extends Controller
     {
         try {
 
-                $ped = new Pedido();
-                $f = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido);
-                $lp = new LineaPedido();
-                $lp->cantidad = $request->cantidad;
-                $lp->tipo_vianda_id = $request->tipo_vianda_id;
-                $lp->precio_vianda = $request->precio_vianda;
+            $ped = new Pedido();
+            $f = Carbon::createFromFormat('d/m/Y', $request->fecha_pedido);
+            $lp = new LineaPedido();
+            $lp->cantidad = $request->cantidad;
+            $lp->tipo_vianda_id = $request->tipo_vianda_id;
+            $lp->precio_vianda = $request->precio_vianda;
 
-                $ped->fecha_pedido = $f->format('Y-m-d');
-                  //$ped->cantidad =
-                $precioEnvio = 0;
-                if (isset($request->envio)) {
+            $ped->fecha_pedido = $f->format('Y-m-d');
+            //$ped->cantidad =
+            $precioEnvio = 0;
+            if (isset($request->envio)) {
                 $ped->envio = 1;
                 $ped->cadete_id = $request->cadete_id;
                 $ped->precio_envio = $request->precio_envio;
-                    $precioEnvio =$ped->precio_envio;
-                }
-                $ped->observaciones=$request->observaciones;
-                $ped->cliente_id = $request->cliente_id;
+                $precioEnvio =$ped->precio_envio;
+            }
+            $ped->observaciones=$request->observaciones;
+            $ped->cliente_id = $request->cliente_id;
 
 
-                $ped->total = ($lp->precio_vianda * $lp->cantidad) + $precioEnvio;
+            $ped->total = ($lp->precio_vianda * $lp->cantidad) + $precioEnvio;
 
-                $ped->cobrado=0;
-                $ped->save();
-                $ped->ListLineasPedido() ->save($lp);
+            $ped->cobrado=0;
+            $ped->save();
+            $ped->ListLineasPedido() ->save($lp);
 
 
-                //$lp->pedido_id = $ped->id;
-                //$lp->save();
+            //$lp->pedido_id = $ped->id;
+            //$lp->save();
 
             Session::flash('mensajeOk', 'Pedido Agregado Con Exito');
             return back();
@@ -587,20 +587,20 @@ class PedidosController extends Controller
         $cadetes = Cadete::all();
 
 
-          return view ('admin.liquidarcadete', compact('cadetes'));
+        return view ('admin.liquidarcadete', compact('cadetes'));
 
 
     }
 
     public function liquidarCadeteUnico(){
-        
+
         $cadete = Cadete::findOrFail($_GET['idcadete']);
-        
+
 
         $fechaHoy = new Carbon('now');
         $fechadesde = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechadesde']));
         $fechahasta = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechahasta']));
-        
+
 //        $pedidoscadete = Pedido::where('cadete_id','=',$cadete->id);
 
         $listPedidos = Pedido::whereRaw("cadete_id='".$cadete->id."' AND (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
@@ -608,22 +608,22 @@ class PedidosController extends Controller
         $arreglo = Array();
         $liquidacion=0;
         foreach ($listPedidos as $pedido) {
-          
-                $cont = Array();
-                $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido; 
-                $cont[] = $pedido->fecha_pedido;                
-                $cont[] = $pedido->precio_envio;                       
-              
-                $arreglo[] = $cont;
 
-                $liquidacion += $pedido->precio_envio; 
+            $cont = Array();
+            $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido;
+            $cont[] = $pedido->fecha_pedido;
+            $cont[] = $pedido->precio_envio;
+
+            $arreglo[] = $cont;
+
+            $liquidacion += $pedido->precio_envio;
         }
         $arreglo[] = $liquidacion;
 
         return json_encode($arreglo);
         die();
 
-          
+
 
 
     }
@@ -718,18 +718,18 @@ class PedidosController extends Controller
         //$l = $listp->groupBy('Cliente.idempresa');
         //foreach($l as $ll){
         //  foreach ($ll as $lll)
-          //  {
-            //    $llll = $lll->Cliente;
-           // }
+        //  {
+        //    $llll = $lll->Cliente;
+        // }
 
 //        }
-  //      var_dump($llll->Empresa->nombre);
+        //      var_dump($llll->Empresa->nombre);
 
         $listCadetes = Cadete::all()->lists('nombre', 'id');
         $cantidadTotal=0;
         foreach($listPedidosEmpresa as $lpe )
         {
-           $cantidadTotal= $cantidadTotal+ $lpe->ListPedidos->count();
+            $cantidadTotal= $cantidadTotal+ $lpe->ListPedidos->count();
         }
         $cantidadTotal = $cantidadTotal+ $listPedidosClientes->count();
 

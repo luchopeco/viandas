@@ -95,10 +95,11 @@ class ViandasController extends Controller
         $cantidades = DB::select("SELECT tv.nombre , sum(cd.cantidad) AS cantidad, cd.dia_semana_id AS dia
                         FROM
                             cliente_dia cd
-                            INNER JOIN tipo_vianda tv
-                                ON   tv.id = cd.tipo_vianda_id
-                                INNER JOIN cliente c ON c.id = cd.cliente_id
+                            INNER JOIN tipo_vianda tv ON   tv.id = cd.tipo_vianda_id
+                            INNER JOIN cliente c ON c.id = cd.cliente_id
+                            LEFT JOIN empresa e on c.idempresa =  e.id
                         WHERE c.deleted_at IS NULL
+                        and e.deleted_at IS NULL
                         GROUP BY tv.nombre, dia
                         ORDER BY cantidad, dia");
         return view ('admin.include.viandas',compact('listPedidosClientes','listPedidosEmpresa','listDiaSemana','cantidades'));
@@ -173,11 +174,12 @@ class ViandasController extends Controller
         $cantidades = DB::select("SELECT tv.nombre , sum(cd.cantidad) AS cantidad, cd.dia_semana_id AS dia
                         FROM
                             cliente_dia cd
-                            INNER JOIN tipo_vianda tv
-                                ON   tv.id = cd.tipo_vianda_id
-                                INNER JOIN cliente c ON c.id = cd.cliente_id
+                            INNER JOIN tipo_vianda tv  ON   tv.id = cd.tipo_vianda_id
+                            INNER JOIN cliente c ON c.id = cd.cliente_id
+                            LEFT JOIN empresa e on c.idempresa = e.id
                         WHERE c.deleted_at IS NULL
                         and cd.dia_semana_id = ".$request->id."
+                        and e.deleted_at IS NULL
                         GROUP BY tv.nombre, dia
                         ORDER BY cantidad, dia");
         // $listClientes = Cliente::orderBy('nombre')->get();

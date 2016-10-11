@@ -15,22 +15,22 @@
                                     <th>Cobrado</th>
                                 </tr>
                                 @foreach($listPedidos as $p)
-                                <tr>
-                                    <td> {{$p->FechaPedido()}}</td>
-                                    <td>{{$p->Empresa->nombre}}</td>
-                                    <td>$ {{$p->total}}</td>
-                                    <td>
-                                    @if($p->envio==1)
-                                        ${{$p->precio_envio}} - {{$p->Cadete->nombre}}
-                                    @else
-                                        Sin Envio
-                                    @endif
-                                    </td>
-                                    <td>{{$p->observaciones}}</td>
-                                    <td>{{$p->FueCobrado()}}</td>
-                                    <td><a href="#"  class="btn btn-xs btn-info editar-pedido-empresa" data-idpedido="{{$p->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
-                                    <td><a href="#"  class="btn btn-xs btn-primary detalle-pedido-empresa" data-idpedido="{{$p->id}}"  title="Detalle"> <i class="fa fa-bars" aria-hidden="true"></i></a></td>
-                                </tr>
+                                    <tr>
+                                        <td> {{$p->FechaPedido()}}</td>
+                                        <td>{{$p->Empresa->nombre}}</td>
+                                        <td>$ {{$p->total}}</td>
+                                        <td>
+                                            @if($p->envio==1)
+                                                ${{$p->precio_envio}} - {{$p->Cadete->nombre}}
+                                            @else
+                                                Sin Envio
+                                            @endif
+                                        </td>
+                                        <td>{{$p->observaciones}}</td>
+                                        <td>{{$p->FueCobrado()}}</td>
+                                        <td><a href="#"  class="btn btn-xs btn-info editar-pedido-empresa" data-idpedido="{{$p->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
+                                        <td><a href="#"  class="btn btn-xs btn-primary detalle-pedido-empresa" data-idpedido="{{$p->id}}"  title="Detalle"> <i class="fa fa-bars" aria-hidden="true"></i></a></td>
+                                    </tr>
                                 @endforeach
                             </table>
                         </div>
@@ -45,8 +45,8 @@
                                 <i class="fa fa-line-chart" aria-hidden="true"></i>
                             </span>
                             <div class="info-box-content">
-                              <span class="info-box-text">Cantidad</span>
-                              <span class="info-box-number"> <strong>{{$listPedidos->count()}}</strong></span>
+                                <span class="info-box-text">Cantidad</span>
+                                <span class="info-box-number"> <strong>{{$listPedidos->count()}}</strong></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -57,8 +57,8 @@
                                 <i class="fa fa-usd" aria-hidden="true"></i>
                             </span>
                             <div class="info-box-content">
-                              <span class="info-box-text">Total</span>
-                              <span class="info-box-number"> <strong>$ {{$listPedidos->sum('total')}}</strong></span>
+                                <span class="info-box-text">Total</span>
+                                <span class="info-box-number"> <strong>$ {{$listPedidos->sum('total')}}</strong></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
