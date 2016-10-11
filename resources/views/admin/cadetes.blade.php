@@ -34,14 +34,17 @@
    <div class="row">
        <div class=" col-md-12">
           <div class=" panel panel-default">
-               <div class=" panel-heading">Cadetes <a href="" id="btnNuevaLocalidad" title="Nueva Localidad" class=" btn-xs btn btn-success" data-toggle="modal" data-target="#modalLocalidadAgregar"><i class=" fa fa-plus"></i></a>
+               <div class=" panel-heading">Cadetes <a href="" id="btnNuevaLocalidad" title="Nuevo Cadete" class=" btn-xs btn btn-success" data-toggle="modal" data-target="#modalLocalidadAgregar"><i class=" fa fa-plus"></i></a>
                    <div class="pull-right">
                        <div class="btn-group">
+                           
+                           <a href="cadetesdebaja/" class="btn btn-xs btn-danger"> Cadetes de Baja</a>
+
                            <button type="button" class="multiselect dropdown-toggle btn btn-xs btn-warning" data-toggle="dropdown" title="Ayuda">
                                <i class="fa fa-question-circle"></i><b class="caret"></b>
                            </button>
                            <ul class="multiselect-container dropdown-menu pull-right">
-                               <li>Desde Aqui Puede Agregar (Click en "+"), editar o eliminar una Localidad</li>
+                               <li>Desde Aqui Puede Agregar (Click en "+"), editar o eliminar un cadete</li>
                            </ul>
                        </div>
                    </div>
