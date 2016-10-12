@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumb')
-<li><a href="/admin/home"><i class="fa fa-home"></i> Home</a></li>
+<li><a href="/admin/cadetes"><i class="fa fa-home"></i> Home / Cadetes</a></li>
 @endsection
 
 @section('content')
@@ -72,7 +72,7 @@
                                              
                                              
                                              <td><a href="#" class="btn btn-xs btn-warning baja" data-idcliente="{{$cadete->id}}"  title="Dar de Alta"><i class="fa fa-thumbs-up"></i></a></td>
-                                             <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cadete->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
+                                             <!--<td><a href="#" class="btn btn-xs btn-danger eliminar" data-idcliente="{{$cadete->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>-->
                                          </tr>
 
                                          

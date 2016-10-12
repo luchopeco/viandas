@@ -44,7 +44,7 @@
                                <i class="fa fa-question-circle"></i><b class="caret"></b>
                            </button>
                            <ul class="multiselect-container dropdown-menu pull-right">
-                               <li>Desde Aqui Puede Agregar (Click en "+"), editar o eliminar un cadete</li>
+                               <li>Desde Aqui Puede Agregar (Click en "+"), editar o dar de baja un cadete</li>
                            </ul>
                        </div>
                    </div>
@@ -67,7 +67,7 @@
                                    
 
                                    <td><a href="#"  class="btn btn-xs btn-info editar" data-idlocalidad="{{$loc->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
-                                   <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idlocalidad="{{$loc->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
+                                   <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idlocalidad="{{$loc->id}}"  title="Dar de Baja"> <i class=" fa fa-close"></i></a></td>
                                </tr>
                            @endforeach
                        </table>
@@ -171,13 +171,13 @@
                  {!!Form::open(['route'=>['admin.cadetes.destroy'],'method'=>'DELETE'])!!}
                    <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                       <h4 class="modal-title" id="myModalLabel">Eliminando Cadete</h4>
+                       <h4 class="modal-title" id="myModalLabel">Dar de baja Cadete</h4>
                    </div>
                    <div class="modal-body">
                           <div class="row">
                                <div class="col-md-12">
                                    {!!Form::Text('id',null,['class'=>'hidden','id'=>'idD'])!!}
-                                   <h3>¿Desea Eliminar  el cadete?</h3>
+                                   <h3>¿Desea dar de baja  el cadete?</h3>
                                    <div id="caca"></div>
                                </div>
                           </div>

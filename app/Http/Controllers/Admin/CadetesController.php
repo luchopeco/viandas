@@ -161,6 +161,24 @@ class CadetesController extends Controller
         }
     }
 
+    public function alta(Request $request)
+    {
+
+        try
+        {  
+            Cadete::withTrashed()->where('id', $request->id)->restore();
+            //Cliente::restore($request->id);
+            Session::flash('mensajeOk', 'Cadete Dado de Alta con Exito');
+            return back();
+        }
+        catch(QueryException  $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+
+    }
+
 
 
     
