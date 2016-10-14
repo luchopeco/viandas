@@ -74,7 +74,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('localidades/buscar','LocalidadesController@buscar');
 
         Route::resource('cadetes','CadetesController');
+        Route::get('cadetesdebaja','CadetesController@listaDeBaja');
         Route::post('cadetes/buscar','CadetesController@buscar');
+        
+        Route::post('cadetes/alta','CadetesController@alta');
+
 
         Route::get('pedidos/liquidarcadeteunico', 'PedidosController@liquidarCadeteUnico');
 

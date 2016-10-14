@@ -8,6 +8,7 @@ use viandas\Http\Requests;
 use viandas\Http\Controllers\Controller;
 use viandas\Cadete;
 
+
 class CadetesController extends Controller
 {
     public function __construct()
@@ -135,7 +136,7 @@ class CadetesController extends Controller
     {
         try{
             Cadete::destroy($request->id);
-            Session::flash('mensajeOk','Cadete Eliminado con éxito');
+            Session::flash('mensajeOk','Cadete dado de baja con éxito');
             return back();
         }
         catch(\Exception $ex)
@@ -144,6 +145,41 @@ class CadetesController extends Controller
             return back();
         }
     }
+
+    public function listaDeBaja()
+    {
+        try {
+           //var_dump('algo');die();
+           $listDeleted = Cadete::onlyTrashed()->get();
+            
+            return view('admin.cadetesbaja', compact('listDeleted'));
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+    }
+
+    public function alta(Request $request)
+    {
+
+        try
+        {  
+            Cadete::withTrashed()->where('id', $request->id)->restore();
+            //Cliente::restore($request->id);
+            Session::flash('mensajeOk', 'Cadete Dado de Alta con Exito');
+            return back();
+        }
+        catch(QueryException  $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+
+    }
+
+
 
     
 }
