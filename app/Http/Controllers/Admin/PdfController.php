@@ -33,13 +33,12 @@ class PdfController extends Controller
         //ini_set("memory_limit",-1);
         //ini_set('max_execution_time', 0);
 
-       $listPedidos= DB::select("SELECT
+        $listPedidos= DB::select("SELECT
                         c.apellido,
                         c.nombre,
-                        case c.envio when 1 then 'SI'  when 0 then 'NO' end as envio,
-                        cd.cantidad,
-                        CONCAT(tv.nombre, ' - $', tv.precio ) AS pedido,
-                        cd.cantidad * tv.precio AS total,
+                        CASE c.envio WHEN 1 THEN 'SI'  WHEN 0 THEN 'NO' END AS envio,
+                        GROUP_CONCAT(DISTINCT CONCAT(cd.cantidad,' ',tv.nombre, ' $', tv.precio,'<br>' ) SEPARATOR ' ') AS pedido,
+			SUM(cd.cantidad * tv.precio) /COUNT(COALESCE( a.nombre,0))	 AS total,
                         GROUP_CONCAT(DISTINCT a.nombre ORDER BY a.nombre SEPARATOR  ', ' ) no_me_gusta,
                         e.nombre AS empresa,
                         cd.dia_semana_id AS dia
@@ -51,13 +50,10 @@ class PdfController extends Controller
                             LEFT JOIN no_me_gusta nmg ON nmg.cliente_id = c.id
                             LEFT JOIN alimento a ON a.id = nmg.alimento_id
                             LEFT JOIN empresa e ON e.id = c.idempresa
-                     where c.deleted_at is NULL
+                     WHERE c.deleted_at IS NULL
                     GROUP BY 	c.apellido,
                         c.nombre,
-                        cd.cantidad,
                         c.envio,
-                         pedido,
-                        total,
                         dia
                     ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
                     ");
