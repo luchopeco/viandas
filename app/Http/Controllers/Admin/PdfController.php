@@ -38,7 +38,7 @@ class PdfController extends Controller
                         c.nombre,
                         CASE c.envio WHEN 1 THEN 'SI'  WHEN 0 THEN 'NO' END AS envio,
                         GROUP_CONCAT(DISTINCT CONCAT(cd.cantidad,' ',tv.nombre, ' $', tv.precio,'<br>' ) SEPARATOR ' ') AS pedido,
-			SUM(cd.cantidad * tv.precio) /COUNT(COALESCE( a.nombre,0))	 AS total,
+			SUM(cd.cantidad * tv.precio) / CASE COUNT(a.nombre) WHEN 0 THEN 1 ELSE COUNT(a.nombre)  END AS total,
                         GROUP_CONCAT(DISTINCT a.nombre ORDER BY a.nombre SEPARATOR  ', ' ) no_me_gusta,
                         e.nombre AS empresa,
                         cd.dia_semana_id AS dia
