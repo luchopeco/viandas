@@ -4,6 +4,7 @@ namespace viandas\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Scalar\LNumber;
@@ -724,8 +725,10 @@ class PedidosController extends Controller
 
 //        }
         //      var_dump($llll->Empresa->nombre);
-
-        $listCadetes = Cadete::all()->lists('nombre', 'id');
+        $listCadetes =   DB::table('cadete')->select(DB::raw('id, CONCAT( COALESCE(apellido, ""),", ", COALESCE(nombre, "")) as apenom'))
+            ->where('deleted_at',null)
+            ->orderBy('apenom')
+            ->lists('apenom','id');
         $cantidadTotal=0;
         foreach($listPedidosEmpresa as $lpe )
         {

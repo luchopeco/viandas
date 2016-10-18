@@ -137,7 +137,7 @@ $cpc=0;
                                 <div class="col-md-5">
                                     <div class="input-group cadete-pedido @if($p->Cliente->envio==0) hidden  @endif">
                                         <span class="input-group-addon"><i class="fa fa-motorcycle"></i></span>
-                                        {!!Form::select('pedCli['.$cpc.'][cadete_id]', $listCadetes,null,array('class' => 'form-control '))!!}
+                                        {!!Form::select('pedCli['.$cpc.'][cadete_id]', $listCadetes,$p->Cliente->idcadete,array('class' => 'form-control '))!!}
                                     </div>
                                 </div>
                             </div>
