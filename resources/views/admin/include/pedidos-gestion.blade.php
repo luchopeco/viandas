@@ -42,7 +42,8 @@
                                     </td>
                                     <td>{{$p->observaciones}}</td>
                                     <td>{{$p->FueCobrado()}}</td>
-                                    <td><a href="#"  class="btn btn-xs btn-info editar" data-idpedido="{{$p->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
+                                    <td><a href="/admin/pedidos/{{$p->id}}/edit"  class="btn btn-xs btn-info" title="Editar"> <i class=" fa fa-edit"></i></a></td>
+                                    <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idpedido="{{$p->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                 </tr>
                                 @endforeach
                             </table>
@@ -69,3 +70,4 @@
         </div>
     </div>
 </div>
+

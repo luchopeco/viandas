@@ -41,7 +41,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::resource('clientes','ClientesController');
         Route::get('clientes/nomegusta/{id}','ClientesController@nomegusta');
 
-       // Route::get('clientes/nomegusta/{id}', ['as' => 'book_view', 'uses' => 'ClientesController@nomegusta']);
+        // Route::get('clientes/nomegusta/{id}', ['as' => 'book_view', 'uses' => 'ClientesController@nomegusta']);
 
 
         Route::post('clientes/nomegustaagregar','ClientesController@nomegustaagregar');
@@ -49,7 +49,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('clientes/alta','ClientesController@alta');
         Route::get('clientes/like/like','ClientesController@likecliente');
         Route::get('clientesdebaja','ClientesController@listaDeBaja');
-        
+
         Route::get('loquenogusta','ClientesController@nomegustalista');
         Route::get('clientes/gestionar/{id}','ClientesController@gestionarcliente');
 
@@ -76,7 +76,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::resource('cadetes','CadetesController');
         Route::get('cadetesdebaja','CadetesController@listaDeBaja');
         Route::post('cadetes/buscar','CadetesController@buscar');
-        
+
         Route::post('cadetes/alta','CadetesController@alta');
 
 
@@ -96,14 +96,15 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('pedidos/buscarpedidos','PedidosController@buscarpedidos');
         Route::post('pedidos/buscarpedidosempresas','PedidosController@buscarpedidosempresas');
         Route::post('pedidos/buscarpedidoempresa','PedidosController@buscarpedidoempresa');
+        Route::post('pedidos/eliminarlinea','PedidosController@eliminarlinea');
 
         Route::get('cobros','PedidosController@listarPedidos');
-        
+
         Route::post('cobros/buscarcobros','PedidosController@buscarCobros');
 
         Route::get('cobros/buscarcobrosajax', 'PedidosController@buscarCobrosAjax');
 
-        
+
         Route::get('cobros/actualizarcobros', 'PedidosController@actualizarCobros');
 
 
@@ -112,5 +113,5 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::get('repor/planillasemanal','PdfController@planillasemanal');
 
 
-    	}
+    }
 );

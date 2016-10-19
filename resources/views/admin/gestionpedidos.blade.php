@@ -194,6 +194,37 @@
             <!-- /.modal-content -->
         </div>
     </div>
+    <div class="modal fade" id="modalPedidoEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {!!Form::open(['route'=>['admin.pedidos.destroy'],'method'=>'DELETE'])!!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminando Pedido</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {!!Form::Text('id',null,['class'=>'hidden','id'=>'idD'])!!}
+                            <h3>¿Desea Eliminar el pedido?</h3>
+                            <p>No se podrá recuperar.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                {!!Form::submit('Eliminar', array('class' => 'btn btn-success'))!!}
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
 
 @endsection
 
@@ -254,9 +285,6 @@
 
         }
 
-
-
-
         $(function () {
 
             $("#cliente").autocomplete({
@@ -272,34 +300,29 @@
             $("#btnBuscarPedidoEmpresa").click(function(){
                 buscarPedidosEmpresa();
             });
-            $('body').on('click', '.editar', function (event) {
-
-                $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
-                event.preventDefault();
-                var idpedido=$(this).attr('data-idpedido');
-                $.ajax({
-                    url:"../pedidos/"+ idpedido+"/edit",
-                    type: "GET",
-                    dataType: "json"
-                })
-                        .done(function(response){
-                            //alert(response.datos.titulo);
-                            $('#nombreU').val(response.datos.nombre);
-                            $('#descripcionU').val(response.datos.descripcion);
-                            $('#idU').val(response.datos.id);
-                            $('#tipo_alimento_idU').val(response.datos.tipo_alimento_id);
-                            $("#modalPedidoModificar").modal("show");
-                            $('#cargando').html('');
-                        })
-                        .fail(function(){
-                            alert(id_alimento);
-                            $('#cargando').html('');
-                        });
-
-            });
-
-
-
+//            $('body').on('click', '.editar', function (event) {
+//                $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
+//                event.preventDefault();
+//                var idpedido=$(this).attr('data-idpedido');
+//                $.ajax({
+//                    url:"../pedidos/"+ idpedido+"/edit",
+//                    type: "GET",
+//                    dataType: "json"
+//                })
+//                        .done(function(response){
+//                            //alert(response.datos.titulo);
+//                            $('#nombreU').val(response.datos.nombre);
+//                            $('#descripcionU').val(response.datos.descripcion);
+//                            $('#idU').val(response.datos.id);
+//                            $('#tipo_alimento_idU').val(response.datos.tipo_alimento_id);
+//                            $("#modalPedidoModificar").modal("show");
+//                            $('#cargando').html('');
+//                        })
+//                        .fail(function(){
+//                            alert(id_alimento);
+//                            $('#cargando').html('');
+//                        });
+//            });
 
             $('body').on('click', '.detalle-pedido-empresa', function (event) {
                 $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
@@ -320,7 +343,14 @@
                         .fail(function(){
                             alert(id_alimento);
                         });
-            });
+            })
+                    .on('click', '.eliminar', function (event) {
+                        event.preventDefault();
+                        var id_alimento=$(this).attr('data-idpedido');
+                        $("#idD").val(id_alimento);
+                        $("#modalPedidoEliminar").modal("show");
+                    });
+
 
         });
     </script>

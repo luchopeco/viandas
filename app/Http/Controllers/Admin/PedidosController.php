@@ -203,7 +203,7 @@ class PedidosController extends Controller
             }
         }
         $listPedCli = collect();
-        if(isset($rq['pedEmp']) ) {
+        if(isset($rq['pedCli']) ) {
             foreach ($rq['pedCli'] as $pcl) {
                 $pedido = new Pedido();
                 $pedido->fecha_pedido = Carbon::createFromFormat('d/m/Y', $pcl['fecha_pedido']);
@@ -286,13 +286,17 @@ class PedidosController extends Controller
      */
     public function edit($id)
     {
-        $p = Pedido::findOrFail($id);
-        ///para cargar el cliente y q me lo envie en el ajax
-        $per = $p->Cliente;
-        $response = array(
-            "datos" => $p
-        );
-        return json_encode($response, JSON_HEX_QUOT | JSON_HEX_TAG);
+        $pedido = Pedido::findOrFail($id);
+        if($pedido->cobrado ==1)
+        {
+            Session::flash('mensajeError', 'No se Puede Modificar Un pedido Cobrado');
+            return back();
+        }
+        $listCadetes =   DB::table('cadete')->select(DB::raw('id, CONCAT( COALESCE(apellido, ""),", ", COALESCE(nombre, "")) as apenom'))
+            ->where('deleted_at',null)
+            ->orderBy('apenom')
+            ->lists('apenom','id');
+        return view ('admin.pedidoeditar', compact('pedido','listCadetes'));
     }
 
     /**
@@ -302,9 +306,39 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try{
+
+            $p = Pedido::findOrFail($request->id);
+            $p->observaciones = $request->observaciones;
+            if(isset($request->envio)){
+                if($p->precio_envio!= $request->precio_envio)
+                {
+                    $p->total=$p->total-$p->precio_envio;
+                    $p->total = $p->total+$request->precio_envio;
+                    $p->precio_envio = $request->precio_envio;
+
+                }
+                $p->envio=1;
+                $p->cadete_id=$request->cadete_id;
+            }
+            else{
+                $p->envio=0;
+                $p->total = $p->total - $p->precio_envio;
+                $p->precio_envio=0;
+                $p->cadete_id=null;
+            }
+            $p->save();
+
+            Session::flash('mensajeOk','Cabecera del Pedido Modificada con exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -313,9 +347,18 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try{
+            Pedido::destroy($request->id);
+            Session::flash('mensajeOk','Pedido Eliminado con exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
     public function listarPedidos(){
@@ -746,6 +789,30 @@ class PedidosController extends Controller
     {
         $pedido=PedidoEmpresa::findOrFail($request->id);
         return view ('admin.include.pedido-empresa-detalle', compact('pedido'));
+    }
+
+    public function eliminarlinea(Request $request)
+    {
+        try{
+            $lp = LineaPedido::findOrFail($request->id);
+            $p = Pedido::findOrFail($lp->pedido_id);
+            if($p->ListLineasPedido->count() == 1 )
+            {
+                Session::flash('mensajeError', 'No se puede dejar el pedido sin lineas. Agregue una nueva untes de Eliminar esta linea');
+                return back();
+            }
+            $p->total = $p->total - ($lp->cantidad * $lp->precio_vianda);
+            $p->save();
+            LineaPedido::destroy($request->id);
+            Session::flash('mensajeOk','Linea Pedido Eliminada con exito');
+            return back();
+        }
+        catch(\Exception $ex)
+        {
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
+
     }
 
 }
