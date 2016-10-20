@@ -296,7 +296,8 @@ class PedidosController extends Controller
             ->where('deleted_at',null)
             ->orderBy('apenom')
             ->lists('apenom','id');
-        return view ('admin.pedidoeditar', compact('pedido','listCadetes'));
+        $listTipoViandas = TipoVianda::all();
+        return view ('admin.pedidoeditar', compact('pedido','listCadetes','listTipoViandas'));
     }
 
     /**
@@ -563,7 +564,7 @@ class PedidosController extends Controller
             $ped->cliente_id = $request->cliente_id;
 
 
-            $ped->total = ($lp->precio_vianda * $lp->cantidad) + $precioEnvio;
+            $ped->total = $request->total;
 
             $ped->cobrado=0;
             $ped->save();
@@ -813,6 +814,25 @@ class PedidosController extends Controller
             return back();
         }
 
+    }
+
+    public function agregarlinea(Request $request)
+    {
+        try{
+            $p = Pedido::findOrFail($request->pedido_id);
+            $a= new LineaPedido($request->all());
+            $p->total = $p->total + ($request->cantidad * $request->precio_vianda);
+            $a->save();
+            $p->save();
+
+            Session::flash('mensajeOk', 'Linea Pedido Agregada Con Exito');
+            return back();
+        }
+        catch(\Exception $ex){
+
+            Session::flash('mensajeError', $ex->getMessage());
+            return back();
+        }
     }
 
 }

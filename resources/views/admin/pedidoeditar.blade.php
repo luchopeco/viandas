@@ -110,7 +110,7 @@
                         <div class="col-md-6">
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h4>Linea Pedido <a class="btn-success btn-xs btn" title="Nueva LineaPedido"> <i class="fa fa-plus"></i></a></h4>
+                                    <h4>Linea Pedido <a class="btn-success btn-xs btn" title="Nueva LineaPedido" data-toggle="modal" data-target="#modalLpAgregar"> <i class="fa fa-plus"></i></a></h4>
                                 </div>
                                 <div class="box-body">
                                     <div class="row">
@@ -179,6 +179,57 @@
             <!-- /.modal-dialog -->
         </div>
     </div>
+
+    <div class="modal fade" id="modalLpAgregar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {!!Form::open(['url'=>['/admin/pedidos/agregarlinea'],'method'=>'POST', 'data-toggle='>'validator'])!!}
+                <input name="pedido_id" class="form-control hidden "   type="text" value="{{$pedido->id}}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Agregando Linea Pedido</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            Cantidad
+                            {!!Form::Number('cantidad', '1',['class' => 'form-control','required|between:0,99.99','id'=>'txt-cantidad-vianda'])!!}
+                        </div>
+                        <div class="col-md-4">
+                            Tipo Vianda
+                            <div class="input-group ">
+                                <span class="input-group-addon" title="Tipo Vianda"><i class="fa fa-leaf"></i></span>
+                                <select name="tipo_vianda_id" class="form-control" id="cbx-tipo-vianda"  required>
+                                    <option value="" data-precio="0" required>Seleccionar</option>
+                                    @foreach($listTipoViandas as $tv)
+                                        <option value="{{$tv->id}}" data-precio="{{$tv->precio}}">{{$tv->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            Precio Vianda
+                            <div class="input-group ">
+                                <span class="input-group-addon" title="Precio Vianda"> $</span>
+                                {!!Form::Number('precio_vianda',0,['class'=>' form-control ','required||between:0,99.99','id'=>'txt-precio-vianda'])!!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                {!!Form::submit('Agregar', array('class' => 'btn btn-success'))!!}
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -188,12 +239,23 @@
             $("#cbx-envio").click(function() {
                 $(this).closest('.row').find('.col-md-4').toggleClass('hidden');
                 $(this).closest('.row').find('.col-md-6').toggleClass('hidden');
+
             });
             $('body').on('click', '.eliminar', function (event) {
                 event.preventDefault();
                 var id_alimento=$(this).attr('data-idlp');
                 $("#idD").val(id_alimento);
                 $("#modalLpEliminar").modal("show");
+            });
+            ///para cambiar los valores de precio pedido segun tipo Vianda
+            $("#cbx-tipo-vianda").change(function() {
+                var precio=$("#cbx-tipo-vianda option:selected").attr('data-precio') * $("#txt-cantidad-vianda").val();
+                $('#txt-precio-vianda').val(precio);
+            });
+            /// para multiplicar la cantidad por el precio
+            $( "#txt-cantidad-vianda" ).change(function() {
+                var precio = $("#cbx-tipo-vianda option:selected").attr('data-precio') * $("#txt-cantidad-vianda").val();
+                $('#txt-precio-vianda').val(precio);
             });
         });
     </script>

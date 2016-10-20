@@ -97,6 +97,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::post('pedidos/buscarpedidosempresas','PedidosController@buscarpedidosempresas');
         Route::post('pedidos/buscarpedidoempresa','PedidosController@buscarpedidoempresa');
         Route::post('pedidos/eliminarlinea','PedidosController@eliminarlinea');
+        Route::post('pedidos/agregarlinea','PedidosController@agregarlinea');
 
         Route::get('cobros','PedidosController@listarPedidos');
 
