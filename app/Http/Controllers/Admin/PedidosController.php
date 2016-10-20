@@ -218,15 +218,17 @@ class PedidosController extends Controller
                 }
                 $pedido->total = $pedido->precio_envio;
                 $almenosUnaLineaPedidoc = 0;
-                foreach ($pcl['linea'] as $lpc) {
-                    if (isset($lpc['confirmado'])) {
-                        $almenosUnaLineaPedidoc = 1;
-                        $lppp = new LineaPedido();
-                        $lppp->cantidad = $lpc['cantidad'];
-                        $lppp->tipo_vianda_id = $lpc['tipo_vianda_id'];
-                        $lppp->precio_vianda = $lpc['precio_vianda'];
-                        $pedido->ListLineasPedido->add($lppp);
-                        $pedido->total = $pedido->total + ($lppp->precio_vianda);
+                if(isset($pcl['linea'])){
+                    foreach ($pcl['linea'] as $lpc) {
+                        if (isset($lpc['confirmado'])) {
+                            $almenosUnaLineaPedidoc = 1;
+                            $lppp = new LineaPedido();
+                            $lppp->cantidad = $lpc['cantidad'];
+                            $lppp->tipo_vianda_id = $lpc['tipo_vianda_id'];
+                            $lppp->precio_vianda = $lpc['precio_vianda'];
+                            $pedido->ListLineasPedido->add($lppp);
+                            $pedido->total = $pedido->total + ($lppp->precio_vianda);
+                        }
                     }
                 }
                 if ($almenosUnaLineaPedidoc == 1) {
