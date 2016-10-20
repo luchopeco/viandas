@@ -680,7 +680,9 @@ class PedidosController extends Controller
     public function buscarpedidosxdia(Request $request)
     {
         $fechaHoy = new Carbon('now');
-        $fechaManana = new Carbon('tomorrow');
+        $fechaHo = new Carbon('now');
+        //$fechaManana = new Carbon('tomorrow');
+        $fechaManana=$fechaHo->addDays(10);
         $fecha = Carbon::createFromFormat('d/m/Y', $request->fecha);
         $fechaAnterior = $fechaHoy->subDays(7);
         $fecha_pedido=$request->fecha;
