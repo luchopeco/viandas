@@ -10,13 +10,13 @@
         }
         body{
             font-family: verdana, sans-serif;
-            font-size: 10pt;
+            font-size: 8pt;
         }
         table{
             border-collapse: collapse;
         }
         table,td,th{
-            border: 0.5mm solid #000000;
+            border: 0.3mm solid #000000;
         }
         th{
             text-align: center;
@@ -67,7 +67,7 @@
     <table>
         <tr>
             <th style="width:45mm ;">Cliente</th>
-            <th style="width: 50mm">No Gusta</th>
+            <!--<th style="width: 50mm">No Gusta</th>-->
             {{--<th style="width:10mm ">Cant.</th>--}}
             <th style="width: 40mm">Pedido</th>
             <th style="width: 10mm">Total</th>
@@ -79,7 +79,7 @@
             @if($d->id == $p->dia && $p->empresa == null)
                 <tr >
                     <td>{{$p->apellido}}, {{$p->nombre}}</td>
-                    <td style="font-size: 8pt">{{$p->no_me_gusta}}</td>
+                <!--    <td style="font-size: 8pt">{{$p->no_me_gusta}}</td>-->
                     {{--<td style="text-align: center;">{{$p->cantidad}}</td>--}}
                     <td style="text-align: center;">{!!$p->pedido!!}</td>
                     <td style="text-align: center;">${{$p->total}}</td>
@@ -104,7 +104,7 @@
             <table>
                 <tr>
                     <th style="width:45mm ;">Cliente</th>
-                    <th style="width: 75mm;">No Gusta</th>
+                 <!--   <th style="width: 75mm;">No Gusta</th> -->
                     {{--<th style="width:10mm ">Cant.</th>--}}
                     <th style="width: 35mm">Pedido</th>
                     <th style="width: 15mm">Total</th>
@@ -113,7 +113,7 @@
                     @if($d->id == $p->dia && $p->empresa == $emp->nombre)
                         <tr >
                             <td>{{$p->apellido}}, {{$p->nombre}}</td>
-                            <td style="font-size: 8pt">{{$p->no_me_gusta}}</td>
+                       <!--     <td style="font-size: 8pt">{{$p->no_me_gusta}}</td>-->
                             {{--<td style="text-align: center;">{{$p->cantidad}}</td>--}}
                             <td style="text-align: center;">{{$p->pedido}}</td>
                             <td style="text-align: center;">$ {{$p->total}}</td>
