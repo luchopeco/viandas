@@ -388,7 +388,13 @@ class ClientesController extends Controller
     public function likecliente()
     {
         $term = Str::lower(\Illuminate\Support\Facades\Input::get('term'));
-        $listClientes = Cliente::where('apellido', 'like', '%' . $term . '%')->orWhere('nombre', 'like', '%' . $term . '%')->get();
+        //$listClientes = Cliente::where('apellido', 'like', '%' . $term . '%')->orWhere('nombre', 'like', '%' . $term . '%')->get();
+        $listClientes = Cliente::where(function($query) use ($term)
+        {
+            $query->where('apellido', 'like', '%' . $term . '%')
+                ->orWhere('nombre', 'like', '%' . $term . '%');
+        })
+        ->whereNull('deleted_at')->get();
 //        $data = array(
 //            'R' => 'Red',
 //            'O' => 'Orange',
