@@ -461,32 +461,46 @@ class PedidosController extends Controller
         die();
         */
 
-        $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+        $listPedidos = Pedido::whereRaw($empresaSQL." (deleted_at is null AND fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
 
         $arreglo = Array();
 
         foreach ($listPedidos as $pedido) {
 
-            $cont = Array();
-            $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido;
-            $cont[] = $pedido->fecha_pedido;
-            $lineaP = '';
-            foreach ($pedido->ListLineasPedido as $lp) {
-                $lineaP .= $lp->TipoVianda->nombre.' Cant: '.$lp->cantidad.'; ';
+          $clienteX = Cliente::withTrashed()
+                ->where('id',  $pedido->cliente_id)
+                ->get();
+
+          //  var_dump($clienteX[0]);die();
+            if(!$clienteX[0]->trashed()){
+                
+                $clientedelpedido = $clienteX[0]; //Cliente::findOrFail($pedido->cliente_id);
+             //   var_dump($pedido->cliente_id);die();
+
+                $cont = Array();
+                $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido;
+                $cont[] = $pedido->fecha_pedido;
+                $lineaP = '';
+                foreach ($pedido->ListLineasPedido as $lp) {
+                    $lineaP .= $lp->TipoVianda->nombre.' Cant: '.$lp->cantidad.'; ';
+                }
+
+                $cont[] = $lineaP;
+
+                $cont[] = $pedido->precio_envio;
+                $cont[] = $pedido->total;
+                $cobrado='';
+                if($pedido->cobrado == 1){
+                    $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'" checked="checked">';
+                }else{
+                    $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'">';
+                }
+                $cont[] = $cobrado;
+                $arreglo[] = $cont;
+               
+
             }
 
-            $cont[] = $lineaP;
-
-            $cont[] = $pedido->precio_envio;
-            $cont[] = $pedido->total;
-            $cobrado='';
-            if($pedido->cobrado == 1){
-                $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'" checked="checked">';
-            }else{
-                $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'">';
-            }
-            $cont[] = $cobrado;
-            $arreglo[] = $cont;
         }
 
         return json_encode($arreglo);
