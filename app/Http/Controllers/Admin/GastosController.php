@@ -144,7 +144,7 @@ class GastosController extends Controller
     {
         try{
             Gasto::destroy($request->id);
-            Session::flash('mensajeOk','Gastp Eliminado con exito');
+            Session::flash('mensajeOk','Gasto Eliminado con exito');
             return back();
         }
         catch(\Exception $ex)
