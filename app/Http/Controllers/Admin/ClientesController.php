@@ -416,4 +416,7 @@ class ClientesController extends Controller
 //        }
         return  json_encode($return_array);
     }
+
+
+    
 }

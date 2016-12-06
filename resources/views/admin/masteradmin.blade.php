@@ -106,6 +106,8 @@
 
                 <li <?php if(strpos(\Illuminate\Support\Facades\URL::current(),'cobros') ==true){echo 'class="active"';} ?>><a href="/admin/cobros"><i class="fa fa-money"></i>Cobros</a></li>
 
+                <li <?php if(strpos(\Illuminate\Support\Facades\URL::current(),'recibos') ==true){echo 'class="active"';} ?>><a href="/admin/recibos"><i class="fa fa-money"></i>Recibos</a></li>
+
                 <li  <?php  if('admin.pedidos.liquidarcadetes..index'== Route::current()->getName()||'admin.pedidos.liquidarcadetes..index'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/pedidos/liquidarcadetes"><i class="fa fa-coffee"></i>Liquidar Cadetes</a></li>
 
 

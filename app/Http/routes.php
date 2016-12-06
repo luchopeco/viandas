@@ -110,6 +110,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
 
 
 
+        Route::get('recibos','PedidosController@listarPedidosRecibos');
+        Route::get('recibos/emitir','PedidosController@emitirRecibos');
+
+
+        //Route::get('recibos/buscarcobrosajax', 'PedidosController@buscarCobrosAjax');
+
+
+
         Route::resource('reportes','PdfController');
         Route::get('repor/planillasemanal','PdfController@planillasemanal');
 

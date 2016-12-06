@@ -556,6 +556,61 @@ class PedidosController extends Controller
 
     }
 
+
+// recibos
+    public function listarPedidosRecibos(){
+
+        $listaDePedidos =  Pedido::all();
+        $empresas = Empresa::all();
+
+
+        return view ('admin.recibos',compact('listaDePedidos','empresas'));
+    }
+    public function emitirRecibos(){
+
+        $fechadesde = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechaDesde']));
+        $fechahasta = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechaHasta']));
+
+        $clientes= Cliente::whereRaw("envio='1' AND idempresa IS NULL")->get();
+
+        $total = 0;
+        $contadorClientes=0;
+
+        foreach ($clientes as $c) {
+            $pedidosC = Pedido::whereRaw("cliente_id='".$c->id."' AND (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+        
+            $tienepedido=false;
+            $totalcliente = 0;
+            foreach ($pedidosC as $p) {
+
+                // aca preguntar si tiene envio !
+                
+                $totalcliente= $totalcliente + $p->total;
+                $tienepedido = true;                
+            }  
+            if ($tienepedido) {
+
+                $contadorClientes++;
+
+                // DIBUJAR EL RECIBO
+
+                ECHO '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <br><br>';
+                ECHO 'Nutrilife Viandas - Liquidaci&oacute;n desde: '.$fechadesde->format("d-m-Y").' -> hasta '.$fechahasta->format('d-m-Y').'<br>';
+                
+                echo $c->nombre.' '.$c->apellido.' - TOTAL: $ '.$totalcliente;
+
+                ECHO '<br><br>';
+            }
+
+            
+        }
+
+        die();
+
+    }
+
+
+
     public function agregarPedidoManual(Request $request)
     {
         try {
