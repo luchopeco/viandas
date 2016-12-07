@@ -123,7 +123,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li <?php if('admin.nolaborables.index'== Route::current()->getName()||'admin.nolaborables.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/nolaborables"><i class="fa fa-calendar"></i>Dias no laborables</a></li>
+                        <!-- <li <?php if('admin.nolaborables.index'== Route::current()->getName()||'admin.nolaborables.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/nolaborables"><i class="fa fa-calendar"></i>Dias no laborables</a></li>
+                        -->
                         <li <?php if('admin.tipogastos.index'== Route::current()->getName()||'admin.tipogastos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tipogastos"><i class="fa fa-money"></i>Tipos Gastos</a></li>
                         <li <?php if('admin.tiposalimentos.index'== Route::current()->getName()||'admin.tiposalimentos.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/tiposalimentos"><i class="fa fa-lemon-o"></i>Tipos Alimentos</a></li>
                         <li <?php if('admin.empresas.index'== Route::current()->getName()||'admin.empresas.show'== Route::current()->getName()){echo 'class="active"';} ?>><a href="/admin/empresas"><i class="fa fa-building-o"></i>Empresas</a></li>

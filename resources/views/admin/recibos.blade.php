@@ -50,7 +50,7 @@
                        </div>
                    </div>
 
-                   <form name="emitir" id="emitir" action="recibos/emitir" method="get" >
+                   <form name="emitir" id="emitir" action="recibos/emitir" method="get" target="_blank">
 
 
                    <div class=" panel-body">
