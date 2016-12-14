@@ -35,7 +35,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>{{$pedido->Cliente->apellido}}, {{$pedido->Cliente->nombre}} <small> Editando Pendido</small> </h4>
+                    <h4>{{$pedido->Cliente->apellido}}, {{$pedido->Cliente->nombre}} <small> Editando Pedido</small> </h4>
                 </div>
                 <div class="panel-body">
                     <div class="row">
