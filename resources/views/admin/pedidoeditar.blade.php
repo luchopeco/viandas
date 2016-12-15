@@ -120,6 +120,7 @@
                                                     <thead>
                                                     <tr>
                                                         <th>Pedido</th>
+                                                        <th>Unitario</th>
                                                         <th>Subtotal</th>
                                                         <th></th>
                                                     </tr>
@@ -128,6 +129,7 @@
                                                     @foreach($pedido->ListLineasPedido as $lp)
                                                         <tr>
                                                             <td>{{$lp->cantidad}} {{$lp->TipoVianda->nombre}}</td>
+                                                            <td>$ {{$lp->precio_vianda}}</td>
                                                             <td>$ {{$lp->cantidad * $lp->precio_vianda}}</td>
                                                             <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idlp="{{$lp->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                                         </tr>

@@ -187,9 +187,9 @@ class PedidosController extends Controller
                             $lpp = new LineaPedido();
                             $lpp->cantidad = $lp['cantidad'];
                             $lpp->tipo_vianda_id = $lp['tipo_vianda_id'];
-                            $lpp->precio_vianda = $lp['precio_vianda'];
+                            $lpp->precio_vianda = $lp['precio_vianda'] / $lp['cantidad'];
                             $pedido->ListLineasPedido->add($lpp);
-                            $pedido->total = $pedido->total + ($lpp->precio_vianda);
+                            $pedido->total = $pedido->total + ($lpp->precio_vianda * $lpp->cantidad);
                         }
                     }
                     if ($almenosUnaLineaPedido == 1) {
@@ -225,9 +225,9 @@ class PedidosController extends Controller
                             $lppp = new LineaPedido();
                             $lppp->cantidad = $lpc['cantidad'];
                             $lppp->tipo_vianda_id = $lpc['tipo_vianda_id'];
-                            $lppp->precio_vianda = $lpc['precio_vianda'];
+                            $lppp->precio_vianda = $lpc['precio_vianda'] / $lpc['cantidad'];
                             $pedido->ListLineasPedido->add($lppp);
-                            $pedido->total = $pedido->total + ($lppp->precio_vianda);
+                            $pedido->total = $pedido->total + ($lppp->precio_vianda * $lppp->cantidad);
                         }
                     }
                 }
@@ -894,7 +894,11 @@ class PedidosController extends Controller
         try{
             $p = Pedido::findOrFail($request->pedido_id);
             $a= new LineaPedido($request->all());
-            $p->total = $p->total + ($request->cantidad * $request->precio_vianda);
+            $precioVianda =  $a->precio_vianda / $a->cantidad;
+
+            $a->precio_vianda = $precioVianda;
+
+            $p->total = $p->total + ($request->cantidad * $a->precio_vianda);
             $a->save();
             $p->save();
 
