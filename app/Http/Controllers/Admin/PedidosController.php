@@ -556,6 +556,165 @@ class PedidosController extends Controller
 
     }
 
+    // estados clientes
+
+
+
+    public function listarPedidosEstados(){
+
+        $listaDePedidos =  Pedido::all();
+        $empresas = Empresa::all();
+
+
+        return view ('admin.estadocliente',compact('listaDePedidos','empresas'));
+    }
+
+    ///Busca por dia
+    public function buscarEstados(Request $request)
+    {
+        $fechaHoy = new Carbon('now');
+        $fechadesde = Carbon::createFromFormat('d/m/Y', $request->fechaDesde);
+        $fechahasta = Carbon::createFromFormat('d/m/Y', $request->fechaHasta);
+        $empresaActual ="";
+        //var_dump($fechadesde);die();
+
+        $eID=$request->empresa;
+        $empresaSQL='';
+        if($eID=='9999'){
+            //no tiene empresa
+            $empresaSQL='';
+        }
+        else{
+            $empresaActual = Empresa::find($request->empresa);
+
+            $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
+
+        }
+
+
+        $listPedidos = Pedido::whereRaw($empresaSQL." (fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+
+
+//. ($fechadesde->format('Y-m-d'))."'"
+        //  $dia= $fecha->dayOfWeek+1;
+
+        //  $listViandas = ViandaCliente::whereRaw("dia_semana_id = ".$dia)->orderBy("cliente_id")->get();
+
+        //$listViandas = ViandaCliente::all();
+
+
+        /// recorro los pedidos, y limpio las viandas segun se realizaron los pedidos
+        /*      foreach ($listPedidos as $pedido)
+              {
+                  $listViandas = $listViandas->where('cliente_id',' != ', $pedido->cliente_id)->where('tipo_vianda_id','!= ', $pedido->tipo_vianda_id);
+              }
+      */
+        // $fecha_pedido=$request->fecha;
+
+        $listEmpresas = Empresa::all();
+
+        $listCadetes = Cadete::all()->lists('nombre', 'id');
+
+
+        return view ('admin.include.cobros',compact('empresaActual','listPedidos','listEmpresas','listCadetes'));
+
+    }
+
+    public function buscarEstadosAjax()
+    {
+
+
+
+        $fechaHoy = new Carbon('now');
+        $fechadesde = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechadesde']));
+        $fechahasta = Carbon::createFromFormat('d/m/Y', str_replace('%2F', '/', $_GET['fechahasta']));
+        $empresaActual ="";
+        //var_dump($fechadesde);die();
+
+        $eID=$_GET['idempresa'];
+        $empresaSQL='';
+        if($eID=='9999'){
+            //no tiene empresa
+            $empresaSQL='';
+        }
+        else{
+            $empresaActual = Empresa::find($eID);
+
+            $empresaSQL = '(empresa_id = '.$eID.' ) AND ';
+
+        }
+        /* ejemplo andando
+                $arreglo = Array();
+                $cont = Array();
+                $cont[] = '1'; 
+                $cont[] = '2011-04-25';
+                $cont[] = 'System Architect';
+                $cont[] = 'Edinburgh';
+                $cont[] = '5421';
+                $cont[] = '2011-04-25';
+                $cont[] = '<input type="checkbox"/>';
+                $arreglo[] = $cont;    
+
+        return json_encode($arreglo);
+        die();
+        */
+
+        $listPedidos = Pedido::whereRaw($empresaSQL." (deleted_at is null AND fecha_pedido BETWEEN '".$fechadesde->format('Y-m-d')."' AND '".$fechahasta->format('Y-m-d')."')")->get();
+
+        $arreglo = Array();
+
+        foreach ($listPedidos as $pedido) {
+
+          $clienteX = Cliente::withTrashed()
+                ->where('id',  $pedido->cliente_id)
+                ->get();
+
+          //  var_dump($clienteX[0]);die();
+            if(!$clienteX[0]->trashed()){
+                
+                $clientedelpedido = $clienteX[0]; //Cliente::findOrFail($pedido->cliente_id);
+             //   var_dump($pedido->cliente_id);die();
+
+                $cont = Array();
+                $cont[] = $pedido->cliente->nombre.' - '.$pedido->cliente->apellido;
+                $cont[] = $pedido->fecha_pedido;
+                $lineaP = '';
+                foreach ($pedido->ListLineasPedido as $lp) {
+                    $lineaP .= $lp->TipoVianda->nombre.' Cant: '.$lp->cantidad.'; ';
+                }
+
+                $cont[] = $lineaP;
+
+                $cont[] = $pedido->precio_envio;
+                $cont[] = $pedido->total;
+                $cobrado='';
+                if($pedido->cobrado == 1){
+                    $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'" checked="checked">';
+                }else{
+                    $cobrado='<input type="checkbox" name="'.$pedido->id.'" id="'.$pedido->id.'" value="'.$pedido->id.'">';
+                }
+                
+                $cont[] = $cobrado;
+                $arreglo[] = $cont;
+               
+
+            }
+
+        }
+
+        return json_encode($arreglo);
+        die();
+
+        // ----------------------------------
+
+
+        $listEmpresas = Empresa::all();
+        $listCadetes = Cadete::all()->lists('nombre', 'id');
+        return view ('admin.include.cobros',compact('empresaActual','listPedidos','listEmpresas','listCadetes'));
+    }
+
+    // fiin estados clientes
+
 
 // recibos
     public function listarPedidosRecibos(){
