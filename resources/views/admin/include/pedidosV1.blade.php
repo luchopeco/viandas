@@ -179,8 +179,8 @@ $cpc=0;
 
 <div class="row">
     <div class="col-md-12">
-    {!!Form::submit('Aceptar', array('class' => 'btn btn-success btn-block'))!!}
-        <a id="caca" class="btn btn-danger">aceptar</a>
+    <!--{!!Form::submit('Aceptar', array('class' => 'btn btn-success btn-block'))!!}-->
+        <a id="btnAceptar" class="btn btn-success btn-block">Aceptar</a>
     </div>
 </div>
 {!! Form::close() !!}
@@ -293,7 +293,7 @@ $(function () {
         var $caca = $(this).closest('.agrupacion-pedidos').find('.cbx-confirmar');
         $caca.prop("checked", !$caca.prop("checked"));
         });
-        $("#caca").click(function(){
+        $("#btnAceptar").click(function(){
 
                     var formData =JSON.stringify( $("form.pedido").serializeObject());
                     //console.log(formData);
