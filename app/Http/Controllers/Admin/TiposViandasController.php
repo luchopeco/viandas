@@ -22,6 +22,7 @@ class TiposViandasController extends Controller
     public function index()
     {
         $listTiposViandas =TipoVianda::all();
+
         return view ('admin.tiposviandas',compact('listTiposViandas'));
     }
 
@@ -57,6 +58,7 @@ class TiposViandasController extends Controller
             "mensaje" => "No se pudo realizar la operacion",
             "datos" => $tv
         );
+    
         return json_encode($response, JSON_HEX_QUOT | JSON_HEX_TAG);
     }
 
@@ -96,6 +98,7 @@ class TiposViandasController extends Controller
             $tv->descripcion=$request->descripcion;
             $tv->nombre=$request->nombre;
             $tv->precio=$request->precio;
+            $tv->abrev=$request->abrev;
             $tv->save();
 
             Session::flash('mensajeOk','Tipo Vianda Modificada con exito');

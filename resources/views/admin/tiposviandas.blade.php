@@ -53,12 +53,15 @@
                                <th>Nombre</th>
                                <th>Descripcion</th>
                                <th>Precio</th>
+                               <th>Abreviatura</th>
                            </tr>
+                       
                            @foreach($listTiposViandas as $tipoVianda)
                                <tr >
                                    <td>{{$tipoVianda->nombre}}</td>
                                    <td>{{$tipoVianda->descripcion}}</td>
                                    <td>${{$tipoVianda->precio}}</td>
+                                   <td>{{$tipoVianda->abrev}}</td>
                                    <td><a href="#"  class="btn btn-xs btn-info editar" data-idtipovianda="{{$tipoVianda->id}}"  title="Editar"> <i class=" fa fa-edit"></i></a></td>
                                    <td><a href="#" class="btn btn-xs btn-danger eliminar" data-idtipovianda="{{$tipoVianda->id}}"  title="Eliminar"> <i class=" fa fa-close"></i></a></td>
                                </tr>
@@ -99,6 +102,16 @@
                                              {!!Form::Number('precio',null,['class'=>' form-control','required'])!!}
                                          </div>
                                      </div>
+
+                                     <div class="form-group">
+                                        {!!Form::label('abrev','Abrev')!!}
+                                         <div class="input-group">
+                                             <span class="input-group-addon">$</span>
+                                             {!!Form::Text('abrev',null,['class'=>' form-control','required'])!!}
+                                         </div>
+                                     </div>
+
+
                                  </div>
                               </div>
                          </div>
@@ -119,10 +132,10 @@
                     {!!Form::open(['route'=>'admin.tiposviandas.update','method'=>'PUT', 'data-toggle='>'validator'])!!}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="myModalLabel">Modificando Tipo Alimento</h4>
+                            <h4 class="modal-title" id="myModalLabel">Modificando Tipo Vianda</h4>
                         </div>
                         <div class="modal-body"><div class=" panel panel-default">
-                        <div class=" panel-heading">Tipo Alimento</div>
+                        <div class=" panel-heading">Tipo Vianda</div>
                            <div class=" panel-body">
                             <div clas="row">
                                 <div class="col-md-12">
@@ -142,6 +155,13 @@
                                          <div class="input-group">
                                              <span class="input-group-addon">$</span>
                                              {!!Form::Number('precio',null,['class'=>' form-control','id'=>'precioU','required'])!!}
+                                         </div>
+                                     </div>
+                                     <div class="form-group">
+                                         {!!Form::label('abrev','Abrev')!!}
+                                         <div class="input-group">
+                                             <span class="input-group-addon">$</span>
+                                             {!!Form::Text('abrev',null,['class'=>' form-control','id'=>'abrevU','required'])!!}
                                          </div>
                                      </div>
                                 </div>
@@ -209,6 +229,7 @@
                     $('#descripcionU').val(response.datos.descripcion);
                     $('#idU').val(response.datos.id);
                     $('#precioU').val(response.datos.precio);
+                    $('#abrevU').val(response.datos.abrev);
                     $("#modalTipoViandaModificar").modal("show");
                 })
                 .fail(function(){
