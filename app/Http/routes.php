@@ -106,7 +106,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],
         Route::get('cobros/buscarcobrosajax', 'PedidosController@buscarCobrosAjax');
 
 
-        Route::get('cobros/actualizarcobros', 'PedidosController@actualizarCobros');
+
+        Route::get('estadocliente','PedidosController@listarPedidosEstados');
+        Route::post('estadocliente/buscarestados','PedidosController@buscarEstados');
+        Route::get('estadocliente/buscarestadosajax', 'PedidosController@buscarEstadosAjax');
+       // Route::get('estadocliente/actualizarcobros', 'PedidosController@actualizarCobros');
 
 
 
