@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-md-6">
         <div class="callout callout-info">
@@ -5,7 +6,7 @@
         </div>
     </div>
 </div>
-{!!Form::open(['route'=>'admin.pedidos.store','method'=>'POST', 'data-toggle'=>'validator'])!!}
+{!!Form::open(['route'=>'admin.pedidos.store','method'=>'POST', 'data-toggle'=>'validator','class'=>'pedido'])!!}
 <?php
 //contador Pedido Empresa
 $cpe =0;
@@ -179,6 +180,7 @@ $cpc=0;
 <div class="row">
     <div class="col-md-12">
     {!!Form::submit('Aceptar', array('class' => 'btn btn-success btn-block'))!!}
+        <a id="caca" class="btn btn-danger">aceptar</a>
     </div>
 </div>
 {!! Form::close() !!}
@@ -186,6 +188,93 @@ $cpc=0;
 
 <script>
 
+    function buscarPedidos() {
+        $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
+        //event.preventDefault();
+
+        ///si tengo q buscar todos
+        var fecha = $("#txtfecha").val();
+        $.ajax({
+            url: "pedidos/buscarpedidosxdia",
+            type: "POST",
+            dataType: "html",
+            data: {'fecha': fecha}
+        })
+                .done(function (response) {
+                    $('#tabla-pedidos').html(response);
+                    $('#cargando').html('');
+                })
+                .fail(function () {
+                    $('#cargando').html('');
+                });
+    }
+
+    (function($){
+        $.fn.serializeObject = function(){
+
+            var self = this,
+                    json = {},
+                    push_counters = {},
+                    patterns = {
+                        "validate": /^[a-zA-Z][a-zA-Z0-9_]*(?:\[(?:\d*|[a-zA-Z0-9_]+)\])*$/,
+                        "key":      /[a-zA-Z0-9_]+|(?=\[\])/g,
+                        "push":     /^$/,
+                        "fixed":    /^\d+$/,
+                        "named":    /^[a-zA-Z0-9_]+$/
+                    };
+
+
+            this.build = function(base, key, value){
+                base[key] = value;
+                return base;
+            };
+
+            this.push_counter = function(key){
+                if(push_counters[key] === undefined){
+                    push_counters[key] = 0;
+                }
+                return push_counters[key]++;
+            };
+
+            $.each($(this).serializeArray(), function(){
+
+                // skip invalid keys
+                if(!patterns.validate.test(this.name)){
+                    return;
+                }
+
+                var k,
+                        keys = this.name.match(patterns.key),
+                        merge = this.value,
+                        reverse_key = this.name;
+
+                while((k = keys.pop()) !== undefined){
+
+                    // adjust reverse_key
+                    reverse_key = reverse_key.replace(new RegExp("\\[" + k + "\\]$"), '');
+
+                    // push
+                    if(k.match(patterns.push)){
+                        merge = self.build([], self.push_counter(reverse_key), merge);
+                    }
+
+                    // fixed
+                    else if(k.match(patterns.fixed)){
+                        merge = self.build([], k, merge);
+                    }
+
+                    // named
+                    else if(k.match(patterns.named)){
+                        merge = self.build({}, k, merge);
+                    }
+                }
+
+                json = $.extend(true, json, merge);
+            });
+
+            return json;
+        };
+    })(jQuery);
 $(function () {
 
     /// para multiplicar la cantidad por el precio
@@ -204,6 +293,36 @@ $(function () {
         var $caca = $(this).closest('.agrupacion-pedidos').find('.cbx-confirmar');
         $caca.prop("checked", !$caca.prop("checked"));
         });
+        $("#caca").click(function(){
+
+                    var formData =JSON.stringify( $("form.pedido").serializeObject());
+                    //console.log(formData);
+                    //alert  (formData);
+
+                    $.ajax({
+                        data:  { pedido : formData},
+                        url:   'pedidos',
+                        type:  'post',
+                        beforeSend: function () {
+                            $('#cargando').html('<button class="btn btn-default btn-lg"><i class="fa fa-spinner fa-spin"></i>Cargando....</button>');
+                        },
+                        success:  function (data) {
+                            buscarPedidos();
+                            $('body, html').animate({
+                                scrollTop: '0px'
+                            }, 300);
+                            //alert (JSON.stringify(data));
+                            $('#msjOk').html("<div  class='alert alert-success alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>Pedidos Confirmados Con Exito</div>");
+                        },
+                        error:function()
+                        {
+                            alert("Se ha Producido un error. Comuniquese con el Soporte Tecnico");
+                        }
+                    });
+
+
+                }
+        );
 
 
 });

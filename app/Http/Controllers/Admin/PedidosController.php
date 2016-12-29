@@ -158,7 +158,15 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-        $rq = $request->all();
+
+
+        //var_dump($request->pedido);
+        //var_dump( Input::all());
+        $rq = array();
+        $rq =  json_decode($request->pedido, true);
+        //$rq = $request->all();
+        //var_dump($rq['pedCli']);
+
         $listPem = collect();
         if(isset($rq['pedEmp']) )
         {
@@ -262,9 +270,9 @@ class PedidosController extends Controller
         }
 
 
-
+        //var_dump($pedidoCli);
         Session::flash('mensajeOk', 'Pedidos Confirmados Con Exito');
-        return back();
+        //return back();
 
 
     }

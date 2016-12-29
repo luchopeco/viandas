@@ -9,6 +9,11 @@
 @endsection
 
 @section('content')
+    <div  class="row" >
+        <div id="msjOk" class="col-md-12">
+
+        </div>
+    </div>
     @if(Session::has('mensajeOk'))
         <div class="row">
             <div class="col-md-12">
