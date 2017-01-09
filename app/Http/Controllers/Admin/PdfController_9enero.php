@@ -38,22 +38,23 @@ class PdfController extends Controller
                         c.apellido,
                         c.nombre,
                         CASE c.envio WHEN 1 THEN 'SI'  WHEN 0 THEN 'NO' END AS envio,
-                        GROUP_CONCAT(CONCAT(cd.cantidad,' ',tv.abrev ) SEPARATOR ' -- ') AS pedido,
-						SUM(cd.cantidad * tv.precio) AS total,                        
+                        GROUP_CONCAT(DISTINCT CONCAT(cd.cantidad,' ',tv.abrev ) SEPARATOR ' -- ') AS pedido,
+            SUM(cd.cantidad * tv.precio) / CASE COUNT(a.nombre) WHEN 0 THEN 1 ELSE COUNT(a.nombre)  END AS total,
+                        GROUP_CONCAT(DISTINCT a.nombre ORDER BY a.nombre SEPARATOR  ', ' ) no_me_gusta,
                         e.nombre AS empresa,
-						'ninguno' no_me_gusta,
                         cd.dia_semana_id AS dia
                     FROM
                         cliente_dia cd
                         INNER JOIN tipo_vianda tv ON   tv.id = cd.tipo_vianda_id
-                        INNER JOIN cliente c ON c.id = cd.cliente_id                       
+                        INNER JOIN cliente c ON c.id = cd.cliente_id
+                        LEFT JOIN no_me_gusta nmg ON nmg.cliente_id = c.id
+                        LEFT JOIN alimento a ON a.id = nmg.alimento_id
                         LEFT JOIN empresa e ON e.id = c.idempresa
                      WHERE c.deleted_at IS NULL
                     GROUP BY    c.apellido,
                         c.nombre,
                         c.envio,
-                        dia,
-						empresa
+                        dia
                     ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
                     ");
 
