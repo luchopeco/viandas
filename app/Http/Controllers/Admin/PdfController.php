@@ -34,28 +34,33 @@ class PdfController extends Controller
         //ini_set('max_execution_time', 0);
 
         $listPedidos= DB::select("SELECT
-                        c.id as clienteID,
-                        c.apellido,
-                        c.nombre,
-                        CASE c.envio WHEN 1 THEN 'SI'  WHEN 0 THEN 'NO' END AS envio,
-                        GROUP_CONCAT(CONCAT(cd.cantidad,' ',tv.abrev ) SEPARATOR ' -- ') AS pedido,
-						SUM(cd.cantidad * tv.precio) AS total,                        
-                        e.nombre AS empresa,
-						'ninguno' no_me_gusta,
-                        cd.dia_semana_id AS dia
-                    FROM
-                        cliente_dia cd
-                        INNER JOIN tipo_vianda tv ON   tv.id = cd.tipo_vianda_id
-                        INNER JOIN cliente c ON c.id = cd.cliente_id                       
-                        LEFT JOIN empresa e ON e.id = c.idempresa
-                     WHERE c.deleted_at IS NULL
-                    GROUP BY    c.apellido,
-                        c.nombre,
-                        c.envio,
-                        dia,
-						empresa
-                    ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc
-                    ");
+                                    c.id as clienteID,
+                                    c.apellido,
+                                    c.nombre,
+                                    CASE c.envio WHEN 1 THEN 'SI'  WHEN 0 THEN 'NO' END AS envio,
+                                    GROUP_CONCAT(CONCAT(cd.cantidad,' ',tv.abrev ) SEPARATOR ' - ') AS pedido,
+                                    CASE c.envio WHEN 0 then SUM(cd.cantidad * tv.precio)
+                                    WHEN 1
+                                    THEN (CASE WHEN e.nombre is null THEN SUM(cd.cantidad * tv.precio) + sum( distinct l.costo_envio) ELSE SUM(cd.cantidad * tv.precio) + sum( distinct l2.costo_envio) END )
+                                    END
+                                    AS total,
+                                     e.nombre AS empresa,
+                                    'ninguno' no_me_gusta,
+                                    cd.dia_semana_id AS dia
+                                FROM
+                                    cliente_dia cd
+                                    INNER JOIN tipo_vianda tv ON   tv.id = cd.tipo_vianda_id
+                                    INNER JOIN cliente c ON c.id = cd.cliente_id
+                                    INNER JOIN localidad l ON l.id = c.idlocalidad
+                                    LEFT JOIN empresa e ON e.id = c.idempresa
+                                    LEFT JOIN localidad l2 ON l2.id = e.idlocalidad
+                                 WHERE c.deleted_at IS NULL
+                                GROUP BY    c.apellido,
+                                    c.nombre,
+                                    c.envio,
+                                    dia,
+                                    empresa
+                                ORDER BY dia ASC,  c.apellido ASC , c.nombre Asc");
 
         $cantidades = DB::select("SELECT
                             tv.nombre,
